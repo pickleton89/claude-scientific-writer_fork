@@ -19,18 +19,18 @@ This fork serves as a **customized skill repository** built on top of the Claude
 |--------|-------------|
 | **Skills Streamlined** | Removed 5 clinical/business skills (`research-grants`, `clinical-decision-support`, `clinical-reports`, `market-research-reports`, `treatment-plans`) |
 | **Brand Integration** | Added Oligon brand standards for PDF generation and visual identity |
-| **Visualization Skills** | Added `plotting-libraries`, `scientific-visualization`, and `visual-design` skills |
+| **Visualization Skills** | Added `plotting-libraries` and `visual-design` skills |
 | **Single Source of Truth** | Consolidated skills to one location (`skills/`) instead of three |
 
-## Skills (19 total)
+## Skills (18 top-level + 4 document sub-skills)
 
 | Category | Skills |
 |----------|--------|
 | **Writing** | `scientific-writing`, `literature-review`, `hypothesis-generation` |
 | **Presentations** | `scientific-slides`, `latex-posters`, `pptx-posters` |
 | **Research** | `research-lookup`, `citation-management`, `peer-review`, `scholar-evaluation` |
-| **Visuals** | `scientific-schematics`, `generate-image`, `plotting-libraries`, `scientific-visualization`, `visual-design` |
-| **Documents** | `markitdown`, `venue-templates` |
+| **Visuals** | `scientific-schematics`, `generate-image`, `plotting-libraries`, `visual-design` |
+| **Documents** | `markitdown`, `venue-templates`, `document-skills/*` (docx, pdf, pptx, xlsx) |
 | **Analysis** | `scientific-critical-thinking` |
 | **Conversion** | `paper-2-web` |
 
@@ -38,7 +38,7 @@ This fork serves as a **customized skill repository** built on top of the Claude
 
 ```
 claude-scientific-writer_fork/
-├── skills/                  # Canonical skill definitions (19 skills)
+├── skills/                  # Canonical skill definitions (18 + 4 sub-skills)
 ├── .claude/
 │   └── WRITER.md            # Agent system instructions
 ├── src/oligon_reports/      # Branded PDF generation (ReportLab)
@@ -65,7 +65,7 @@ claude-scientific-writer_fork/
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/claude-scientific-writer_fork.git
+git clone <your-fork-url>
 cd claude-scientific-writer_fork
 
 # Install dependencies with uv

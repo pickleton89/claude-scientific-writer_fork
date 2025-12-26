@@ -85,7 +85,7 @@ uv run ty                  # Type check
 | `INTEGRATION_ANALYSIS.md` | Template-project merge roadmap |
 | `docs/original/` | Archived upstream documentation |
 
-### Active Skills (18)
+### Active Skills (18 top-level + 4 document sub-skills)
 
 | Category | Skills |
 |----------|--------|
@@ -93,7 +93,7 @@ uv run ty                  # Type check
 | **Presentations** | `scientific-slides`, `latex-posters`, `pptx-posters` |
 | **Research** | `research-lookup`, `citation-management`, `peer-review`, `scholar-evaluation` |
 | **Visuals** | `scientific-schematics`, `generate-image`, `plotting-libraries`, `visual-design` |
-| **Documents** | `markitdown`, `venue-templates` |
+| **Documents** | `markitdown`, `venue-templates`, `document-skills/*` (docx, pdf, pptx, xlsx) |
 | **Analysis** | `scientific-critical-thinking` |
 | **Conversion** | `paper-2-web` |
 
@@ -103,7 +103,7 @@ uv run ty                  # Type check
 
 ```
 claude-scientific-writer_fork/
-├── skills/                  # ⭐ CANONICAL skill definitions (19 skills)
+├── skills/                  # ⭐ CANONICAL skill definitions (18 + 4 sub-skills)
 │   ├── citation-management/
 │   ├── generate-image/
 │   ├── hypothesis-generation/

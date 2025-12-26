@@ -17,7 +17,19 @@
       "Skill(taches-cc-resources:create-agent-skills)",
       "Skill(readme-skill)",
       "Skill(skill-reviewer)",
-      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork status)"
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork status)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork diff --stat)",
+      "Bash(git -C /Users/jeffkiefer/.claude/skills/skill-reviewer status)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork push)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork log --oneline -3)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork log --oneline -5)",
+      "Bash(while read f)",
+      "Bash(do [ -f \"skills/scientific-writing/$f\" ])",
+      "Bash(done)",
+      "Bash(for f in imrad_structure.md citation_styles.md figures_tables.md reporting_guidelines.md writing_principles.md field_terminology.md writing_process.md)",
+      "Bash(do [ -f \"skills/scientific-writing/references/$f\" ])",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork status --short)"
     ]
-  }
+  },
+  "outputStyle": "default"
 }

@@ -26,6 +26,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Accepts skill domain via user input or SKILL.md path
   - Uses web search for current best practices
   - Outputs to skill's references/expert_guide.md
+- `skills/hypothesis-generation/references/expert_guide.md`: Expert hypothesis generation synthesis
+  - Core principles (mechanism over description, falsifiability, competing explanations, abductive humility)
+  - Strong Inference method pattern for eliminating alternatives
+  - Falsification-first and Mechanism Probe patterns
+  - Failure modes: single-hypothesis fixation, vague formulation, confirmation-only design
 
 ### Removed
 

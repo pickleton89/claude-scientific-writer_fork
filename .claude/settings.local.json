@@ -28,7 +28,18 @@
       "Bash(done)",
       "Bash(for f in imrad_structure.md citation_styles.md figures_tables.md reporting_guidelines.md writing_principles.md field_terminology.md writing_process.md)",
       "Bash(do [ -f \"skills/scientific-writing/references/$f\" ])",
-      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork status --short)"
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork status --short)",
+      "Bash(git fetch:*)",
+      "Bash(git merge:*)",
+      "Bash(git push:*)",
+      "WebSearch",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork add skills/research-lookup/references/expert_guide.md CHANGELOG.md)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork commit -m \"$\\(cat <<''EOF''\nfeat: add research-lookup expert guide\n\nAdd expert synthesis document for research lookup skill covering:\n- Core principles \\(query precision, verify before trust, multi-source triangulation\\)\n- Decision framework with 7 situation→action rules\n- Expert patterns: Structured Query Construction, Citation Verification Loop\n- Failure modes and quality signals for AI-assisted research\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(xargs -I {} sh -c 'echo \"\"=== {} ===\"\" && head -30 {}')",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork add skills/research-lookup/references/bioinformatics_databases.md CHANGELOG.md)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork commit -m \"$\\(cat <<''EOF''\nfeat\\(research-lookup\\): add bioinformatics databases reference\n\nAdd comprehensive guide to programmatic data retrieval from core\nbioinformatics resources:\n- Sequence databases: NCBI ecosystem, Ensembl, UCSC Genome Browser\n- Protein databases: UniProt, PDB, AlphaFold DB\n- Pathway & ontology: GO, KEGG, Reactome, MSigDB\n- Disease & variant: ClinVar, OMIM, GWAS Catalog\n- Common patterns: ID mapping, bulk retrieval, caching\n\nPhase 0.1 of bioinformatics skills implementation plan.\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork add .claude/settings.local.json skills_library_gap_analysis.md)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork commit -m \"$\\(cat <<''EOF''\nchore: clean up local settings and remove gap analysis file\n\n- Update local Claude Code settings\n- Remove skills_library_gap_analysis.md \\(content incorporated into implementation plan\\)\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ]
   },
   "outputStyle": "default"

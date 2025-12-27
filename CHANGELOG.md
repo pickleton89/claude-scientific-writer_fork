@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `BIOINFORMATICS_SKILLS_IMPLEMENTATION_PLAN.md`: Comprehensive roadmap for extending skills library
+  - 3 new skills planned: `statistical-analysis`, `code-documentation`, `reproducible-research`
+  - 4 skill extensions: `plotting-libraries` (R/ggplot2), `research-lookup`, `scientific-writing`, `venue-templates`
+  - ~33 new reference files across 5 implementation phases
+  - Detailed SKILL.md templates and content outlines for all new skills
+  - Dropped pure execution skills (sequence-analysis, bioinformatics-pipelines) to preserve communication focus
+- `skills_library_gap_analysis.md`: Analysis of bioinformatics workflow coverage gaps
+  - Identified library as "Science Communication Engine" excelling at output phase
+  - Cataloged 9 gap areas from critical (sequence/omics analysis) to moderate (domain visualization)
+  - Recommended prioritized skill additions with integration paths
+  - Workflow diagram showing missing "execution phase" between hypothesis and visualization
 - `skills/scientific-slides/references/expert_guide.md`: Expert scientific presentation synthesis document
   - Core principles (visual primacy, one idea per slide, narrative arc, audience calibration)
   - Decision framework with 7 situation→action rules for complexity, timing, audience adaptation

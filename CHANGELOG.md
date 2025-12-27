@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `skills/research-lookup/references/bioinformatics_databases.md`: Comprehensive guide to programmatic data retrieval
+  - Sequence databases: NCBI ecosystem (GenBank, RefSeq, SRA, GEO), Ensembl (BioMart, REST API), UCSC Genome Browser
+  - Protein databases: UniProt (Swiss-Prot vs TrEMBL, ID mapping), PDB, AlphaFold DB (pLDDT interpretation)
+  - Pathway & ontology: GO (evidence codes), KEGG, Reactome, MSigDB (Hallmark, C2, C5)
+  - Disease & variant: ClinVar (significance levels), OMIM, GWAS Catalog
+  - Common patterns: identifier mapping, bulk retrieval, rate limits, caching strategies
+  - Quick reference cards for database selection by data type
+  - **Phase 0.1 of bioinformatics skills implementation plan**
 - `BIOINFORMATICS_SKILLS_IMPLEMENTATION_PLAN.md`: Comprehensive roadmap for extending skills library
   - 3 new skills planned: `statistical-analysis`, `code-documentation`, `reproducible-research`
   - 4 skill extensions: `plotting-libraries` (R/ggplot2), `research-lookup`, `scientific-writing`, `venue-templates`

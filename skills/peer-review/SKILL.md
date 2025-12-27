@@ -543,6 +543,9 @@ Slide 18: Alignment - title not centered
 
 This skill includes reference materials to support comprehensive peer review:
 
+### references/expert_review_guide.md
+Core principles, decision frameworks, and failure modes that separate competent from excellent peer review. Covers expert patterns (claim-evidence audit, replication test, inverse review), anti-patterns to avoid, and quality signals. Start here for the expert mental model.
+
 ### references/reporting_standards.md
 Guidelines for major reporting standards across disciplines (CONSORT, PRISMA, ARRIVE, MIAME, STROBE, etc.) to evaluate completeness of methods and results reporting.
 

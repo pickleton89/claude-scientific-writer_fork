@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `skills/peer-review/references/expert_review_guide.md`: Expert peer review synthesis document
+  - Core principles (evaluate science not scientists, proportionality, falsifiability, actionability, hierarchy)
+  - Decision framework with situation→action rules
+  - Expert patterns: Claim-Evidence Audit, Replication Test, Inverse Review
+  - Failure modes and anti-patterns catalog
+  - Quality signals distinguishing good enough from excellent reviews
+  - Self-review checklist for reviewers
+- `skills/scholar-evaluation/references/expert_guide.md`: Expert scholar evaluation synthesis document
+  - Core principles (claims vs evidence, proportionality, dimension separation, synthesis over summarization)
+  - Decision framework for interdisciplinary work, scope management, statistical reporting
+  - Expert patterns: Claim Trace, Replication Audit, Contribution Delta
+  - Failure modes: single-metric obsession, confirmation bias, expertise bluffing
+  - Quality signals for research assessment
+- `prompts/001-expert-skill-synthesis.md`: Meta-prompt for generating expert domain guides
+  - Accepts skill domain via user input or SKILL.md path
+  - Uses web search for current best practices
+  - Outputs to skill's references/expert_guide.md
+
 ### Removed
 
 - `skills/scientific-visualization/`: **Merged into `visual-design`** to eliminate 80% content duplication

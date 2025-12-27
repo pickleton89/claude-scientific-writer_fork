@@ -68,6 +68,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Strong Inference method pattern for eliminating alternatives
   - Falsification-first and Mechanism Probe patterns
   - Failure modes: single-hypothesis fixation, vague formulation, confirmation-only design
+- Extended `skills/scientific-writing/references/field_terminology.md` with bioinformatics nomenclature section
+  - Gene naming conventions: HGNC human standards, model organism conventions (mouse, zebrafish, fly, worm, yeast)
+  - Variant nomenclature: HGVS notation for substitutions, deletions, insertions, frameshifts
+  - Genomic coordinates: assembly versions (GRCh38/hg38), 1-based vs 0-based coordinate systems
+  - Species conventions: binomial nomenclature, italicization rules
+  - Sequence data conventions: expression units (TPM, FPKM, CPM), quality scores, coverage reporting
+  - **Phase 0.2 of bioinformatics skills implementation plan**
 
 ### Removed
 

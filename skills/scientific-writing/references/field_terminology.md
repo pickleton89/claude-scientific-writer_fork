@@ -32,6 +32,111 @@ Adapt language, terminology, and conventions to match the specific scientific di
 - Use standard genetic notation (e.g., +/+, +/-, -/- for genotypes)
 - Employ established terminology for molecular techniques (e.g., "quantitative PCR" or "qPCR," not "real-time PCR")
 
+## Bioinformatics Nomenclature
+
+This section provides comprehensive nomenclature standards for bioinformatics and computational biology writing. Proper use of these conventions is essential for accuracy and reproducibility.
+
+### Gene Naming Conventions
+
+#### HGNC (Human Gene Nomenclature Committee)
+
+Official human gene symbols follow strict formatting rules:
+- **Genes**: Uppercase, italicized in text (e.g., *TP53*, *BRCA1*)
+- **Protein products**: Uppercase, not italicized (e.g., TP53, BRCA1)
+- Never use unofficial aliases in formal writing without defining them
+
+#### Model Organism Conventions
+
+| Organism | Gene | Protein | Example |
+|----------|------|---------|---------|
+| Human | *GENE* (italic, uppercase) | GENE (roman, uppercase) | *TP53* → TP53 |
+| Mouse | *Gene* (italic, sentence case) | Gene (roman, sentence case) | *Trp53* → Trp53 |
+| Zebrafish | *gene* (italic, lowercase) | Gene (roman, sentence case) | *tp53* → Tp53 |
+| Drosophila | *gene* (italic, lowercase) | Gene (roman, sentence case) | *p53* → P53 |
+| C. elegans | *gene-#* (italic, lowercase-number) | GENE-# (roman, uppercase) | *cep-1* → CEP-1 |
+| Yeast | *GENE#* (italic, uppercase) | Gene#p (roman, sentence case + p) | *TRP1* → Trp1p |
+
+#### Common Gene Naming Errors to Avoid
+
+- Using unofficial aliases (p53 vs *TP53*)
+- Inconsistent capitalization within a manuscript
+- Missing italics for genes in running text
+- Confusing gene and protein notation
+
+### Variant Nomenclature (HGVS)
+
+The Human Genome Variation Society (HGVS) nomenclature is the standard for describing sequence variants.
+
+#### Sequence Type Prefixes
+
+- `c.` - coding DNA reference sequence
+- `g.` - genomic DNA reference sequence
+- `m.` - mitochondrial DNA reference sequence
+- `n.` - non-coding RNA reference sequence
+- `p.` - protein reference sequence
+
+#### Common Variant Notation
+
+| Type | Format | Example | Meaning |
+|------|--------|---------|---------|
+| Substitution | c.76A>T | c.76A>T | Adenine to Thymine at position 76 |
+| Deletion | c.76delA | c.76delA | Deletion of A at position 76 |
+| Insertion | c.76_77insT | c.76_77insT | Insertion of T between positions 76 and 77 |
+| Duplication | c.76dupA | c.76dupA | Duplication of A at position 76 |
+| Frameshift | p.Arg97Profs*23 | p.Arg97Profs*23 | Frameshift at Arg97, stop at position 23 |
+
+#### Protein Change Notation
+
+- Three-letter amino acid codes are preferred in publications
+- Use `Ter` or `*` for stop codons, never `X`
+- Example: p.Arg248Gln (not p.R248Q in formal text)
+
+### Genomic Coordinates
+
+#### Genome Assembly Versions
+
+**Always specify the assembly version in your Methods section:**
+- Human: GRCh38 (preferred) or hg38 (UCSC notation)
+- Mouse: GRCm39 or mm39
+- Example Methods statement: "Coordinates are reported relative to GRCh38"
+
+#### Coordinate Systems
+
+Be explicit about which coordinate system you're using:
+
+| System | Description | Used By |
+|--------|-------------|---------|
+| 1-based, fully-closed | First base is 1, both ends included | Ensembl, HGVS, VCF |
+| 0-based, half-open | First base is 0, end not included | UCSC, BED, BAM |
+
+**Important**: Always state which system when reporting coordinates, as the same genomic region has different numeric representations in each system.
+
+### Species Conventions
+
+- **First mention**: Full binomial name, italicized (*Homo sapiens*)
+- **Subsequent mentions**: Abbreviated (*H. sapiens*) or common name (human)
+- **Never**: Write genus/species without italics (*Homo sapiens* is correct; Homo sapiens is wrong)
+- **Species abbreviations**: Only use after defining the full name (*D. melanogaster* after establishing *Drosophila melanogaster*)
+
+### Sequence Data Conventions
+
+#### Expression Units
+
+| Unit | Use Case | Notes |
+|------|----------|-------|
+| Raw counts | DESeq2, edgeR input | Not directly comparable across samples |
+| CPM | Simple library normalization | Counts per million mapped reads |
+| TPM | Cross-sample comparison | Normalized for gene length and library size |
+| FPKM/RPKM | Legacy unit | Less preferred than TPM for new analyses |
+
+#### Quality and Coverage Reporting
+
+- **Coverage**: Report as mean ± SD or median with range
+- **Quality scores**: Use Phred scale (Q30 = 99.9% base call accuracy)
+- **Read depth**: Specify minimum and average per-base coverage
+
+---
+
 ## Chemistry and Pharmaceutical Sciences
 
 - Follow IUPAC nomenclature for chemical compounds

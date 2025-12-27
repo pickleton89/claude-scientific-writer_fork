@@ -235,9 +235,15 @@ Run three tests before submission:
 
 ## Integration with Other Skills
 
-**Related skills**: research-lookup (literature), scientific-schematics/generate-image (figures), venue-templates (journal-specific styles).
+**Related skills:**
+- **research-lookup**: Literature search and citation finding
+- **scientific-schematics/generate-image**: Figure creation and visual elements
+- **venue-templates**: Journal-specific styles and formatting requirements
+- **statistical-analysis**: Test selection, statistical reporting in Methods, interpreting results
+- **reproducible-research**: Data Availability statements, environment documentation, FAIR compliance
+- **code-documentation**: Documenting analysis code referenced in Methods sections
 
-**Workflow**: Use this skill for general principles (IMRAD, citations, clarity), then consult `venue-templates` for venue-specific style adaptation (Nature/Science, Cell Press, medical journals, ML/CS conferences).
+**Workflow**: Use this skill for general principles (IMRAD, citations, clarity), then consult `venue-templates` for venue-specific style adaptation (Nature/Science, Cell Press, medical journals, ML/CS conferences). For quantitative Methods sections, reference `statistical-analysis` for proper test selection and reporting. For Data Availability statements, use `reproducible-research` guidance.
 
 ## References
 

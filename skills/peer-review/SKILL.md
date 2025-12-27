@@ -552,6 +552,15 @@ Guidelines for major reporting standards across disciplines (CONSORT, PRISMA, AR
 ### references/common_issues.md
 Catalog of frequent methodological and statistical issues encountered in peer review, with guidance on identifying and addressing them.
 
+## Cross-References
+
+**Related skills for comprehensive peer review:**
+
+- **statistical-analysis**: Evaluate statistical methods, test selection, multiple testing corrections, effect sizes, and power analysis in manuscripts
+- **scientific-critical-thinking**: Framework for evidence evaluation, bias detection, and logical fallacy identification
+- **venue-templates**: `reviewer_expectations.md` for venue-specific review standards
+- **reproducible-research**: Assess data availability, code sharing, and reproducibility standards
+
 ## Final Checklist
 
 Before finalizing the review, verify:

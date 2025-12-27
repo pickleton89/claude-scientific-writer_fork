@@ -509,3 +509,22 @@ This skill serves as a powerful research assistant with intelligent dual-model s
 - **Complementary WebSearch**: Use alongside WebSearch for metadata verification and non-academic sources
 
 Whether you need quick fact-finding or deep analytical synthesis, this skill automatically adapts to deliver the right level of research support for your scientific writing needs.
+
+## Reference Documents
+
+### Bioinformatics Database Reference
+
+For bioinformatics-specific data retrieval, see `references/bioinformatics_databases.md` which covers:
+- **Sequence databases**: NCBI (GenBank, RefSeq, SRA, GEO), Ensembl, UCSC Genome Browser
+- **Protein databases**: UniProt, PDB, AlphaFold Database
+- **Pathway & ontology**: Gene Ontology, KEGG, Reactome, MSigDB
+- **Disease & variants**: ClinVar, OMIM, GWAS Catalog
+- **Common patterns**: Identifier mapping, bulk retrieval, API usage
+
+## Cross-References
+
+**Related skills:**
+- **scientific-writing**: Using research findings in manuscripts
+- **statistical-analysis**: Finding appropriate statistical methods and benchmarks
+- **citation-management**: Organizing and formatting discovered citations
+- **reproducible-research**: Data deposition and retrieval best practices

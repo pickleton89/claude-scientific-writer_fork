@@ -564,3 +564,12 @@ This skill includes comprehensive reference materials that provide detailed fram
 3. Recognize limitations and uncertainties
 4. Suggest improvements for future work
 5. Advance scientific understanding
+
+## Cross-References
+
+**Related skills for critical evaluation:**
+
+- **statistical-analysis**: Quantitative evaluation of statistical methods, test selection appropriateness, multiple testing corrections, effect size interpretation
+- **peer-review**: Structured manuscript evaluation using critical thinking principles
+- **research-lookup**: Finding methodological standards and benchmarks in literature
+- **hypothesis-generation**: Evaluating hypothesis quality and testability

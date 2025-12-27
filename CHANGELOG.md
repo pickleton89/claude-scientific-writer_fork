@@ -71,6 +71,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Phase 5: Cross-reference updates** - Added bidirectional links between skills for better discoverability
+  - `skills/scientific-writing/SKILL.md`: Added cross-references to statistical-analysis (test selection, reporting), reproducible-research (Data Availability), and code-documentation
+  - `skills/hypothesis-generation/SKILL.md`: Added statistical-analysis (power analysis, effect sizes) and reproducible-research (pre-registration) cross-references
+  - `skills/scientific-critical-thinking/SKILL.md`: New Cross-References section linking to statistical-analysis, peer-review, research-lookup, and hypothesis-generation
+  - `skills/research-lookup/SKILL.md`: Added Reference Documents section highlighting bioinformatics_databases.md; new Cross-References to scientific-writing, statistical-analysis, citation-management, reproducible-research
+  - `skills/peer-review/SKILL.md`: New Cross-References section for statistical-analysis (evaluating stats in papers), scientific-critical-thinking, venue-templates, reproducible-research
+  - **Completes bioinformatics skills implementation plan**
+
 - `skills/plotting-libraries/SKILL.md`: Extended to cover R ecosystem and bioinformatics visualizations
   - Updated description to include R (ggplot2, Bioconductor) alongside Python
   - Added Python vs R decision framework with factor comparison

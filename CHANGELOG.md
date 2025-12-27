@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `skills/literature-review/references/expert_guide.md`: Expert literature review synthesis document
+  - Core principles (synthesis over summary, reproducible search, thematic architecture, critical stance, gap identification)
+  - Decision framework with 7 situation→action rules for search scope, database selection, evidence weighting
+  - Expert patterns: Multi-Database Triangulation, Evidence Pyramid Weighting, Citation Network Expansion
+  - Failure modes: narrative-first bias, study-by-study organization, single-database reliance
+  - Quality signals distinguishing "good enough" from "excellent" reviews
 - `skills/peer-review/references/expert_review_guide.md`: Expert peer review synthesis document
   - Core principles (evaluate science not scientists, proportionality, falsifiability, actionability, hierarchy)
   - Decision framework with situation→action rules

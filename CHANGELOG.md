@@ -25,6 +25,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Correlation interpretation scales and regression model selection
   - Quick reference card for rapid test selection
   - **Phase 1.2 of bioinformatics skills implementation plan**
+- `skills/statistical-analysis/references/multiple_testing_correction.md`: Essential guide for high-dimensional data
+  - Multiple testing problem explanation with RNA-seq example (20,000 tests → 1,000 false positives)
+  - FWER vs FDR definitions with use-case guidance
+  - Bonferroni correction: when appropriate, why too conservative for omics
+  - Benjamini-Hochberg FDR: algorithm, assumptions, standard for genomics
+  - Q-value and local FDR (Storey's method) with π₀ estimation
+  - Other methods: Holm, Hochberg, Benjamini-Yekutieli comparison table
+  - Permutation-based approaches: SAM, fgsea, Westfall-Young MaxT
+  - Python (statsmodels) and R code patterns for all methods
+  - DESeq2, edgeR, limma tool defaults reference
+  - Decision framework diagram and manuscript reporting templates
+  - **Phase 1.3 of bioinformatics skills implementation plan**
 - `skills/research-lookup/references/bioinformatics_databases.md`: Comprehensive guide to programmatic data retrieval
   - Sequence databases: NCBI ecosystem (GenBank, RefSeq, SRA, GEO), Ensembl (BioMart, REST API), UCSC Genome Browser
   - Protein databases: UniProt (Swiss-Prot vs TrEMBL, ID mapping), PDB, AlphaFold DB (pLDDT interpretation)

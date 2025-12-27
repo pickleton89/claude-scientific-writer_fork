@@ -9,6 +9,87 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `skills/reproducible-research/SKILL.md`: New skill for reproducibility and FAIR data practices
+  - Comprehensive FAIR principles quick reference (Findable, Accessible, Interoperable, Reusable)
+  - Data deposition guide: repository selection by data type (SRA, GEO, PRIDE, Zenodo, etc.)
+  - Environment specification hierarchy: requirements.txt → environment.yml → Docker
+  - Standard project structure template with data, notebooks, src, results directories
+  - Common reproducibility pitfalls with solutions (unpinned deps, missing seeds, hardcoded paths)
+  - Data Availability statement templates for public, controlled access, and existing data
+  - Cross-references to scientific-writing, code-documentation, venue-templates, statistical-analysis
+  - **Phase 3.1 of bioinformatics skills implementation plan**
+- `skills/reproducible-research/references/fair_principles.md`: Comprehensive FAIR implementation guide
+  - F1-F4: Persistent identifiers (DOI, accession), rich metadata, registration in searchable resources
+  - A1-A2: Standard protocols (HTTP, FTP, API), authentication, metadata persistence
+  - I1-I3: Standard formats by data type, FAIR vocabularies (GO, DO, Uberon, CL, EFO), qualified references
+  - R1.1-R1.3: License selection (CC0, CC-BY, MIT, GPL), provenance documentation, domain standards
+  - FAIR assessment checklist and automated tools (F-UJI, FAIR Evaluator, FAIRshake)
+  - Implementation priorities: Minimum Viable → Standard → Advanced FAIR
+  - **Phase 3.2 of bioinformatics skills implementation plan**
+- `skills/reproducible-research/references/data_repositories.md`: Repository selection and submission guide
+  - NCBI GEO: Submission process, metadata spreadsheet format, timeline expectations
+  - NCBI SRA: BioProject/BioSample creation, file upload with Aspera, command-line tools
+  - ENA: Programmatic submission with Webin-CLI, manifest format
+  - Zenodo: GitHub integration, .zenodo.json configuration, direct API upload
+  - PRIDE: ProteomeXchange submission for proteomics
+  - PDB: OneDep submission for structures, validation checklist
+  - Repository comparison table: speed, ease, use cases
+  - Data Availability statement templates for multiple scenarios
+  - **Phase 3.3 of bioinformatics skills implementation plan**
+- `skills/reproducible-research/references/metadata_standards.md`: Domain-specific standards reference
+  - MIAME: Six core elements for microarray experiments with compliance checklist
+  - MINSEQE: Sample, library, sequencing, data processing metadata with YAML examples
+  - MIQE: qPCR essential information (7 categories) with complete checklist
+  - MIAPE: Proteomics modules (MS, GE, CE, GI, MSI, Quant) with core elements
+  - Decision tree for standard selection by data type
+  - Validation tools and metadata templates
+  - **Phase 3.4 of bioinformatics skills implementation plan**
+- `skills/reproducible-research/references/conda_environments.md`: Environment management guide
+  - environment.yml structure: basic, pinned, and full export options
+  - Conda vs Mamba vs Micromamba comparison
+  - Channel configuration and bioconda setup
+  - Best practices: version pinning, channel priority, lock files
+  - Scenario-specific environments: RNA-seq, single-cell, structural biology
+  - Troubleshooting: solving conflicts, platform-specific packages, pip inside conda
+  - Integration with Snakemake, Nextflow, Jupyter
+  - **Phase 3.5 of bioinformatics skills implementation plan**
+- `skills/reproducible-research/references/docker_containers.md`: Container reference for reproducibility
+  - Dockerfile patterns: minimal, bioinformatics, multi-stage builds
+  - Best practices: pinned versions, minimal layers, labels, non-root user
+  - Build and run commands with volume mounts, GPU support, resource limits
+  - Docker Compose for multi-container setups
+  - Singularity/Apptainer: Definition files, HPC integration, SLURM job scripts
+  - BioContainers registry for pre-built bioinformatics tools
+  - Container reproducibility and publication checklists
+  - **Phase 3.6 of bioinformatics skills implementation plan**
+- `skills/reproducible-research/references/project_structure.md`: Project organization templates
+  - Standard analysis project structure with all directories explained
+  - README.md template with installation, usage, structure, citation sections
+  - .gitignore patterns for scientific computing
+  - Specialized templates: RNA-seq, machine learning, multi-omics projects
+  - Configuration files: config.yaml, paths.yaml with documentation
+  - Naming conventions for files, variables, directories
+  - Version control integration: what to track vs ignore
+  - Minimal and publishable project checklists
+  - **Phase 3.7 of bioinformatics skills implementation plan**
+- `skills/reproducible-research/references/version_control_data.md`: Large file management
+  - Tool comparison: Git LFS, DVC, git-annex (features, use cases, decision tree)
+  - Git LFS: Setup, tracking patterns, .gitattributes template, limitations
+  - DVC: Data tracking, remote storage (S3, GCS, SSH), pipeline definition (dvc.yaml)
+  - DVC experiments and metrics tracking
+  - git-annex: Setup, file management, remote configuration
+  - Best practices: metadata tracking, naming, lineage documentation
+  - GitHub Actions integration for DVC workflows
+  - **Phase 3.8 of bioinformatics skills implementation plan**
+- `skills/reproducible-research/references/workflow_documentation.md`: Pipeline documentation guide
+  - Snakemake documentation: Snakefile structure, config, rule docstrings, environment files
+  - Nextflow documentation: Pipeline README, nextflow.config, process documentation
+  - Methods section templates for workflow-based publications
+  - Workflow diagrams: DAG generation, ASCII diagrams for README
+  - Documentation checklist: README, configuration, code, environment, reproducibility
+  - Tool comparison: Snakemake vs Nextflow decision guide
+  - Reference to nf-core and snakemake-workflows repositories
+  - **Phase 3.9 of bioinformatics skills implementation plan**
 - `skills/code-documentation/SKILL.md`: New skill for documenting scientific code
   - Documentation hierarchy: inline comments → docstrings → README → notebooks → API docs
   - Style selection framework for Python (NumPy/Google) and R (roxygen2)

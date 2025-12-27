@@ -9,6 +9,79 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `skills/plotting-libraries/references/ggplot2.md`: Complete ggplot2 reference for R visualization
+  - Grammar of Graphics components: data, aesthetics, geoms, stats, scales, coords, facets, themes
+  - Comprehensive geoms reference: points, lines, distributions, bars, heatmaps, text/annotations
+  - Scale customization: axis transformations, color palettes (ggsci journal colors), size/shape
+  - Faceting: facet_wrap and facet_grid with scale options
+  - Publication-ready themes: custom theme_publication() function, theme modifications
+  - Common bioinformatics plots: expression boxplots, PCA with ellipses, bar plots with error bars
+  - Plot combination with patchwork and cowplot packages
+  - Journal-specific figure sizes (Nature, Science, PNAS, Cell)
+  - ggsci, ggpubr, ggrepel, ggbeeswarm extension packages
+  - **Phase 4.1 of bioinformatics skills implementation plan**
+- `skills/plotting-libraries/references/bioconductor_viz.md`: Bioconductor visualization packages reference
+  - ComplexHeatmap: basic heatmaps, row/column annotations, splitting, multiple linked heatmaps
+  - EnhancedVolcano: basic and customized volcano plots, gene labeling, threshold customization
+  - ggpubr: publication-ready ggplot2 extensions, statistical comparisons, correlation plots
+  - clusterProfiler/enrichplot: GO/KEGG enrichment visualization (dotplot, barplot, cnetplot, heatplot)
+  - ggbio: genome visualization, ideograms, track plots
+  - ggsci color palettes for journal-specific styling
+  - Color schemes for heatmaps (diverging, sequential, viridis)
+  - Publication export workflows
+  - **Phase 4.2 of bioinformatics skills implementation plan**
+- `skills/plotting-libraries/references/volcano_plots.md`: Volcano plot guide for differential expression
+  - Python implementation: matplotlib basic, labeled with adjustText, seaborn-based
+  - R implementation: ggplot2 basic, labeled with ggrepel, EnhancedVolcano (recommended)
+  - Threshold selection guidelines by analysis context (exploratory to stringent)
+  - Gene labeling strategies: top by p-value, top by effect size, genes of interest
+  - Colorblind-friendly palettes
+  - Publication checklist for volcano plots
+  - Cross-references to statistical-analysis and heatmaps
+  - **Phase 4.3 of bioinformatics skills implementation plan**
+- `skills/plotting-libraries/references/heatmaps.md`: Expression heatmap guide with clustering
+  - Data preparation: z-scoring, log transformation, filtering top variable genes
+  - Python: seaborn clustermap with annotations, matplotlib simple heatmap
+  - R: ComplexHeatmap with annotations and splitting, pheatmap alternative
+  - Clustering considerations: distance metrics (euclidean, correlation), linkage methods
+  - Color palettes: diverging for z-scored data, sequential for positive data
+  - Gene selection strategies: top DE, top variable, pathway-specific
+  - Row/column annotation patterns for both languages
+  - Publication checklist for heatmaps
+  - **Phase 4.4 of bioinformatics skills implementation plan**
+- `skills/plotting-libraries/references/survival_curves.md`: Kaplan-Meier and survival visualization
+  - Python (lifelines): basic KM, stratified with log-rank test, risk tables, Cox forest plots
+  - R (survminer): ggsurvplot customization, risk tables, median survival lines, forest plots
+  - Gene expression stratified survival with optimal cutpoint selection
+  - Statistical considerations: log-rank assumptions, crossing curves, multiple comparisons
+  - Methods section and figure legend templates
+  - Publication checklist for survival analysis
+  - Cross-references to statistical-analysis survival methods
+  - **Phase 4.5 of bioinformatics skills implementation plan**
+- `skills/plotting-libraries/references/genome_tracks.md`: Genome track visualization guide
+  - pyGenomeTracks (Python): INI configuration, track types (genes, bigWig, BED, Hi-C, links)
+  - Command-line and Python API usage for pyGenomeTracks
+  - Gviz (R/Bioconductor): IdeogramTrack, GenomeAxisTrack, GeneRegionTrack, DataTrack
+  - IGV integration: batch scripting, igv-jupyter for notebooks
+  - Input file formats: BED, bigWig, bigBed, BAM, VCF, GTF
+  - Track ordering and color consistency guidelines
+  - Common workflows: ChIP-seq, RNA-seq + ATAC-seq integration
+  - Publication checklist for genome visualizations
+  - **Phase 4.6 of bioinformatics skills implementation plan**
+
+### Changed
+
+- `skills/plotting-libraries/SKILL.md`: Extended to cover R ecosystem and bioinformatics visualizations
+  - Updated description to include R (ggplot2, Bioconductor) alongside Python
+  - Added Python vs R decision framework with factor comparison
+  - Added R library selection guide (ggplot2, Bioconductor packages)
+  - New bioinformatics_plots section with specialized visualization table
+  - Added R publication workflow examples
+  - Added ggsci journal palette integration
+  - Updated reference_guides section with all 8 reference files (2 Python, 2 R, 4 specialized)
+  - Added cross-references to statistical-analysis, reproducible-research skills
+  - **Phase 4 completion of bioinformatics skills implementation plan**
+
 - `skills/reproducible-research/SKILL.md`: New skill for reproducibility and FAIR data practices
   - Comprehensive FAIR principles quick reference (Findable, Accessible, Interoperable, Reusable)
   - Data deposition guide: repository selection by data type (SRA, GEO, PRIDE, Zenodo, etc.)

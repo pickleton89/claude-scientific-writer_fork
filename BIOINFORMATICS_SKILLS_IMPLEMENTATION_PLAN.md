@@ -1169,11 +1169,11 @@ ggplot(pca_df, aes(x = PC1, y = PC2, color = condition, shape = batch)) +
 
 ## Implementation Timeline
 
-### Week 1: Quick Wins (Phase 0)
-- [ ] Create `research-lookup/references/bioinformatics_databases.md`
-- [ ] Extend `scientific-writing/references/field_terminology.md`
-- [ ] Create `venue-templates/references/bioinformatics_journals.md`
-- [ ] Commit and update CHANGELOG
+### Week 1: Quick Wins (Phase 0) ✅ COMPLETED
+- [x] Create `research-lookup/references/bioinformatics_databases.md`
+- [x] Extend `scientific-writing/references/field_terminology.md`
+- [x] Create `venue-templates/references/bioinformatics_journals.md`
+- [x] Commit and update CHANGELOG
 
 ### Week 2: Statistical Analysis Skill (Phase 1)
 - [ ] Create `statistical-analysis/SKILL.md`
@@ -1232,10 +1232,10 @@ ggplot(pca_df, aes(x = PC1, y = PC2, color = condition, shape = batch)) +
 
 ### New Files (Total: ~33)
 
-**Phase 0: Quick Wins (3 files)**
-- [ ] `skills/research-lookup/references/bioinformatics_databases.md`
-- [ ] `skills/scientific-writing/references/field_terminology.md` (extend)
-- [ ] `skills/venue-templates/references/bioinformatics_journals.md`
+**Phase 0: Quick Wins (3 files)** ✅ COMPLETED
+- [x] `skills/research-lookup/references/bioinformatics_databases.md`
+- [x] `skills/scientific-writing/references/field_terminology.md` (extend)
+- [x] `skills/venue-templates/references/bioinformatics_journals.md`
 
 **Phase 1: statistical-analysis (9 files)**
 - [ ] `skills/statistical-analysis/SKILL.md`

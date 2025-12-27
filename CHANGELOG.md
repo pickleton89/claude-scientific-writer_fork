@@ -75,6 +75,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Species conventions: binomial nomenclature, italicization rules
   - Sequence data conventions: expression units (TPM, FPKM, CPM), quality scores, coverage reporting
   - **Phase 0.2 of bioinformatics skills implementation plan**
+- `skills/venue-templates/references/bioinformatics_journals.md`: Comprehensive bioinformatics journal formatting guide
+  - Nucleic Acids Research (NAR): Database issue, Web Server issue, and research articles with specific requirements
+  - Bioinformatics (Oxford): Original Papers vs Application Notes, benchmarking requirements
+  - Genome Biology: Open-access requirements, mandatory data deposition, software paper specifics
+  - Genome Research: Cold Spring Harbor style, reproducibility focus
+  - Nature Methods: Transformative method requirements, Life Sciences Reporting Summary
+  - PLOS Computational Biology: FAIR principles, "Ten Simple Rules" format
+  - Universal bioinformatics requirements: data deposition standards, software availability checklist
+  - Benchmarking best practices: metrics by application type, performance reporting standards
+  - Figure standards for common bioinformatics visualizations
+  - Common rejection reasons and writing conventions
+  - Journal selection decision framework
+  - **Phase 0.3 of bioinformatics skills implementation plan**
 
 ### Removed
 

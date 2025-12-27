@@ -9,6 +9,65 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `skills/code-documentation/SKILL.md`: New skill for documenting scientific code
+  - Documentation hierarchy: inline comments → docstrings → README → notebooks → API docs
+  - Style selection framework for Python (NumPy/Google) and R (roxygen2)
+  - README structure templates for analysis projects, tools, and data repositories
+  - Notebook guidelines for Jupyter, R Markdown, and Quarto
+  - Common pitfalls and quality signals for documentation
+  - Cross-references to reproducible-research, scientific-writing, statistical-analysis
+  - **Phase 2.1-2.2 of bioinformatics skills implementation plan**
+- `skills/code-documentation/references/python_docstrings.md`: Comprehensive Python docstring reference
+  - NumPy style templates with complete function, class, and module examples
+  - Google style templates for comparison
+  - Type hints integration with docstrings
+  - Section reference table (Parameters, Returns, Raises, Examples, etc.)
+  - Common mistakes and how to avoid them
+  - Docstring linting tools (pydocstyle, darglint)
+  - **Phase 2.3 of bioinformatics skills implementation plan**
+- `skills/code-documentation/references/r_documentation.md`: Complete R documentation guide
+  - roxygen2 syntax and common tags reference
+  - Function, S4 class, and R6 class documentation templates
+  - Package-level documentation (DESCRIPTION, package.R)
+  - Examples best practices (conditionals, example data)
+  - Text formatting, lists, links, and math in docs
+  - pkgdown site generation and deployment
+  - Vignette creation and structure
+  - **Phase 2.3 of bioinformatics skills implementation plan**
+- `skills/code-documentation/references/readme_templates.md`: Four complete README templates
+  - Analysis project template (data requirements, environment, workflow, results)
+  - Software tool template (badges, installation, API, benchmarks, contributing)
+  - Data repository template (data dictionary, collection methods, usage terms)
+  - Research compendium template (reproducible research packages for publications)
+  - Essential sections quick reference
+  - **Phase 2.4 of bioinformatics skills implementation plan**
+- `skills/code-documentation/references/notebook_best_practices.md`: Jupyter/RMarkdown/Quarto guide
+  - Standard notebook structure with section templates
+  - Code cell organization (one concept per cell, size guidelines)
+  - Reproducibility: random seeds, version tracking, relative paths
+  - Output management and visibility control
+  - Platform-specific guidelines (Jupyter magics, RMarkdown chunks, Quarto options)
+  - Common mistakes and hygiene checklist
+  - Notebook vs script decision framework
+  - **Phase 2.5 of bioinformatics skills implementation plan**
+- `skills/code-documentation/references/inline_commenting.md`: When and how to comment code
+  - Core principle: explain "why" not "what"
+  - DO/DON'T comment decision guide
+  - Comment types: single-line, end-of-line, block, section
+  - Scientific code patterns (formulas, references, domain context, parameters)
+  - TODO/FIXME/XXX conventions with identifiers
+  - Self-documenting code alternatives (naming, extraction, constants)
+  - Comment quality checklist
+  - **Phase 2.5 of bioinformatics skills implementation plan**
+- `skills/code-documentation/references/api_documentation.md`: Package documentation guide
+  - Python Sphinx setup: conf.py, index.rst, autodoc configuration
+  - pdoc as simpler alternative for smaller packages
+  - R pkgdown: _pkgdown.yml configuration, GitHub Pages deployment
+  - Documentation structure by user journey
+  - Versioning, deprecation notices, cross-references
+  - CI/CD automation with GitHub Actions
+  - Hosting options (Read the Docs, GitHub Pages, Netlify)
+  - **Phase 2.5 of bioinformatics skills implementation plan**
 - `skills/statistical-analysis/SKILL.md`: New skill for statistical methods in scientific data analysis
   - Decision frameworks for test selection (comparison, association, regression)
   - Quick reference tables: two groups, multiple groups, paired/repeated measures

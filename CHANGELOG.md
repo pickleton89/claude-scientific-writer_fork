@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `skills/scientific-slides/references/expert_guide.md`: Expert scientific presentation synthesis document
+  - Core principles (visual primacy, one idea per slide, narrative arc, audience calibration)
+  - Decision framework with 7 situation→action rules for complexity, timing, audience adaptation
+  - Expert patterns: Hook-First Opening, Visual-Text Hierarchy, Checkpoint Pacing
+  - Failure modes: reading slides, default themes, cognitive overload, skipping practice
+  - Quality signals for presentation design and delivery
 - `skills/research-lookup/references/expert_guide.md`: Expert research lookup synthesis document
   - Core principles (query precision, verify before trust, multi-source triangulation, complexity-appropriate tools)
   - Decision framework with 7 situation→action rules for model selection, result handling, verification

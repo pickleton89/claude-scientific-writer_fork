@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `skills/statistical-analysis/SKILL.md`: New skill for statistical methods in scientific data analysis
+  - Decision frameworks for test selection (comparison, association, regression)
+  - Quick reference tables: two groups, multiple groups, paired/repeated measures
+  - RNA-seq/differential expression test recommendations (DESeq2, edgeR, limma-voom)
+  - Common statistical pitfalls with solutions (10 error categories)
+  - Reporting guidelines with Methods section templates
+  - Cross-references to scientific-writing, plotting-libraries, reproducible-research
+  - **Phase 1.1 of bioinformatics skills implementation plan**
+- `skills/statistical-analysis/references/test_decision_framework.md`: Comprehensive test selection reference
+  - Decision trees with ASCII diagrams for all test categories
+  - Python (scipy/statsmodels) code patterns for all tests
+  - R code patterns with effect size calculations
+  - Normality assessment methods and sample size guidelines
+  - Correlation interpretation scales and regression model selection
+  - Quick reference card for rapid test selection
+  - **Phase 1.2 of bioinformatics skills implementation plan**
 - `skills/research-lookup/references/bioinformatics_databases.md`: Comprehensive guide to programmatic data retrieval
   - Sequence databases: NCBI ecosystem (GenBank, RefSeq, SRA, GEO), Ensembl (BioMart, REST API), UCSC Genome Browser
   - Protein databases: UniProt (Swiss-Prot vs TrEMBL, ID mapping), PDB, AlphaFold DB (pLDDT interpretation)

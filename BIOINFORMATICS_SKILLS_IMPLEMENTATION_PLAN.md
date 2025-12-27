@@ -1176,8 +1176,8 @@ ggplot(pca_df, aes(x = PC1, y = PC2, color = condition, shape = batch)) +
 - [x] Commit and update CHANGELOG
 
 ### Week 2: Statistical Analysis Skill (Phase 1)
-- [ ] Create `statistical-analysis/SKILL.md`
-- [ ] Create `references/test_decision_framework.md`
+- [x] Create `statistical-analysis/SKILL.md`
+- [x] Create `references/test_decision_framework.md`
 - [ ] Create `references/multiple_testing_correction.md`
 - [ ] Create `references/normalization_methods.md`
 - [ ] Create remaining reference files
@@ -1238,8 +1238,8 @@ ggplot(pca_df, aes(x = PC1, y = PC2, color = condition, shape = batch)) +
 - [x] `skills/venue-templates/references/bioinformatics_journals.md`
 
 **Phase 1: statistical-analysis (9 files)**
-- [ ] `skills/statistical-analysis/SKILL.md`
-- [ ] `skills/statistical-analysis/references/test_decision_framework.md`
+- [x] `skills/statistical-analysis/SKILL.md`
+- [x] `skills/statistical-analysis/references/test_decision_framework.md`
 - [ ] `skills/statistical-analysis/references/python_scipy_patterns.md`
 - [ ] `skills/statistical-analysis/references/r_stats_patterns.md`
 - [ ] `skills/statistical-analysis/references/multiple_testing_correction.md`

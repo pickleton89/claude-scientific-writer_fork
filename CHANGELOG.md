@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `skills/research-lookup/references/expert_guide.md`: Expert research lookup synthesis document
+  - Core principles (query precision, verify before trust, multi-source triangulation, complexity-appropriate tools)
+  - Decision framework with 7 situation→action rules for model selection, result handling, verification
+  - Expert patterns: Structured Query Construction, Reasoning Keyword Injection, Citation Verification Loop
+  - Failure modes: trusting AI summaries, single-tool reliance, unverified citations
+  - Quality signals for research information retrieval
 - `skills/literature-review/references/expert_guide.md`: Expert literature review synthesis document
   - Core principles (synthesis over summary, reproducible search, thematic architecture, critical stance, gap identification)
   - Decision framework with 7 situation→action rules for search scope, database selection, evidence weighting

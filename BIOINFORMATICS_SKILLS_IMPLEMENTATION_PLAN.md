@@ -1175,13 +1175,13 @@ ggplot(pca_df, aes(x = PC1, y = PC2, color = condition, shape = batch)) +
 - [x] Create `venue-templates/references/bioinformatics_journals.md`
 - [x] Commit and update CHANGELOG
 
-### Week 2: Statistical Analysis Skill (Phase 1)
+### Week 2: Statistical Analysis Skill (Phase 1) ✅ COMPLETED
 - [x] Create `statistical-analysis/SKILL.md`
 - [x] Create `references/test_decision_framework.md`
 - [x] Create `references/multiple_testing_correction.md`
-- [ ] Create `references/normalization_methods.md`
-- [ ] Create remaining reference files
-- [ ] Commit and update CHANGELOG
+- [x] Create `references/normalization_methods.md`
+- [x] Create remaining reference files (python_scipy_patterns, r_stats_patterns, dimensionality_reduction, clustering_methods, survival_analysis, power_sample_size)
+- [x] Commit and update CHANGELOG
 
 ### Week 3: Code Documentation Skill (Phase 2)
 - [ ] Create `code-documentation/SKILL.md`
@@ -1237,17 +1237,17 @@ ggplot(pca_df, aes(x = PC1, y = PC2, color = condition, shape = batch)) +
 - [x] `skills/scientific-writing/references/field_terminology.md` (extend)
 - [x] `skills/venue-templates/references/bioinformatics_journals.md`
 
-**Phase 1: statistical-analysis (9 files)**
+**Phase 1: statistical-analysis (10 files)** ✅ COMPLETED
 - [x] `skills/statistical-analysis/SKILL.md`
 - [x] `skills/statistical-analysis/references/test_decision_framework.md`
 - [x] `skills/statistical-analysis/references/multiple_testing_correction.md`
-- [ ] `skills/statistical-analysis/references/python_scipy_patterns.md`
-- [ ] `skills/statistical-analysis/references/r_stats_patterns.md`
-- [ ] `skills/statistical-analysis/references/normalization_methods.md`
-- [ ] `skills/statistical-analysis/references/dimensionality_reduction.md`
-- [ ] `skills/statistical-analysis/references/clustering_methods.md`
-- [ ] `skills/statistical-analysis/references/survival_analysis.md`
-- [ ] `skills/statistical-analysis/references/power_sample_size.md`
+- [x] `skills/statistical-analysis/references/normalization_methods.md`
+- [x] `skills/statistical-analysis/references/python_scipy_patterns.md`
+- [x] `skills/statistical-analysis/references/r_stats_patterns.md`
+- [x] `skills/statistical-analysis/references/dimensionality_reduction.md`
+- [x] `skills/statistical-analysis/references/clustering_methods.md`
+- [x] `skills/statistical-analysis/references/survival_analysis.md`
+- [x] `skills/statistical-analysis/references/power_sample_size.md`
 
 **Phase 2: code-documentation (6 files)**
 - [ ] `skills/code-documentation/SKILL.md`

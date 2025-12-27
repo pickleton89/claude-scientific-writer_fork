@@ -37,6 +37,83 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - DESeq2, edgeR, limma tool defaults reference
   - Decision framework diagram and manuscript reporting templates
   - **Phase 1.3 of bioinformatics skills implementation plan**
+- `skills/statistical-analysis/references/normalization_methods.md`: Pre-requisite for valid statistical comparisons
+  - Technical variation sources: sequencing depth, gene length, RNA composition, batch effects
+  - Library size normalization: CPM, RPKM/FPKM, TPM with formulas and code
+  - Advanced methods: TMM (edgeR), DESeq2 size factors, limma-voom transformation
+  - Method selection guide: visualization vs DE analysis vs ML preprocessing
+  - Batch effect correction: ComBat, ComBat-seq, Harmony, limma removeBatchEffect
+  - Best practices and verification workflows
+  - Python and R code patterns for all methods
+  - Manuscript reporting templates
+  - **Phase 1.5 of bioinformatics skills implementation plan**
+- `skills/statistical-analysis/references/python_scipy_patterns.md`: Complete scipy.stats and statsmodels reference
+  - Descriptive statistics and confidence intervals (t-distribution, bootstrap)
+  - Normality testing: visual (Q-Q plots) and statistical (Shapiro-Wilk, Anderson-Darling)
+  - Two-sample comparisons: automatic test selection with effect sizes
+  - Multiple group comparisons: ANOVA, Kruskal-Wallis with post-hoc tests
+  - Correlation analysis: Pearson, Spearman, Kendall with confidence intervals
+  - Regression: linear (with diagnostics), logistic (with odds ratios)
+  - Categorical data: chi-square, Fisher's exact, contingency table analysis
+  - Multiple testing correction patterns
+  - Complete analysis templates with reporting functions
+  - **Phase 1.6 of bioinformatics skills implementation plan**
+- `skills/statistical-analysis/references/r_stats_patterns.md`: Complete R base stats and package reference
+  - Descriptive statistics with dplyr groupwise summaries
+  - Normality assessment and testing functions
+  - Two-sample and paired comparisons with effect sizes
+  - ANOVA: one-way, two-way, repeated measures with ez and car packages
+  - Mixed-effects models with lme4 and lmerTest
+  - Correlation matrices with visualization (corrplot)
+  - Regression diagnostics with performance package
+  - RNA-seq workflows: edgeR, DESeq2, limma-voom complete pipelines
+  - Power analysis with pwr package
+  - Session info for reproducibility
+  - **Phase 1.6 of bioinformatics skills implementation plan**
+- `skills/statistical-analysis/references/dimensionality_reduction.md`: PCA, t-SNE, UMAP theory and implementation
+  - Method selection guide based on analysis goals
+  - PCA: theory, Python/R implementation, interpretation, variance explained
+  - t-SNE: parameter guidelines (perplexity), caveats, interpretation limitations
+  - UMAP: parameters (n_neighbors, min_dist), supervised UMAP
+  - Parameter sweep functions for optimization
+  - Method comparison with quantitative evaluation
+  - Best practices: preprocessing, reproducibility, validation
+  - Manuscript reporting templates
+  - **Phase 1.6 of bioinformatics skills implementation plan**
+- `skills/statistical-analysis/references/clustering_methods.md`: Hierarchical, k-means, and graph-based clustering
+  - Method taxonomy and selection guide
+  - Hierarchical clustering: linkage methods, distance metrics, dendrogram cutting
+  - K-means: elbow method, silhouette analysis, consensus clustering
+  - Graph-based: Leiden, Louvain, resolution parameter selection
+  - Density-based: DBSCAN, HDBSCAN with parameter optimization
+  - Cluster validation: internal metrics (silhouette, Calinski-Harabasz)
+  - Scanpy and Seurat integration patterns for single-cell
+  - Clustered heatmap generation
+  - Manuscript reporting templates
+  - **Phase 1.6 of bioinformatics skills implementation plan**
+- `skills/statistical-analysis/references/survival_analysis.md`: Kaplan-Meier, log-rank, Cox regression
+  - Key concepts: survival time, censoring types, hazard functions
+  - Kaplan-Meier: estimation, plotting, median survival with CI
+  - Log-rank test: two-group and multi-group comparisons
+  - Cox proportional hazards: model fitting, hazard ratios, assumption testing
+  - Proportional hazards violations: stratification, time-varying coefficients
+  - Gene expression survival analysis: cutpoint selection, multi-gene screening
+  - lifelines (Python) and survival/survminer (R) implementations
+  - Common pitfalls: immortal time bias, optimal cutpoint overfitting
+  - Manuscript reporting templates
+  - **Phase 1.6 of bioinformatics skills implementation plan**
+- `skills/statistical-analysis/references/power_sample_size.md`: Study design fundamentals
+  - Power equation: effect size, sample size, α, β relationships
+  - Effect size reference: Cohen's d, log2 fold change conversion
+  - Two-group comparison: sample size tables, power curves
+  - RNA-seq specific power: RNASeqPower, BCV considerations
+  - ANOVA and multi-group power analysis
+  - Correlation power with minimum detectable effect
+  - Survival analysis power: Schoenfeld formula, event calculations
+  - Multiple testing adjustment for genome-wide studies
+  - Quick reference tables for common scenarios
+  - Manuscript reporting templates
+  - **Phase 1.6 of bioinformatics skills implementation plan**
 - `skills/research-lookup/references/bioinformatics_databases.md`: Comprehensive guide to programmatic data retrieval
   - Sequence databases: NCBI ecosystem (GenBank, RefSeq, SRA, GEO), Ensembl (BioMart, REST API), UCSC Genome Browser
   - Protein databases: UniProt (Swiss-Prot vs TrEMBL, ID mapping), PDB, AlphaFold DB (pLDDT interpretation)

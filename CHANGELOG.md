@@ -23,6 +23,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Phase 2.2 Quantification Implementation (Complete)**: Quantifying remaining skills from PHASE2_QUALITATIVE_TERMS_AUDIT.md
+  - `skills/hypothesis-generation/SKILL.md` (v1.0.0 → v2.1.0): Applied quantification thresholds
+    - Added cross-reference to shared thresholds document (§1 Literature Coverage, §3 Replication, §7 Quality Rubrics)
+    - Updated overview to specify quantified requirements: 3-5 hypotheses, ≥40 citations, ≥3 databases, <5% new papers in final iteration
+    - Added Quantified Search Requirements table (databases: 3-5, papers: 40-70+, recency: 60-75%, saturation: <5%)
+    - Added Hypothesis Quality Rubric (10-point scale): Testability, Falsifiability, Parsimony, Explanatory Power, Distinctiveness
+    - Added scoring thresholds: Strong ≥8/10, Viable 5-7/10, Weak <5/10
+    - Added Minimum Experimental Design Requirements table (primary outcomes, controls, sample size, statistical approach, confounds)
+    - Added Replication Standards by experiment type referencing QUANTIFICATION_THRESHOLDS.md §3
+    - Added Quality Standards table with minimum requirements and targets for Evidence-based, Testable, Mechanistic, Comprehensive, Rigorous
+    - Added Report Completeness Checklist (6 items)
+  - `skills/reproducible-research/SKILL.md` (v1.0.0 → v2.1.0): Applied reproducibility scoring thresholds
+    - Added cross-reference to shared thresholds document (§5 Documentation Completeness, §8 Iteration & Stopping)
+    - Updated objective to specify target: ≥75% reproducibility checklist compliance
+    - Added Quantified Reproducibility Levels table (Level 1-4 with score ranges: Minimal 25-49%, Standard 50-74%, Complete 75-89%, Exemplary 90-100%)
+    - Added Scoring Thresholds referencing QUANTIFICATION_THRESHOLDS.md §5
+    - Added version pinning requirements to each environment specification level
+    - Added Level 4 Exemplary definition (container + CI tests + archived DOI)
+    - Added FAIR Compliance Scoring table (25% per principle, explicit compliance thresholds)
+    - Quantified FAIR principles with checkboxes and required vs optional items
+    - Added Reproducibility Errors severity table with impact scores (-5% to -25%)
+    - Added Detailed Checklist (20 items, 100 points) across 4 categories: Environment, Data, Code, Documentation
+    - Added minimum threshold for publication: ≥75 points (15/20 items)
+
 - **Phase 2.1 Quantification Implementation (Complete)**: Replacing qualitative terms with measurable thresholds
   - `skills/literature-review/SKILL.md` (v2.0.0 → v2.1.0): Applied quantification from `QUANTIFICATION_THRESHOLDS.md`
     - Added cross-reference to shared thresholds document (§1 Literature Coverage, §6 Time-Based)

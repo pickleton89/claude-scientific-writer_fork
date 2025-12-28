@@ -1,10 +1,14 @@
 ---
 name: reproducible-research
-description: "Reproducibility and FAIR data practices for scientific research. Environment management (Conda, Docker), data repositories (GEO, SRA, Zenodo), metadata standards (MIAME, MINSEQE), and project organization. Use for Methods sections, Data Availability statements, and analysis documentation."
+version: 2.1.0
+description: "Reproducibility and FAIR data practices with quantified completeness thresholds. Environment management (Conda, Docker), data repositories (GEO, SRA, Zenodo), metadata standards (MIAME, MINSEQE), and project organization. Use for Methods sections, Data Availability statements, and analysis documentation."
+shared-thresholds: "../QUANTIFICATION_THRESHOLDS.md"
 ---
 
+> **Quantified Thresholds:** This skill references shared thresholds from [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §5 (Documentation Completeness) and §8 (Iteration & Stopping Criteria).
+
 <objective>
-Guide the documentation and infrastructure needed for reproducible scientific computing. This skill focuses on what to document and where to deposit data—not on executing analyses, but on making them reproducible by others.
+Guide the documentation and infrastructure needed for reproducible scientific computing with quantified completeness levels. Achieve ≥75% reproducibility checklist compliance for publication-ready projects. This skill focuses on what to document and where to deposit data—not on executing analyses, but on making them reproducible by others.
 </objective>
 
 <scope>
@@ -28,25 +32,40 @@ Guide the documentation and infrastructure needed for reproducible scientific co
 <fair_quick_reference>
 ## FAIR Principles Summary
 
-### Findable
-- Assign persistent identifiers (DOI)
-- Rich metadata describing the data
-- Registered in searchable resource
+### FAIR Compliance Scoring
 
-### Accessible
-- Retrievable by identifier using standard protocol
-- Metadata accessible even if data restricted
-- Authentication/authorization where needed
+| Principle | Minimum Requirements | Score |
+|-----------|---------------------|-------|
+| **Findable** | DOI assigned, ≥5 metadata fields, indexed in repository | 25% |
+| **Accessible** | Standard protocol (HTTP/FTP), auth documented if restricted | 25% |
+| **Interoperable** | Standard format, ontology terms used, qualified references | 25% |
+| **Reusable** | License specified, provenance documented, domain standards met | 25% |
 
-### Interoperable
-- Use formal, shared language (ontologies)
-- Use FAIR vocabularies
-- Include qualified references to other data
+**FAIR Compliance Thresholds:**
+- **Non-compliant:** <50% (fails ≥2 principles)
+- **Partially compliant:** 50-74% (1 principle incomplete)
+- **Compliant:** 75-99% (all principles met at minimum)
+- **Exemplary:** 100% (exceeds all requirements)
 
-### Reusable
-- Clear usage license
-- Detailed provenance
-- Meet domain-relevant standards
+### Findable (25%)
+- [ ] Persistent identifier assigned (DOI) — **Required**
+- [ ] Rich metadata: title, authors, date, description, keywords (≥5 fields)
+- [ ] Registered in searchable resource (repository, catalog)
+
+### Accessible (25%)
+- [ ] Retrievable by identifier using standard protocol (HTTP, FTP)
+- [ ] Metadata accessible even if data restricted
+- [ ] Authentication/authorization documented where needed
+
+### Interoperable (25%)
+- [ ] Use formal, shared language (ontologies: GO, SO, CHEBI)
+- [ ] Standard file formats (FASTQ, BAM, CSV, not proprietary)
+- [ ] Include qualified references to related datasets
+
+### Reusable (25%)
+- [ ] Clear usage license specified (CC-BY, MIT, GPL) — **Required**
+- [ ] Detailed provenance (how data was generated)
+- [ ] Meet domain-relevant standards (MIAME, MINSEQE, MIQE)
 
 </fair_quick_reference>
 
@@ -69,6 +88,21 @@ Guide the documentation and infrastructure needed for reproducible scientific co
 <environment_documentation>
 ## Environment Specification Hierarchy
 
+### Quantified Reproducibility Levels
+
+| Level | Name | Requirements | Reproducibility Score |
+|-------|------|--------------|----------------------|
+| 1 | Minimal | requirements.txt with `>=` versions | 25-49% |
+| 2 | Standard | environment.yml with pinned versions | 50-74% |
+| 3 | Complete | Docker/Singularity container | 75-89% |
+| 4 | Exemplary | Container + CI tests + archived DOI | 90-100% |
+
+**Scoring Thresholds** (see [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §5):
+- **Not reproducible:** <50% checklist items
+- **Partially reproducible:** 50-74%
+- **Reproducible (publication-ready):** 75-89%
+- **Highly reproducible:** 90-100%
+
 ### Level 1: Minimal (requirements.txt)
 ```
 numpy>=1.21.0
@@ -76,7 +110,8 @@ pandas>=1.3.0
 scipy>=1.7.0
 ```
 - Quick start for collaborators
-- Often insufficient for exact reproducibility
+- Insufficient for exact reproducibility (score: 25-49%)
+- **Version pinning:** 0% exact pins
 
 ### Level 2: Standard (environment.yml)
 ```yaml
@@ -89,9 +124,9 @@ dependencies:
   - numpy=1.24.3
   - pandas=2.0.2
 ```
-- Pinned versions
+- Pinned versions (score: 50-74%)
 - Cross-platform (mostly)
-- Standard for bioinformatics
+- **Version pinning:** 100% exact pins required
 
 ### Level 3: Complete (Docker/Singularity)
 ```dockerfile
@@ -99,9 +134,15 @@ FROM continuumio/miniconda3:23.5.2-0
 COPY environment.yml .
 RUN conda env create -f environment.yml
 ```
-- Fully reproducible
+- Fully reproducible (score: 75-89%)
 - Required for HPC/cloud
-- Publication-grade reproducibility
+- **Validation:** Must pass `docker build` + `docker run` without errors
+
+### Level 4: Exemplary (Archived + Tested)
+- Container image archived with DOI
+- CI pipeline validates reproducibility
+- Produces identical output on 3 consecutive runs
+- Score: 90-100%
 
 </environment_documentation>
 
@@ -159,16 +200,41 @@ project/
 <common_pitfalls>
 ## Reproducibility Errors to Avoid
 
-1. **Unpinned dependencies**: `pip install numpy` vs `numpy==1.24.3`
-2. **Missing random seeds**: Results vary between runs
-3. **Hardcoded paths**: `/Users/myname/data/` breaks on other systems
-4. **Undocumented preprocessing**: Filtering steps not recorded
-5. **Missing software versions**: "We used Python" (which version?)
-6. **Broken data links**: URLs that expire or change
-7. **No environment file**: "It works on my machine"
-8. **Uncommitted changes**: Analysis ran on modified code
-9. **Missing intermediate files**: Can't reproduce from raw data
-10. **No license**: Others can't legally reuse code
+| Error | Severity | Impact on Score | Fix |
+|-------|----------|-----------------|-----|
+| Unpinned dependencies | 🔴 Critical | -20% | Pin all versions with `==` |
+| Missing random seeds | 🔴 Critical | -15% | Set seed at script start |
+| Hardcoded paths | 🟡 Major | -10% | Use relative paths or config |
+| Undocumented preprocessing | 🟡 Major | -10% | Script all transformations |
+| Missing software versions | 🟡 Major | -10% | Include in environment file |
+| Broken data links | 🔴 Critical | -15% | Use DOIs and archived copies |
+| No environment file | 🔴 Critical | -25% | Create environment.yml |
+| Uncommitted changes | 🟡 Major | -10% | Commit before running |
+| Missing intermediate files | 🟢 Minor | -5% | Document regeneration |
+| No license | 🟢 Minor | -5% | Add LICENSE file |
+
+**Detailed Checklist (20 items):**
+
+| Category | Item | Points |
+|----------|------|--------|
+| **Environment (25%)** | requirements.txt or environment.yml present | 5 |
+| | All dependencies pinned to exact versions | 10 |
+| | Python/R version specified | 5 |
+| | System requirements documented | 5 |
+| **Data (25%)** | Raw data archived with DOI | 10 |
+| | Data processing scripts included | 5 |
+| | Random seeds set for all stochastic operations | 5 |
+| | Checksums for input files | 5 |
+| **Code (25%)** | All analysis code in repository | 10 |
+| | No hardcoded absolute paths | 5 |
+| | README with usage instructions | 5 |
+| | LICENSE file present | 5 |
+| **Documentation (25%)** | Methods sufficient for replication | 10 |
+| | Parameter values documented | 5 |
+| | Expected outputs described | 5 |
+| | Execution order documented | 5 |
+
+**Minimum for publication:** ≥75 points (15/20 items)
 
 </common_pitfalls>
 

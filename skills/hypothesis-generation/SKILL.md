@@ -1,14 +1,18 @@
 ---
 name: hypothesis-generation
-description: "Generate testable hypotheses. Formulate from observations, design experiments, explore competing explanations, develop predictions, propose mechanisms, for scientific inquiry across domains."
+version: 2.1.0
+description: "Generate testable hypotheses with quantified quality criteria. Formulate from observations, design experiments, explore competing explanations, develop predictions, propose mechanisms, for scientific inquiry across domains."
 allowed-tools: [Read, Write, Edit, Bash]
+shared-thresholds: "../QUANTIFICATION_THRESHOLDS.md"
 ---
 
 # Scientific Hypothesis Generation
 
+> **Quantified Thresholds:** This skill references shared thresholds from [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §1 (Literature Coverage), §3 (Replication & Sample Size), and §7 (Quality Scoring Rubrics).
+
 ## Overview
 
-Hypothesis generation is a systematic process for developing testable explanations. Formulate evidence-based hypotheses from observations, design experiments, explore competing explanations, and develop predictions. Apply this skill for scientific inquiry across domains.
+Hypothesis generation is a systematic process for developing testable explanations with quantified quality criteria. Generate 3-5 competing hypotheses per phenomenon, each meeting testability and falsifiability requirements. Support with ≥40 citations from ≥3 databases, achieving <5% new papers in final search iteration. Apply this skill for scientific inquiry across domains.
 
 ## When to Use This Skill
 
@@ -73,11 +77,20 @@ Start by clarifying the observation, question, or phenomenon that requires expla
 
 ### 2. Conduct Comprehensive Literature Search
 
-Search existing scientific literature to ground hypotheses in current evidence. Use both PubMed (for biomedical topics) and general web search (for broader scientific domains):
+Search existing scientific literature to ground hypotheses in current evidence. Use both PubMed (for biomedical topics) and general web search (for broader scientific domains).
+
+**Quantified Search Requirements** (see [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §1):
+
+| Requirement | Minimum | Target |
+|-------------|---------|--------|
+| Databases searched | 3 | 4-5 |
+| Total papers retrieved | 40 | 70+ |
+| Recent papers (≤5 years) | 60% | 75% |
+| Search saturation | <5% new in final iteration | <2% |
 
 **For biomedical topics:**
 - Use WebFetch with PubMed URLs to access relevant literature
-- Search for recent reviews, meta-analyses, and primary research
+- Search for recent reviews (≤3 years), meta-analyses, and primary research
 - Look for similar phenomena, related mechanisms, or analogous systems
 
 **For all scientific domains:**
@@ -86,9 +99,9 @@ Search existing scientific literature to ground hypotheses in current evidence. 
 - Identify gaps in current understanding
 
 **Search strategy:**
-- Begin with broad searches to understand the landscape
-- Narrow to specific mechanisms, pathways, or theories
-- Look for contradictory findings or unresolved debates
+- Begin with broad searches to understand the landscape (expect 100-200 initial hits)
+- Narrow to specific mechanisms, pathways, or theories (refine to 40-70 relevant papers)
+- Look for contradictory findings or unresolved debates (note ≥2 alternative viewpoints)
 - Consult `references/literature_search_strategies.md` for detailed search techniques
 
 ### 3. Synthesize Existing Evidence
@@ -119,28 +132,47 @@ Develop 3-5 distinct hypotheses that could explain the phenomenon. Each hypothes
 
 ### 5. Evaluate Hypothesis Quality
 
-Assess each hypothesis against established quality criteria from `references/hypothesis_quality_criteria.md`:
+Assess each hypothesis against the quality rubric below and criteria from `references/hypothesis_quality_criteria.md`.
 
-**Testability:** Can the hypothesis be empirically tested?
-**Falsifiability:** What observations would disprove it?
-**Parsimony:** Is it the simplest explanation that fits the evidence?
-**Explanatory Power:** How much of the phenomenon does it explain?
-**Scope:** What range of observations does it cover?
-**Consistency:** Does it align with established principles?
-**Novelty:** Does it offer new insights beyond existing explanations?
+**Hypothesis Quality Rubric** (10-point scale, 2 points per criterion):
 
-Explicitly note the strengths and weaknesses of each hypothesis.
+| Criterion | 0 | 1 | 2 |
+|-----------|---|---|---|
+| **Testability** | Cannot be tested empirically | Testable with significant difficulty | Clear experimental approach exists |
+| **Falsifiability** | No observation could disprove | Vague falsification criteria | Specific falsifying observations defined |
+| **Parsimony** | Unnecessarily complex | Moderate complexity | Simplest fit to evidence |
+| **Explanatory Power** | Explains <50% of observations | Explains 50-80% | Explains >80% of observations |
+| **Distinctiveness** | Indistinguishable from alternatives | Partially distinguishable | Unique, testable predictions |
+
+**Scoring thresholds:**
+- **Strong hypothesis:** ≥8/10 → Prioritize for experimental testing
+- **Viable hypothesis:** 5-7/10 → Include with noted limitations
+- **Weak hypothesis:** <5/10 → Document but deprioritize
+
+**Required for each hypothesis:**
+- Quality score with criterion breakdown
+- ≥2 specific strengths with evidence
+- ≥2 specific weaknesses or limitations
+- Comparison to at least one competing hypothesis
 
 ### 6. Design Experimental Tests
 
-For each viable hypothesis, propose specific experiments or studies to test it. Consult `references/experimental_design_patterns.md` for common approaches:
+For each viable hypothesis (score ≥5/10), propose specific experiments or studies to test it. Consult `references/experimental_design_patterns.md` for common approaches.
 
-**Experimental design elements:**
-- What would be measured or observed?
-- What comparisons or controls are needed?
-- What methods or techniques would be used?
-- What sample sizes or statistical approaches are appropriate?
-- What are potential confounds and how to address them?
+**Minimum Experimental Design Requirements:**
+
+| Element | Requirement |
+|---------|-------------|
+| Primary outcome | 1-2 clearly defined |
+| Controls | ≥2 (positive + negative) |
+| Sample size rationale | Power calculation or literature precedent |
+| Statistical approach | Pre-specified test + effect size measure |
+| Confound mitigation | ≥3 potential confounds addressed |
+
+**Replication Standards** (see [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §3):
+- In vitro: ≥3 biological replicates, ≥3 technical replicates
+- In vivo: 6-10 animals per group (per power calculation)
+- Human studies: Per IRB-approved power calculation
 
 **Consider multiple approaches:**
 - Laboratory experiments (in vitro, in vivo, computational)
@@ -263,13 +295,23 @@ To prevent content from overflowing on pages, follow these critical guidelines:
 
 ## Quality Standards
 
-Ensure all generated hypotheses meet these standards:
+Ensure all generated hypotheses meet these quantified standards:
 
-- **Evidence-based:** Grounded in existing literature with citations
-- **Testable:** Include specific, measurable predictions
-- **Mechanistic:** Explain how/why, not just what
-- **Comprehensive:** Consider alternative explanations
-- **Rigorous:** Include experimental designs to test predictions
+| Standard | Minimum Requirement | Target |
+|----------|---------------------|--------|
+| **Evidence-based** | ≥3 citations per hypothesis | ≥5 citations from peer-reviewed sources |
+| **Testable** | ≥2 specific predictions per hypothesis | ≥3 with expected effect sizes |
+| **Mechanistic** | Causal pathway described | Multi-step mechanism with intermediates |
+| **Comprehensive** | ≥3 competing hypotheses | 3-5 spanning mechanistic levels |
+| **Rigorous** | Experimental design for each hypothesis | Design with power calculation |
+
+**Report Completeness Checklist:**
+- [ ] 3-5 competing hypotheses presented
+- [ ] All hypotheses score ≥5/10 on quality rubric
+- [ ] ≥1 hypothesis scores ≥8/10 (strong)
+- [ ] ≥40 citations in bibliography
+- [ ] ≥1 visual schematic included
+- [ ] Experimental designs for all viable hypotheses
 
 ## Resources
 

@@ -404,6 +404,112 @@ Assess the manuscript's clarity, organization, and accessibility.
 □ All 7 stages completed with documented findings
 □ Ready to draft structured review report
 
+## Critical Analysis Framework
+
+Apply these frameworks throughout the peer review process to systematically evaluate scientific rigor, identify flaws, and assess evidence quality.
+
+### Evidence Quality Assessment (GRADE)
+
+Evaluate the strength and quality of evidence systematically using the GRADE approach:
+
+**Study Design Hierarchy:**
+1. Systematic reviews/meta-analyses (highest for intervention effects)
+2. Randomized controlled trials
+3. Cohort studies
+4. Case-control studies
+5. Cross-sectional studies
+6. Case series/reports
+7. Expert opinion (lowest)
+
+**GRADE Considerations:**
+- Start with design type (RCT = high, observational = low)
+- **Downgrade for:** Risk of bias, inconsistency across studies, indirectness, imprecision, publication bias
+- **Upgrade for:** Large effect sizes, dose-response relationships, confounders would reduce effect
+
+**Convergence of Evidence:**
+- **Stronger:** Multiple independent replications, different methodologies converge, mechanistic alignment
+- **Weaker:** Single study, contradictory findings, no replication attempts, publication bias evident
+
+**Reference:** See `references/evidence_hierarchy.md` for detailed GRADE system and quality assessment tools.
+
+### Logical Fallacy Identification
+
+Detect logical errors in scientific arguments and claims:
+
+**Causation Fallacies:**
+- **Post hoc:** "B followed A, so A caused B"
+- **Correlation = causation:** Confusing association with causality
+- **Reverse causation:** Mistaking cause for effect
+
+**Generalization Fallacies:**
+- **Hasty generalization:** Broad conclusions from small samples
+- **Cherry-picking:** Selecting only supporting evidence
+- **Ecological fallacy:** Group patterns applied to individuals
+
+**Statistical Fallacies:**
+- **Base rate neglect:** Ignoring prior probability
+- **Texas sharpshooter:** Finding patterns in random data
+- **Prosecutor's fallacy:** Confusing P(E|H) with P(H|E)
+
+**Science-Specific Fallacies:**
+- **Galileo gambit:** "They laughed at Galileo, so my fringe idea is correct"
+- **Argument from ignorance:** "Not proven false, so true"
+- **Unfalsifiability:** Making untestable claims
+
+**When identifying fallacies:** Name the specific fallacy, explain why reasoning is flawed, identify what evidence would be needed for valid inference.
+
+**Reference:** See `references/logical_fallacies.md` for comprehensive fallacy catalog with examples.
+
+### Claim Evaluation
+
+Systematically evaluate scientific claims for validity and support:
+
+1. **Identify the Claim:** Causal, associational, or descriptive? How strong (proven, likely, suggested, possible)?
+2. **Assess the Evidence:** Direct or indirect? Sufficient for claim strength? Alternative explanations ruled out?
+3. **Check Logical Connection:** Do conclusions follow from data? Are there logical leaps?
+4. **Evaluate Proportionality:** Is confidence proportional to evidence? Are limitations downplayed?
+5. **Check for Overgeneralization:** Do claims extend beyond sample? Are caveats included?
+
+**Red Flags:**
+- Causal language from correlational studies
+- "Proves" or absolute certainty
+- Ignoring contradictory evidence
+- Extrapolation beyond data
+
+### Bias Detection
+
+Systematic review of potential bias sources:
+
+**Cognitive Biases (Researcher):**
+- **Confirmation bias:** Only supporting findings highlighted
+- **HARKing:** Hypotheses stated post-hoc
+- **Publication bias:** Negative results missing
+
+**Selection Biases:**
+- **Sampling bias:** Non-representative sample
+- **Attrition bias:** Differential dropout between groups
+- **Survivorship bias:** Only "survivors" visible
+
+**Measurement Biases:**
+- **Observer bias:** Expectations influence observations
+- **Recall bias:** Systematic retrospective inaccuracies
+- **Instrument bias:** Systematic measurement errors
+
+**Analysis Biases:**
+- **P-hacking:** Multiple analyses until significance
+- **Outcome switching:** Replacing non-significant outcomes
+- **Subgroup fishing:** Uncorrected subgroup analyses
+
+**Reference:** See `references/common_biases.md` for comprehensive bias taxonomy with detection and mitigation strategies.
+
+### Additional Critical Analysis References
+
+The following reference materials support comprehensive critical evaluation:
+
+- **`references/scientific_method.md`** - Core principles, critical evaluation criteria, red flags in scientific claims
+- **`references/statistical_pitfalls.md`** - Common statistical errors: p-value misunderstandings, multiple comparisons, effect size mistakes
+- **`references/experimental_design.md`** - Comprehensive design checklist: hypotheses, sampling, blinding, validity threats
+
 ## Structuring Peer Review Reports
 
 > **Reference:** See `../QUANTIFICATION_THRESHOLDS.md` §4 (Issue Severity Classification) for shared severity criteria.
@@ -709,9 +815,9 @@ Catalog of frequent methodological and statistical issues encountered in peer re
 **Related skills for comprehensive peer review:**
 
 - **statistical-analysis**: Evaluate statistical methods, test selection, multiple testing corrections, effect sizes, and power analysis in manuscripts
-- **scientific-critical-thinking**: Framework for evidence evaluation, bias detection, and logical fallacy identification
 - **venue-templates**: `reviewer_expectations.md` for venue-specific review standards
 - **reproducible-research**: Assess data availability, code sharing, and reproducibility standards
+- **scholar-evaluation**: 8-dimension scholarly work assessment for structured quality scoring
 
 ## Final Checklist
 

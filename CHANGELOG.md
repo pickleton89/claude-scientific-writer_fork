@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Skills Consolidation (Complete)**: Applied recommendations from SKILLS_ANALYSIS.md
+  - **Merged `scientific-critical-thinking` into `peer-review`**: Critical analysis frameworks now part of peer-review
+    - Added "Critical Analysis Framework" section covering GRADE evidence quality, logical fallacies, claim evaluation, bias detection
+    - Moved 6 reference files to `peer-review/references/`: common_biases.md, evidence_hierarchy.md, experimental_design.md, logical_fallacies.md, scientific_method.md, statistical_pitfalls.md
+    - Removed `skills/scientific-critical-thinking/` directory
+    - Updated cross-references in: statistical-analysis, scholar-evaluation
+    - Updated routing in: SKILL_ROUTER.md, SKILL_TESTS.md
+  - **Added `SKILL.md` to `document-skills/` container**: Container now has proper routing documentation
+    - Explains 4 sub-skills: docx, pdf, pptx, xlsx
+    - Decision tree for format selection
+    - Cross-references to related skills
+  - **Updated `SKILLS_ANALYSIS.md`**: Documented all changes and updated skill inventory
+    - Skill count: 21 top-level + 4 document sub-skills (22 before merge)
+    - Marked consolidation recommendations as complete
+
 ### Added
 
 - **Phase 5 Validation (Complete)**: Created test scenarios for skill determinism validation

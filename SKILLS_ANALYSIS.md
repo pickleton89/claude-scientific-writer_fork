@@ -1,13 +1,18 @@
 # Skills Folder Analysis Report
 
 > Generated: 2025-12-26
+> **Updated: 2025-12-28** - Applied consolidation recommendations
 > Scope: Review of `/skills/` folder for redundancies and consolidation opportunities
 
 ## Executive Summary
 
-The skills folder contains **19 skills** that are generally well-organized with minimal redundancy. The skills cover the complete research lifecycle from literature discovery through publication and dissemination.
+The skills folder contains **21 top-level skills** (plus 4 document sub-skills) that cover the complete research lifecycle from literature discovery through publication and dissemination.
 
-**Key Finding**: One consolidation opportunity identified in the review/evaluation skill group.
+**Changes Applied (2025-12-28):**
+- ✅ Merged `scientific-critical-thinking` into `peer-review` (reduced skill count by 1)
+- ✅ Added `SKILL.md` to `document-skills/` container
+- ✅ Updated cross-references in affected skills
+- ✅ Updated SKILL_ROUTER.md routing logic
 
 ---
 
@@ -21,9 +26,11 @@ The skills folder contains **19 skills** that are generally well-organized with 
 | **Presentations** | `scientific-slides`, `latex-posters`, `pptx-posters` | 3 |
 | **Research** | `research-lookup`, `citation-management`, `peer-review`, `scholar-evaluation` | 4 |
 | **Visuals** | `scientific-schematics`, `generate-image`, `plotting-libraries`, `visual-design` | 4 |
-| **Documents** | `markitdown`, `venue-templates`, `document-skills` | 3 |
-| **Analysis** | `scientific-critical-thinking` | 1 |
+| **Documents** | `markitdown`, `venue-templates`, `document-skills` (container with 4 sub-skills) | 3 |
+| **Analysis** | `statistical-analysis`, `code-documentation`, `reproducible-research` | 3 |
 | **Conversion** | `paper-2-web` | 1 |
+
+**Total: 21 top-level skills + 4 document sub-skills (docx, pdf, pptx, xlsx)**
 
 ### Structure Summary
 
@@ -35,9 +42,9 @@ The skills folder contains **19 skills** that are generally well-organized with 
 | scientific-slides | ✓ | ✓ | ✓ | ✓ | Very High |
 | latex-posters | ✓ | ✓ | ✓ | ✓ | High |
 | pptx-posters | ✓ | | ✓ | ✓ | Medium |
-| research-lookup | ✓ | ✓ | | | Medium-High |
+| research-lookup | ✓ | ✓ | ✓ | | Medium-High |
 | citation-management | ✓ | ✓ | ✓ | ✓ | Medium |
-| peer-review | ✓ | | ✓ | | High |
+| peer-review | ✓ | | ✓ | | **Very High** (includes critical analysis) |
 | scholar-evaluation | ✓ | ✓ | | | Medium-High |
 | scientific-schematics | ✓ | ✓ | ✓ | | Very High |
 | generate-image | ✓ | ✓ | | | Medium |
@@ -46,39 +53,64 @@ The skills folder contains **19 skills** that are generally well-organized with 
 | markitdown | ✓ | ✓ | ✓ | ✓ | Medium-High |
 | paper-2-web | ✓ | | ✓ | | Very High |
 | venue-templates | ✓ | ✓ | ✓ | ✓ | High |
-| scientific-critical-thinking | ✓ | | ✓ | | Medium-High |
-| document-skills | ❌ | | | | Container |
+| statistical-analysis | ✓ | | ✓ | | High |
+| code-documentation | ✓ | | ✓ | | Medium |
+| reproducible-research | ✓ | | ✓ | | Medium-High |
+| document-skills | ✓ | | | | Container |
 
 ---
 
-## Identified Redundancies
+## Completed Consolidations
 
-### 1. Review/Evaluation Skills (Primary Concern) ⚠️
+### 1. Scientific Critical Thinking → Peer Review ✅
 
-Three skills have overlapping functionality in research quality assessment:
+**Date:** 2025-12-28
 
-| Skill | Purpose | Key Features |
-|-------|---------|--------------|
-| `peer-review` | Formal manuscript/grant evaluation | Section-by-section systematic review, reproducibility assessment |
-| `scholar-evaluation` | Structured quality scoring | 8-dimension framework with quantitative scores |
-| `scientific-critical-thinking` | Research rigor analysis | Bias detection, statistical validity, evidence quality (GRADE/Cochrane), logical fallacy identification |
+The `scientific-critical-thinking` skill has been merged into `peer-review` as a "Critical Analysis Framework" section.
 
-**Overlap Analysis**:
+**What was merged:**
+- Evidence Quality Assessment (GRADE framework)
+- Logical Fallacy Identification
+- Claim Evaluation process
+- Bias Detection taxonomy
 
-- `scientific-critical-thinking` provides critical analysis capabilities that conceptually overlap with methodology assessment in both other skills
-- All three evaluate research quality but from slightly different angles
-- `peer-review` and `scholar-evaluation` have clearer distinct purposes (formal review vs. structured scoring)
+**Reference files moved to peer-review/references/:**
+- `common_biases.md`
+- `evidence_hierarchy.md`
+- `experimental_design.md`
+- `logical_fallacies.md`
+- `scientific_method.md`
+- `statistical_pitfalls.md`
 
-**Recommendation**:
-
-Merge `scientific-critical-thinking` into `peer-review` as a "Critical Analysis Framework" subsection.
+**Files updated:**
+- `skills/peer-review/SKILL.md` - Added Critical Analysis Framework section
+- `skills/statistical-analysis/SKILL.md` - Updated cross-references
+- `skills/scholar-evaluation/SKILL.md` - Updated cross-references
+- `skills/SKILL_ROUTER.md` - Updated routing logic
+- `skills/SKILL_TESTS.md` - Updated test scenarios
 
 | Before | After |
 |--------|-------|
-| 3 skills | 2 skills |
-| `peer-review` | `peer-review` (enhanced with critical thinking framework) |
+| 3 review skills | 2 review skills |
+| `peer-review` | `peer-review` (enhanced with critical analysis) |
 | `scholar-evaluation` | `scholar-evaluation` (unchanged) |
 | `scientific-critical-thinking` | (absorbed into peer-review) |
+
+### 2. Document Skills Container ✅
+
+**Date:** 2025-12-28
+
+Added `SKILL.md` to `document-skills/` explaining the container structure and routing logic.
+
+**Container structure:**
+```
+document-skills/
+├── SKILL.md           ← NEW: Container routing logic
+├── docx/SKILL.md      → Word documents
+├── pdf/SKILL.md       → PDF documents
+├── pptx/SKILL.md      → PowerPoint presentations
+└── xlsx/SKILL.md      → Excel spreadsheets
+```
 
 ---
 
@@ -158,7 +190,7 @@ Presentation:
 scientific-writing → scientific-slides → [scientific-schematics + research-lookup]
 
 Publication:
-venue-templates → scientific-writing → peer-review/scholar-evaluation → citation-management
+venue-templates → scientific-writing → peer-review → citation-management
 
 Dissemination:
 scientific-writing → paper-2-web → [web/video/poster outputs]
@@ -166,18 +198,16 @@ scientific-writing → paper-2-web → [web/video/poster outputs]
 
 ---
 
-## Structural Issues
+## Structural Improvements Made
 
-### 1. Missing SKILL.md
+### 1. ✅ Document Skills Container (Fixed)
 
-`document-skills/` is a container directory with subdirectories (`docx/`, `pdf/`, `pptx/`, `xlsx/`) but lacks a `SKILL.md` file.
+`document-skills/` now has a `SKILL.md` explaining:
+- Container structure and routing logic
+- Decision tree for format selection
+- Links to sub-skills
 
-**Options**:
-- Add a `SKILL.md` explaining the container structure
-- Split into 4 separate skills with individual `SKILL.md` files
-- Merge into `markitdown` if functionality overlaps
-
-### 2. Complexity Imbalance
+### 2. Complexity Imbalance (Noted)
 
 Some skills are significantly more complex than others:
 
@@ -187,46 +217,38 @@ Some skills are significantly more complex than others:
 | `latex-posters` | Multiple LaTeX packages, extensive templates, quality control workflow |
 | `scientific-schematics` | Two-stage AI pipeline with quality thresholds |
 | `paper-2-web` | Autonomous multi-output pipeline |
+| `peer-review` | Now includes 7-stage review + critical analysis framework |
 
 **Consideration**: `scientific-slides` could potentially be split into 3 sub-skills by workflow type.
 
-### 3. Scattered MANDATORY Requirements
+### 3. MANDATORY Requirements
 
-Figure requirements are documented in multiple places without central coordination:
+Figure requirements are documented in SKILL_ROUTER.md and individual skills:
 
 - `hypothesis-generation`: "1-2 figures minimum"
 - `latex-posters`: "2-3 figures, 40-50% of area"
 - `scientific-slides`: "figures/diagrams essential"
 
-**Recommendation**: Document all mandatory requirements in a central location or create a dependency map.
-
 ---
 
-## Recommendations
+## Current State Summary
 
-### Priority Actions
+### Skill Count
 
-| Priority | Action | Impact |
-|----------|--------|--------|
-| **High** | Merge `scientific-critical-thinking` into `peer-review` | Reduces skill count, eliminates conceptual overlap |
-| Medium | Add `SKILL.md` to `document-skills/` | Structural consistency |
-| Medium | Create skill dependency diagram | Improves discoverability |
-| Low | Consider splitting `scientific-slides` | Reduces per-skill complexity |
+| State | Count |
+|-------|-------|
+| Top-level skills | 21 |
+| Document sub-skills | 4 |
+| **Total skills** | **25** |
 
-### Consolidation Summary
+### Files in skills/ (Non-Skill)
 
-| Current State | Proposed State | Change |
-|---------------|----------------|--------|
-| 19 skills | 18 skills | -1 |
-| 3 review skills | 2 review skills | Merge critical-thinking → peer-review |
-
-### What NOT to Consolidate
-
-| Skills | Reason to Keep Separate |
-|--------|------------------------|
-| `scientific-schematics` + `generate-image` | Different backends, quality controls, use cases |
-| `latex-posters` + `pptx-posters` | Different output formats, user preferences |
-| `plotting-libraries` + `visual-design` | Different abstraction levels (how vs. why) |
+| File | Purpose |
+|------|---------|
+| `SKILL_ROUTER.md` | Decision trees for skill selection |
+| `SKILL_TEMPLATE.md` | Template for creating new skills |
+| `SKILL_TESTS.md` | Validation test scenarios |
+| `QUANTIFICATION_THRESHOLDS.md` | Shared quality thresholds |
 
 ---
 
@@ -242,7 +264,7 @@ Figure requirements are documented in multiple places without central coordinati
 | `pptx-posters` | Create PowerPoint-based posters |
 | `research-lookup` | Real-time research lookup via Perplexity |
 | `citation-management` | Organize and format citations |
-| `peer-review` | Systematic manuscript/grant evaluation |
+| `peer-review` | Systematic manuscript/grant evaluation + critical analysis |
 | `scholar-evaluation` | 8-dimension scholarly work assessment |
 | `scientific-schematics` | AI-powered technical diagram generation |
 | `generate-image` | General-purpose AI image generation |
@@ -251,9 +273,12 @@ Figure requirements are documented in multiple places without central coordinati
 | `markitdown` | Convert documents to Markdown |
 | `paper-2-web` | Transform papers to web/video/poster |
 | `venue-templates` | Publication venue templates and formatting |
-| `scientific-critical-thinking` | Research rigor and claim evaluation |
-| `document-skills` | Document format conversion (container) |
+| `statistical-analysis` | Statistical method selection and reporting |
+| `code-documentation` | Code documentation standards and templates |
+| `reproducible-research` | FAIR principles and reproducibility workflows |
+| `document-skills` | Document format processing (container) |
 
 ---
 
 *Analysis conducted by Claude Opus 4.5*
+*Updated: 2025-12-28 - Consolidation recommendations applied*

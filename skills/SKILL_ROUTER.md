@@ -181,18 +181,17 @@ User needs research/information support
 ├─ Need to EVALUATE a paper or researcher?
 │  │
 │  ├─ Evaluate paper quality?
-│  │  └─ YES → peer-review (manuscript review)
-│  │            OR scientific-critical-thinking (analysis framework)
+│  │  └─ YES → peer-review (manuscript review + critical analysis framework)
 │  │
 │  └─ Evaluate researcher/scholar?
 │     └─ YES → scholar-evaluation (8-dimension assessment)
 │
 └─ Need to ANALYZE arguments or evidence?
    │
-   └─ YES → scientific-critical-thinking
+   └─ YES → peer-review (use Critical Analysis Framework section)
              │
              ├─ Bias identification
-             ├─ Evidence quality hierarchy
+             ├─ Evidence quality hierarchy (GRADE)
              └─ Logical fallacy detection
 ```
 
@@ -205,7 +204,7 @@ User needs research/information support
 | "Format my references" | citation-management | BibTeX/citation styling |
 | "Is this paper reliable?" | peer-review | Manuscript evaluation |
 | "Evaluate this researcher" | scholar-evaluation | Scholar assessment |
-| "Analyze this argument" | scientific-critical-thinking | Logic/evidence analysis |
+| "Analyze this argument" | peer-review | Logic/evidence analysis (Critical Analysis Framework) |
 
 ---
 
@@ -303,9 +302,9 @@ User needs to convert or transform content
 | Systematic review | literature-review | + citation-management |
 | Manage citations | citation-management | — |
 | **Evaluation** | | |
-| Review manuscript | peer-review | + scientific-critical-thinking |
+| Review manuscript | peer-review | (includes critical analysis) |
 | Evaluate scholar | scholar-evaluation | — |
-| Analyze arguments | scientific-critical-thinking | — |
+| Analyze arguments | peer-review | (use Critical Analysis Framework) |
 | **Analysis** | | |
 | Statistical guidance | statistical-analysis | + reproducible-research |
 | Reproducibility | reproducible-research | + code-documentation |
@@ -399,7 +398,7 @@ User needs to convert or transform content
     │                     SUPPORTING SKILLS                           │
     │  research-lookup  │  statistical-analysis  │  reproducible-     │
     │  peer-review      │  scholar-evaluation    │  research          │
-    │  scientific-critical-thinking              │  code-documentation│
+    │                                            │  code-documentation│
     └─────────────────────────────────────────────────────────────────┘
            │
            ▼
@@ -426,7 +425,7 @@ User needs to convert or transform content
 **Clarifying questions:**
 1. Review a manuscript for peer review? → peer-review
 2. Evaluate a researcher's work? → scholar-evaluation
-3. Analyze logical arguments? → scientific-critical-thinking
+3. Analyze logical arguments? → peer-review (Critical Analysis Framework)
 4. Review literature systematically? → literature-review
 
 ### "I need to write something"

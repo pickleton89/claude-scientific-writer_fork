@@ -259,10 +259,9 @@ Detailed guidance available in `references/` subdirectory:
 
 **Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
-- **scientific-critical-thinking**: Conceptual framework for evidence evaluation
+- **peer-review**: Manuscript evaluation and critical analysis frameworks (evidence evaluation, bias detection, logical fallacies)
 - **plotting-libraries**: Visualizing statistical results (volcano plots, heatmaps)
 - **scientific-writing**: Reporting statistical methods and results in manuscripts
 - **reproducible-research**: Documenting analysis parameters for reproducibility
 - **research-lookup**: Finding appropriate statistical methods in literature
-- **peer-review**: Evaluating statistical methods in papers under review
 </cross_references>

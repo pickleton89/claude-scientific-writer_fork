@@ -421,11 +421,10 @@ Calibrate expectations to:
 
 | Skill | Relationship |
 |-------|-------------|
-| `peer-review` | Use for full peer review with revision requirements; scholar-evaluation provides quantitative baseline |
+| `peer-review` | Use for full peer review with revision requirements; includes critical analysis frameworks (evidence evaluation, bias detection, logical fallacies) |
 | `scientific-writing` | Use to improve writing after identifying weaknesses via scholar-evaluation |
 | `statistical-analysis` | Use for detailed statistical method review when dimension 5 scores low |
 | `literature-review` | Use when dimension 2 (Literature Review) requires expansion |
-| `scientific-critical-thinking` | Complementary framework for evaluating argument quality |
 
 **Skill Selection:**
 See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.

@@ -111,6 +111,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Exemplary patterns to propagate: decision matrices, numbered pitfalls, exit criteria checklists, scope boundaries, template strings
   - Priority action table with impact and effort estimates
 
+- `PHASE2_QUALITATIVE_TERMS_AUDIT.md`: Comprehensive audit of qualitative terms requiring quantification
+  - Found 847+ instances across 22 skills in 18 categories of vague language
+  - Priority categorization: "appropriate" (80+), "sufficient/adequate" (60+), "comprehensive/thorough" (45+)
+  - Skill-by-skill summary with instance counts and quantification priority
+  - Proposed quantification mappings for each term category
+  - Implementation recommendations for threshold tables and skill updates
+
+- `skills/QUANTIFICATION_THRESHOLDS.md`: Shared numeric thresholds replacing qualitative terms (Phase 2.2)
+  - **Section 1: Literature Coverage** - Min papers by doc type (30-100), database requirements by field, search saturation criteria
+  - **Section 2: Visual Quality** - Resolution by context (72-600 DPI), WCAG accessibility standards (4.5:1 contrast), font sizes by context
+  - **Section 3: Replication** - Biological/technical rep minimums by experiment type, power requirements (≥80%), sample size red flags
+  - **Section 4: Issue Severity** - Critical/Major/Minor/Optional definitions with quantified criteria and checklists
+  - **Section 5: Documentation Completeness** - Code coverage levels (50-95%), methods documentation tiers, reproducibility checklist pass rates
+  - **Section 6: Time-Based** - "Recent" and "current" definitions by field (≤2 years fast fields, ≤5 years standard)
+  - **Section 7: Quality Rubrics** - 10-point scales for figures, schematics, and writing (5 criteria each)
+  - **Section 8: Iteration Limits** - Stopping criteria and maximum iteration limits by task type
+  - Cross-reference guide mapping qualitative terms to threshold sections
+
 - `skills/plotting-libraries/references/ggplot2.md`: Complete ggplot2 reference for R visualization
   - Grammar of Graphics components: data, aesthetics, geoms, stats, scales, coords, facets, themes
   - Comprehensive geoms reference: points, lines, distributions, bars, heatmaps, text/annotations

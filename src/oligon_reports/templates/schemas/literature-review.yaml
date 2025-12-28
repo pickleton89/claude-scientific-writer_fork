@@ -1,0 +1,180 @@
+# Literature Review Schema
+# Paper summaries, comparisons, and synthesis for research projects
+# Used to organize and analyze existing literature on a topic
+
+schema_version: "1.0"
+document_type: "literature-review"
+category: "project-management"
+description: |
+  Literature review documents for organizing paper summaries, comparisons,
+  and synthesis. Supports systematic review of existing research.
+  Typical length: 200-400 lines.
+
+frontmatter:
+  required:
+    - name: type
+      expected: "literature-review"
+      description: "Document type identifier"
+    - name: title
+      type: string
+      description: "Review title"
+    - name: topic
+      type: string
+      description: "Topic area being reviewed"
+    - name: date
+      type: string
+      format: "YYYY-MM-DD"
+      description: "Review date"
+  optional:
+    - name: papers_reviewed
+      type: integer
+      description: "Number of papers reviewed"
+    - name: author
+      type: string
+      description: "Review author"
+    - name: version
+      type: string
+      default: "1.0"
+      description: "Document version"
+
+sections:
+  - id: scope
+    heading: "Scope"
+    level: 2
+    required: true
+    description: "What this review covers"
+    subsections:
+      - id: research_questions
+        heading: "Research Questions"
+        level: 3
+        required: false
+        expected_content:
+          type: "numbered_list"
+          description: "Research questions guiding the review"
+      - id: search_strategy
+        heading: "Search Strategy"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+        expected_content:
+          type: "table"
+          columns: ["Database", "Query", "Results"]
+
+  - id: paper_summaries
+    heading: "Paper Summaries"
+    level: 2
+    required: true
+    description: "Individual paper analyses"
+    allows_dynamic_subsections: true
+    notes: "Each subsection is a paper: Author et al., Year"
+    subsection_template:
+      pattern: "[Author] et al., [Year]"
+      expected_elements:
+        - id: title
+          heading: null
+          pattern: "**Title:**"
+          required: true
+        - id: journal
+          heading: null
+          pattern: "**Journal:**"
+          required: false
+        - id: doi
+          heading: null
+          pattern: "**DOI:**"
+          required: false
+        - id: key_findings
+          heading: "Key Findings"
+          level: 4
+          required: true
+          expected_content:
+            type: "bullet_list"
+        - id: methods
+          heading: "Methods"
+          level: 4
+          required: false
+        - id: relevance
+          heading: "Relevance"
+          level: 4
+          required: false
+          expected_content:
+            type: "blockquote"
+            description: "How this relates to your work"
+
+  - id: comparative_analysis
+    heading: "Comparative Analysis"
+    level: 2
+    required: false
+    description: "Cross-paper comparisons"
+    subsections:
+      - id: methods_comparison
+        heading: "Methods Comparison"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+        expected_content:
+          type: "table"
+          columns: ["Paper", "Method", "Sample Size", "Key Difference"]
+      - id: results_comparison
+        heading: "Results Comparison"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+
+  - id: synthesis
+    heading: "Synthesis"
+    level: 2
+    required: true
+    description: "Consolidated insights from the review"
+    subsections:
+      - id: consensus_findings
+        heading: "Consensus Findings"
+        level: 3
+        required: false
+        description: "What papers agree on"
+      - id: contradictions
+        heading: "Contradictions"
+        level: 3
+        required: false
+        description: "Where papers disagree"
+      - id: gaps
+        heading: "Gaps"
+        level: 3
+        required: false
+        description: "What remains unknown"
+
+  - id: implications
+    heading: "Implications for Current Work"
+    level: 2
+    required: false
+    description: "How this informs your research"
+
+  - id: references
+    heading: "References"
+    level: 2
+    required: true
+    description: "Full citations for reviewed papers"
+    expected_content:
+      type: "numbered_list"
+      description: "Full citations in consistent format"
+
+component_mappings:
+  frontmatter: "CoverPage"
+  "## N. Title": "SectionDivider"
+  paper_summary: "PaperSummaryCard"
+  "**Title:**": "BoldLabel"
+  "> ": "RelevanceCallout"
+  comparison_table: "ComparisonMatrix"
+  references_list: "CitationList"
+
+validation:
+  require_frontmatter: true
+  min_sections: 3
+  allow_extra_sections: true
+  required_sections:
+    - scope
+    - paper_summaries
+    - synthesis
+    - references

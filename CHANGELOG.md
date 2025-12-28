@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Phase 1 Template Infrastructure - Steps 1-3 (In Progress)**: Foundation for markdown-to-PDF conversion
+- **Phase 1 Template Infrastructure - Steps 1-4 (In Progress)**: Foundation for markdown-to-PDF conversion
   - **Step 1 Setup**: Added `python-frontmatter>=1.1.0` dependency, created `src/oligon_reports/templates/` directory structure
   - **Step 2 Parser Foundation**: Created TemplateParser class (~300 lines) in `src/oligon_reports/templates/parser.py`
     - Dataclass definitions: `FrontmatterData`, `Element`, `Section`, `DocumentTree`, `ValidationError`
@@ -26,7 +26,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `readme.yaml`: Reference documentation with overview/quick-start/architecture (8 sections)
     - `data-report.yaml`: Data-driven reports with metrics/rankings/recommendations (8 sections)
     - Each schema defines: frontmatter (required/optional), sections hierarchy, component_mappings, validation rules
-  - Next: Step 4 (Schemas Batch 2: phase-plan, literature-review, project-status, technical-spec)
+  - **Step 4 Schemas Batch 2**: Created 4 YAML schemas for scientific, project management, and development documents
+    - `phase-plan.yaml`: Scientific workflow planning with hypotheses, metrics, acceptance criteria (8 sections)
+    - `literature-review.yaml`: Paper summaries, comparisons, synthesis with paper_summaries templates (6 sections)
+    - `project-status.yaml`: Progress tracking with milestones, blockers, risks (6 sections)
+    - `technical-spec.yaml`: Software design with goals, requirements, architecture (8 sections)
+    - All schemas follow established pattern: schema_version, frontmatter (required/optional), sections, component_mappings, validation
+  - Next: Step 5 (Schemas Batch 3: task-list, standards-guide, agent-definition, method-guide)
 
 - **Phase 2 Component Extension (Complete)**: Added 5 new PDF components to `src/oligon_reports/components.py`
   - **FindingCard**: Numbered finding box with badge, title, and description for `#### Finding N:` patterns

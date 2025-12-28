@@ -1,0 +1,152 @@
+# Project Status Schema
+# Progress tracking with milestones, blockers, and risks
+# Used for periodic project status updates
+
+schema_version: "1.0"
+document_type: "project-status"
+category: "project-management"
+description: |
+  Project status update documents for tracking progress, blockers, and milestones.
+  Used for periodic reporting on project health and upcoming work.
+  Typical length: 100-200 lines.
+
+frontmatter:
+  required:
+    - name: type
+      expected: "project-status"
+      description: "Document type identifier"
+    - name: title
+      type: string
+      description: "Status update title"
+    - name: date
+      type: string
+      format: "YYYY-MM-DD"
+      description: "Status date"
+    - name: period
+      type: string
+      description: "Reporting period (Week/Sprint/Month)"
+  optional:
+    - name: overall_status
+      type: enum
+      values: ["On Track", "At Risk", "Blocked"]
+      default: "On Track"
+      description: "Overall project status"
+    - name: project
+      type: string
+      description: "Project name"
+    - name: author
+      type: string
+      description: "Status author"
+
+sections:
+  - id: summary
+    heading: "Summary"
+    level: 2
+    required: true
+    description: "Brief status overview with key metrics"
+    expected_elements:
+      - tables
+    subsections:
+      - id: metrics_table
+        heading: null
+        level: 3
+        required: false
+        expected_content:
+          type: "table"
+          columns: ["Metric", "Value"]
+
+  - id: progress
+    heading: "Progress This Period"
+    level: 2
+    required: true
+    description: "Work completed and in progress"
+    subsections:
+      - id: completed
+        heading: "Completed"
+        level: 3
+        required: false
+        expected_content:
+          type: "checklist"
+          description: "Completed tasks with [x] checkboxes"
+      - id: in_progress
+        heading: "In Progress"
+        level: 3
+        required: false
+        expected_content:
+          type: "checklist"
+          description: "Tasks in progress with [ ] checkboxes and notes"
+
+  - id: milestones
+    heading: "Milestones"
+    level: 2
+    required: false
+    description: "Key milestone tracking"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Milestone", "Target Date", "Status"]
+
+  - id: blockers
+    heading: "Blockers"
+    level: 2
+    required: false
+    description: "Current blockers with resolution plans"
+    allows_dynamic_subsections: true
+    notes: "Each subsection is a blocker with Impact/Owner/Resolution"
+    subsection_template:
+      pattern: "[Blocker Name]"
+      expected_elements:
+        - id: impact
+          pattern: "**Impact:**"
+          required: true
+        - id: owner
+          pattern: "**Owner:**"
+          required: true
+        - id: resolution
+          pattern: "**Resolution:**"
+          required: true
+
+  - id: risks
+    heading: "Risks"
+    level: 2
+    required: false
+    description: "Risk assessment and mitigation"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Risk", "Likelihood", "Impact", "Mitigation"]
+
+  - id: next_period
+    heading: "Next Period"
+    level: 2
+    required: true
+    description: "Planned work for upcoming period"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Priority", "Task", "Owner"]
+
+component_mappings:
+  frontmatter: "CoverPage"
+  "## N. Title": "SectionDivider"
+  overall_status: "StatusBadge"
+  summary_metrics: "MetricCardRow"
+  completed_checklist: "CompletedChecklist"
+  in_progress_checklist: "ProgressChecklist"
+  milestones_table: "MilestoneTracker"
+  blocker_section: "BlockerCard"
+  risks_table: "RiskMatrix"
+  "- [x]": "CompletedChecklistItem"
+  "- [ ]": "PendingChecklistItem"
+
+validation:
+  require_frontmatter: true
+  min_sections: 2
+  allow_extra_sections: true
+  required_sections:
+    - summary
+    - progress
+    - next_period

@@ -1,0 +1,241 @@
+# Technical Specification Schema
+# Software design documents with goals, requirements, and architecture
+# Used for planning features and systems before implementation
+
+schema_version: "1.0"
+document_type: "technical-spec"
+category: "development"
+description: |
+  Technical specification documents for software design with goals, scope,
+  requirements, and architecture details. Used to plan features before building.
+  Typical length: 500-1050 lines.
+
+frontmatter:
+  required:
+    - name: type
+      expected: "technical-spec"
+      description: "Document type identifier"
+    - name: title
+      type: string
+      description: "Feature or system name"
+    - name: date
+      type: string
+      format: "YYYY-MM-DD"
+      description: "Specification date"
+  optional:
+    - name: version
+      type: string
+      default: "1.0"
+      description: "Document version"
+    - name: author
+      type: string
+      description: "Specification author"
+    - name: status
+      type: enum
+      values: ["Draft", "Review", "Approved", "Implemented"]
+      default: "Draft"
+      description: "Specification status"
+    - name: reviewers
+      type: list
+      description: "List of reviewers"
+
+sections:
+  - id: overview
+    heading: "Overview"
+    level: 2
+    required: true
+    description: "What this specification covers"
+    subsections:
+      - id: goals
+        heading: "Goals"
+        level: 3
+        required: true
+        expected_content:
+          type: "bullet_list"
+          description: "What we're trying to achieve"
+      - id: non_goals
+        heading: "Non-Goals"
+        level: 3
+        required: false
+        expected_content:
+          type: "bullet_list"
+          description: "What is explicitly out of scope"
+
+  - id: background
+    heading: "Background"
+    level: 2
+    required: false
+    description: "Context and motivation"
+    subsections:
+      - id: current_state
+        heading: "Current State"
+        level: 3
+        required: false
+        description: "How things work now"
+      - id: problem
+        heading: "Problem"
+        level: 3
+        required: false
+        description: "What needs to change"
+
+  - id: requirements
+    heading: "Requirements"
+    level: 2
+    required: true
+    description: "Functional and non-functional requirements"
+    subsections:
+      - id: functional
+        heading: "Functional Requirements"
+        level: 3
+        required: true
+        expected_elements:
+          - tables
+        expected_content:
+          type: "table"
+          columns: ["ID", "Requirement", "Priority"]
+      - id: non_functional
+        heading: "Non-Functional Requirements"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+        expected_content:
+          type: "table"
+          columns: ["ID", "Requirement", "Metric"]
+
+  - id: design
+    heading: "Design"
+    level: 2
+    required: true
+    description: "Architecture and component design"
+    subsections:
+      - id: architecture
+        heading: "Architecture"
+        level: 3
+        required: true
+        expected_elements:
+          - code_blocks
+        notes: "ASCII diagrams or architecture descriptions"
+      - id: components
+        heading: "Components"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+        expected_content:
+          type: "table"
+          columns: ["Component", "Responsibility"]
+      - id: interfaces
+        heading: "Interfaces"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+        expected_content:
+          type: "table"
+          columns: ["Interface", "Input", "Output"]
+
+  - id: implementation
+    heading: "Implementation"
+    level: 2
+    required: false
+    description: "Implementation approach and details"
+    subsections:
+      - id: approach
+        heading: "Approach"
+        level: 3
+        required: false
+        description: "Implementation strategy"
+      - id: dependencies
+        heading: "Dependencies"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+        expected_content:
+          type: "table"
+          columns: ["Dependency", "Version", "Purpose"]
+      - id: configuration
+        heading: "Configuration"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+        expected_content:
+          type: "table"
+          columns: ["Parameter", "Default", "Description"]
+
+  - id: testing
+    heading: "Testing"
+    level: 2
+    required: false
+    description: "Test cases and acceptance criteria"
+    subsections:
+      - id: test_cases
+        heading: "Test Cases"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+        expected_content:
+          type: "table"
+          columns: ["ID", "Scenario", "Expected Result"]
+      - id: acceptance_criteria
+        heading: "Acceptance Criteria"
+        level: 3
+        required: false
+        expected_content:
+          type: "checklist"
+          description: "Checkboxes for acceptance criteria"
+
+  - id: rollout
+    heading: "Rollout"
+    level: 2
+    required: false
+    description: "Deployment phases and rollback plan"
+    subsections:
+      - id: phases
+        heading: "Phases"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+        expected_content:
+          type: "table"
+          columns: ["Phase", "Scope", "Timeline"]
+      - id: rollback
+        heading: "Rollback Plan"
+        level: 3
+        required: false
+        description: "How to revert if needed"
+
+  - id: open_questions
+    heading: "Open Questions"
+    level: 2
+    required: false
+    description: "Unresolved design questions"
+    expected_content:
+      type: "checklist"
+      description: "Questions to be resolved"
+
+component_mappings:
+  frontmatter: "CoverPage"
+  "## N. Title": "SectionDivider"
+  requirements_table: "RequirementsTable"
+  architecture_diagram: "ArchitectureDiagram"
+  components_table: "ComponentTable"
+  interfaces_table: "InterfaceTable"
+  dependencies_table: "DependencyTable"
+  test_cases_table: "TestCaseTable"
+  "- [ ]": "ChecklistItem"
+  "code_block": "CodeBlock"
+  status_badge: "StatusBadge"
+
+validation:
+  require_frontmatter: true
+  min_sections: 3
+  allow_extra_sections: true
+  required_sections:
+    - overview
+    - requirements
+    - design

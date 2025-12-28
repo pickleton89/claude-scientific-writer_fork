@@ -1,0 +1,172 @@
+# Phase Plan Schema
+# Scientific workflow planning with hypotheses, metrics, and acceptance criteria
+# For planning future research phases before execution
+
+schema_version: "1.0"
+document_type: "phase-plan"
+category: "scientific"
+description: |
+  Scientific workflow planning documents with hypotheses, metrics, and acceptance criteria.
+  Used to plan research phases before execution, defining what will be tested and how.
+  Typical length: 300-500 lines.
+
+frontmatter:
+  required:
+    - name: type
+      expected: "phase-plan"
+      description: "Document type identifier"
+    - name: title
+      type: string
+      description: "Phase plan title"
+    - name: project
+      type: string
+      description: "Project name"
+    - name: phase
+      type: string
+      description: "Phase number or identifier"
+    - name: date
+      type: string
+      format: "YYYY-MM-DD"
+      description: "Plan creation date"
+  optional:
+    - name: version
+      type: string
+      default: "1.0"
+      description: "Document version"
+    - name: status
+      type: enum
+      values: ["Draft", "Approved", "In Progress", "Complete"]
+      default: "Draft"
+      description: "Plan status"
+    - name: author
+      type: string
+      description: "Plan author"
+
+sections:
+  - id: executive_summary
+    heading: "Executive Summary"
+    level: 2
+    required: true
+    description: "1-2 paragraph overview of what this phase will accomplish"
+    expected_content:
+      type: "prose"
+      description: "Brief overview paragraph"
+
+  - id: key_questions
+    heading: "Key Questions / Hypotheses"
+    level: 2
+    required: true
+    description: "Research questions with hypotheses and test approaches"
+    expected_elements:
+      - tables
+    subsections:
+      - id: questions_table
+        heading: null
+        level: 3
+        required: false
+        expected_content:
+          type: "table"
+          columns: ["#", "Question", "Hypothesis", "Test Approach"]
+
+  - id: structures
+    heading: "Structures Under Analysis"
+    level: 2
+    required: false
+    description: "Reference and test structures being analyzed"
+    subsections:
+      - id: reference_structures
+        heading: "Reference Structures"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+      - id: predicted_structures
+        heading: "Predicted/Test Structures"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+
+  - id: analysis_framework
+    heading: "Analysis Framework"
+    level: 2
+    required: true
+    description: "Detailed analysis methods and procedures"
+    allows_dynamic_subsections: true
+    expected_elements:
+      - code_blocks
+      - tables
+    notes: "Subsections typically follow Objective/Method/Tools pattern"
+
+  - id: metrics
+    heading: "Metrics & Acceptance Criteria"
+    level: 2
+    required: true
+    description: "Quantitative success criteria with thresholds"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Metric", "Threshold", "Pass Condition", "Rationale"]
+
+  - id: output_structure
+    heading: "Output Directory Structure"
+    level: 2
+    required: false
+    description: "Expected file organization for outputs"
+    expected_elements:
+      - code_blocks
+    expected_content:
+      type: "code_block"
+      language: "text"
+      description: "Directory tree structure"
+
+  - id: dependencies
+    heading: "Dependencies"
+    level: 2
+    required: false
+    description: "Prior phase and external dependencies"
+    subsections:
+      - id: prior_dependencies
+        heading: "Prior Phase Dependencies"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+      - id: external_dependencies
+        heading: "External Dependencies"
+        level: 3
+        required: false
+        expected_content:
+          type: "bullet_list"
+
+  - id: timeline
+    heading: "Timeline"
+    level: 2
+    required: false
+    description: "Milestone dates and status"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Milestone", "Target Date", "Status"]
+
+component_mappings:
+  frontmatter: "CoverPage"
+  "## N. Title": "SectionDivider"
+  executive_summary: "HighlightedSummaryBox"
+  questions_table: "NumberedQuestionCards"
+  metrics_table: "ThresholdTable"
+  directory_structure: "TreeDiagram"
+  timeline_table: "TimelineComponent"
+  "code_block": "CodeBlock"
+
+validation:
+  require_frontmatter: true
+  min_sections: 3
+  allow_extra_sections: true
+  required_sections:
+    - executive_summary
+    - key_questions
+    - analysis_framework
+    - metrics

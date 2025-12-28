@@ -1,14 +1,17 @@
 ---
 name: scientific-schematics
-version: 2.0.0
+version: 2.1.0
 description: "Create publication-quality scientific diagrams using Nano Banana Pro AI with iterative refinement and Gemini 3 Pro quality review. Specialized in neural networks, flowcharts, biological pathways, and system architectures."
 allowed-tools: [Read, Write, Edit, Bash]
+shared-thresholds: "../QUANTIFICATION_THRESHOLDS.md"
 ---
 
 # Scientific Schematics and Diagrams
 
+> **Quantified Thresholds:** This skill references shared thresholds from [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §7 (Quality Rubrics) and §8 (Iteration & Stopping Criteria).
+
 <overview>
-Generate publication-quality scientific diagrams through AI-powered creation with iterative refinement. Uses Nano Banana Pro for image generation and Gemini 3 Pro for quality review. Smart iteration stops early when quality thresholds are met, saving API calls while ensuring appropriate quality for each document type.
+Generate publication-quality scientific diagrams through AI-powered creation with iterative refinement. Uses Nano Banana Pro for image generation and Gemini 3 Pro for quality review. Smart iteration stops early when quality score ≥ document threshold (6.5-8.5/10), with soft limit of 3 iterations and hard limit of 5 iterations per diagram.
 </overview>
 
 <when_to_use>
@@ -89,17 +92,23 @@ What do you need to visualize?
 
 ### Quality Threshold by Document Type
 
-| Document Type | Threshold | Max Iterations | Use Case |
-|---------------|-----------|----------------|----------|
-| journal | 8.5/10 | 2 | Nature, Science, peer-reviewed journals |
-| conference | 8.0/10 | 2 | Conference papers |
-| thesis | 8.0/10 | 2 | Dissertations, theses |
-| grant | 8.0/10 | 2 | Grant proposals |
-| preprint | 7.5/10 | 2 | arXiv, bioRxiv preprints |
-| report | 7.5/10 | 2 | Technical reports |
-| poster | 7.0/10 | 2 | Academic posters |
-| presentation | 6.5/10 | 2 | Slides, talks |
-| default | 7.5/10 | 2 | General purpose |
+> Reference: [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §8
+
+| Document Type | Threshold | Soft Limit | Hard Limit | Use Case |
+|---------------|-----------|------------|------------|----------|
+| journal | 8.5/10 | 3 | 5 | Nature, Science, peer-reviewed journals |
+| conference | 8.0/10 | 3 | 5 | Conference papers |
+| thesis | 8.0/10 | 3 | 5 | Dissertations, theses |
+| grant | 8.0/10 | 3 | 5 | Grant proposals |
+| preprint | 7.5/10 | 2 | 4 | arXiv, bioRxiv preprints |
+| report | 7.5/10 | 2 | 4 | Technical reports |
+| poster | 7.0/10 | 2 | 3 | Academic posters |
+| presentation | 6.5/10 | 2 | 3 | Slides, talks |
+| default | 7.5/10 | 3 | 5 | General purpose |
+
+**Iteration Behavior:**
+- **Soft limit:** Target iterations; stop if quality ≥ threshold OR soft limit reached
+- **Hard limit:** Absolute maximum; never exceed regardless of quality score
 
 ### Tool Selection Matrix
 
@@ -209,12 +218,30 @@ Generate Image → Review Quality → Score >= Threshold?
                                         │
                                         ├─ YES → DONE (early stop)
                                         │
-                                        └─ NO → Iteration < Max?
+                                        └─ NO → Iteration < Hard Limit?
                                                      │
-                                                     ├─ YES → Improve prompt, regenerate
+                                                     ├─ NO → DONE (hard limit reached)
                                                      │
-                                                     └─ NO → DONE (max reached)
+                                                     └─ YES → Iteration < Soft Limit?
+                                                                   │
+                                                                   ├─ YES → Improve prompt, regenerate
+                                                                   │
+                                                                   └─ NO → Score improving? (Δ ≥ 0.5)
+                                                                                │
+                                                                                ├─ YES → Continue to hard limit
+                                                                                │
+                                                                                └─ NO → DONE (diminishing returns)
 ```
+
+**Stopping Criteria** (from §8):
+
+| Stop When | Reason |
+|-----------|--------|
+| Quality score ≥ threshold | Target achieved |
+| Soft limit reached AND score not improving | Diminishing returns |
+| Hard limit reached | Absolute maximum |
+| Score improvement < 0.5 between iterations | Plateau detected |
+| Critical error in generation | Cannot proceed |
 
 ---
 
@@ -238,13 +265,21 @@ Generate Image → Review Quality → Score >= Threshold?
 
 **Quality Scoring Rubric (10 points total):**
 
-| Dimension | Points | Criteria |
-|-----------|--------|----------|
-| Scientific Accuracy | 0-2 | Correct concepts, notation, relationships |
-| Clarity & Readability | 0-2 | Easy to understand, clear hierarchy |
-| Label Quality | 0-2 | Complete, readable, consistent labels |
-| Layout & Composition | 0-2 | Logical flow, balanced, no overlaps |
-| Professional Appearance | 0-2 | Publication-ready quality |
+> Reference: [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §7 (Schematic Quality Rubric)
+
+| Dimension | Points | 0 (Fail) | 1 (Acceptable) | 2 (Excellent) |
+|-----------|--------|----------|----------------|---------------|
+| Scientific Accuracy | 0-2 | Factual errors | Minor issues | Scientifically accurate |
+| Clarity & Readability | 0-2 | Confusing layout | Understandable | Intuitive flow |
+| Label Quality | 0-2 | Missing/unreadable | Present but issues | Clear, consistent |
+| Layout & Composition | 0-2 | Overlaps/cramped | Reasonable spacing | Balanced, logical |
+| Professional Appearance | 0-2 | Amateur look | Acceptable | Publication-ready |
+
+**Score Interpretation:**
+- 0-4: Needs revision (below all thresholds)
+- 5-6: Acceptable for presentations/posters
+- 7-8: Acceptable for preprints/reports
+- 9-10: Publication-ready (journal quality)
 
 ---
 
@@ -403,10 +438,20 @@ Always specify flow:
 Requesting too many elements in a single diagram.
 
 **Solution:**
-Limit complexity:
-- Maximum 10-15 primary elements per diagram
-- Break complex systems into multiple figures
-- Use hierarchical views (overview + detail diagrams)
+Limit complexity per diagram type:
+
+| Diagram Type | Max Elements | Max Connections | Max Hierarchy Levels |
+|--------------|--------------|-----------------|---------------------|
+| Flowchart | 15 nodes | 20 edges | 4 levels |
+| Neural network | 12 layers | — | 3 groups |
+| Pathway | 10 molecules | 12 reactions | 3 cascades |
+| System architecture | 12 components | 15 connections | 3 tiers |
+| Block diagram | 10 blocks | 12 arrows | 2 levels |
+
+**When exceeding limits:**
+- Break into multiple figures (overview + detail)
+- Use hierarchical views with zoom levels
+- Create figure panels (a, b, c) for related components
 
 </anti_patterns>
 

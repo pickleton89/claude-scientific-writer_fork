@@ -32,6 +32,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Added Literature Recency Thresholds table defining "recent" and "current" by field type
     - Added citation density requirements in synthesis workflow (2-6 citations per paragraph by document type)
     - Replaced vague "comprehensive, documented database searches" with specific thresholds
+  - `skills/scientific-schematics/SKILL.md` (v2.0.0 → v2.1.0): Applied iteration and quality quantification
+    - Added cross-reference to shared thresholds document (§7 Quality Rubrics, §8 Iteration)
+    - Updated quality threshold table with soft/hard iteration limits (soft: 2-3, hard: 3-5 by document type)
+    - Added explicit stopping criteria table (5 conditions: threshold met, diminishing returns, hard limit, plateau, error)
+    - Expanded smart iteration logic with soft/hard limit decision tree and score improvement check (Δ ≥ 0.5)
+    - Quantified "overcrowded" anti-pattern with element count limits by diagram type (10-15 elements, 12-20 connections)
+    - Enhanced quality rubric with 3-level scoring descriptors (Fail/Acceptable/Excellent) and score interpretation guide
 
 - **Phase 1.3 Skills Determinism Implementation (Complete)**: Refactored all Tier 3 skills to use standard template
   - `skills/citation-management/SKILL.md` (6.5 → ~8.5): Complete restructure with deterministic patterns

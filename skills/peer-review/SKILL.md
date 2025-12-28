@@ -66,6 +66,12 @@ Conduct peer review systematically through the following stages, adapting depth 
 
 ### Stage 1: Initial Assessment
 
+**Progress Milestones:**
+- 25%: Central research question identified
+- 50%: Main findings and conclusions noted
+- 75%: Venue appropriateness assessed
+- 100%: Initial impression documented, ready for deep review
+
 Begin with a high-level evaluation to determine the manuscript's scope, novelty, and overall quality.
 
 **Key Questions:**
@@ -78,6 +84,12 @@ Begin with a high-level evaluation to determine the manuscript's scope, novelty,
 **Output:** Brief summary (2-3 sentences) capturing the manuscript's essence and initial impression.
 
 ### Stage 2: Detailed Section-by-Section Review
+
+**Progress Milestones:**
+- 25%: Abstract/Title and Introduction reviewed
+- 50%: Methods section evaluated
+- 75%: Results and Discussion reviewed
+- 100%: References assessed, all sections documented
 
 Conduct a thorough evaluation of each manuscript section, documenting specific concerns and strengths.
 
@@ -150,6 +162,12 @@ Conduct a thorough evaluation of each manuscript section, documenting specific c
 
 ### Stage 3: Methodological and Statistical Rigor
 
+**Progress Milestones:**
+- 25%: Statistical assumptions and test appropriateness checked
+- 50%: Sample size and replication verified against thresholds
+- 75%: Experimental design (controls, blinding, randomization) assessed
+- 100%: Computational methods reviewed, all issues documented
+
 > **Reference:** See `../QUANTIFICATION_THRESHOLDS.md` §3 (Replication & Sample Size) for shared thresholds.
 
 Evaluate the technical quality and rigor of the research with particular attention to common pitfalls.
@@ -200,6 +218,12 @@ Evaluate the technical quality and rigor of the research with particular attenti
 
 ### Stage 4: Reproducibility and Transparency
 
+**Progress Milestones:**
+- 25%: Data availability assessed (repositories, accession numbers)
+- 50%: Code and materials availability checked
+- 75%: Reporting guideline compliance verified
+- 100%: Protocol detail sufficiency evaluated, issues documented
+
 Assess whether the research meets modern standards for reproducibility and open science.
 
 **Data Availability:**
@@ -219,6 +243,12 @@ Assess whether the research meets modern standards for reproducibility and open 
 - Are all elements of the appropriate checklist addressed?
 
 ### Stage 5: Figure and Data Presentation
+
+**Progress Milestones:**
+- 25%: Figure resolution and labeling quality checked
+- 50%: Error bars and statistical indicators verified
+- 75%: Image integrity checked (manipulation, duplications)
+- 100%: Figure clarity assessed, quality scores documented
 
 > **Reference:** See `../QUANTIFICATION_THRESHOLDS.md` §2 (Visual Quality) and §7 (Figure Quality Rubric) for shared thresholds.
 
@@ -256,6 +286,12 @@ Evaluate the quality, clarity, and integrity of data visualization.
 
 ### Stage 6: Ethical Considerations
 
+**Progress Milestones:**
+- 25%: Human subjects (IRB, consent) verified if applicable
+- 50%: Animal research (IACUC, 3Rs) verified if applicable
+- 75%: Conflicts of interest and funding checked
+- 100%: Authorship and integrity concerns assessed
+
 Verify that the research meets ethical standards and guidelines.
 
 **Human Subjects:**
@@ -279,6 +315,12 @@ Verify that the research meets ethical standards and guidelines.
 - Are there concerns about plagiarism or duplicate publication?
 
 ### Stage 7: Writing Quality and Clarity
+
+**Progress Milestones:**
+- 25%: Structure and organization assessed
+- 50%: Language clarity and conciseness evaluated
+- 75%: Jargon minimization and accessibility checked
+- 100%: All stages complete, ready for report drafting
 
 Assess the manuscript's clarity, organization, and accessibility.
 

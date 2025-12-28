@@ -92,6 +92,12 @@ Need research poster?
 
 ### Stage 1: Requirements Gathering
 
+**Progress Milestones:**
+- 25%: Poster dimensions confirmed from conference
+- 50%: Orientation and deadline established
+- 75%: Logos collected (≥300 DPI)
+- 100%: Color palette defined, all specs documented
+
 **Objective:** Establish poster specifications and constraints
 
 **Steps:**
@@ -110,6 +116,12 @@ Need research poster?
 ---
 
 ### Stage 2: Content Preparation
+
+**Progress Milestones:**
+- 25%: Title and author block drafted
+- 50%: Section text drafted (Intro, Methods, Results, Conclusions)
+- 75%: Figures prepared at ≥300 DPI
+- 100%: References compiled, content within budget
 
 **Objective:** Prepare and organize all poster content
 
@@ -144,6 +156,12 @@ Need research poster?
 ---
 
 ### Stage 3: Layout Construction
+
+**Progress Milestones:**
+- 25%: Presentation created with exact dimensions
+- 50%: Grid guides and margins set up
+- 75%: Master slide created with header/footer bands
+- 100%: Content placeholders added for all sections
 
 **Objective:** Build poster structure in PowerPoint
 
@@ -193,6 +211,12 @@ Need research poster?
 
 ### Stage 4: Content Population
 
+**Progress Milestones:**
+- 25%: Title and author block added with proper sizing
+- 50%: Section headers and body text placed
+- 75%: Figures inserted with captions
+- 100%: References and QR code added, styling consistent
+
 **Objective:** Add content following visual hierarchy
 
 **Steps:**
@@ -227,6 +251,12 @@ Need research poster?
 ---
 
 ### Stage 5: Visual Refinement
+
+**Progress Milestones:**
+- 25%: Color scheme applied consistently
+- 50%: All elements aligned to grid
+- 75%: Visual interest elements added (dividers, accents)
+- 100%: Accessibility verified, white space optimized
 
 **Objective:** Polish design for maximum impact
 
@@ -265,6 +295,12 @@ Need research poster?
 
 ### Stage 6: Quality Validation
 
+**Progress Milestones:**
+- 25%: 100% zoom visual inspection completed
+- 50%: 25% scale print test done
+- 75%: Spell-check and name verification complete
+- 100%: QR codes tested, all checklist items verified
+
 **Objective:** Ensure poster meets print and presentation standards
 
 **Steps:**
@@ -299,6 +335,12 @@ Need research poster?
 ---
 
 ### Stage 7: Export and Delivery
+
+**Progress Milestones:**
+- 25%: Native PPTX file saved (backup)
+- 50%: PDF exported with embedded fonts
+- 75%: PDF dimensions and file size verified
+- 100%: Supplementary formats prepared, delivery confirmed
 
 **Objective:** Generate print-ready files
 

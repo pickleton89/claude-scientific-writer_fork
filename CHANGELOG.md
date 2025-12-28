@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Phase 3.2 Progress Milestones (Complete)**: Added 25%/50%/75%/100% progress tracking within workflow stages
+  - `skills/literature-review/SKILL.md`: Added progress milestones to all 8 stages
+  - `skills/hypothesis-generation/SKILL.md`: Added progress milestones to all 8 stages
+  - `skills/peer-review/SKILL.md`: Added progress milestones to all 7 stages
+  - `skills/pptx-posters/SKILL.md`: Added progress milestones to all 7 stages
+  - `skills/statistical-analysis/SKILL.md`: Added Stage Progress Milestones section for all 6 stages
+  - `skills/citation-management/SKILL.md`: Added progress milestones to all 5 stages
+  - `skills/scientific-schematics/SKILL.md`: Added progress milestones to all 5 stages
+  - Updated `SKILLS_DETERMINISM_AUDIT.md`: Phase 3 fully complete, remaining work is Phase 4-5
+
 - **Phase 3.1 Workflow Transitions (Complete)**: Added explicit exit criteria between workflow stages
   - `skills/statistical-analysis/SKILL.md`: Added Workflow Transitions section with 6 stage-to-stage exit criteria
   - `skills/hypothesis-generation/SKILL.md`: Added Workflow Transitions section with 8 stage-to-stage exit criteria

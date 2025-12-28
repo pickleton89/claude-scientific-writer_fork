@@ -168,6 +168,12 @@ A literature search is considered **comprehensive** when ALL criteria are met:
 4. Select databases (minimum 3 for systematic reviews)
 5. Define search strategy with Boolean operators
 
+**Progress Milestones:**
+- 25%: Research question drafted in structured format
+- 50%: Inclusion/exclusion criteria table completed
+- 75%: Databases selected and justified
+- 100%: Search strategy drafted and ready for execution
+
 **Exit Criteria:**
 - [ ] Research question documented (PICO/PEO/SPIDER format)
 - [ ] Protocol registered (if systematic review)
@@ -209,6 +215,12 @@ A literature search is considered **comprehensive** when ALL criteria are met:
 - [ ] No new relevant papers in last 50 screened titles
 - [ ] Citation chaining yields <5% new papers
 - [ ] Expert consultation confirms no major gaps
+
+**Progress Milestones:**
+- 25%: Search strings constructed for all databases
+- 50%: Primary database searches executed and documented
+- 75%: Citation network (forward/backward) searches completed
+- 100%: All results exported, combined, and initial dedup complete
 
 **Exit Criteria:**
 - [ ] All selected databases searched
@@ -286,6 +298,12 @@ Studies included (n = B)
 └── In qualitative synthesis (n = B2)
 ```
 
+**Progress Milestones:**
+- 25%: Deduplication complete, screening list ready
+- 50%: Title screening complete, abstracts queued
+- 75%: Abstract screening complete, full texts queued
+- 100%: Full-text screening complete, PRISMA diagram drafted
+
 **Exit Criteria:**
 - [ ] Deduplication complete (documented count)
 - [ ] All titles screened (≤15 sec each average)
@@ -325,6 +343,12 @@ Studies included (n = B)
 4. Extract data from all included studies
 5. Verify extraction accuracy (dual extraction for ≥20%)
 
+**Progress Milestones:**
+- 25%: Extraction form created and piloted on 3-5 papers
+- 50%: 50% of included studies extracted
+- 75%: 100% of studies extracted, verification in progress
+- 100%: Dual extraction verified, missing data documented
+
 **Exit Criteria:**
 - [ ] Extraction form finalized after pilot
 - [ ] Data extracted from 100% of included studies
@@ -360,6 +384,12 @@ Studies included (n = B)
 | Moderate quality | One high-risk domain, others low |
 | Low quality (High RoB) | ≥2 high-risk domains |
 | Very low quality | ≥3 high-risk or critical flaw |
+
+**Progress Milestones:**
+- 25%: Assessment tool selected and calibrated
+- 50%: 50% of studies assessed independently
+- 75%: All studies assessed, summary table drafted
+- 100%: Risk of bias plot generated, exclusion decisions made
 
 **Exit Criteria:**
 - [ ] All studies assessed with selected tool
@@ -409,6 +439,12 @@ Studies included (n = B)
 5. Create summary tables per theme
 6. If meta-analysis: calculate pooled effects, heterogeneity (I²)
 
+**Progress Milestones:**
+- 25%: Major themes (3-7) identified from extracted data
+- 50%: Studies grouped by theme, mapping complete
+- 75%: Thematic synthesis drafted for all themes
+- 100%: Summary tables created, meta-analysis complete (if applicable)
+
 **Exit Criteria:**
 - [ ] 3-7 themes identified and documented
 - [ ] All studies mapped to themes
@@ -447,6 +483,12 @@ Studies included (n = B)
 | Vancouver | Superscript^1,2^ | 1. Smith JD, Johnson ML. Title. J Name. 2023;22(4):301-18. |
 | IEEE | Bracketed [1], [2] | [1] J. D. Smith et al., "Title," *J. Name*, vol. 22, no. 4, pp. 301-318, 2023. |
 
+**Progress Milestones:**
+- 25%: All DOIs and citations extracted from document
+- 50%: 50% of DOIs verified and resolving
+- 75%: 100% DOIs verified, metadata cross-check in progress
+- 100%: All citations verified, style consistent throughout
+
 **Exit Criteria:**
 - [ ] 100% of DOIs verified
 - [ ] All metadata cross-checked
@@ -482,6 +524,12 @@ Studies included (n = B)
 - [ ] Limitations section included
 - [ ] All references verified
 - [ ] PDF generates without errors
+
+**Progress Milestones:**
+- 25%: Document structure created from template
+- 50%: All sections drafted (Introduction through Discussion)
+- 75%: PRISMA diagram integrated, citations formatted
+- 100%: PDF generated, proofread complete
 
 **Exit Criteria:**
 - [ ] All sections complete

@@ -97,6 +97,26 @@ Guide rigorous statistical analysis for scientific research, with emphasis on bi
 6. Report results → Methods + Results sections
 ```
 
+### Stage Progress Milestones
+
+**Stage 1 - Research Question:**
+- 25%: Hypothesis articulated → 50%: Comparison type identified → 75%: Variables defined → 100%: Ready for data assessment
+
+**Stage 2 - Data Assessment:**
+- 25%: Normality tested → 50%: Sample size documented → 75%: Outliers identified → 100%: Data characteristics complete
+
+**Stage 3 - Test Selection:**
+- 25%: Test identified from framework → 50%: Assumptions verified → 75%: Code implemented → 100%: Raw p-values computed
+
+**Stage 4 - Corrections:**
+- 25%: Number of tests documented → 50%: Correction method selected → 75%: Adjusted p-values computed → 100%: Significance determined
+
+**Stage 5 - Effect Sizes:**
+- 25%: Metric selected → 50%: Effect sizes computed → 75%: Confidence intervals calculated → 100%: Biological relevance assessed
+
+**Stage 6 - Reporting:**
+- 25%: Methods section drafted → 50%: Results section with statistics → 75%: Figures created → 100%: All comparisons reported
+
 ## Workflow Transitions
 
 ### Stage 1 → 2: Research Question → Data Assessment

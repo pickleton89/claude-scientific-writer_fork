@@ -128,6 +128,12 @@ What do you need to visualize?
 
 ### Stage 1: Requirements Analysis
 
+**Progress Milestones:**
+- 25%: Diagram type identified from matrix
+- 50%: Document type and quality threshold determined
+- 75%: Component list complete
+- 100%: Flow direction and labels documented
+
 **Objective:** Understand diagram requirements and constraints
 
 **Steps:**
@@ -147,6 +153,12 @@ What do you need to visualize?
 ---
 
 ### Stage 2: Prompt Construction
+
+**Progress Milestones:**
+- 25%: Diagram type and layout specified
+- 50%: Components and relationships added
+- 75%: Quantitative details included
+- 100%: Style and accessibility requirements specified
 
 **Objective:** Create effective prompt for AI generation
 
@@ -186,6 +198,12 @@ Visual style: {{style preferences}}
 ---
 
 ### Stage 3: AI Generation
+
+**Progress Milestones:**
+- 25%: API configured and generation started
+- 50%: Initial image generated
+- 75%: Quality review completed
+- 100%: Score ≥ threshold or iterations exhausted
 
 **Objective:** Generate diagram with quality review
 
@@ -247,6 +265,12 @@ Generate Image → Review Quality → Score >= Threshold?
 
 ### Stage 4: Quality Verification
 
+**Progress Milestones:**
+- 25%: Quality assessment reviewed
+- 50%: 5 quality dimensions checked
+- 75%: Accessibility verified (colorblind-safe)
+- 100%: Labels and file format validated
+
 **Objective:** Verify diagram meets publication standards
 
 **Steps:**
@@ -284,6 +308,12 @@ Generate Image → Review Quality → Score >= Threshold?
 ---
 
 ### Stage 5: Integration
+
+**Progress Milestones:**
+- 25%: Image moved to figures/ directory
+- 50%: LaTeX includegraphics command added
+- 75%: Caption written with all elements described
+- 100%: Cross-reference added, style verified
 
 **Objective:** Integrate diagram into manuscript/presentation
 

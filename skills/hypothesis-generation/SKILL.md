@@ -67,6 +67,12 @@ Follow this systematic process to generate robust scientific hypotheses:
 
 ### 1. Understand the Phenomenon
 
+**Progress Milestones:**
+- 25%: Core observation identified and articulated
+- 50%: Scope and boundaries defined
+- 75%: Known vs. unknown aspects documented
+- 100%: Relevant domain(s) identified, search terms generated
+
 Start by clarifying the observation, question, or phenomenon that requires explanation:
 
 - Identify the core observation or pattern that needs explanation
@@ -76,6 +82,12 @@ Start by clarifying the observation, question, or phenomenon that requires expla
 - Identify the relevant scientific domain(s)
 
 ### 2. Conduct Comprehensive Literature Search
+
+**Progress Milestones:**
+- 25%: Search strategy defined, databases selected
+- 50%: Primary database searches executed (50% of papers)
+- 75%: All databases searched, 70+ papers retrieved
+- 100%: Search saturation achieved (<5% new papers), papers organized
 
 Search existing scientific literature to ground hypotheses in current evidence. Use both PubMed (for biomedical topics) and general web search (for broader scientific domains).
 
@@ -106,6 +118,12 @@ Search existing scientific literature to ground hypotheses in current evidence. 
 
 ### 3. Synthesize Existing Evidence
 
+**Progress Milestones:**
+- 25%: Current understanding summarized
+- 50%: Key mechanisms and theories catalogued
+- 75%: Conflicting evidence and gaps identified
+- 100%: Synthesis complete, ready for hypothesis generation
+
 Analyze and integrate findings from literature search:
 
 - Summarize current understanding of the phenomenon
@@ -115,6 +133,12 @@ Analyze and integrate findings from literature search:
 - Identify analogies from related systems or domains
 
 ### 4. Generate Competing Hypotheses
+
+**Progress Milestones:**
+- 25%: First hypothesis drafted with mechanistic explanation
+- 50%: 2-3 hypotheses drafted, covering different mechanisms
+- 75%: 3-5 hypotheses complete, each grounded in evidence
+- 100%: Hypotheses reviewed for distinctiveness and completeness
 
 Develop 3-5 distinct hypotheses that could explain the phenomenon. Each hypothesis should:
 
@@ -131,6 +155,12 @@ Develop 3-5 distinct hypotheses that could explain the phenomenon. Each hypothes
 - Combine mechanisms in novel ways
 
 ### 5. Evaluate Hypothesis Quality
+
+**Progress Milestones:**
+- 25%: Quality rubric applied to first hypothesis
+- 50%: All hypotheses scored on 10-point scale
+- 75%: Strengths and weaknesses documented for each
+- 100%: Hypotheses ranked, weak ones (<5/10) deprioritized
 
 Assess each hypothesis against the quality rubric below and criteria from `references/hypothesis_quality_criteria.md`.
 
@@ -157,6 +187,12 @@ Assess each hypothesis against the quality rubric below and criteria from `refer
 
 ### 6. Design Experimental Tests
 
+**Progress Milestones:**
+- 25%: Primary outcome and controls defined for first hypothesis
+- 50%: Experimental designs drafted for all viable hypotheses
+- 75%: Sample size rationale and statistical approach added
+- 100%: Confound mitigation documented, designs finalized
+
 For each viable hypothesis (score ≥5/10), propose specific experiments or studies to test it. Consult `references/experimental_design_patterns.md` for common approaches.
 
 **Minimum Experimental Design Requirements:**
@@ -182,6 +218,12 @@ For each viable hypothesis (score ≥5/10), propose specific experiments or stud
 
 ### 7. Formulate Testable Predictions
 
+**Progress Milestones:**
+- 25%: ≥2 predictions drafted for first hypothesis
+- 50%: Predictions drafted for all viable hypotheses
+- 75%: Direction/magnitude and conditions specified
+- 100%: Distinguishing and falsifying predictions identified
+
 For each hypothesis, generate specific, quantitative predictions:
 
 - State what should be observed if the hypothesis is correct
@@ -191,6 +233,12 @@ For each hypothesis, generate specific, quantitative predictions:
 - Note predictions that would falsify the hypothesis
 
 ### 8. Present Structured Output
+
+**Progress Milestones:**
+- 25%: LaTeX document structure created from template
+- 50%: Main text drafted (executive summary + hypothesis boxes)
+- 75%: Appendices complete, citations integrated
+- 100%: Visual schematic added, document compiles without errors
 
 Generate a professional LaTeX document using the template in `assets/hypothesis_report_template.tex`. The report should be well-formatted with colored boxes for visual organization and divided into a concise main text with comprehensive appendices.
 

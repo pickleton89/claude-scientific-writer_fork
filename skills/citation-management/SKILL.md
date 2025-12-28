@@ -102,6 +102,12 @@ What is your target venue?
 
 ### Stage 1: Paper Discovery
 
+**Progress Milestones:**
+- 25%: Target databases identified
+- 50%: Search query constructed
+- 75%: Searches executed and results exported
+- 100%: Duplicates identified, search documented
+
 **Objective:** Find relevant papers using academic search engines
 
 **Steps:**
@@ -140,6 +146,12 @@ AND/OR/NOT              # Boolean operators
 
 ### Stage 2: Metadata Extraction
 
+**Progress Milestones:**
+- 25%: Identifier types classified
+- 50%: Primary API sources queried
+- 75%: Required fields verified
+- 100%: Gaps filled, author names standardized
+
 **Objective:** Convert paper identifiers to complete, accurate metadata
 
 **Steps:**
@@ -174,6 +186,12 @@ AND/OR/NOT              # Boolean operators
 ---
 
 ### Stage 3: BibTeX Generation
+
+**Progress Milestones:**
+- 25%: Entry types selected
+- 50%: Citation keys generated
+- 75%: Required fields populated
+- 100%: Title case protection applied, entries complete
 
 **Objective:** Generate clean, properly formatted BibTeX entries
 
@@ -229,6 +247,12 @@ AND/OR/NOT              # Boolean operators
 
 ### Stage 4: Validation
 
+**Progress Milestones:**
+- 25%: BibTeX syntax validated
+- 50%: Required fields checked
+- 75%: DOIs verified as resolvable
+- 100%: Duplicates removed, consistency verified
+
 **Objective:** Verify all citations are accurate and complete
 
 **Steps:**
@@ -259,6 +283,12 @@ AND/OR/NOT              # Boolean operators
 ---
 
 ### Stage 5: Integration
+
+**Progress Milestones:**
+- 25%: .bib file copied to manuscript directory
+- 50%: Bibliography command added to LaTeX
+- 75%: Document compiled, citations checked
+- 100%: Reference formatting verified against venue
 
 **Objective:** Integrate validated bibliography into manuscript workflow
 

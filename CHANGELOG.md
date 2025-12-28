@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Phase 4.1 Skill Router (Complete)**: Created `skills/SKILL_ROUTER.md` for deterministic multi-skill routing
+  - 6 decision trees covering all 21 skills:
+    - Figure & Visual Creation (plotting-libraries, scientific-schematics, generate-image, visual-design)
+    - Document Creation (scientific-writing, slides, posters, venue-templates)
+    - Research Workflow (research-lookup, literature-review, citation-management)
+    - Analysis & Reproducibility (statistical-analysis, reproducible-research, code-documentation)
+    - Evaluation/Review (peer-review, scholar-evaluation, scientific-critical-thinking)
+    - Conversion (markitdown, paper-2-web)
+  - Quick Reference Matrix: Task → Skill mapping table
+  - Multi-Skill Workflows: 4 complete workflow examples (research paper, poster, lit review, reproducible analysis)
+  - Skill Relationships Diagram: ASCII architecture view showing skill dependencies
+  - Ambiguous Scenarios: Clarifying questions for "make a figure", "review something", "write something"
+  - Updated `SKILLS_DETERMINISM_AUDIT.md`: Phase 4.1 marked complete
+
 ### Changed
 
 - **Phase 3.2 Progress Milestones (Complete)**: Added 25%/50%/75%/100% progress tracking within workflow stages

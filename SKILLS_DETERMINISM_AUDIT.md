@@ -31,8 +31,8 @@ This audit evaluates 21 top-level skills in the library across 8 determinism dim
 - ✅ Cross-references between skills well-documented
 
 **Remaining Opportunities (Optional):**
-- Create SKILL_ROUTER.md for multi-skill scenarios
-- Add workflow transition criteria for enhanced determinism
+- ✅ SKILL_ROUTER.md created with 6 decision trees
+- Add router cross-references to individual skills
 - Create test scenarios for validation
 
 ---
@@ -629,59 +629,22 @@ Define measurable progress within each stage:
 
 **Duration:** 1 session
 
-#### Step 4.1: Create Skill Router Document
+#### Step 4.1: Create Skill Router Document ✅ COMPLETED
 
-Add `SKILL_ROUTER.md` at skills root:
+> **Status:** Completed 2025-12-28
+> **Result:** Created `SKILL_ROUTER.md` with 6 decision trees and comprehensive routing logic
 
-```markdown
-# Skill Router
-
-## Decision Tree: Figure Creation
-
-```
-User wants to create a figure
-│
-├─ Is it a data visualization (plots, charts)?
-│  │
-│  ├─ Yes → plotting-libraries
-│  │         ├─ Statistical comparison → seaborn/ggplot2
-│  │         ├─ Time series → matplotlib/ggplot2
-│  │         └─ Bioinformatics → Bioconductor
-│  │
-│  └─ No → Is it a schematic/diagram?
-│          │
-│          ├─ Yes → scientific-schematics
-│          │
-│          └─ No → Is it photorealistic?
-│                   │
-│                   ├─ Yes → generate-image
-│                   │
-│                   └─ No → visual-design (for guidance)
-```
-
-## Decision Tree: Document Creation
-
-```
-User wants to create a document
-│
-├─ Is it a research paper?
-│  │
-│  ├─ Yes → scientific-writing
-│  │        └─ Then → venue-templates (for journal-specific formatting)
-│  │
-│  └─ No → Is it a presentation?
-│          │
-│          ├─ Yes → scientific-slides
-│          │
-│          └─ No → Is it a poster?
-│                   │
-│                   ├─ Yes → latex-posters OR pptx-posters
-│                   │        (decision: LaTeX if complex equations,
-│                   │         PPTX if quick turnaround)
-│                   │
-│                   └─ No → [route by document type]
-```
-```
+**Contents of SKILL_ROUTER.md:**
+- Decision Tree: Figure & Visual Creation (plotting-libraries, scientific-schematics, generate-image, visual-design)
+- Decision Tree: Document Creation (scientific-writing, slides, posters, venue-templates)
+- Decision Tree: Research Workflow (research-lookup, literature-review, citation-management)
+- Decision Tree: Analysis & Reproducibility (statistical-analysis, reproducible-research, code-documentation)
+- Decision Tree: Evaluation/Review (peer-review, scholar-evaluation, scientific-critical-thinking)
+- Decision Tree: Conversion (markitdown, paper-2-web)
+- Quick Reference Matrix (Task → Skill mapping)
+- Multi-Skill Workflows (4 complete workflow examples)
+- Skill Relationships Diagram (ASCII architecture view)
+- Ambiguous Scenarios (clarifying questions for common cases)
 
 #### Step 4.2: Add Router References
 
@@ -839,12 +802,13 @@ Schedule quarterly reviews:
 | 🟡 Medium | Quantify qualitative terms (Phase 2) | ✅ Complete | Shared thresholds created |
 | 🟡 Medium | Add stage boundary exit criteria (Phase 3.1) | ✅ Complete | 3 skills updated, 11 already compliant |
 | 🟡 Medium | Add progress indicators (Phase 3.2) | ✅ Complete | 7 skills with milestones |
+| 🟡 Medium | Create SKILL_ROUTER.md (Phase 4.1) | ✅ Complete | 6 decision trees, routing matrix |
 
 ### Remaining Priority Actions (Optional)
 
 | Priority | Action | Impact | Effort |
 |----------|--------|--------|--------|
-| 🟡 Medium | Create SKILL_ROUTER.md (Phase 4) | Solves multi-skill confusion | 1 session |
+| 🟡 Medium | Add router references to skills (Phase 4.2) | Cross-links skills to router | 30 min |
 | 🟢 Low | Create test scenarios (Phase 5) | Validates improvements | Ongoing |
 
 ---

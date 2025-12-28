@@ -1,0 +1,459 @@
+# Skill Router
+
+> Decision trees and routing logic for selecting the right skill(s) for scientific writing tasks
+> Version: 1.0.0 | Created: 2025-12-28
+
+---
+
+## Overview
+
+This document provides explicit routing logic for selecting skills when multiple options may apply. Use these decision trees to deterministically route tasks to the appropriate skill(s).
+
+**When to use this router:**
+- Task could be handled by multiple skills
+- Unclear which skill is primary vs. supporting
+- Need to understand skill relationships for complex workflows
+
+---
+
+## Decision Tree: Figure & Visual Creation
+
+```
+User wants to create a visual
+│
+├─ Is it based on DATA (numbers, measurements, statistics)?
+│  │
+│  ├─ YES → plotting-libraries
+│  │         │
+│  │         ├─ Python ecosystem?
+│  │         │  ├─ Statistical/categorical → seaborn
+│  │         │  ├─ Custom/fine control → matplotlib
+│  │         │  └─ Interactive → plotly
+│  │         │
+│  │         ├─ R ecosystem?
+│  │         │  ├─ Publication figures → ggplot2
+│  │         │  ├─ Genomics/bio data → Bioconductor (ComplexHeatmap, etc.)
+│  │         │  └─ Interactive → plotly/shiny
+│  │         │
+│  │         └─ Then consult → visual-design (for styling guidance)
+│  │
+│  └─ NO → Is it a DIAGRAM or SCHEMATIC?
+│          │
+│          ├─ YES → scientific-schematics
+│          │         │
+│          │         ├─ Workflow/process → Flowchart
+│          │         ├─ Biological pathway → Pathway diagram
+│          │         ├─ Molecular structure → Structure schematic
+│          │         ├─ Experimental setup → Methods diagram
+│          │         ├─ Conceptual model → Concept map
+│          │         └─ Mechanism → Mechanism diagram
+│          │
+│          └─ NO → Is it PHOTOREALISTIC or AI-GENERATED imagery?
+│                   │
+│                   ├─ YES → generate-image
+│                   │         │
+│                   │         ├─ Scientific illustration → Claude/DALL-E
+│                   │         ├─ Artistic/creative → Image generation models
+│                   │         └─ Photo-style → Photorealistic models
+│                   │
+│                   └─ NO → visual-design (general guidance)
+│                            │
+│                            └─ Provides: color theory, typography,
+│                               layout principles, accessibility
+```
+
+### Figure Creation: Quick Selection
+
+| Task | Primary Skill | Supporting Skill |
+|------|---------------|------------------|
+| Bar chart, scatter plot, histogram | plotting-libraries | visual-design |
+| Heatmap, volcano plot, PCA | plotting-libraries | visual-design |
+| Flowchart, pathway diagram | scientific-schematics | visual-design |
+| Molecular mechanism | scientific-schematics | generate-image |
+| Conceptual illustration | generate-image | visual-design |
+| Infographic elements | visual-design | generate-image |
+
+---
+
+## Decision Tree: Document Creation
+
+```
+User wants to create a document
+│
+├─ Is it a RESEARCH PAPER or MANUSCRIPT?
+│  │
+│  ├─ YES → scientific-writing
+│  │         │
+│  │         ├─ Need journal-specific formatting?
+│  │         │  └─ YES → venue-templates (for style requirements)
+│  │         │
+│  │         ├─ Need to review existing literature?
+│  │         │  └─ YES → literature-review (systematic approach)
+│  │         │
+│  │         ├─ Need to generate hypotheses?
+│  │         │  └─ YES → hypothesis-generation
+│  │         │
+│  │         └─ Need statistical analysis guidance?
+│  │            └─ YES → statistical-analysis
+│  │
+│  └─ NO → Is it a PRESENTATION?
+│          │
+│          ├─ YES → scientific-slides
+│          │         │
+│          │         ├─ Conference talk → 10-15 slides
+│          │         ├─ Seminar → 20-30 slides
+│          │         ├─ Thesis defense → 30-45 slides
+│          │         └─ Lab meeting → 5-10 slides
+│          │
+│          └─ NO → Is it a POSTER?
+│                   │
+│                   ├─ YES → Which format?
+│                   │         │
+│                   │         ├─ Complex equations/LaTeX needed?
+│                   │         │  └─ YES → latex-posters
+│                   │         │
+│                   │         ├─ Quick turnaround / visual focus?
+│                   │         │  └─ YES → pptx-posters
+│                   │         │
+│                   │         └─ Unsure → See decision criteria below
+│                   │
+│                   └─ NO → Is it a LITERATURE REVIEW?
+│                            │
+│                            ├─ YES → literature-review
+│                            │
+│                            └─ NO → See "Other Documents" below
+```
+
+### Poster Format Decision
+
+| Criterion | LaTeX (latex-posters) | PowerPoint (pptx-posters) |
+|-----------|----------------------|---------------------------|
+| Complex equations | ✅ Preferred | ⚠️ Possible but harder |
+| Precise typography | ✅ Better control | ⚠️ Limited |
+| Quick iteration | ⚠️ Slower | ✅ Faster |
+| Non-LaTeX user | ⚠️ Learning curve | ✅ Familiar |
+| Template available | Check venue | Check venue |
+| Collaboration | ⚠️ Requires LaTeX | ✅ Easy sharing |
+
+**Decision rule:** Use LaTeX if equations OR precise layout required; otherwise use PowerPoint.
+
+### Other Document Types
+
+| Document Type | Primary Skill | Notes |
+|---------------|---------------|-------|
+| Literature review paper | literature-review → scientific-writing | Systematic then write |
+| Methods paper | scientific-writing + reproducible-research | Emphasize reproducibility |
+| Data paper | scientific-writing + code-documentation | Focus on data description |
+| Review article | literature-review → scientific-writing | Narrative synthesis |
+| Grant proposal | scientific-writing | Adapt for proposal format |
+| Thesis chapter | scientific-writing + venue-templates | Institution-specific |
+
+---
+
+## Decision Tree: Research Workflow
+
+```
+User needs research/information support
+│
+├─ Need to FIND information or papers?
+│  │
+│  ├─ Quick fact/concept lookup?
+│  │  └─ YES → research-lookup (Perplexity API)
+│  │            │
+│  │            ├─ Simple query → Sonar Pro
+│  │            └─ Complex/reasoning → Sonar Reasoning Pro
+│  │
+│  └─ Systematic literature search?
+│     └─ YES → literature-review
+│              │
+│              ├─ Database selection by domain
+│              ├─ PRISMA-style screening
+│              └─ Then → citation-management (for references)
+│
+├─ Need to MANAGE citations?
+│  │
+│  └─ YES → citation-management
+│            │
+│            ├─ BibTeX formatting
+│            ├─ Style selection (APA, Nature, etc.)
+│            └─ Validation and deduplication
+│
+├─ Need to EVALUATE a paper or researcher?
+│  │
+│  ├─ Evaluate paper quality?
+│  │  └─ YES → peer-review (manuscript review)
+│  │            OR scientific-critical-thinking (analysis framework)
+│  │
+│  └─ Evaluate researcher/scholar?
+│     └─ YES → scholar-evaluation (8-dimension assessment)
+│
+└─ Need to ANALYZE arguments or evidence?
+   │
+   └─ YES → scientific-critical-thinking
+             │
+             ├─ Bias identification
+             ├─ Evidence quality hierarchy
+             └─ Logical fallacy detection
+```
+
+### Research Task Routing
+
+| Task | Primary Skill | When to Use |
+|------|---------------|-------------|
+| "Find papers on X" | research-lookup | Quick search, <10 papers |
+| "Comprehensive literature review" | literature-review | Systematic, 50+ papers |
+| "Format my references" | citation-management | BibTeX/citation styling |
+| "Is this paper reliable?" | peer-review | Manuscript evaluation |
+| "Evaluate this researcher" | scholar-evaluation | Scholar assessment |
+| "Analyze this argument" | scientific-critical-thinking | Logic/evidence analysis |
+
+---
+
+## Decision Tree: Analysis & Reproducibility
+
+```
+User needs analysis or code support
+│
+├─ Need STATISTICAL analysis guidance?
+│  │
+│  └─ YES → statistical-analysis
+│            │
+│            ├─ Test selection → Decision matrices
+│            ├─ Multiple testing → Correction methods
+│            ├─ Effect sizes → Interpretation thresholds
+│            └─ Power analysis → Sample size calculation
+│
+├─ Need to ensure REPRODUCIBILITY?
+│  │
+│  └─ YES → reproducible-research
+│            │
+│            ├─ Environment specification
+│            ├─ FAIR principles
+│            ├─ Data/code archiving
+│            └─ Seed management
+│
+└─ Need CODE DOCUMENTATION?
+   │
+   └─ YES → code-documentation
+             │
+             ├─ README structure
+             ├─ Docstring formats (Python/R/Bash)
+             ├─ API documentation
+             └─ Style selection (NumPy, Google, etc.)
+```
+
+### Analysis Support Routing
+
+| Task | Primary Skill | Supporting Skill |
+|------|---------------|------------------|
+| "Which test should I use?" | statistical-analysis | — |
+| "Make my analysis reproducible" | reproducible-research | code-documentation |
+| "Document my code" | code-documentation | — |
+| "Archive my data" | reproducible-research | — |
+| "Report my statistics" | statistical-analysis | scientific-writing |
+
+---
+
+## Decision Tree: Conversion & Transformation
+
+```
+User needs to convert or transform content
+│
+├─ Convert FILE to Markdown?
+│  │
+│  └─ YES → markitdown
+│            │
+│            ├─ PDF → Markdown (OCR if needed)
+│            ├─ DOCX/PPTX/XLSX → Markdown
+│            ├─ Images → Markdown (with descriptions)
+│            └─ Audio → Markdown (transcription)
+│
+└─ Convert PAPER to web/media format?
+   │
+   └─ YES → paper-2-web
+             │
+             ├─ Interactive website
+             ├─ Visual poster summary
+             └─ Video abstract
+```
+
+---
+
+## Quick Reference Matrix
+
+### Task → Skill Mapping
+
+| Task Category | Primary Skill | Common Combinations |
+|---------------|---------------|---------------------|
+| **Writing** | | |
+| Write research paper | scientific-writing | + venue-templates, literature-review |
+| Write literature review | literature-review | + scientific-writing, citation-management |
+| Generate hypotheses | hypothesis-generation | + literature-review, statistical-analysis |
+| **Presentations** | | |
+| Create slides | scientific-slides | + visual-design, plotting-libraries |
+| Create LaTeX poster | latex-posters | + visual-design, scientific-schematics |
+| Create PowerPoint poster | pptx-posters | + visual-design, plotting-libraries |
+| **Visuals** | | |
+| Data visualization | plotting-libraries | + visual-design |
+| Schematic/diagram | scientific-schematics | + visual-design |
+| AI-generated image | generate-image | + visual-design |
+| Design guidance | visual-design | (supporting role) |
+| **Research** | | |
+| Quick lookup | research-lookup | — |
+| Systematic review | literature-review | + citation-management |
+| Manage citations | citation-management | — |
+| **Evaluation** | | |
+| Review manuscript | peer-review | + scientific-critical-thinking |
+| Evaluate scholar | scholar-evaluation | — |
+| Analyze arguments | scientific-critical-thinking | — |
+| **Analysis** | | |
+| Statistical guidance | statistical-analysis | + reproducible-research |
+| Reproducibility | reproducible-research | + code-documentation |
+| Code documentation | code-documentation | — |
+| **Conversion** | | |
+| File → Markdown | markitdown | — |
+| Paper → Web/Media | paper-2-web | — |
+
+---
+
+## Multi-Skill Workflows
+
+### Workflow 1: Complete Research Paper
+
+```
+1. literature-review      → Systematic search & screening
+2. citation-management    → Organize references
+3. hypothesis-generation  → Formulate testable hypotheses
+4. statistical-analysis   → Plan analysis approach
+5. scientific-writing     → Draft manuscript
+6. venue-templates        → Format for target journal
+7. plotting-libraries     → Create data figures
+8. scientific-schematics  → Create method diagrams
+9. visual-design          → Polish all visuals
+10. peer-review           → Self-review before submission
+```
+
+### Workflow 2: Conference Poster
+
+```
+1. scientific-writing     → Condense paper to poster content
+2. pptx-posters OR latex-posters → Create poster structure
+3. plotting-libraries     → Create figures
+4. scientific-schematics  → Create diagrams
+5. visual-design          → Apply design principles
+```
+
+### Workflow 3: Literature Review Paper
+
+```
+1. research-lookup        → Initial scoping search
+2. literature-review      → Systematic search & PRISMA
+3. citation-management    → Organize all references
+4. scientific-writing     → Write review narrative
+5. venue-templates        → Format for target journal
+```
+
+### Workflow 4: Reproducible Analysis Pipeline
+
+```
+1. statistical-analysis   → Select appropriate methods
+2. code-documentation     → Document code thoroughly
+3. reproducible-research  → Ensure FAIR compliance
+4. plotting-libraries     → Create reproducible figures
+```
+
+---
+
+## Skill Relationships Diagram
+
+```
+                    ┌─────────────────────────────────────────┐
+                    │           DOCUMENT OUTPUT               │
+                    │  scientific-writing  │  venue-templates │
+                    └──────────┬───────────┴────────┬─────────┘
+                               │                    │
+           ┌───────────────────┼────────────────────┼───────────────────┐
+           │                   │                    │                   │
+           ▼                   ▼                    ▼                   ▼
+    ┌─────────────┐    ┌─────────────┐    ┌──────────────┐    ┌─────────────┐
+    │ literature- │    │ hypothesis- │    │ scientific-  │    │ latex-/pptx-│
+    │   review    │    │ generation  │    │    slides    │    │   posters   │
+    └──────┬──────┘    └──────┬──────┘    └──────┬───────┘    └──────┬──────┘
+           │                  │                   │                   │
+           ▼                  │                   │                   │
+    ┌─────────────┐           │                   │                   │
+    │  citation-  │◄──────────┘                   │                   │
+    │ management  │                               │                   │
+    └─────────────┘                               ▼                   ▼
+                                           ┌─────────────────────────────────┐
+                                           │         VISUAL OUTPUT           │
+                                           │  plotting-libraries  │ visual-  │
+                                           │  scientific-schematics│ design  │
+                                           │  generate-image       │         │
+                                           └─────────────────────────────────┘
+                                                         │
+           ┌─────────────────────────────────────────────┘
+           │
+           ▼
+    ┌─────────────────────────────────────────────────────────────────┐
+    │                     SUPPORTING SKILLS                           │
+    │  research-lookup  │  statistical-analysis  │  reproducible-     │
+    │  peer-review      │  scholar-evaluation    │  research          │
+    │  scientific-critical-thinking              │  code-documentation│
+    └─────────────────────────────────────────────────────────────────┘
+           │
+           ▼
+    ┌─────────────────────────────────────────────────────────────────┐
+    │                     CONVERSION SKILLS                           │
+    │  markitdown (file → markdown)  │  paper-2-web (paper → web)    │
+    └─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Ambiguous Scenarios
+
+### "I need to make a figure"
+
+**Clarifying questions:**
+1. Is it based on data/numbers? → plotting-libraries
+2. Is it a diagram/schematic? → scientific-schematics
+3. Is it an illustration/artistic? → generate-image
+4. Need design guidance only? → visual-design
+
+### "I need to review something"
+
+**Clarifying questions:**
+1. Review a manuscript for peer review? → peer-review
+2. Evaluate a researcher's work? → scholar-evaluation
+3. Analyze logical arguments? → scientific-critical-thinking
+4. Review literature systematically? → literature-review
+
+### "I need to write something"
+
+**Clarifying questions:**
+1. Research paper/manuscript? → scientific-writing
+2. Literature review? → literature-review + scientific-writing
+3. Presentation? → scientific-slides
+4. Poster? → latex-posters OR pptx-posters
+5. Hypothesis document? → hypothesis-generation
+
+---
+
+## Cross-References
+
+Each skill's `<cross_references>` section should include:
+
+```markdown
+<cross_references>
+## Related Skills
+
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
+- [list specific related skills with relationship descriptions]
+</cross_references>
+```
+
+---
+
+*This router provides deterministic skill selection for the 21-skill scientific writing library. For threshold values and quality criteria, see `QUANTIFICATION_THRESHOLDS.md`.*

@@ -72,6 +72,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added `examples/component_demo.py` - visual showcase generating demo PDF with all components
   - Part of INTEGRATION_ANALYSIS.md Phase 2 Component Extension work
 
+- **Phase 3 Implementation Plan**: Created `docs/PHASE3_IMPLEMENTATION_PLAN.md` for skill creation
+  - Defines `markdown-to-pdf` skill architecture with three commands
+  - `/list-templates`: Display available document templates in table format
+  - `/new-doc <type>`: Create new document from template
+  - `/doc-to-pdf <file>`: Convert markdown to branded PDF with confirmation workflow
+  - Component mapping: template elements → PDF components (FindingCard, StatusTable, etc.)
+  - Opt-in `--figures` flag for scientific-schematics integration
+  - Output to `output/` folder (gitignored)
+  - Part of INTEGRATION_ANALYSIS.md Phase 3 Skill Creation work
+
 - **Phase 1 Implementation Plan**: Created `docs/PHASE1_IMPLEMENTATION_PLAN.md` for template infrastructure
   - 12 YAML schemas for document type validation
   - 12 markdown templates with full examples

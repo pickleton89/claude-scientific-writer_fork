@@ -1,8 +1,9 @@
 ---
 name: scientific-writing
-version: 1.0.0
+version: 2.1.0
 description: "Guides scientific manuscript writing using IMRAD structure, citations (APA/AMA/Vancouver), and reporting guidelines (CONSORT/STROBE/PRISMA). Use when writing research papers, journal submissions, abstracts, or scientific documents requiring structured prose with proper citations."
 allowed-tools: Read, Write, Edit, Bash
+quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
 ---
 
 # Scientific Writing
@@ -80,11 +81,34 @@ For detailed figure creation instructions, consult the respective skill document
 
 ### 1. Manuscript Structure and Organization
 
+> **Reference:** See `../QUANTIFICATION_THRESHOLDS.md` §1 (Literature Coverage) for citation targets.
+
 **IMRAD Format**: Guide papers through the standard Introduction, Methods, Results, And Discussion structure used across most scientific disciplines. This includes:
 - **Introduction**: Establish research context, identify gaps, state objectives
 - **Methods**: Detail study design, populations, procedures, and analysis approaches
 - **Results**: Present findings objectively without interpretation
 - **Discussion**: Interpret results, acknowledge limitations, propose future directions
+
+**Section Word Count Targets:**
+
+| Section | Short Paper (3000 words) | Standard (5000 words) | Long (8000 words) |
+|---------|-------------------------|----------------------|-------------------|
+| Abstract | 150-250 | 200-300 | 250-350 |
+| Introduction | 400-600 | 600-900 | 900-1200 |
+| Methods | 600-900 | 900-1400 | 1400-2000 |
+| Results | 600-900 | 1000-1500 | 1500-2400 |
+| Discussion | 600-900 | 1000-1500 | 1500-2000 |
+| Conclusion | 100-200 | 150-300 | 200-400 |
+
+**Citation Targets by Section:**
+
+| Section | Original Research | Review Article |
+|---------|------------------|----------------|
+| Introduction | 8-15 citations | 15-30 citations |
+| Methods | 3-8 citations | 5-10 citations |
+| Results | 0-3 citations | N/A |
+| Discussion | 10-20 citations | 30-60 citations |
+| **Total** | ≥30 citations | ≥100 citations |
 
 For detailed guidance on IMRAD structure, refer to `references/imrad_structure.md`.
 
@@ -161,9 +185,28 @@ Each guideline provides checklists ensuring all critical methodological elements
 
 ### 6. Writing Principles and Style
 
+> **Reference:** See `../QUANTIFICATION_THRESHOLDS.md` §7 (Writing Quality Rubric) for scoring criteria.
+
 Apply fundamental scientific writing principles. For detailed guidance, refer to `references/writing_principles.md`.
 
 **Four pillars**: Clarity (precise language, defined terms), Conciseness (eliminate redundancy, 15-20 word sentences), Accuracy (exact values, consistent terminology), Objectivity (unbiased, acknowledge limitations).
+
+**Writing Quality Thresholds:**
+
+| Metric | Minimum | Target | Excellent |
+|--------|---------|--------|-----------|
+| Sentence length (average) | ≤25 words | 15-20 words | 12-18 words |
+| Paragraph length | ≤200 words | 100-150 words | 80-120 words |
+| Passive voice usage | ≤40% | ≤25% | ≤15% |
+| Acronyms per page | ≤8 | ≤5 | ≤3 |
+| Grammar errors per page | ≤3 | ≤1 | 0 |
+| Readability (Flesch-Kincaid) | Grade 12-16 | Grade 10-14 | Grade 8-12 |
+
+**Sentence Structure Guidelines:**
+- Average sentence length: 15-20 words (≤25 maximum)
+- Vary sentence structure (simple, compound, complex)
+- Front-load key information in each sentence
+- One main idea per sentence
 
 ### 7. Writing Process: From Outline to Full Paragraphs
 

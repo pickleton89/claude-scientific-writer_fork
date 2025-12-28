@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **Phase 2.1 Quantification Implementation (In Progress)**: Replacing qualitative terms with measurable thresholds
+- **Phase 2.1 Quantification Implementation (Complete)**: Replacing qualitative terms with measurable thresholds
   - `skills/literature-review/SKILL.md` (v2.0.0 → v2.1.0): Applied quantification from `QUANTIFICATION_THRESHOLDS.md`
     - Added cross-reference to shared thresholds document (§1 Literature Coverage, §6 Time-Based)
     - Updated overview to specify quantified coverage: ≥3 databases, 30-100+ papers, <5% new papers in final iteration
@@ -39,6 +39,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Expanded smart iteration logic with soft/hard limit decision tree and score improvement check (Δ ≥ 0.5)
     - Quantified "overcrowded" anti-pattern with element count limits by diagram type (10-15 elements, 12-20 connections)
     - Enhanced quality rubric with 3-level scoring descriptors (Fail/Acceptable/Excellent) and score interpretation guide
+  - `skills/generate-image/SKILL.md` (v2.0.0 → v2.1.0): Applied quality scoring rubric and iteration limits
+    - Added cross-reference to shared thresholds document (§7 Figure Quality Rubric, §8 Iteration Limits)
+    - Added 10-point quality scoring rubric with 5 criteria (subject accuracy, style match, resolution, artifacts, composition)
+    - Added score interpretation guide (0-4 reject, 5-6 marginal, 7-8 accept, 9-10 excellent)
+    - Added iteration decision logic diagram with 5 stopping conditions
+    - Added iteration limits by output type table (quick draft: 3, presentation: 4, publication: 5)
+    - Updated success criteria with quality score thresholds (minimum ≥5, target ≥7, excellent ≥9)
+    - Quantified excessive iterations anti-pattern with specific iteration budgets
+  - `skills/visual-design/SKILL.md` (v2.0.0 → v2.1.0): Applied accessibility thresholds and quality scoring
+    - Added cross-reference to shared thresholds document (§2 Visual Quality, §7 Quality Rubrics)
+    - Added WCAG 2.1 accessibility compliance table (Level A, AA, AAA requirements)
+    - Added design quality scoring rubric (10-point scale with 5 criteria)
+    - Enhanced accessibility checklist with minimum/target thresholds for 8 checks
+    - Added contrast thresholds for large text and non-text elements
+    - Added color difference threshold (ΔE ≥20 CIE2000)
+  - `skills/peer-review/SKILL.md` (v2.0.0 → v2.1.0): Applied severity scoring rubric and replication thresholds
+    - Added cross-reference to shared thresholds document (§3 Replication, §4 Severity Classification)
+    - Added issue severity classification table with quantified criteria for Critical/Major/Minor/Optional
+    - Added replication thresholds table by experiment type (cell culture, primary cells, mouse, clinical)
+    - Added sample size red flags table with severity ratings and actions
+    - Added figure quality thresholds table (resolution, font size, contrast, line weight)
+  - `skills/scientific-writing/SKILL.md` (v1.0.0 → v2.1.0): Applied section word count and citation targets
+    - Added cross-reference to shared thresholds document (§1 Literature Coverage, §7 Writing Quality Rubric)
+    - Added section word count targets table for short (3000), standard (5000), and long (8000) papers
+    - Added citation targets by section table for original research and review articles
+    - Added writing quality thresholds table (sentence length, paragraph length, passive voice, acronyms, grammar)
+    - Added readability thresholds (Flesch-Kincaid Grade 8-16)
 
 - **Phase 1.3 Skills Determinism Implementation (Complete)**: Refactored all Tier 3 skills to use standard template
   - `skills/citation-management/SKILL.md` (6.5 → ~8.5): Complete restructure with deterministic patterns

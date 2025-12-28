@@ -1,7 +1,9 @@
 ---
 name: peer-review
+version: 2.1.0
 description: "Systematic peer review toolkit. Evaluate methodology, statistics, design, reproducibility, ethics, figure integrity, reporting standards, for manuscript and grant review across disciplines."
 allowed-tools: [Read, Write, Edit, Bash]
+quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
 ---
 
 # Scientific Critical Evaluation and Peer Review
@@ -148,6 +150,8 @@ Conduct a thorough evaluation of each manuscript section, documenting specific c
 
 ### Stage 3: Methodological and Statistical Rigor
 
+> **Reference:** See `../QUANTIFICATION_THRESHOLDS.md` §3 (Replication & Sample Size) for shared thresholds.
+
 Evaluate the technical quality and rigor of the research with particular attention to common pitfalls.
 
 **Statistical Assessment:**
@@ -159,6 +163,24 @@ Evaluate the technical quality and rigor of the research with particular attenti
 - Are parametric vs. non-parametric tests chosen appropriately?
 - Are missing data handled properly?
 - Are exploratory vs. confirmatory analyses distinguished?
+
+**Replication Thresholds (minimum acceptable):**
+
+| Experiment Type | Biological Reps | Technical Reps | Power |
+|-----------------|-----------------|----------------|-------|
+| Cell culture (in vitro) | ≥3 | ≥3 | 80% |
+| Primary cells | ≥3-5 | ≥2-3 | 80% |
+| Mouse studies | ≥6-10 | — | 80% |
+| Clinical trials | Per power calc | 1 | 80% |
+
+**Sample Size Red Flags:**
+
+| Indicator | Severity | Action |
+|-----------|----------|--------|
+| n < 3 per group | 🔴 Critical | Cannot perform valid statistics |
+| n = 3-5 per group (without justification) | 🟡 Major | Request justification or increase |
+| No power calculation | 🟡 Major | Request justification |
+| Post-hoc power analysis | 🔴 Critical | Invalid—flag as major concern |
 
 **Experimental Design:**
 - Are controls appropriate and adequate?
@@ -198,7 +220,18 @@ Assess whether the research meets modern standards for reproducibility and open 
 
 ### Stage 5: Figure and Data Presentation
 
+> **Reference:** See `../QUANTIFICATION_THRESHOLDS.md` §2 (Visual Quality) and §7 (Figure Quality Rubric) for shared thresholds.
+
 Evaluate the quality, clarity, and integrity of data visualization.
+
+**Figure Quality Thresholds:**
+
+| Criterion | Minimum | Target | Excellent |
+|-----------|---------|--------|-----------|
+| Resolution | 150 DPI | 300 DPI | 600 DPI |
+| Font size (labels) | ≥7pt | ≥8pt | ≥10pt |
+| Contrast ratio | 4.5:1 | 7:1 | 10:1 |
+| Line weight | ≥0.5pt | ≥1.0pt | ≥1.5pt |
 
 **Quality Checks:**
 - Are figures high resolution and clearly labeled?
@@ -269,7 +302,20 @@ Assess the manuscript's clarity, organization, and accessibility.
 
 ## Structuring Peer Review Reports
 
+> **Reference:** See `../QUANTIFICATION_THRESHOLDS.md` §4 (Issue Severity Classification) for shared severity criteria.
+
 Organize feedback in a hierarchical structure that prioritizes issues and provides actionable guidance.
+
+### Issue Severity Classification
+
+Use quantified criteria to consistently categorize issues:
+
+| Severity | Definition | Criteria (any one triggers) | Action |
+|----------|------------|----------------------------|--------|
+| **Critical** | Invalidates conclusions | Data cannot be verified; wrong statistical test invalidating results; missing data >30% without sensitivity analysis; conclusions contradicted by data; missing ethics approval | Reject |
+| **Major** | Significantly affects interpretation | Key control missing from ≥50% of experiments; sample size <80% of power requirement; methods insufficient for replication; statistical assumptions violated; ≥20% of stated outcomes missing | Major revision |
+| **Minor** | Affects clarity/completeness | Grammar/spelling errors (>5/page); figure quality below standards; reference formatting inconsistent; acronyms undefined; minor methods gaps | Minor revision |
+| **Optional** | Suggestions only | Style preferences; additional analyses that would strengthen; alternative visualizations | Author discretion |
 
 ### Summary Statement
 

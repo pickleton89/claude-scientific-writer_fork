@@ -1,8 +1,9 @@
 ---
 name: visual-design
-version: 2.0.0
+version: 2.1.0
 description: "Design philosophy and publication specifications for scientific visuals. Provides guidance on typography, color, layout, accessibility, and journal requirements. Delegates implementation to specialized skills."
 allowed-tools: [Read, Glob, Write]
+quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
 ---
 
 # Visual Design for Scientific Communication
@@ -185,15 +186,18 @@ Who is your primary audience?
 - [ ] Readable at final size (≥7pt minimum)
 - [ ] Works in grayscale
 
-**Accessibility Checklist:**
+**Accessibility Checklist (WCAG 2.1 AA Compliance):**
 
-| Check | Requirement | Tool to Verify |
-|-------|-------------|----------------|
-| Colorblind safe | Distinguishable in CVD simulation | Color Oracle, Coblis |
-| Contrast ratio | ≥4.5:1 for text on background | WebAIM Contrast Checker |
-| Redundant coding | Information not color-only | Remove color mentally |
-| Font size | ≥7pt at final reproduction | Measure in layout |
-| Line weight | ≥0.5pt at final size | Measure in layout |
+| Check | Minimum | Target | Tool to Verify |
+|-------|---------|--------|----------------|
+| Colorblind safe | Distinguishable by ≥2 CVD types | All 3 CVD types | Color Oracle, Coblis |
+| Text contrast | 4.5:1 | 7:1 | WebAIM Contrast Checker |
+| Large text contrast | 3:1 | 4.5:1 | WebAIM Contrast Checker |
+| Non-text contrast | 3:1 | 4.5:1 | WebAIM Contrast Checker |
+| Redundant coding | 1 alternative | 2 alternatives | Remove color mentally |
+| Font size | ≥7pt at final | ≥8pt at final | Measure in layout |
+| Line weight | ≥0.5pt at final | ≥1.0pt at final | Measure in layout |
+| Color difference (ΔE) | ≥20 CIE2000 | ≥30 CIE2000 | Color difference calculator |
 
 ---
 
@@ -265,34 +269,54 @@ Who is your primary audience?
 <success_criteria>
 ## Success Criteria
 
+> **Reference:** See `../QUANTIFICATION_THRESHOLDS.md` §2 (Visual Quality) and §7 (Quality Rubrics) for shared thresholds.
+
 **Quantitative Thresholds:**
 
 | Metric | Minimum | Target | Excellent |
 |--------|---------|--------|-----------|
 | Contrast ratio (text) | 4.5:1 | 7:1 | 10:1 |
+| Contrast ratio (large text ≥18pt) | 3:1 | 4.5:1 | 7:1 |
+| Non-text contrast | 3:1 | 4.5:1 | 7:1 |
 | Minimum font size | 7pt | 8pt | 10pt |
 | Color count (categorical) | ≤10 | ≤7 | ≤5 |
 | Line weight | 0.5pt | 1.0pt | 1.5pt |
 | Resolution (print) | 150 DPI | 300 DPI | 600 DPI |
+| Resolution (screen) | 72 DPI | 150 DPI | 300 DPI |
 
-**Design Quality Indicators:**
+**WCAG 2.1 Accessibility Compliance:**
 
-| Quality Signal | How to Assess |
-|----------------|---------------|
-| Intentionality | Every element has a purpose; nothing is default |
-| Clarity | Message understood in <10 seconds |
-| Consistency | Same style across all panels/figures |
-| Accessibility | Passes colorblind and grayscale tests |
-| Brand alignment | Matches organizational visual identity |
+| Level | Requirements | Use Case |
+|-------|--------------|----------|
+| Level A | Minimum accessibility | Internal drafts |
+| Level AA | Standard accessibility (4.5:1 contrast, focus visible) | Publication, presentations |
+| Level AAA | Enhanced accessibility (7:1 contrast, sign language) | Public-facing, web |
+
+**Design Quality Scoring (10-point scale):**
+
+| Criterion | 0 (Fail) | 1 (Acceptable) | 2 (Excellent) |
+|-----------|----------|----------------|---------------|
+| Intentionality | Default styling | Mostly customized | Every choice purposeful |
+| Clarity | >30s to understand | <10s to understand | <5s to understand |
+| Consistency | Inconsistent styling | Minor variations | Fully consistent |
+| Accessibility | Fails WCAG A | Meets WCAG AA | Meets WCAG AAA |
+| Brand alignment | Off-brand | Mostly aligned | Perfect alignment |
+
+**Score Interpretation:**
+- **0-4:** Needs major revision
+- **5-6:** Acceptable for internal use
+- **7-8:** Publication ready
+- **9-10:** Exemplary design
 
 **Completion Checklist:**
 - [ ] Single clear message communicated
 - [ ] Appropriate for target audience
 - [ ] No default/generic styling
-- [ ] Accessibility requirements met
+- [ ] Accessibility requirements met (WCAG AA minimum)
 - [ ] Publication specifications followed
 - [ ] Consistent with other document figures
 - [ ] Brand guidelines applied (if applicable)
+- [ ] Design quality score ≥7/10
 
 </success_criteria>
 

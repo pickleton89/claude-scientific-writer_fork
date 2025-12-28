@@ -1,8 +1,9 @@
 ---
 name: generate-image
-version: 2.0.0
+version: 2.1.0
 description: "Generate and edit images using AI models (FLUX, Gemini) via OpenRouter. For photos, illustrations, artwork, and visual assets. Use scientific-schematics for technical diagrams."
 allowed-tools: [Read, Write, Edit, Bash]
+quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
 ---
 
 # Generate Image
@@ -188,15 +189,47 @@ export OPENROUTER_API_KEY=your-api-key-here
 
 ### Stage 4: Quality Validation
 
-**Objective:** Verify image meets requirements
+**Objective:** Verify image meets requirements using quantified scoring
 
 **Steps:**
 1. Open and inspect generated image
-2. Check against quality criteria
-3. Assess fitness for intended use
-4. Decide: accept, regenerate, or edit
+2. Score against quality rubric (0-10 scale)
+3. Apply iteration decision logic
+4. Decide: accept (≥7/10), regenerate, or edit
 
-**Quality Checklist:**
+**Quality Scoring Rubric (10-point scale):**
+
+| Criterion | 0 (Fail) | 1 (Acceptable) | 2 (Excellent) |
+|-----------|----------|----------------|---------------|
+| Subject accuracy | Wrong subject | Minor deviations | Matches prompt exactly |
+| Style match | Wrong style | Mostly appropriate | Perfect for use case |
+| Resolution | <512px | 512-1024px | ≥1024px |
+| Artifacts | Visible distortions | Minor imperfections | Clean, professional |
+| Composition | Poor balance/framing | Acceptable layout | Strong visual hierarchy |
+
+**Score Interpretation:**
+- **0-4:** Reject—regenerate with refined prompt
+- **5-6:** Marginal—regenerate if iteration budget allows
+- **7-8:** Accept—suitable for most uses
+- **9-10:** Excellent—publication quality
+
+**Iteration Decision Logic:**
+
+```
+Score current image
+│
+├─ Score ≥ 8/10 → STOP (excellent quality)
+│
+├─ Score 7/10 AND iterations ≥ 3 → STOP (acceptable + budget)
+│
+├─ Score improvement < 0.5 for 2 consecutive iterations → STOP (plateau)
+│
+├─ Iterations = 5 (hard limit) → STOP (budget exhausted)
+│
+└─ Otherwise → Continue with refined prompt
+```
+
+**Quality Checklist (Pass/Fail):**
 
 | Criterion | Pass | Fail Action |
 |-----------|------|-------------|
@@ -257,14 +290,32 @@ project/
 <success_criteria>
 ## Success Criteria
 
+> **Reference:** See `../QUANTIFICATION_THRESHOLDS.md` §7 (Figure Quality Rubric) and §8 (Iteration Limits) for shared thresholds.
+
 **Quantitative Thresholds:**
 
 | Metric | Minimum | Target | Excellent |
 |--------|---------|--------|-----------|
 | Resolution | 512px | 1024px | 2048px |
 | Generation time | <60s | <30s | <10s |
-| Iteration count | ≤5 | ≤3 | 1 |
+| Quality score | ≥5/10 | ≥7/10 | ≥9/10 |
 | Prompt length | 10 words | 20-50 words | Optimal coverage |
+
+**Iteration Limits by Output Type:**
+
+| Output Type | Soft Limit | Hard Limit | Rationale |
+|-------------|------------|------------|-----------|
+| Quick draft | 2 | 3 | Speed over perfection |
+| Presentation | 3 | 4 | Balance quality/time |
+| Publication | 4 | 5 | Quality critical |
+| Hero image | 4 | 5 | Visual impact matters |
+
+**Stopping Criteria (stop when ANY is true):**
+1. Quality score ≥ 8/10 (excellent threshold)
+2. Quality score ≥ 7/10 AND iteration count ≥ soft limit
+3. Score improvement < 0.5 for 2 consecutive iterations (plateau)
+4. Iteration count = hard limit (budget exhausted)
+5. API error or rate limit encountered
 
 **Completion Checklist:**
 - [ ] Image matches intended subject
@@ -273,6 +324,7 @@ project/
 - [ ] No artifacts or distortions
 - [ ] Colors and composition professional
 - [ ] File saved in correct format and location
+- [ ] Quality score documented (for iteration tracking)
 
 </success_criteria>
 
@@ -375,15 +427,20 @@ mv temp_image.png figures/fig1_final.png
 ### 5. Excessive Iterations
 
 **Anti-pattern:**
-Regenerating 10+ times with minor prompt tweaks
+Regenerating 10+ times with minor prompt tweaks, wasting API calls and time.
 
 **Solution:**
-Systematic refinement:
-1. First generation: Test basic prompt
-2. If wrong subject: Clarify subject terms
-3. If wrong style: Add explicit style modifiers
-4. If wrong composition: Add composition terms
-5. Maximum 5 iterations; if still failing, reconsider approach
+Apply quantified stopping criteria:
+1. Score each generation using 10-point rubric
+2. Stop if score ≥ 8/10 (excellent) or ≥ 7/10 with soft limit reached
+3. Stop if score improvement < 0.5 for 2 consecutive iterations (plateau detected)
+4. Hard limit: 5 iterations maximum for publication, 3 for drafts
+5. If hard limit reached with score < 5/10, reconsider approach entirely
+
+**Iteration Budget by Context:**
+- Quick draft/exploration: 3 max
+- Presentation/poster: 4 max
+- Publication/hero image: 5 max
 
 </anti_patterns>
 

@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `SKILLS_DETERMINISM_AUDIT.md`: Comprehensive determinism audit of all 22 skills in the library
+  - Executive summary with overall score (7.5/10, potential 8.5/10)
+  - Tier-based skill rankings across 8 determinism dimensions
+  - Individual skill scores with strengths and improvement opportunities
+  - Cross-cutting issues analysis (inconsistent patterns, missing thresholds, orchestration gaps)
+  - 5-phase implementation plan: structure standardization, quantification, workflow transitions, skill orchestration, validation
+  - Exemplary patterns to propagate: decision matrices, numbered pitfalls, exit criteria checklists, scope boundaries, template strings
+  - Priority action table with impact and effort estimates
+
 - `skills/plotting-libraries/references/ggplot2.md`: Complete ggplot2 reference for R visualization
   - Grammar of Graphics components: data, aesthetics, geoms, stats, scales, coords, facets, themes
   - Comprehensive geoms reference: points, lines, distributions, bars, heatmaps, text/annotations

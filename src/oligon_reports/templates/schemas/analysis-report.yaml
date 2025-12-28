@@ -1,0 +1,189 @@
+# Analysis Report Schema
+# Phase-style analysis documents with objective, methods, results, discussion
+# Supports optional PASS/FAIL assessment mode for phase results
+
+schema_version: "1.0"
+document_type: "analysis-report"
+category: "scientific"
+description: |
+  Phase-style analysis documents with objective, methods, results, discussion.
+  Supports optional PASS/FAIL assessment mode via frontmatter flag.
+  Typical length: 400-800 lines.
+
+frontmatter:
+  required:
+    - name: type
+      expected: "analysis-report"
+      description: "Document type identifier"
+    - name: title
+      type: string
+      description: "Report title"
+    - name: date
+      type: string
+      format: "YYYY-MM-DD"
+      description: "Report date"
+  optional:
+    - name: project
+      type: string
+      description: "Project name"
+    - name: phase
+      type: string
+      description: "Phase number or identifier"
+    - name: focus
+      type: string
+      description: "Analysis focus area"
+    - name: author
+      type: string
+      description: "Report author"
+    - name: version
+      type: string
+      default: "1.0"
+      description: "Document version"
+    - name: assessment
+      type: enum
+      values: ["none", "pass-fail"]
+      default: "none"
+      description: "Enable PASS/FAIL status tables when set to pass-fail"
+
+sections:
+  - id: objective
+    heading: "Objective"
+    level: 2
+    required: true
+    description: "Problem statement and goals"
+    subsections:
+      - id: key_questions
+        heading: "Key Questions"
+        level: 3
+        required: false
+        expected_content:
+          type: "numbered_list"
+          description: "Numbered list of research questions"
+      - id: critical_context
+        heading: "Critical Context"
+        level: 3
+        required: false
+        expected_content:
+          type: "callout"
+          description: "Important framing or caveats as blockquote"
+
+  - id: methods
+    heading: "Methods"
+    level: 2
+    required: true
+    description: "Methodology and procedures"
+    allows_dynamic_subsections: true
+    expected_elements:
+      - tables
+      - code_blocks
+      - method_blocks
+    notes: "Subsections often follow What/Why/How pattern"
+
+  - id: results
+    heading: "Results"
+    level: 2
+    required: true
+    description: "Analysis results, may have multiple subsections"
+    allows_multiple: true
+    subsections:
+      - id: what_we_did
+        heading: "What We Did"
+        level: 3
+        required: false
+      - id: why
+        heading: "Why"
+        level: 3
+        required: false
+      - id: how
+        heading: "How"
+        level: 3
+        required: false
+        expected_elements:
+          - code_blocks
+      - id: results_data
+        heading: "Results"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+      - id: interpretation
+        heading: "Interpretation"
+        level: 3
+        required: false
+
+  - id: summary
+    heading: "Summary"
+    level: 2
+    required: true
+    description: "Consolidated results and key findings"
+    subsections:
+      - id: consolidated_results
+        heading: "Consolidated Results"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+      - id: key_findings
+        heading: "Key Findings"
+        level: 3
+        required: false
+        expected_content:
+          type: "finding_cards"
+          description: "Numbered findings with titles"
+
+  - id: discussion
+    heading: "Discussion"
+    level: 2
+    required: false
+    description: "Analysis and interpretation"
+    subsections:
+      - id: implications
+        heading: "Implications"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+      - id: limitations
+        heading: "Limitations"
+        level: 3
+        required: false
+        expected_content:
+          type: "numbered_list"
+
+  - id: recommendations
+    heading: "Recommendations"
+    level: 2
+    required: false
+    description: "Action items and next steps"
+    expected_elements:
+      - checklists
+      - tables
+
+  - id: files_outputs
+    heading: "Files and Outputs"
+    level: 2
+    required: false
+    description: "Output file references"
+    expected_elements:
+      - tables
+
+component_mappings:
+  frontmatter: "CoverPage"
+  "## N. Title": "SectionDivider"
+  "> **Type:**": "CalloutBox"
+  "#### Finding N:": "FindingCard"
+  "table_with_status": "StatusTable"
+  "- [ ]": "ChecklistItem"
+  "code_block": "CodeBlock"
+  "pass_fail_summary": "StatusBadgeRow"
+  "rankings_table": "GradedTable"
+
+validation:
+  require_frontmatter: true
+  min_sections: 3
+  allow_extra_sections: true
+  required_sections:
+    - objective
+    - methods
+    - results
+    - summary

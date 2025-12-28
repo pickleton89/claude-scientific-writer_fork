@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Phase 1 Template Infrastructure - Steps 1-2 (In Progress)**: Foundation for markdown-to-PDF conversion
+- **Phase 1 Template Infrastructure - Steps 1-3 (In Progress)**: Foundation for markdown-to-PDF conversion
   - **Step 1 Setup**: Added `python-frontmatter>=1.1.0` dependency, created `src/oligon_reports/templates/` directory structure
   - **Step 2 Parser Foundation**: Created TemplateParser class (~300 lines) in `src/oligon_reports/templates/parser.py`
     - Dataclass definitions: `FrontmatterData`, `Element`, `Section`, `DocumentTree`, `ValidationError`
@@ -20,7 +20,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `validate()` skeleton for schema validation
     - Static methods: `list_templates()`, `get_template()`
   - Updated `src/oligon_reports/__init__.py` to export template classes
-  - Next: Step 3 (Schemas Batch 1: analysis-report, meeting-notes, readme, data-report)
+  - **Step 3 Schemas Batch 1**: Created 4 YAML schemas in `src/oligon_reports/templates/schemas/`
+    - `analysis-report.yaml`: Scientific analysis with objective/methods/results/discussion (7 sections)
+    - `meeting-notes.yaml`: Project management with agenda/decisions/action items (5 sections)
+    - `readme.yaml`: Reference documentation with overview/quick-start/architecture (8 sections)
+    - `data-report.yaml`: Data-driven reports with metrics/rankings/recommendations (8 sections)
+    - Each schema defines: frontmatter (required/optional), sections hierarchy, component_mappings, validation rules
+  - Next: Step 4 (Schemas Batch 2: phase-plan, literature-review, project-status, technical-spec)
 
 - **Phase 2 Component Extension (Complete)**: Added 5 new PDF components to `src/oligon_reports/components.py`
   - **FindingCard**: Numbered finding box with badge, title, and description for `#### Finding N:` patterns

@@ -1,0 +1,141 @@
+# README Schema
+# Project entry point with overview, quick start, and architecture
+
+schema_version: "1.0"
+document_type: "readme"
+category: "reference"
+description: |
+  Project entry point documentation with overview, quick start guide, and architecture.
+  Typical length: 50-450 lines. Serves as first touchpoint for new users.
+
+frontmatter:
+  required:
+    - name: type
+      expected: "readme"
+      description: "Document type identifier"
+    - name: project
+      type: string
+      description: "Project name"
+  optional:
+    - name: version
+      type: string
+      description: "Project version"
+    - name: last_updated
+      type: string
+      format: "YYYY-MM-DD"
+      description: "Last update date"
+    - name: status
+      type: enum
+      values: ["active", "maintenance", "deprecated", "archived"]
+      default: "active"
+      description: "Project status"
+    - name: license
+      type: string
+      description: "License type"
+
+sections:
+  - id: title
+    heading: "[Project Name]"
+    level: 1
+    required: true
+    description: "Project title and one-line description"
+    notes: "Usually matches frontmatter project name"
+
+  - id: overview
+    heading: "Overview"
+    level: 2
+    required: true
+    description: "2-3 sentence explanation of what this project does"
+    subsections:
+      - id: key_technologies
+        heading: "Key Technologies"
+        level: 3
+        required: false
+        expected_content:
+          type: "bullet_list"
+
+  - id: quick_start
+    heading: "Quick Start"
+    level: 2
+    required: true
+    description: "Getting started guide"
+    subsections:
+      - id: prerequisites
+        heading: "Prerequisites"
+        level: 3
+        required: false
+        expected_content:
+          type: "bullet_list"
+      - id: installation
+        heading: "Installation"
+        level: 3
+        required: true
+        expected_elements:
+          - code_blocks
+      - id: first_use
+        heading: "First Use"
+        level: 3
+        required: false
+        expected_elements:
+          - code_blocks
+
+  - id: architecture
+    heading: "Architecture"
+    level: 2
+    required: false
+    description: "Project structure and organization"
+    expected_elements:
+      - code_blocks
+    expected_content:
+      type: "directory_tree"
+      description: "ASCII directory tree structure"
+
+  - id: usage
+    heading: "Usage"
+    level: 2
+    required: false
+    description: "Detailed usage examples"
+    allows_dynamic_subsections: true
+    expected_elements:
+      - code_blocks
+
+  - id: configuration
+    heading: "Configuration"
+    level: 2
+    required: false
+    description: "Configuration options"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Parameter", "Default", "Description"]
+
+  - id: contributing
+    heading: "Contributing"
+    level: 2
+    required: false
+    description: "Guidelines for contributors"
+
+  - id: license
+    heading: "License"
+    level: 2
+    required: false
+    description: "License information"
+
+component_mappings:
+  frontmatter: "CoverPage"
+  "# Title": "DocumentTitle"
+  "## Title": "SectionDivider"
+  "Quick Start": "HighlightBox"
+  "directory_tree": "DirectoryDiagram"
+  "| Parameter |": "ReferenceTable"
+  "code_block": "CodeBlock"
+
+validation:
+  require_frontmatter: true
+  min_sections: 2
+  allow_extra_sections: true
+  required_sections:
+    - title
+    - overview
+    - quick_start

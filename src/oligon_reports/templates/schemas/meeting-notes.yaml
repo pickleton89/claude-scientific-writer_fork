@@ -1,0 +1,99 @@
+# Meeting Notes Schema
+# Simple meeting documentation with agenda, decisions, and action items
+
+schema_version: "1.0"
+document_type: "meeting-notes"
+category: "project-management"
+description: |
+  Meeting documentation with agenda, discussion notes, decisions, and action items.
+  Typical length: 50-150 lines. Simple structure for quick capture.
+
+frontmatter:
+  required:
+    - name: type
+      expected: "meeting-notes"
+      description: "Document type identifier"
+    - name: title
+      type: string
+      description: "Meeting title"
+    - name: date
+      type: string
+      format: "YYYY-MM-DD"
+      description: "Meeting date"
+  optional:
+    - name: attendees
+      type: list
+      description: "List of meeting attendees"
+    - name: facilitator
+      type: string
+      description: "Meeting facilitator name"
+    - name: location
+      type: string
+      description: "Meeting location or video link"
+    - name: duration
+      type: string
+      description: "Meeting duration"
+
+sections:
+  - id: agenda
+    heading: "Agenda"
+    level: 2
+    required: true
+    description: "Meeting agenda items"
+    expected_content:
+      type: "numbered_list"
+      description: "Numbered list of agenda topics"
+
+  - id: discussion
+    heading: "Discussion"
+    level: 2
+    required: false
+    description: "Discussion notes organized by topic"
+    allows_dynamic_subsections: true
+    notes: "Subsections correspond to agenda items"
+
+  - id: decisions
+    heading: "Decisions"
+    level: 2
+    required: false
+    description: "Decisions made during the meeting"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Decision", "Owner", "Date"]
+
+  - id: action_items
+    heading: "Action Items"
+    level: 2
+    required: true
+    description: "Tasks assigned during meeting"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Action", "Owner", "Due Date", "Status"]
+
+  - id: next_meeting
+    heading: "Next Meeting"
+    level: 2
+    required: false
+    description: "Next meeting date and planned topics"
+    expected_elements:
+      - checklists
+
+component_mappings:
+  frontmatter: "MetadataHeader"
+  "## Title": "SectionDivider"
+  "**Decision:**": "CalloutBox"
+  "| Action |": "StatusTable"
+  "- [ ]": "ChecklistItem"
+  "⬜/🔄/✅": "StatusBadge"
+
+validation:
+  require_frontmatter: true
+  min_sections: 2
+  allow_extra_sections: true
+  required_sections:
+    - agenda
+    - action_items

@@ -1,0 +1,174 @@
+# Data Report Schema
+# Data-driven reports with metrics, rankings, and recommendations
+# Consolidates former data-summary and generated-report types
+
+schema_version: "1.0"
+document_type: "data-report"
+category: "scientific"
+description: |
+  Data-driven reports with metrics, rankings, and recommendations.
+  Supports auto-generation via pipeline (set generated: true).
+  Typical length: 100-650 lines.
+
+frontmatter:
+  required:
+    - name: type
+      expected: "data-report"
+      description: "Document type identifier"
+    - name: title
+      type: string
+      description: "Report title"
+    - name: date
+      type: string
+      format: "YYYY-MM-DD"
+      description: "Report date"
+  optional:
+    - name: subject
+      type: string
+      description: "Target entity (gene, protein, compound, etc.)"
+    - name: total_records
+      type: integer
+      description: "Number of records analyzed"
+    - name: generated
+      type: boolean
+      default: false
+      description: "True for auto-generated pipeline reports"
+    - name: pipeline_version
+      type: string
+      description: "Version of pipeline that generated this report"
+    - name: author
+      type: string
+      description: "Report author or generating system"
+
+sections:
+  - id: header
+    heading: "[Report Title]"
+    level: 1
+    required: true
+    description: "Report title with inline metadata"
+    expected_content:
+      type: "metadata_block"
+      description: "Subject, timestamp, record count as bold key-value pairs"
+
+  - id: navigation
+    heading: "Navigation"
+    level: 2
+    required: false
+    description: "Table of contents for longer reports"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Section", "Description"]
+    notes: "Optional - useful for reports > 200 lines"
+
+  - id: executive_summary
+    heading: "Executive Summary"
+    level: 2
+    required: true
+    description: "Key findings overview with status indicator"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "metrics_table"
+      columns: ["Metric", "Value", "Interpretation"]
+
+  - id: overview
+    heading: "Overview"
+    level: 2
+    required: false
+    description: "Context and purpose of the analysis"
+    subsections:
+      - id: objectives_analyzed
+        heading: "Objectives Analyzed"
+        level: 3
+        required: false
+        expected_elements:
+          - tables
+        expected_content:
+          type: "table"
+          columns: ["#", "Objective", "Goal", "Description"]
+
+  - id: results_summary
+    heading: "Results Summary"
+    level: 2
+    required: true
+    description: "Aggregated results by category"
+    allows_dynamic_subsections: true
+    expected_elements:
+      - tables
+      - callouts
+    subsections:
+      - id: category_results
+        heading: "[Category Name]"
+        level: 3
+        required: false
+        expected_content:
+          type: "graded_table"
+          columns: ["ID", "Metric 1", "Metric 2", "Score", "Tier"]
+      - id: quality_assessment
+        heading: "Quality Assessment"
+        level: 3
+        required: false
+        expected_content:
+          type: "callout"
+
+  - id: detailed_analysis
+    heading: "Detailed Analysis"
+    level: 2
+    required: false
+    description: "In-depth breakdown of results"
+    allows_dynamic_subsections: true
+    expected_elements:
+      - tables
+    subsections:
+      - id: pattern_analysis
+        heading: "Pattern Analysis"
+        level: 3
+        required: false
+
+  - id: recommendations
+    heading: "Recommendations"
+    level: 2
+    required: false
+    description: "Actionable guidance based on results"
+    allows_dynamic_subsections: true
+    expected_elements:
+      - tables
+    expected_content:
+      type: "ranked_table"
+      columns: ["Rank", "ID", "Key Metric", "Recommendation"]
+
+  - id: technical_details
+    heading: "Technical Details"
+    level: 2
+    required: false
+    description: "Pipeline parameters and input metadata"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Parameter", "Value"]
+
+component_mappings:
+  frontmatter: "MetadataHeader"
+  "# Title": "DocumentTitle"
+  "## Navigation": "ClickableTOC"
+  "**Status:**": "StatusBadge"
+  "Executive Summary": "MetricCardRow"
+  "Tier": "GradedTable"
+  "Score": "GradedTable"
+  "> **Assessment:**": "CalloutBox"
+  "Rank": "RankedList"
+  "figure": "FigureWithCaption"
+  "| Parameter |": "CompactMetadataTable"
+  "pipeline_version": "FooterMetadata"
+
+validation:
+  require_frontmatter: true
+  min_sections: 2
+  allow_extra_sections: true
+  required_sections:
+    - header
+    - executive_summary
+    - results_summary

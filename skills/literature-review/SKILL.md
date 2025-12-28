@@ -1,14 +1,17 @@
 ---
 name: literature-review
-version: 2.0.0
-description: "Conduct systematic, comprehensive literature reviews using multiple academic databases. Provides structured methodology for search, screening, synthesis, and citation verification with professional output in markdown and PDF formats."
+version: 2.1.0
+description: "Conduct systematic literature reviews using multiple academic databases with quantified coverage thresholds. Provides structured methodology for search, screening, synthesis, and citation verification with professional output in markdown and PDF formats."
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, WebFetch, WebSearch]
+shared-thresholds: "../QUANTIFICATION_THRESHOLDS.md"
 ---
 
 # Literature Review
 
+> **Quantified Thresholds:** This skill references shared thresholds from [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §1 (Literature Coverage) and §6 (Time-Based Thresholds).
+
 <overview>
-Conduct systematic, comprehensive literature reviews following rigorous academic methodology. This skill provides structured workflows for multi-database searching, screening, thematic synthesis, and citation verification with professional output generation in markdown and PDF formats.
+Conduct systematic literature reviews with quantified coverage requirements: ≥3 databases, 30-100+ papers depending on review type, and documented search strategies achieving <5% new papers in final iteration. This skill provides structured workflows for multi-database searching, screening, thematic synthesis, and citation verification with professional output generation in markdown and PDF formats.
 </overview>
 
 <when_to_use>
@@ -99,6 +102,40 @@ What is the primary research domain?
 | Systematic reviews | AMSTAR 2 | 16 items, 7 critical |
 | Animal studies | SYRCLE RoB | 10 items |
 
+## Literature Coverage Thresholds
+
+> Reference: [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §1
+
+| Review Type | Min Papers | Min Databases | Time Range | Citation Density |
+|-------------|------------|---------------|------------|------------------|
+| Original Research | 30 | 2 | 5-10 years | 2-4 per paragraph |
+| Review Article | 100 | 4 | 10+ years | 4-6 per paragraph |
+| Systematic Review | 50+ | 3 | Per PRISMA | All relevant |
+| Meta-Analysis | 10+ studies | 3 | 10+ years | All included |
+| Methods Paper | 20 | 2 | 5 years | Key comparisons |
+| Commentary/Letter | 10-15 | 1 | 2-3 years | Selective |
+
+**"Comprehensive" Defined:**
+
+A literature search is considered **comprehensive** when ALL criteria are met:
+- [ ] ≥3 databases searched with documented strategy
+- [ ] Forward/backward citation search performed
+- [ ] Gray literature checked (preprints, theses, conference proceedings)
+- [ ] ≤5% new relevant papers found in final search iteration
+- [ ] Date range explicitly specified and justified
+
+## Literature Recency Thresholds
+
+> Reference: [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §6
+
+| Field Type | "Recent" Means | "Current" Means |
+|------------|---------------|-----------------|
+| Fast-moving (ML, genomics) | ≤2 years | ≤6 months |
+| Standard biomedical | ≤5 years | ≤1 year |
+| Clinical guidelines | ≤3 years | ≤1 year |
+| Historical context | ≤10 years | ≤5 years |
+| Foundational work | Any age if seminal | N/A |
+
 </decision_framework>
 
 <workflow>
@@ -142,7 +179,7 @@ What is the primary research domain?
 
 ### Stage 2: Systematic Search
 
-**Objective:** Execute comprehensive, documented database searches
+**Objective:** Execute documented database searches meeting coverage thresholds (≥3 databases, <5% new papers in final iteration)
 
 **Steps:**
 1. Construct search strings for each database:
@@ -363,6 +400,11 @@ Studies included (n = B)
    However, conflicting evidence exists regarding...
    [citations]. A notable gap is...
    ```
+
+   **Citation Density Requirements** (see Literature Coverage Thresholds):
+   - Review articles: 4-6 citations per paragraph
+   - Systematic reviews: All relevant studies cited per theme
+   - Original research: 2-4 citations per paragraph
 
 5. Create summary tables per theme
 6. If meta-analysis: calculate pooled effects, heterogeneity (I²)

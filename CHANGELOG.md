@@ -23,6 +23,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Phase 2.1 Quantification Implementation (In Progress)**: Replacing qualitative terms with measurable thresholds
+  - `skills/literature-review/SKILL.md` (v2.0.0 → v2.1.0): Applied quantification from `QUANTIFICATION_THRESHOLDS.md`
+    - Added cross-reference to shared thresholds document (§1 Literature Coverage, §6 Time-Based)
+    - Updated overview to specify quantified coverage: ≥3 databases, 30-100+ papers, <5% new papers in final iteration
+    - Added Literature Coverage Thresholds table with min papers, databases, time range, and citation density by review type
+    - Added "Comprehensive" definition checklist with 5 explicit criteria
+    - Added Literature Recency Thresholds table defining "recent" and "current" by field type
+    - Added citation density requirements in synthesis workflow (2-6 citations per paragraph by document type)
+    - Replaced vague "comprehensive, documented database searches" with specific thresholds
+
 - **Phase 1.3 Skills Determinism Implementation (Complete)**: Refactored all Tier 3 skills to use standard template
   - `skills/citation-management/SKILL.md` (6.5 → ~8.5): Complete restructure with deterministic patterns
     - Added citation style selection decision tree by venue (biomedical, life sciences, social sciences, engineering, conferences, grants)

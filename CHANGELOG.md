@@ -9,6 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `skills/SKILL_TEMPLATE.md`: Standard template for deterministic skill definitions
+  - XML semantic tags for all major sections (overview, when_to_use, decision_framework, workflow, etc.)
+  - Decision matrix and ASCII decision tree format options
+  - Numbered workflow stages with exit criteria checklists
+  - Success criteria with quantitative thresholds table
+  - Scope boundaries with explicit redirects to alternative skills
+  - Anti-patterns section with solution patterns
+  - Output templates section
+  - Cross-references and reference documents sections
+  - Quality scoring dimensions (8 dimensions with weights)
+  - Checklist for skill authors
+
+### Changed
+
+- **Phase 1.2 Skills Determinism Implementation**: Refactored all Tier 4 skills (lowest scoring) to use standard template
+  - `skills/scholar-evaluation/SKILL.md` (5.0 → ~8.5): Added 8-dimension evaluation framework with weighted scoring, 5-point rubric with quality tiers (A-F), recommendation priority matrix, 5 anti-patterns, executive summary and detailed report templates
+  - `skills/markitdown/SKILL.md` (5.0 → ~8.5): Added conversion path decision tree, method selection matrix by input type, 5-stage workflow with validation checks, 5 anti-patterns with code examples, batch conversion report template
+  - `skills/paper-2-web/SKILL.md` (5.0 → ~8.5): Added output selection decision tree with cost/time estimates, component selection matrix by use case, 5-stage deployment workflow, quality validation tables per component (website/poster/video), deployment checklist template
+  - `skills/generate-image/SKILL.md` (5.5 → ~8.5): Added image type decision tree (routing to scientific-schematics vs plotting-libraries vs generate-image), model selection matrix, 5-component prompt engineering framework, quality validation checklist, 4 scientific prompt templates
+
 - `SKILLS_DETERMINISM_AUDIT.md`: Comprehensive determinism audit of all 22 skills in the library
   - Executive summary with overall score (7.5/10, potential 8.5/10)
   - Tier-based skill rankings across 8 determinism dimensions

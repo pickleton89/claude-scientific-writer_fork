@@ -293,6 +293,75 @@ To prevent content from overflowing on pages, follow these critical guidelines:
 
 **Quick Reference:** See `assets/FORMATTING_GUIDE.md` for detailed examples of all box types, color schemes, and common formatting patterns.
 
+## Workflow Transitions
+
+### Stage 1 → 2: Understand Phenomenon → Literature Search
+**Exit criteria:**
+□ Core observation/question clearly articulated in 1-2 sentences
+□ Scope and boundaries defined (what's included/excluded)
+□ Relevant scientific domain(s) identified
+□ Known vs. unknown aspects documented
+□ Initial search terms generated (≥5 keywords/phrases)
+
+### Stage 2 → 3: Literature Search → Synthesize Evidence
+**Exit criteria:**
+□ ≥3 databases searched (per QUANTIFICATION_THRESHOLDS.md §1)
+□ ≥40 papers retrieved, ≥70 for comprehensive reviews
+□ Search saturation achieved (<5% new papers in final iteration)
+□ ≥60% papers from last 5 years
+□ Both supporting and contradictory evidence identified
+
+### Stage 3 → 4: Synthesize Evidence → Generate Hypotheses
+**Exit criteria:**
+□ Current understanding summarized in ≤1 page
+□ ≥2 alternative viewpoints documented
+□ Key gaps in knowledge identified (≥3)
+□ Relevant mechanisms/theories catalogued
+□ Analogies from related systems noted
+
+### Stage 4 → 5: Generate Hypotheses → Evaluate Quality
+**Exit criteria:**
+□ 3-5 distinct hypotheses generated
+□ Each hypothesis provides mechanistic explanation
+□ Hypotheses are mutually distinguishable
+□ Each hypothesis grounded in literature evidence
+□ Multiple levels of explanation considered
+
+### Stage 5 → 6: Evaluate Quality → Design Experiments
+**Exit criteria:**
+□ All hypotheses scored on 10-point quality rubric
+□ Each score includes criterion breakdown
+□ ≥1 hypothesis scores ≥8/10 (strong)
+□ All hypotheses score ≥5/10 (viable) or marked as deprioritized
+□ Strengths and weaknesses documented for each
+
+### Stage 6 → 7: Design Experiments → Formulate Predictions
+**Exit criteria:**
+□ Experimental design for each viable hypothesis (score ≥5/10)
+□ 1-2 primary outcomes defined per experiment
+□ ≥2 controls per experiment (positive + negative)
+□ Sample size rationale provided
+□ Statistical approach pre-specified
+□ ≥3 potential confounds addressed per design
+
+### Stage 7 → 8: Formulate Predictions → Present Output
+**Exit criteria:**
+□ ≥2 specific predictions per hypothesis
+□ Direction and magnitude of expected effects stated
+□ Conditions under which predictions hold specified
+□ Distinguishing predictions between hypotheses identified
+□ Falsifying observations defined
+
+### Stage 8 Complete: Present Structured Output
+**Exit criteria:**
+□ LaTeX document compiles without errors
+□ Main text ≤4 pages with executive summary
+□ Each hypothesis in colored box (≤0.6 pages each)
+□ No page overflow (content stays within boundaries)
+□ ≥40 citations in bibliography (≥10-15 in main text)
+□ ≥1 visual schematic included
+□ Appendices contain comprehensive details
+
 ## Quality Standards
 
 Ensure all generated hypotheses meet these quantified standards:

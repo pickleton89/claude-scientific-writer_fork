@@ -566,7 +566,15 @@ Create reference tables for common thresholds:
 
 **Duration:** 20-30 minutes per skill
 
-#### Step 3.1: Identify Stage Boundaries
+#### Step 3.1: Identify Stage Boundaries ✅ COMPLETED
+
+> **Status:** Completed 2025-12-28
+> **Result:** 3 skills received new transition sections; 11 skills already had exit criteria from Phase 1
+
+| Category | Skills |
+|----------|--------|
+| **Added transition criteria** | statistical-analysis, hypothesis-generation, peer-review |
+| **Already had exit criteria** | literature-review, citation-management, scientific-schematics, visual-design, scientific-slides, latex-posters, pptx-posters, generate-image, scholar-evaluation, markitdown, paper-2-web |
 
 For each skill with numbered workflows, add transition checklists:
 
@@ -815,18 +823,19 @@ Schedule quarterly reviews:
 | 🔴 High | Apply template to Tier 4 skills (Phase 1.2) | ✅ Complete | 4 skills: +3.5 avg |
 | 🔴 High | Apply template to Tier 3 skills (Phase 1.3) | ✅ Complete | 7 skills: +2.5 avg |
 | 🟡 Medium | Quantify qualitative terms (Phase 2) | ✅ Complete | Shared thresholds created |
+| 🟡 Medium | Add stage boundary exit criteria (Phase 3.1) | ✅ Complete | 3 skills updated, 11 already compliant |
 
 ### Remaining Priority Actions (Optional)
 
 | Priority | Action | Impact | Effort |
 |----------|--------|--------|--------|
 | 🟡 Medium | Create SKILL_ROUTER.md (Phase 4) | Solves multi-skill confusion | 1 session |
-| 🟡 Medium | Add workflow transition criteria (Phase 3) | Improves consistency | 2 hours |
+| 🟡 Medium | Add progress indicators (Phase 3.2) | Enables mid-stage tracking | 1-2 hours |
 | 🟢 Low | Create test scenarios (Phase 5) | Validates improvements | Ongoing |
 
 ---
 
-*Phase 1 (Structure Standardization) and Phase 2 (Quantification) are complete. The library now meets the target determinism score of 8.5/10. Remaining phases are optional enhancements.*
+*Phases 1-2 and Phase 3.1 are complete. The library meets the target determinism score of 8.5/10. Remaining phases (3.2, 4, 5) are optional enhancements.*
 
 ---
 

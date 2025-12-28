@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Phase 3.1 Workflow Transitions (Complete)**: Added explicit exit criteria between workflow stages
+  - `skills/statistical-analysis/SKILL.md`: Added Workflow Transitions section with 6 stage-to-stage exit criteria
+  - `skills/hypothesis-generation/SKILL.md`: Added Workflow Transitions section with 8 stage-to-stage exit criteria
+  - `skills/peer-review/SKILL.md`: Added Workflow Transitions section with 7 stage-to-stage exit criteria
+  - 11 other skills already had exit criteria from Phase 1 restructuring (no changes needed)
+  - Updated `SKILLS_DETERMINISM_AUDIT.md` to mark Phase 3.1 complete
+
 - **Skills Determinism Audit Update (Complete)**: Updated audit document to reflect current skill scores
   - Overall library score: 7.5/10 → **8.5/10** (target achieved)
   - Corrected skill count: 21 evaluated skills (document-skills sub-skills excluded)

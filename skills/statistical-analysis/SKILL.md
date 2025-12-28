@@ -96,6 +96,51 @@ Guide rigorous statistical analysis for scientific research, with emphasis on bi
 5. Calculate effect sizes → Biological relevance
 6. Report results → Methods + Results sections
 ```
+
+## Workflow Transitions
+
+### Stage 1 → 2: Research Question → Data Assessment
+**Exit criteria:**
+□ Research question clearly stated as testable hypothesis
+□ Comparison type identified (two groups, multiple groups, correlation, regression)
+□ Primary outcome variable(s) defined
+□ Grouping/predictor variables defined
+
+### Stage 2 → 3: Data Assessment → Test Selection
+**Exit criteria:**
+□ Normality assessed (Shapiro-Wilk p > 0.05, or visual QQ-plot inspection)
+□ Sample size documented (n per group)
+□ Data type confirmed (continuous, categorical, ordinal, count)
+□ Independence/pairing status determined
+□ Outliers identified and handling decision documented
+
+### Stage 3 → 4: Test Selection → Corrections
+**Exit criteria:**
+□ Test selected from decision framework with documented rationale
+□ Test assumptions verified (e.g., homogeneity of variance for ANOVA)
+□ Code implementation complete and validated on test data
+□ Raw p-values computed for all comparisons
+
+### Stage 4 → 5: Corrections → Effect Sizes
+**Exit criteria:**
+□ Number of tests documented
+□ Correction method selected (BH-FDR for discovery, Bonferroni for confirmation)
+□ Adjusted p-values computed
+□ Significance threshold stated (e.g., FDR < 0.05)
+
+### Stage 5 → 6: Effect Sizes → Reporting
+**Exit criteria:**
+□ Effect size metric selected (Cohen's d, fold change, R², OR, HR)
+□ Effect sizes computed for all significant comparisons
+□ Confidence intervals calculated where applicable
+□ Biological relevance assessed (not just statistical significance)
+
+### Stage 6 Complete: Reporting
+**Exit criteria:**
+□ Methods section includes: software, test name, justification, correction method
+□ Results include: test statistic, degrees of freedom, p-value, effect size
+□ Figures show data distribution (not just bar + error bars)
+□ All comparisons reported (not just significant ones)
 </usage_patterns>
 
 <common_pitfalls>

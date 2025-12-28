@@ -300,6 +300,68 @@ Assess the manuscript's clarity, organization, and accessibility.
 - Are technical terms explained?
 - Is the significance clear to a broad audience?
 
+## Workflow Transitions
+
+### Stage 1 → 2: Initial Assessment → Section-by-Section Review
+**Exit criteria:**
+□ Central research question/hypothesis identified in 1-2 sentences
+□ Main findings and conclusions summarized
+□ Initial impression documented (sound/flawed, significant/incremental)
+□ Venue appropriateness assessed
+□ No immediate disqualifying flaws identified (or flagged for rejection)
+
+### Stage 2 → 3: Section-by-Section Review → Methodological Rigor
+**Exit criteria:**
+□ All sections evaluated (Abstract, Introduction, Methods, Results, Discussion, References)
+□ ≥2 strengths and ≥2 concerns documented per major section
+□ Specific issues located by section/paragraph
+□ Key claims identified for evidence verification
+□ Citation coverage assessed (complete, current, balanced)
+
+### Stage 3 → 4: Methodological Rigor → Reproducibility Assessment
+**Exit criteria:**
+□ Statistical assumptions verified or flagged
+□ Sample size adequacy checked against replication thresholds
+□ Controls and replicates assessed (≥2 controls, ≥3 biological replicates)
+□ Multiple testing correction evaluated
+□ Effect sizes and confidence intervals checked
+□ Experimental design appropriateness documented
+
+### Stage 4 → 5: Reproducibility → Figure Evaluation
+**Exit criteria:**
+□ Data availability assessed (raw data, accession numbers)
+□ Code availability checked (GitHub, Zenodo, etc.)
+□ Reporting guideline compliance verified (CONSORT, PRISMA, ARRIVE, etc.)
+□ Protocol detail sufficiency evaluated
+□ Materials availability confirmed
+
+### Stage 5 → 6: Figure Evaluation → Ethical Considerations
+**Exit criteria:**
+□ All figures inspected for resolution (≥300 DPI target)
+□ Labeling and legends assessed for completeness
+□ Error bars and statistical indicators verified
+□ Colorblind accessibility checked
+□ Image integrity verified (no manipulation concerns)
+□ Figure quality scores documented
+
+### Stage 6 → 7: Ethical Considerations → Writing Quality
+**Exit criteria:**
+□ Human subjects: IRB approval and consent verified (if applicable)
+□ Animal research: IACUC approval verified (if applicable)
+□ Conflicts of interest disclosure checked
+□ Funding source disclosed
+□ No plagiarism or duplicate publication concerns
+□ Authorship appropriateness assessed
+
+### Stage 7 Complete: Writing Quality → Report Drafting
+**Exit criteria:**
+□ Structure and organization assessed
+□ Language clarity evaluated
+□ Jargon minimization checked
+□ Accessibility for non-specialists considered
+□ All 7 stages completed with documented findings
+□ Ready to draft structured review report
+
 ## Structuring Peer Review Reports
 
 > **Reference:** See `../QUANTIFICATION_THRESHOLDS.md` §4 (Issue Severity Classification) for shared severity criteria.

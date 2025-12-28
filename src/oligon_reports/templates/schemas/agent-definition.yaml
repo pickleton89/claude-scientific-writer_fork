@@ -1,0 +1,162 @@
+# Agent Definition Schema
+# AI agent role definitions with capabilities and workflows
+# Used for defining specialized AI agent behaviors
+
+schema_version: "1.0"
+document_type: "agent-definition"
+category: "development"
+description: |
+  AI agent role definition documents specifying capabilities, workflows,
+  constraints, and integration points.
+  Typical length: 50-320 lines.
+
+frontmatter:
+  required:
+    - name: type
+      expected: "agent-definition"
+      description: "Document type identifier"
+    - name: name
+      type: string
+      description: "Agent identifier (lowercase, hyphenated)"
+    - name: description
+      type: string
+      description: "One-line agent description"
+  optional:
+    - name: tools
+      type: array
+      description: "List of tools the agent can use"
+    - name: color
+      type: string
+      description: "Agent color for UI display"
+    - name: model
+      type: enum
+      values: ["inherit", "sonnet", "opus", "haiku"]
+      default: "inherit"
+      description: "Model to use for this agent"
+    - name: version
+      type: string
+      default: "1.0"
+      description: "Agent definition version"
+    - name: author
+      type: string
+      description: "Agent definition author"
+
+sections:
+  - id: title
+    heading: "[Agent Name]"
+    level: 1
+    required: true
+    description: "Agent name as heading"
+
+  - id: role
+    heading: "Role"
+    level: 2
+    required: true
+    description: "Detailed description of what this agent does and when to use it"
+    expected_content:
+      type: "paragraph"
+      description: "Comprehensive role description"
+
+  - id: core_responsibilities
+    heading: "Core Responsibilities"
+    level: 2
+    required: true
+    description: "Numbered list of primary responsibilities"
+    expected_content:
+      type: "numbered_list"
+      description: "3-7 core responsibilities"
+
+  - id: workflow
+    heading: "Workflow"
+    level: 2
+    required: true
+    description: "Step-by-step process the agent follows"
+    allows_dynamic_subsections: true
+    subsection_template:
+      pattern: "Step [N]: [Action]"
+      expected_elements:
+        - id: instructions
+          type: "paragraph"
+          required: true
+        - id: commands
+          pattern: "**Commands:**"
+          required: false
+          expected_content:
+            type: "code_block"
+        - id: output_format
+          pattern: "**Output Format:**"
+          required: false
+          expected_content:
+            type: "code_block"
+
+  - id: input_requirements
+    heading: "Input Requirements"
+    level: 2
+    required: false
+    description: "Required and optional inputs"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Input", "Type", "Required", "Description"]
+
+  - id: output_deliverables
+    heading: "Output Deliverables"
+    level: 2
+    required: false
+    description: "What the agent produces"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Output", "Format", "Description"]
+
+  - id: important_constraints
+    heading: "Important Constraints"
+    level: 2
+    required: false
+    description: "Behavioral constraints using MUST/MUST NOT/SHOULD"
+    expected_content:
+      type: "bullet_list"
+      description: "Constraint statements with MUST/MUST NOT/SHOULD prefixes"
+
+  - id: integration_points
+    heading: "Integration Points"
+    level: 2
+    required: false
+    description: "How this agent works with other agents and commands"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Integrates With", "Purpose"]
+
+  - id: user_standards_compliance
+    heading: "User Standards Compliance"
+    level: 2
+    required: false
+    description: "Reference to standards files this agent follows"
+    expected_content:
+      type: "bullet_list"
+      description: "Links to standards documents"
+
+component_mappings:
+  frontmatter: "AgentHeaderCard"
+  "## Role": "RoleDescriptionBox"
+  core_responsibilities: "NumberedCapabilityList"
+  workflow_steps: "ProcessFlowDiagram"
+  constraints_must: "ConstraintCalloutBox"
+  constraints_must_not: "WarningConstraintBox"
+  constraints_should: "RecommendationBox"
+  input_table: "InputSpecTable"
+  output_table: "OutputSpecTable"
+  integration_table: "IntegrationMatrix"
+
+validation:
+  require_frontmatter: true
+  min_sections: 3
+  allow_extra_sections: true
+  required_sections:
+    - role
+    - core_responsibilities
+    - workflow

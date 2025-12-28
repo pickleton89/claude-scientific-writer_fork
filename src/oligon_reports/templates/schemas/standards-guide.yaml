@@ -1,0 +1,160 @@
+# Standards Guide Schema
+# Coding conventions, best practices, and DO/DON'T patterns
+# Used for establishing team-wide engineering standards
+
+schema_version: "1.0"
+document_type: "standards-guide"
+category: "development"
+description: |
+  Standards and best practices documentation with coding conventions,
+  DO/DON'T patterns, and anti-pattern guidance.
+  Typical length: 100-400 lines.
+
+frontmatter:
+  required:
+    - name: type
+      expected: "standards-guide"
+      description: "Document type identifier"
+    - name: title
+      type: string
+      description: "Standards guide title"
+  optional:
+    - name: category
+      type: enum
+      values: ["backend", "frontend", "global", "testing", "infrastructure", "documentation"]
+      default: "global"
+      description: "Standards category"
+    - name: version
+      type: string
+      default: "1.0"
+      description: "Standards version number"
+    - name: last_updated
+      type: string
+      format: "YYYY-MM-DD"
+      description: "Last update date"
+    - name: author
+      type: string
+      description: "Standards author or team"
+    - name: applies_to
+      type: string
+      description: "Projects or teams these standards apply to"
+
+sections:
+  - id: overview
+    heading: "Overview"
+    level: 2
+    required: true
+    description: "Brief statement of what these standards govern"
+    expected_content:
+      type: "paragraph"
+      description: "Concise description of scope and purpose"
+
+  - id: standards
+    heading: null
+    level: 2
+    required: true
+    description: "Main standards content organized by category"
+    allows_dynamic_subsections: true
+    allows_multiple: true
+    notes: "Each numbered section is a standards category"
+    subsection_template:
+      pattern: "[N]. [Category Name]"
+      expected_elements:
+        - id: standard_item
+          pattern: "[N.M] [Standard/Principle]"
+          required: true
+          child_elements:
+            - id: rule
+              pattern: "**Rule:**"
+              required: true
+              description: "Clear, actionable statement"
+            - id: rationale
+              pattern: "**Rationale:**"
+              required: false
+              description: "Why this matters"
+            - id: examples
+              pattern: "**Examples:**"
+              required: false
+              expected_content:
+                type: "code_block"
+                description: "Good/bad code examples"
+
+  - id: conventions_table
+    heading: "Conventions Table"
+    level: 3
+    required: false
+    description: "Quick reference table of conventions"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Type", "Convention", "Example"]
+
+  - id: common_patterns
+    heading: "Common Patterns"
+    level: 2
+    required: false
+    description: "Recommended implementation patterns"
+    allows_dynamic_subsections: true
+    subsection_template:
+      pattern: "[Pattern Name]"
+      expected_elements:
+        - id: when_to_use
+          pattern: "**When to use:**"
+          required: true
+        - id: implementation
+          pattern: "**Implementation:**"
+          required: true
+          expected_content:
+            type: "code_block"
+        - id: variations
+          pattern: "**Variations:**"
+          required: false
+
+  - id: anti_patterns
+    heading: "Anti-Patterns"
+    level: 2
+    required: false
+    description: "Common mistakes to avoid"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Anti-Pattern", "Problem", "Solution"]
+
+  - id: exceptions
+    heading: "Exceptions"
+    level: 2
+    required: false
+    description: "When standards can be bypassed"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Exception", "When Allowed", "Approval"]
+
+  - id: references
+    heading: "References"
+    level: 2
+    required: false
+    description: "Links to related standards and external resources"
+    expected_content:
+      type: "bullet_list"
+      description: "Links to related documentation"
+
+component_mappings:
+  frontmatter: "CoverPage"
+  "## N. Title": "SectionDivider"
+  good_bad_code: "SideBySideComparisonBoxes"
+  conventions_table: "ReferenceTable"
+  anti_patterns: "WarningCallout"
+  exceptions: "ExceptionNoteBox"
+  "# Good": "GoodExampleBlock"
+  "# Bad": "BadExampleBlock"
+
+validation:
+  require_frontmatter: true
+  min_sections: 2
+  allow_extra_sections: true
+  required_sections:
+    - overview

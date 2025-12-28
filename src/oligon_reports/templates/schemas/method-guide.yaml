@@ -1,0 +1,210 @@
+# Method Guide Schema
+# Tool-specific documentation with usage, examples, and caveats
+# Used for comprehensive tool and method documentation
+
+schema_version: "1.0"
+document_type: "method-guide"
+category: "reference"
+description: |
+  Tool-specific documentation with installation, usage examples,
+  comparisons with alternatives, and troubleshooting guidance.
+  Typical length: 200-600 lines.
+
+frontmatter:
+  required:
+    - name: type
+      expected: "method-guide"
+      description: "Document type identifier"
+    - name: title
+      type: string
+      description: "Tool or method name"
+  optional:
+    - name: category
+      type: string
+      description: "Tool category (e.g., bioinformatics, visualization)"
+    - name: version
+      type: string
+      description: "Tool version being documented"
+    - name: last_updated
+      type: string
+      format: "YYYY-MM-DD"
+      description: "Last update date"
+    - name: tags
+      type: array
+      description: "Searchable tags"
+    - name: author
+      type: string
+      description: "Guide author"
+    - name: platform
+      type: array
+      description: "Supported platforms (macOS, Linux, Windows)"
+
+sections:
+  - id: title
+    heading: "[Tool/Method Name]"
+    level: 1
+    required: true
+    description: "Tool name as heading"
+
+  - id: quick_summary
+    heading: "Quick Summary"
+    level: 2
+    required: true
+    description: "TL;DR of what this tool does and when to use it"
+    expected_content:
+      type: "paragraph"
+      description: "2-3 sentence summary"
+
+  - id: installation
+    heading: "Installation"
+    level: 2
+    required: true
+    description: "Setup instructions"
+    subsections:
+      - id: requirements
+        heading: "Requirements"
+        level: 3
+        required: false
+        expected_content:
+          type: "bullet_list"
+          description: "Prerequisites and dependencies"
+      - id: setup
+        heading: "Setup"
+        level: 3
+        required: true
+        expected_content:
+          type: "code_block"
+          description: "Installation commands"
+      - id: verification
+        heading: "Verification"
+        level: 3
+        required: false
+        expected_content:
+          type: "code_block"
+          description: "Commands to verify installation"
+
+  - id: basic_usage
+    heading: "Basic Usage"
+    level: 2
+    required: true
+    description: "Common use cases with examples"
+    allows_dynamic_subsections: true
+    subsection_template:
+      pattern: "[Use Case Name]"
+      expected_elements:
+        - id: purpose
+          pattern: "**Purpose:**"
+          required: true
+        - id: command
+          pattern: "**Command:**"
+          required: true
+          expected_content:
+            type: "code_block"
+        - id: parameters
+          pattern: "**Parameters:**"
+          required: false
+          expected_content:
+            type: "table"
+            columns: ["Parameter", "Type", "Description"]
+        - id: example
+          pattern: "**Example:**"
+          required: false
+          expected_content:
+            type: "code_block"
+
+  - id: advanced_usage
+    heading: "Advanced Usage"
+    level: 2
+    required: false
+    description: "Advanced features and techniques"
+    allows_dynamic_subsections: true
+
+  - id: comparison
+    heading: "Comparison with Alternatives"
+    level: 2
+    required: false
+    description: "Feature comparison with similar tools"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Feature", "[This Tool]", "[Alt 1]", "[Alt 2]"]
+
+  - id: caveats
+    heading: "Caveats & Limitations"
+    level: 2
+    required: false
+    description: "Important limitations and known issues"
+    subsections:
+      - id: warning
+        heading: null
+        level: 3
+        required: false
+        expected_content:
+          type: "callout"
+          description: "Warning blockquote with critical limitations"
+      - id: known_issues
+        heading: "Known Issues"
+        level: 3
+        required: false
+        expected_content:
+          type: "table"
+          columns: ["Issue", "Workaround"]
+      - id: edge_cases
+        heading: "Edge Cases"
+        level: 3
+        required: false
+        expected_content:
+          type: "bullet_list"
+          description: "Edge cases and how to handle them"
+
+  - id: troubleshooting
+    heading: "Troubleshooting"
+    level: 2
+    required: false
+    description: "Common problems and solutions"
+    allows_dynamic_subsections: true
+    subsection_template:
+      pattern: "[Problem Name]"
+      expected_elements:
+        - id: symptom
+          pattern: "**Symptom:**"
+          required: true
+        - id: cause
+          pattern: "**Cause:**"
+          required: true
+        - id: solution
+          pattern: "**Solution:**"
+          required: true
+          expected_content:
+            type: "code_block"
+
+  - id: references
+    heading: "References"
+    level: 2
+    required: false
+    description: "Official docs, papers, and related resources"
+    expected_content:
+      type: "numbered_list"
+      description: "Numbered list of references with links"
+
+component_mappings:
+  frontmatter: "CoverPage"
+  "## N. Title": "SectionDivider"
+  quick_summary: "HighlightBox"
+  installation_code: "CodeBlock"
+  parameters_table: "ParameterTable"
+  comparison_table: "FeatureMatrix"
+  warning_callout: "WarningCallout"
+  known_issues: "IssueWorkaroundTable"
+  troubleshooting: "ProblemSolutionCard"
+  references: "ReferenceList"
+
+validation:
+  require_frontmatter: true
+  min_sections: 3
+  allow_extra_sections: true
+  required_sections:
+    - quick_summary
+    - installation
+    - basic_usage

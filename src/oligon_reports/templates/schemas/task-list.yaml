@@ -1,0 +1,152 @@
+# Task List Schema
+# Checkbox-based task tracking with phases, dependencies, and acceptance criteria
+# Used for managing multi-phase implementation work
+
+schema_version: "1.0"
+document_type: "task-list"
+category: "development"
+description: |
+  Checkbox-based task tracking documents with phases, dependencies, and acceptance criteria.
+  Used for managing multi-step implementation work with clear progress indicators.
+  Typical length: 150-920 lines.
+
+frontmatter:
+  required:
+    - name: type
+      expected: "task-list"
+      description: "Document type identifier"
+    - name: title
+      type: string
+      description: "Task list title"
+    - name: date
+      type: string
+      format: "YYYY-MM-DD"
+      description: "Creation or update date"
+  optional:
+    - name: spec
+      type: string
+      description: "Related specification document"
+    - name: status
+      type: enum
+      values: ["Not Started", "In Progress", "Complete"]
+      default: "Not Started"
+      description: "Overall task list status"
+    - name: author
+      type: string
+      description: "Task list author"
+    - name: priority
+      type: enum
+      values: ["Low", "Medium", "High", "Critical"]
+      default: "Medium"
+      description: "Overall priority level"
+
+sections:
+  - id: overview
+    heading: "Overview"
+    level: 2
+    required: true
+    description: "Summary of total tasks, phases, and performance targets"
+    expected_elements:
+      - tables
+    subsections:
+      - id: summary_table
+        heading: null
+        level: 3
+        required: false
+        expected_content:
+          type: "table"
+          columns: ["Phase", "Task Groups", "Description", "Status"]
+      - id: performance_targets
+        heading: "Performance Targets"
+        level: 3
+        required: false
+        expected_content:
+          type: "bullet_list"
+          description: "Target metrics with status indicators"
+
+  - id: execution_sequence
+    heading: "Execution Sequence"
+    level: 2
+    required: false
+    description: "Progress overview showing completed, current, and remaining work"
+    subsections:
+      - id: completed
+        heading: "Completed"
+        level: 3
+        required: false
+        expected_content:
+          type: "bullet_list"
+          description: "Summary of completed task groups"
+      - id: current
+        heading: "Current Task"
+        level: 3
+        required: false
+        expected_content:
+          type: "bullet_list"
+          description: "Currently active task group"
+      - id: remaining
+        heading: "Remaining"
+        level: 3
+        required: false
+        expected_content:
+          type: "code_block"
+          description: "Tree diagram of remaining tasks"
+
+  - id: task_list
+    heading: "Task List"
+    level: 2
+    required: true
+    description: "Detailed task breakdown by phase"
+    allows_dynamic_subsections: true
+    notes: "Contains Phase sections with Task Group subsections"
+    subsection_template:
+      pattern: "Phase [N]: [Name]"
+      expected_elements:
+        - id: task_group
+          pattern: "Task Group [X]: [Name]"
+          required: true
+          child_elements:
+            - id: dependencies
+              pattern: "**Dependencies:**"
+              required: false
+            - id: goal
+              pattern: "**Goal:**"
+              required: false
+            - id: checklist
+              type: "checklist"
+              required: true
+              description: "Checkbox items with subtasks"
+            - id: acceptance_criteria
+              pattern: "**Acceptance Criteria:**"
+              required: false
+
+  - id: completion_summary
+    heading: "Completion Summary"
+    level: 2
+    required: false
+    description: "Status table summarizing all task groups"
+    expected_elements:
+      - tables
+    expected_content:
+      type: "table"
+      columns: ["Task Group", "Status", "Notes"]
+
+component_mappings:
+  frontmatter: "CoverPage"
+  "## N. Title": "SectionDivider"
+  overview_table: "SummaryMetricsBox"
+  performance_targets: "TargetMetricsList"
+  execution_tree: "ProgressTreeDiagram"
+  dependencies: "DependencyBadge"
+  acceptance_criteria: "CriteriaChecklist"
+  "- [x]": "CompletedChecklistItem"
+  "- [ ]": "PendingChecklistItem"
+  completion_table: "StatusSummaryTable"
+
+validation:
+  require_frontmatter: true
+  min_sections: 2
+  allow_extra_sections: true
+  required_sections:
+    - overview
+    - task_list

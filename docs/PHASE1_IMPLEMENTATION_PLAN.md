@@ -145,11 +145,11 @@ class TemplateParser:
 - [ ] Create full-example templates for all 12 types
 - [ ] Based on DOCUMENT_TEMPLATING_SYSTEM.md Section 4
 
-### Step 7: Complete Parser
-- [ ] Implement `_parse_sections()` with heading regex
-- [ ] Implement `_detect_elements()` for tables, callouts, code blocks
-- [ ] Implement `validate()` against schema rules
-- [ ] Implement `list_templates()` and `get_template()`
+### Step 7: Complete Parser ✅
+- [x] Implement `_parse_sections()` with heading regex and hierarchy nesting
+- [x] Implement `_detect_elements()` for tables, callouts, code blocks, lists, checklists, finding cards
+- [x] Implement `validate()` against schema rules (frontmatter + sections)
+- [x] Implement `list_templates()` and `get_template()`
 
 ### Step 8: Integration
 - [ ] Update `src/oligon_reports/__init__.py` with exports

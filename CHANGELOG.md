@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Phase 1 Template Infrastructure - Steps 1-2 (In Progress)**: Foundation for markdown-to-PDF conversion
+  - **Step 1 Setup**: Added `python-frontmatter>=1.1.0` dependency, created `src/oligon_reports/templates/` directory structure
+  - **Step 2 Parser Foundation**: Created TemplateParser class (~300 lines) in `src/oligon_reports/templates/parser.py`
+    - Dataclass definitions: `FrontmatterData`, `Element`, `Section`, `DocumentTree`, `ValidationError`
+    - `_parse_frontmatter()` using python-frontmatter library
+    - `detect_type()` for document type identification from frontmatter
+    - `_load_schema()` using Path-based schema loading
+    - `parse()` with section parsing and element detection (tables, code blocks, callouts)
+    - `validate()` skeleton for schema validation
+    - Static methods: `list_templates()`, `get_template()`
+  - Updated `src/oligon_reports/__init__.py` to export template classes
+  - Next: Step 3 (Schemas Batch 1: analysis-report, meeting-notes, readme, data-report)
+
 - **Phase 2 Component Extension (Complete)**: Added 5 new PDF components to `src/oligon_reports/components.py`
   - **FindingCard**: Numbered finding box with badge, title, and description for `#### Finding N:` patterns
   - **StatusTable**: Table with automatic pass/fail color coding (detects ✓/✗/✅/❌/PASS/FAIL symbols)

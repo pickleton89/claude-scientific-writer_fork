@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Phase 5 Validation (Complete)**: Created test scenarios for skill determinism validation
+  - Created `SKILL_TESTS.md` with 42 test scenarios (2 per skill × 21 skills)
+  - **Scenario 1: Basic Usage** — Typical use case with expected deterministic behavior
+  - **Scenario 2: Edge Case** — Boundary condition testing skill routing and error handling
+  - Each scenario includes: Input prompt, Expected Behavior (numbered steps), Success Criteria (checkboxes)
+  - Test coverage includes:
+    - Decision matrix validation (correct test/method selection)
+    - Skill routing verification (redirect to correct skill when out of scope)
+    - Anti-pattern detection (text-heavy posters, unpinned dependencies, etc.)
+    - Threshold enforcement (sample sizes, word counts, quality scores)
+  - Skills covered: statistical-analysis, scientific-writing, generate-image, literature-review, citation-management, code-documentation, hypothesis-generation, latex-posters, markitdown, paper-2-web, peer-review, plotting-libraries, pptx-posters, reproducible-research, research-lookup, scholar-evaluation, scientific-critical-thinking, scientific-schematics, scientific-slides, venue-templates, visual-design
+
 - **Phase 4 Skill Orchestration (Complete)**: Created skill routing system for deterministic multi-skill scenarios
   - **Phase 4.1**: Created `skills/SKILL_ROUTER.md` with 6 decision trees covering all 21 skills:
     - Figure & Visual Creation (plotting-libraries, scientific-schematics, generate-image, visual-design)

@@ -49,7 +49,27 @@
       "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork commit -m \"$\\(cat <<''EOF''\nfeat\\(statistical-analysis\\): add multiple testing correction reference\n\nAdd comprehensive guide for controlling false discoveries in high-dimensional\ndata analysis:\n- FWER vs FDR definitions with use-case guidance\n- Bonferroni, Benjamini-Hochberg, q-value, and permutation methods\n- Python \\(statsmodels\\) and R code patterns for all methods\n- Decision framework diagram and manuscript reporting templates\n- DESeq2, edgeR, limma tool defaults reference\n\nPhase 1.3 of bioinformatics skills implementation plan.\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork commit:*)",
       "Bash(wc:*)",
-      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork log --oneline -20)"
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork log --oneline -20)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork show --stat HEAD)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork diff HEAD~1 HEAD -- SKILLS_DETERMINISM_AUDIT.md)",
+      "Bash(for skill in statistical-analysis literature-review scientific-writing generate-image)",
+      "Bash(do echo \"=== $skill ===\" grep -A 20 \"<cross_references>\" /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork/skills/$skill/SKILL.md)",
+      "Bash(for skill in /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork/skills/*/SKILL.md)",
+      "Bash(do if grep -q \"SKILL_ROUTER\" \"$skill\")",
+      "Bash(grep:*)",
+      "Bash(CHANGELOG.md )",
+      "Bash(SKILLS_ANALYSIS.md )",
+      "Bash(skills/SKILL_ROUTER.md )",
+      "Bash(skills/SKILL_TESTS.md )",
+      "Bash(skills/peer-review/SKILL.md )",
+      "Bash(skills/peer-review/references/ )",
+      "Bash(skills/scholar-evaluation/SKILL.md )",
+      "Bash(skills/statistical-analysis/SKILL.md )",
+      "Bash(skills/document-skills/SKILL.md )",
+      "Bash(skills/scientific-critical-thinking/)",
+      "Skill(fresh-eyes)",
+      "Bash(PYTHONPATH=src uv run python:*)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork diff --cached --stat)"
     ]
   },
   "outputStyle": "default"

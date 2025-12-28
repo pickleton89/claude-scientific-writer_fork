@@ -68,7 +68,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **GradedTable**: Table with tier-based row coloring (gold/silver/bronze for Tier 1/2/3)
   - **MethodBlock**: What/Why/How structured block with colored sections for method documentation
   - **MetadataHeader**: Document header with type badge and key-value metadata grid for YAML frontmatter
-  - Updated module docstring to document all 11 components
+  - Updated `src/oligon_reports/__init__.py` to export all 11 components (was only 4)
+  - Added `examples/component_demo.py` - visual showcase generating demo PDF with all components
   - Part of INTEGRATION_ANALYSIS.md Phase 2 Component Extension work
 
 - **Phase 1 Implementation Plan**: Created `docs/PHASE1_IMPLEMENTATION_PLAN.md` for template infrastructure

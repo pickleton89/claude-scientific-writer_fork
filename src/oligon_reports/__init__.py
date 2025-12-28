@@ -1,7 +1,19 @@
 """Oligon Reports - Professional PDF report generation with Oligon brand standards."""
 
 from .brand_colors import BRAND_COLORS, ColorCycles
-from .components import CalloutBox, MetricCard, SectionDivider, Timeline
+from .components import (
+    CalloutBox,
+    FindingCard,
+    FigurePlaceholder,
+    GradedTable,
+    MetadataHeader,
+    MethodBlock,
+    MetricCard,
+    MetricCardRow,
+    SectionDivider,
+    StatusTable,
+    Timeline,
+)
 from .report_generator import ReportGenerator
 from .templates import (
     DocumentTree,
@@ -17,12 +29,20 @@ __all__ = [
     # Brand
     "BRAND_COLORS",
     "ColorCycles",
-    # Components
+    # Components - Core
     "ReportGenerator",
     "MetricCard",
+    "MetricCardRow",
     "CalloutBox",
     "Timeline",
     "SectionDivider",
+    "FigurePlaceholder",
+    # Components - Phase 2 (Template Integration)
+    "FindingCard",
+    "StatusTable",
+    "GradedTable",
+    "MethodBlock",
+    "MetadataHeader",
     # Templates
     "TemplateParser",
     "DocumentTree",

@@ -23,6 +23,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Phase 1.3 Skills Determinism Implementation (Partial)**: Refactored Tier 3 skills to use standard template
+  - `skills/scientific-slides/SKILL.md` (6.0 → ~8.5): Reduced from 1150 to ~575 lines with proper structure
+    - Added talk type selection decision tree (conference/seminar/defense/grant/journal club)
+    - Added implementation method decision tree (Nano Banana Pro PDF vs PowerPoint vs LaTeX Beamer)
+    - Added time allocation matrix by talk duration
+    - 5-stage numbered workflow with exit criteria (Research & Planning → Method Selection → Generation → Visual Validation → Practice & Refinement)
+    - Quantitative success criteria table (slides/min, font sizes, visual content %, practice runs, citations)
+    - 5 anti-patterns with solutions (text-heavy, missing research context, inconsistent formatting, skipping validation, insufficient practice)
+    - Slide plan and timing checkpoint templates
+  - `skills/latex-posters/SKILL.md` (6.0 → ~8.5): Reduced from 958 to ~575 lines with proper structure
+    - Added LaTeX vs PowerPoint decision tree
+    - Added LaTeX package selection matrix (beamerposter vs tikzposter vs baposter)
+    - Added poster size selection table with dimensions
+    - 5-stage numbered workflow with exit criteria
+    - Content density guidelines table (word counts and bullets per section)
+    - Visual inspection checklist (layout, typography, visual elements, content, accessibility)
+    - 5 anti-patterns with solutions (text-heavy, wrong page size, low-resolution images, poor contrast, skipping print test)
+    - Package configuration templates for all three LaTeX packages
+
 - **Phase 1.2 Skills Determinism Implementation**: Refactored all Tier 4 skills (lowest scoring) to use standard template
   - `skills/scholar-evaluation/SKILL.md` (5.0 → ~8.5): Added 8-dimension evaluation framework with weighted scoring, 5-point rubric with quality tiers (A-F), recommendation priority matrix, 5 anti-patterns, executive summary and detailed report templates
   - `skills/markitdown/SKILL.md` (5.0 → ~8.5): Added conversion path decision tree, method selection matrix by input type, 5-stage workflow with validation checks, 5 anti-patterns with code examples, batch conversion report template

@@ -51,7 +51,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `_validate_frontmatter()` updated for new schema format (`name`-based field specs)
     - Helper methods: `_flatten_sections()`, `_find_section()`, `_validate_section_elements()`, `_is_directory_tree()`
     - Improved `_is_directory_tree()` to avoid false positives from URLs, imports, or code with slashes
-  - Next: Step 8 (Integration - verify exports and imports)
+  - **Step 8 Integration (Phase 1 Complete)**: Package exports and verification
+    - Added `src/oligon_reports` to pyproject.toml wheel packages
+    - Verified `from oligon_reports import TemplateParser` works correctly
+    - All 6 success criteria pass:
+      1. ✅ All 12 schemas loadable via `TemplateParser("type-name")`
+      2. ✅ All 12 templates retrievable via `TemplateParser.get_template("type-name")`
+      3. ✅ `detect_type()` correctly identifies type from any template
+      4. ✅ `parse()` returns valid DocumentTree for sample documents
+      5. ✅ `validate()` catches missing required sections/frontmatter
+      6. ✅ Clean import: `from oligon_reports import TemplateParser`
 
 - **Phase 2 Component Extension (Complete)**: Added 5 new PDF components to `src/oligon_reports/components.py`
   - **FindingCard**: Numbered finding box with badge, title, and description for `#### Finding N:` patterns

@@ -151,9 +151,11 @@ class TemplateParser:
 - [x] Implement `validate()` against schema rules (frontmatter + sections)
 - [x] Implement `list_templates()` and `get_template()`
 
-### Step 8: Integration
-- [ ] Update `src/oligon_reports/__init__.py` with exports
-- [ ] Verify `uv run python -c "from oligon_reports import TemplateParser"`
+### Step 8: Integration ✅
+- [x] Update `src/oligon_reports/__init__.py` with exports
+- [x] Add `oligon_reports` to pyproject.toml wheel packages
+- [x] Verify `uv run python -c "from oligon_reports import TemplateParser"`
+- [x] Verify all 6 success criteria pass
 
 ---
 

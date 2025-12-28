@@ -20,9 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Explains 4 sub-skills: docx, pdf, pptx, xlsx
     - Decision tree for format selection
     - Cross-references to related skills
-  - **Updated `SKILLS_ANALYSIS.md`**: Documented all changes and updated skill inventory
+  - **Archived `SKILLS_ANALYSIS.md`**: Moved to `docs/archived/` after applying recommendations
     - Skill count: 21 top-level + 4 document sub-skills (22 before merge)
-    - Marked consolidation recommendations as complete
+    - Consolidation recommendations complete; file preserved for historical reference
 
 ### Added
 

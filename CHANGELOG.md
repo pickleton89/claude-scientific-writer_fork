@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Phase 2 Component Extension (Complete)**: Added 5 new PDF components to `src/oligon_reports/components.py`
+  - **FindingCard**: Numbered finding box with badge, title, and description for `#### Finding N:` patterns
+  - **StatusTable**: Table with automatic pass/fail color coding (detects ✓/✗/✅/❌/PASS/FAIL symbols)
+  - **GradedTable**: Table with tier-based row coloring (gold/silver/bronze for Tier 1/2/3)
+  - **MethodBlock**: What/Why/How structured block with colored sections for method documentation
+  - **MetadataHeader**: Document header with type badge and key-value metadata grid for YAML frontmatter
+  - Updated module docstring to document all 11 components
+  - Part of INTEGRATION_ANALYSIS.md Phase 2 Component Extension work
+
 - **Phase 1 Implementation Plan**: Created `docs/PHASE1_IMPLEMENTATION_PLAN.md` for template infrastructure
   - 12 YAML schemas for document type validation
   - 12 markdown templates with full examples

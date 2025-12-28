@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **Skills Determinism Audit Update (Complete)**: Updated audit document to reflect current skill scores
-  - Overall library score: 7.5/10 → **8.7/10** (target of 8.5 achieved)
+  - Overall library score: 7.5/10 → **8.5/10** (target achieved)
+  - Corrected skill count: 21 evaluated skills (document-skills sub-skills excluded)
   - Marked Phase 1 (Structure Standardization) as complete
   - Updated Tier 4 skills section: all 4 skills now 8.5-9.0/10 (was 5.0-5.5)
     - `scholar-evaluation`: 5.0 → 8.5

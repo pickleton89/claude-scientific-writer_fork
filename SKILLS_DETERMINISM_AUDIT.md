@@ -2,13 +2,15 @@
 
 > Comprehensive evaluation of deterministic patterns across the scientific writing skills library
 > Generated: 2025-12-27 | **Updated: 2025-12-28**
-> Overall Score: **8.7/10** ✅ (target of 8.5/10 achieved)
+> Overall Score: **8.5/10** ✅ (target achieved)
 
 ---
 
 ## Executive Summary
 
-This audit evaluates all 22 skills in the library across 8 determinism dimensions. The library shows **strong foundations** with several exemplary skills that demonstrate best practices. Newer bioinformatics-focused skills (Phase 1-4 implementations) show more deterministic patterns than inherited upstream skills.
+This audit evaluates 21 top-level skills in the library across 8 determinism dimensions. The library shows **strong foundations** with several exemplary skills that demonstrate best practices. Newer bioinformatics-focused skills (Phase 1-4 implementations) show more deterministic patterns than inherited upstream skills.
+
+> **Note:** The `document-skills/` folder contains 4 sub-skills (docx, pdf, pptx, xlsx) that are not evaluated in this audit as they follow the upstream plugin format.
 
 ### Scoring Rubric
 
@@ -22,7 +24,7 @@ This audit evaluates all 22 skills in the library across 8 determinism dimension
 ### Key Findings (Updated 2025-12-28)
 
 **Achievements:**
-- ✅ All 22 skills now at Tier 1/2 level (8.5+ scores)
+- ✅ All 21 evaluated skills now at Tier 1/2 level (7.5+ scores, most at 8.5+)
 - ✅ Six skills at 9.0+ (statistical-analysis, literature-review, scientific-schematics, visual-design, reproducible-research, generate-image)
 - ✅ Consistent XML semantic tags across all skills
 - ✅ Shared quantification thresholds document (QUANTIFICATION_THRESHOLDS.md)
@@ -100,34 +102,38 @@ This audit evaluates all 22 skills in the library across 8 determinism dimension
 
 ## Tier 2: Strong Determinism (7.0-8.4)
 
-### scientific-writing (8.0/10)
+> **Note:** Several Tier 2 skills were upgraded in Phase 2 (Quantification). Updated scores shown where applicable.
 
-**Strengths:**
+### scientific-writing (8.0 → 8.5/10) ✅ Phase 2 Upgrade
+
+**Original Strengths:**
 - Two-stage writing process (outline → prose) explicitly defined
 - IMRAD section guidance with specific sentence counts
 - Figure requirements table by document type
 - Pre-submission diagnostic tests (3 specific checks)
 - Cross-references to related skills
 
-**Improvements Needed:**
-- Add decision tree for section order based on paper type
-- Quantify "comprehensive" literature review (target citation count)
-- Include word count targets per section
+**Phase 2 Improvements Added:**
+- ✅ Section word count targets table (short/standard/long papers)
+- ✅ Citation targets by section table
+- ✅ Writing quality thresholds (sentence length, passive voice, etc.)
+- ✅ Readability thresholds (Flesch-Kincaid Grade 8-16)
 
 ---
 
-### peer-review (7.5/10)
+### peer-review (7.5 → 8.0/10) ✅ Phase 2 Upgrade
 
-**Strengths:**
+**Original Strengths:**
 - 7-stage systematic workflow
 - Presentation review protocol (separate from manuscript)
 - Reviewer checklist with 12 specific items
 - Response template with required sections
 
-**Improvements Needed:**
-- Add severity scoring rubric for issues (critical/major/minor)
-- Decision tree for when to recommend accept/revise/reject
-- Time allocation per review stage
+**Phase 2 Improvements Added:**
+- ✅ Issue severity classification table (Critical/Major/Minor/Optional)
+- ✅ Replication thresholds by experiment type
+- ✅ Sample size red flags table with actions
+- ✅ Figure quality thresholds (resolution, font, contrast)
 
 ---
 
@@ -161,34 +167,35 @@ This audit evaluates all 22 skills in the library across 8 determinism dimension
 
 ---
 
-### hypothesis-generation (7.0/10)
+### hypothesis-generation (7.0 → 8.5/10) ✅ Phase 2 Upgrade
 
-**Strengths:**
+**Original Strengths:**
 - 8-step workflow with numbered stages
 - LaTeX template with overflow prevention rules
 - Box type specifications (hypothesisbox1-5, predictionbox, etc.)
 - Page break strategy documented
 - Citation targets (10-15 main text, 50+ total)
 
-**Improvements Needed:**
-- Add decision tree for hypothesis type selection
-- Quantify "viable" hypothesis criteria
-- Include workflow transition checklists
+**Phase 2 Improvements Added:**
+- ✅ Quantified search requirements (3-5 databases, 40-70+ papers)
+- ✅ Hypothesis quality rubric (10-point scale)
+- ✅ Minimum experimental design requirements table
+- ✅ Report completeness checklist
 
 ---
 
-### venue-templates (7.0/10)
+### venue-templates (7.5/10)
 
 **Strengths:**
 - Journal-specific formatting guides
 - Style comparison tables
 - Reviewer expectation documentation
 - Word limit specifications
+- Bioinformatics journals reference added
 
 **Improvements Needed:**
 - Add decision tree for journal selection based on paper characteristics
 - Consolidate scattered venue guides into unified decision matrix
-- Include rejection rate and review timeline data
 
 ---
 
@@ -788,14 +795,17 @@ Schedule quarterly reviews:
 ## Summary
 
 ### Current State (Updated 2025-12-28)
-- **Overall Score:** 8.7/10 (↑ from 7.5 at audit creation)
+- **Overall Score:** 8.5/10 (↑ from 7.5 at audit creation)
 - **All Skills Now Tier 1/2:** No skills remain in Tier 3 or Tier 4
-- **Top Performers:** statistical-analysis (9.5), literature-review (9.0), scientific-schematics (9.0), visual-design (9.0), reproducible-research (9.0), generate-image (9.0)
-- **Standard Performers (8.5):** code-documentation, plotting-libraries, scientific-writing, peer-review, research-lookup, scientific-critical-thinking, hypothesis-generation, venue-templates, scholar-evaluation, markitdown, paper-2-web, citation-management, scientific-slides, latex-posters, pptx-posters
+- **Top Performers (9.0+):** statistical-analysis (9.5), literature-review (9.0), scientific-schematics (9.0), visual-design (9.0), reproducible-research (9.0), generate-image (9.0)
+- **Strong Performers (8.5):** code-documentation, plotting-libraries, scientific-writing, hypothesis-generation, scholar-evaluation, markitdown, paper-2-web, citation-management, scientific-slides, latex-posters, pptx-posters
+- **Solid Performers (7.5-8.0):** peer-review (8.0), research-lookup (7.5), scientific-critical-thinking (7.5), venue-templates (7.5)
+
+> **Note:** 21 skills evaluated. The `document-skills/` sub-skills (docx, pdf, pptx, xlsx) were not included in this audit.
 
 ### Target State
 - **Target Score:** 8.5/10 ✅ ACHIEVED
-- **Current Score:** 8.7/10 (exceeds target)
+- **Current Score:** 8.5/10 (target met exactly)
 - **Remaining Work:** Phase 3-5 (optional improvements)
 
 ### Completed Actions

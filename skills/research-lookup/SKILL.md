@@ -523,6 +523,8 @@ For bioinformatics-specific data retrieval, see `references/bioinformatics_datab
 
 ## Cross-References
 
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
 **Related skills:**
 - **scientific-writing**: Using research findings in manuscripts
 - **statistical-analysis**: Finding appropriate statistical methods and benchmarks

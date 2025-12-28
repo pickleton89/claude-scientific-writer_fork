@@ -446,6 +446,8 @@ Ensure all generated hypotheses meet these quantified standards:
 
 ### Related Skills
 
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
 When preparing hypothesis-driven research for publication, consult these related skills:
 
 **venue-templates**: Writing style guidance

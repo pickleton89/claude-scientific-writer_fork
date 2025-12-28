@@ -567,6 +567,8 @@ This skill includes comprehensive reference materials that provide detailed fram
 
 ## Cross-References
 
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
 **Related skills for critical evaluation:**
 
 - **statistical-analysis**: Quantitative evaluation of statistical methods, test selection appropriateness, multiple testing corrections, effect size interpretation

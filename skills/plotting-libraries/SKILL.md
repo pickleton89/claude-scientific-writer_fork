@@ -218,6 +218,10 @@ scale_fill_manual(values = c("Control" = "#377EB8", "Treatment" = "#E41A1C"))
 </reference_guides>
 
 <cross_references>
+## Related Skills
+
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
 - **[visual-design](../visual-design/SKILL.md)**: Design principles and publication specifications
 - **[statistical-analysis](../statistical-analysis/SKILL.md)**: Statistics underlying visualizations
 - **[scientific-writing](../scientific-writing/SKILL.md)**: Figure legends and methods descriptions

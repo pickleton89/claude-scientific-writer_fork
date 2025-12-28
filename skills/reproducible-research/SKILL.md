@@ -268,6 +268,10 @@ https://github.com/username/project.
 </data_availability_templates>
 
 <cross_references>
+## Related Skills
+
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
 - **scientific-writing**: Data Availability statement text, Methods section writing
 - **code-documentation**: README templates, docstring standards
 - **venue-templates**: Journal-specific deposition requirements

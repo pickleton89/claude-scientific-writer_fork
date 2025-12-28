@@ -318,6 +318,8 @@ Review checklist:
 
 ## Integration with Other Skills
 
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
 This skill works seamlessly with other scientific skills:
 
 ### Scientific Writing

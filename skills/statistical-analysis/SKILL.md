@@ -257,6 +257,8 @@ Detailed guidance available in `references/` subdirectory:
 <cross_references>
 ## Related Skills
 
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
 - **scientific-critical-thinking**: Conceptual framework for evidence evaluation
 - **plotting-libraries**: Visualizing statistical results (volcano plots, heatmaps)
 - **scientific-writing**: Reporting statistical methods and results in manuscripts

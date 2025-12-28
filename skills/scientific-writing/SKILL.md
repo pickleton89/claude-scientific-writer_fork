@@ -278,6 +278,8 @@ Run three tests before submission:
 
 ## Integration with Other Skills
 
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
 **Related skills:**
 - **research-lookup**: Literature search and citation finding
 - **scientific-schematics/generate-image**: Figure creation and visual elements

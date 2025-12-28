@@ -165,6 +165,10 @@ Good documentation:
 </common_pitfalls>
 
 <cross_references>
+## Related Skills
+
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
 - **reproducible-research**: Project structure and environment documentation
 - **scientific-writing**: Methods section describing analysis
 - **statistical-analysis**: Documenting statistical choices and parameters

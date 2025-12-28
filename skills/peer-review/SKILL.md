@@ -704,6 +704,8 @@ Catalog of frequent methodological and statistical issues encountered in peer re
 
 ## Cross-References
 
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
 **Related skills for comprehensive peer review:**
 
 - **statistical-analysis**: Evaluate statistical methods, test selection, multiple testing corrections, effect sizes, and power analysis in manuscripts

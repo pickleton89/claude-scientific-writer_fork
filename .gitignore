@@ -45,6 +45,7 @@ uv.lock
 paper_outputs/
 writing_outputs/
 data/
+output/
 
 # LaTeX auxiliary files
 *.aux

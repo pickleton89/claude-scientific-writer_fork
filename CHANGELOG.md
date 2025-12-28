@@ -72,6 +72,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added `examples/component_demo.py` - visual showcase generating demo PDF with all components
   - Part of INTEGRATION_ANALYSIS.md Phase 2 Component Extension work
 
+- **Phase 3 Skill Creation (Complete)**: Created `markdown-to-pdf` skill bridging templates and PDF components
+  - **SKILL.md**: Full skill definition with decision tree and 3 inline commands
+    - `/list-templates`: Display 12 document types with categories and descriptions
+    - `/new-doc <type>`: Create new markdown file from template with date suffix
+    - `/doc-to-pdf <file>`: Convert markdown to branded PDF with ASCII structure confirmation
+  - **references/component_map.md**: Element-to-component mapping reference
+    - Detection patterns for StatusTable, GradedTable, FindingCard, MethodBlock, CalloutBox
+    - Implementation pseudocode for element mapping via ReportGenerator
+    - Brand color reference for each component type
+    - Accurate import reference matching actual `oligon_reports` exports
+  - Updated `.gitignore` with `output/` directory for PDF outputs
+  - Part of INTEGRATION_ANALYSIS.md Phase 3 Skill Creation work
+
 - **Phase 3 Implementation Plan**: Created `docs/PHASE3_IMPLEMENTATION_PLAN.md` for skill creation
   - Defines `markdown-to-pdf` skill architecture with three commands
   - `/list-templates`: Display available document templates in table format

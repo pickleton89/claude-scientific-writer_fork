@@ -1,958 +1,589 @@
 ---
-name: latex-posters
-description: "Create professional research posters in LaTeX using beamerposter, tikzposter, or baposter. Support for conference presentations, academic posters, and scientific communication. Includes layout design, color schemes, multi-column formats, figure integration, and poster-specific best practices for visual communication."
-allowed-tools: [Read, Write, Edit, Bash]
+name: pptx-posters
+version: 2.0.0
+description: "Create professional research posters in PowerPoint/PPTX format with structured layouts, brand-compliant styling, and print-ready export. Optimized for quick turnaround and collaborative editing."
+allowed-tools: [Read, Write, Edit, Bash, Glob]
 ---
 
-# LaTeX Research Posters
+# PowerPoint Research Posters
 
-## Overview
+<overview>
+Create publication-quality research posters using Microsoft PowerPoint or compatible applications. This skill provides structured workflows for poster design, layout optimization, and print-ready export. Optimized for rapid iteration, collaborative editing, and scenarios where LaTeX is impractical.
+</overview>
 
-Research posters are a critical medium for scientific communication at conferences, symposia, and academic events. This skill provides comprehensive guidance for creating professional, visually appealing research posters using LaTeX packages. Generate publication-quality posters with proper layout, typography, color schemes, and visual hierarchy.
+<when_to_use>
+## Trigger Conditions
 
-## When to Use This Skill
+Use this skill when:
+- Creating posters for conferences with tight deadlines (<48 hours)
+- Collaborators require editable PowerPoint format
+- Design requires extensive image manipulation or custom graphics
+- User explicitly requests PPTX format
+- Institution provides PowerPoint templates as standard
 
-This skill should be used when:
-- Creating research posters for conferences, symposia, or poster sessions
-- Designing academic posters for university events or thesis defenses
-- Preparing visual summaries of research for public engagement
-- Converting scientific papers into poster format
-- Creating template posters for research groups or departments
-- Designing posters that comply with specific conference size requirements (A0, A1, 36×48", etc.)
-- Building posters with complex multi-column layouts
-- Integrating figures, tables, equations, and citations in poster format
+Do NOT use this skill when:
+- Poster contains complex mathematical equations → use `latex-posters`
+- Reproducibility/version control is critical → use `latex-posters`
+- Poster requires programmatic generation → use `latex-posters`
+- User explicitly requests LaTeX format
+</when_to_use>
 
-## Visual Enhancement with Scientific Schematics
+<decision_framework>
+## Format Selection Matrix
 
-**⚠️ MANDATORY: Every research poster MUST include at least 2-3 AI-generated figures using the scientific-schematics skill.**
-
-This is not optional. Posters are primarily visual media - text-heavy posters fail to communicate effectively. Before finalizing any poster:
-1. Generate at minimum TWO schematics or diagrams
-2. Target 3-4 figures for comprehensive posters (methodology flowchart, key results visualization, conceptual framework)
-3. Figures should occupy 40-50% of poster area
-
-**How to generate figures:**
-- Use the **scientific-schematics** skill to generate AI-powered publication-quality diagrams
-- Simply describe your desired diagram in natural language
-- Nano Banana Pro will automatically generate, review, and refine the schematic
-
-**How to generate schematics:**
-```bash
-python scripts/generate_schematic.py "your diagram description" -o figures/output.png
+```
+Need research poster?
+│
+├─ Complex equations (>5)?
+│  │
+│  ├─ Yes → latex-posters
+│  │
+│  └─ No → Continue below
+│
+├─ Timeline?
+│  │
+│  ├─ <48 hours → pptx-posters (faster iteration)
+│  │
+│  └─ >48 hours → Either format works
+│
+├─ Collaboration requirement?
+│  │
+│  ├─ Co-authors need to edit → pptx-posters
+│  │
+│  └─ Single author → Either format works
+│
+├─ Template provided?
+│  │
+│  ├─ PPTX template → pptx-posters
+│  │
+│  ├─ LaTeX template → latex-posters
+│  │
+│  └─ No template → Use decision factors above
+│
+└─ Default: pptx-posters (lower barrier to entry)
 ```
 
-The AI will automatically:
-- Create publication-quality images with proper formatting
-- Review and refine through multiple iterations
-- Ensure accessibility (colorblind-friendly, high contrast)
-- Save outputs in the figures/ directory
+## Size Selection Matrix
 
-**When to add schematics:**
-- Research methodology flowcharts for poster content
-- Conceptual framework diagrams
-- Experimental design visualizations
-- Data analysis pipeline diagrams
-- System architecture diagrams
-- Biological pathway illustrations
-- Any complex concept that benefits from visualization
+| Conference Requirement | PPTX Dimensions | Aspect Ratio |
+|-----------------------|-----------------|--------------|
+| A0 Portrait (841×1189mm) | 33.11" × 46.81" | 1:1.41 |
+| A0 Landscape | 46.81" × 33.11" | 1.41:1 |
+| A1 Portrait (594×841mm) | 23.39" × 33.11" | 1:1.41 |
+| 36×48" Portrait | 36" × 48" | 3:4 |
+| 48×36" Landscape | 48" × 36" | 4:3 |
+| 42×56" Portrait | 42" × 56" | 3:4 |
+| 48×72" Landscape | 48" × 72" | 2:3 |
 
-For detailed guidance on creating schematics, refer to the scientific-schematics skill documentation.
+## Layout Selection Matrix
+
+| Content Type | Recommended Layout | Columns |
+|-------------|-------------------|---------|
+| Experimental study | Flow layout | 3-4 |
+| Methods-heavy | Step-by-step | 3 |
+| Results-heavy | Gallery layout | 3-4 |
+| Review/survey | Thematic blocks | 2-3 |
+| Case study | Narrative flow | 2 |
+
+</decision_framework>
+
+<workflow>
+## Workflow
+
+### Stage 1: Requirements Gathering
+
+**Objective:** Establish poster specifications and constraints
+
+**Steps:**
+1. Confirm poster dimensions from conference requirements
+2. Identify orientation (portrait/landscape)
+3. Determine print deadline and submission format
+4. Collect institutional logos (minimum 300 DPI)
+5. Confirm color scheme (brand colors or custom)
+
+**Exit Criteria:**
+- [ ] Exact dimensions documented (width × height in inches)
+- [ ] All logos collected (≥300 DPI, PNG/SVG preferred)
+- [ ] Color palette defined (primary, secondary, accent colors)
+- [ ] Deadline confirmed (print date minus 2 days buffer)
 
 ---
 
-## Core Capabilities
-
-### 1. LaTeX Poster Packages
-
-Support for three major LaTeX poster packages, each with distinct advantages. For detailed comparison and package-specific guidance, refer to `references/latex_poster_packages.md`.
-
-**beamerposter**:
-- Extension of the Beamer presentation class
-- Familiar syntax for Beamer users
-- Excellent theme support and customization
-- Best for: Traditional academic posters, institutional branding
-
-**tikzposter**:
-- Modern, flexible design with TikZ integration
-- Built-in color themes and layout templates
-- Extensive customization through TikZ commands
-- Best for: Colorful, modern designs, custom graphics
-
-**baposter**:
-- Box-based layout system
-- Automatic spacing and positioning
-- Professional-looking default styles
-- Best for: Multi-column layouts, consistent spacing
-
-### 2. Poster Layout and Structure
-
-Create effective poster layouts following visual communication principles. For comprehensive layout guidance, refer to `references/poster_layout_design.md`.
-
-**Common Poster Sections**:
-- **Header/Title**: Title, authors, affiliations, logos
-- **Introduction/Background**: Research context and motivation
-- **Methods/Approach**: Methodology and experimental design
-- **Results**: Key findings with figures and data visualizations
-- **Conclusions**: Main takeaways and implications
-- **References**: Key citations (typically abbreviated)
-- **Acknowledgments**: Funding, collaborators, institutions
-
-**Layout Strategies**:
-- **Column-based layouts**: 2-column, 3-column, or 4-column grids
-- **Block-based layouts**: Flexible arrangement of content blocks
-- **Z-pattern flow**: Guide readers through content logically
-- **Visual hierarchy**: Use size, color, and spacing to emphasize key points
-
-### 3. Design Principles for Research Posters
-
-Apply evidence-based design principles for maximum impact. For detailed design guidance, refer to `references/poster_design_principles.md`.
-
-**Typography**:
-- Title: 72-120pt for visibility from distance
-- Section headers: 48-72pt
-- Body text: 24-36pt minimum for readability from 4-6 feet
-- Use sans-serif fonts (Arial, Helvetica, Calibri) for clarity
-- Limit to 2-3 font families maximum
-
-**Color and Contrast**:
-- Use high-contrast color schemes for readability
-- Institutional color palettes for branding
-- Color-blind friendly palettes (avoid red-green combinations)
-- White space is active space—don't overcrowd
-
-**Visual Elements**:
-- High-resolution figures (300 DPI minimum for print)
-- Large, clear labels on all figures
-- Consistent figure styling throughout
-- Strategic use of icons and graphics
-- Balance text with visual content (40-50% visual recommended)
-
-**Content Guidelines**:
-- **Less is more**: 300-800 words total recommended
-- Bullet points over paragraphs for scannability
-- Clear, concise messaging
-- Self-explanatory figures with minimal text explanation
-- QR codes for supplementary materials or online resources
-
-### 4. Standard Poster Sizes
-
-Support for international and conference-specific poster dimensions:
-
-**International Standards**:
-- A0 (841 × 1189 mm / 33.1 × 46.8 inches) - Most common European standard
-- A1 (594 × 841 mm / 23.4 × 33.1 inches) - Smaller format
-- A2 (420 × 594 mm / 16.5 × 23.4 inches) - Compact posters
-
-**North American Standards**:
-- 36 × 48 inches (914 × 1219 mm) - Common US conference size
-- 42 × 56 inches (1067 × 1422 mm) - Large format
-- 48 × 72 inches (1219 × 1829 mm) - Extra large
-
-**Orientation**:
-- Portrait (vertical) - Most common, traditional
-- Landscape (horizontal) - Better for wide content, timelines
-
-### 5. Package-Specific Templates
-
-Provide ready-to-use templates for each major package. Templates available in `assets/` directory.
-
-**beamerposter Templates**:
-- `beamerposter_classic.tex` - Traditional academic style
-- `beamerposter_modern.tex` - Clean, minimal design
-- `beamerposter_colorful.tex` - Vibrant theme with blocks
-
-**tikzposter Templates**:
-- `tikzposter_default.tex` - Standard tikzposter layout
-- `tikzposter_rays.tex` - Modern design with ray theme
-- `tikzposter_wave.tex` - Professional wave-style theme
-
-**baposter Templates**:
-- `baposter_portrait.tex` - Classic portrait layout
-- `baposter_landscape.tex` - Landscape multi-column
-- `baposter_minimal.tex` - Minimalist design
-
-### 6. Figure and Image Integration
-
-Optimize visual content for poster presentations:
-
-**Best Practices**:
-- Use vector graphics (PDF, SVG) when possible for scalability
-- Raster images: minimum 300 DPI at final print size
-- Consistent image styling (borders, captions, sizes)
-- Group related figures together
-- Use subfigures for comparisons
-
-**LaTeX Figure Commands**:
-```latex
-% Include graphics package
-\usepackage{graphicx}
-
-% Simple figure
-\includegraphics[width=0.8\linewidth]{figure.pdf}
-
-% Figure with caption in tikzposter
-\block{Results}{
-  \begin{tikzfigure}
-    \includegraphics[width=0.9\linewidth]{results.png}
-  \end{tikzfigure}
-}
-
-% Multiple subfigures
-\usepackage{subcaption}
-\begin{figure}
-  \begin{subfigure}{0.48\linewidth}
-    \includegraphics[width=\linewidth]{fig1.pdf}
-    \caption{Condition A}
-  \end{subfigure}
-  \begin{subfigure}{0.48\linewidth}
-    \includegraphics[width=\linewidth]{fig2.pdf}
-    \caption{Condition B}
-  \end{subfigure}
-\end{figure}
-```
-
-### 7. Color Schemes and Themes
-
-Provide professional color palettes for various contexts:
-
-**Academic Institution Colors**:
-- Match university or department branding
-- Use official color codes (RGB, CMYK, or LaTeX color definitions)
-
-**Scientific Color Palettes** (color-blind friendly):
-- Viridis: Professional gradient from purple to yellow
-- ColorBrewer: Research-tested palettes for data visualization
-- IBM Color Blind Safe: Accessible corporate palette
-
-**Package-Specific Theme Selection**:
-
-**beamerposter**:
-```latex
-\usetheme{Berlin}
-\usecolortheme{beaver}
-```
-
-**tikzposter**:
-```latex
-\usetheme{Rays}
-\usecolorstyle{Denmark}
-```
-
-**baposter**:
-```latex
-\begin{poster}{
-  background=plain,
-  bgColorOne=white,
-  headerColorOne=blue!70,
-  textborder=rounded
-}
-```
-
-### 8. Typography and Text Formatting
-
-Ensure readability and visual appeal:
-
-**Font Selection**:
-```latex
-% Sans-serif fonts recommended for posters
-\usepackage{helvet}      % Helvetica
-\usepackage{avant}       % Avant Garde
-\usepackage{sfmath}      % Sans-serif math fonts
-
-% Set default to sans-serif
-\renewcommand{\familydefault}{\sfdefault}
-```
-
-**Text Sizing**:
-```latex
-% Adjust text sizes for visibility
-\setbeamerfont{title}{size=\VeryHuge}
-\setbeamerfont{author}{size=\Large}
-\setbeamerfont{institute}{size=\normalsize}
-```
-
-**Emphasis and Highlighting**:
-- Use bold for key terms: `\textbf{important}`
-- Color highlights sparingly: `\textcolor{blue}{highlight}`
-- Boxes for critical information
-- Avoid italics (harder to read from distance)
-
-### 9. QR Codes and Interactive Elements
-
-Enhance poster interactivity for modern conferences:
-
-**QR Code Integration**:
-```latex
-\usepackage{qrcode}
-
-% Link to paper, code repository, or supplementary materials
-\qrcode[height=2cm]{https://github.com/username/project}
-
-% QR code with caption
-\begin{center}
-  \qrcode[height=3cm]{https://doi.org/10.1234/paper}\\
-  \small Scan for full paper
-\end{center}
-```
-
-**Digital Enhancements**:
-- Link to GitHub repositories for code
-- Link to video presentations or demos
-- Link to interactive web visualizations
-- Link to supplementary data or appendices
-
-### 10. Compilation and Output
-
-Generate high-quality PDF output for printing or digital display:
-
-**Compilation Commands**:
-```bash
-# Basic compilation
-pdflatex poster.tex
-
-# With bibliography
-pdflatex poster.tex
-bibtex poster
-pdflatex poster.tex
-pdflatex poster.tex
-
-# For beamer-based posters
-lualatex poster.tex  # Better font support
-xelatex poster.tex   # Unicode and modern fonts
-```
-
-**Ensuring Full Page Coverage**:
-
-Posters should use the entire page without excessive margins. Configure packages correctly:
-
-**beamerposter - Full Page Setup**:
-```latex
-\documentclass[final,t]{beamer}
-\usepackage[size=a0,scale=1.4,orientation=portrait]{beamerposter}
-
-% Remove default beamer margins
-\setbeamersize{text margin left=0mm, text margin right=0mm}
-
-% Use geometry for precise control
-\usepackage[margin=10mm]{geometry}  % 10mm margins all around
-
-% Remove navigation symbols
-\setbeamertemplate{navigation symbols}{}
-
-% Remove footline and headline if not needed
-\setbeamertemplate{footline}{}
-\setbeamertemplate{headline}{}
-```
-
-**tikzposter - Full Page Setup**:
-```latex
-\documentclass[
-  25pt,                      % Font scaling
-  a0paper,                   % Paper size
-  portrait,                  % Orientation
-  margin=10mm,               % Outer margins (minimal)
-  innermargin=15mm,          % Space inside blocks
-  blockverticalspace=15mm,   % Space between blocks
-  colspace=15mm,             % Space between columns
-  subcolspace=8mm            % Space between subcolumns
-]{tikzposter}
-
-% This ensures content fills the page
-```
-
-**baposter - Full Page Setup**:
-```latex
-\documentclass[a0paper,portrait,fontscale=0.285]{baposter}
-
-\begin{poster}{
-  grid=false,
-  columns=3,
-  colspacing=1.5em,          % Space between columns
-  eyecatcher=true,
-  background=plain,
-  bgColorOne=white,
-  borderColor=blue!50,
-  headerheight=0.12\textheight,  % 12% for header
-  textborder=roundedleft,
-  headerborder=closed,
-  boxheaderheight=2em        % Consistent box header heights
-}
-% Content here
-\end{poster}
-```
-
-**Common Issues and Fixes**:
-
-**Problem**: Large white margins around poster
-```latex
-% Fix for beamerposter
-\setbeamersize{text margin left=5mm, text margin right=5mm}
-
-% Fix for tikzposter
-\documentclass[..., margin=5mm, innermargin=10mm]{tikzposter}
-
-% Fix for baposter - adjust in document class
-\documentclass[a0paper, margin=5mm]{baposter}
-```
-
-**Problem**: Content doesn't fill vertical space
-```latex
-% Use \vfill between sections to distribute space
-\block{Introduction}{...}
-\vfill
-\block{Methods}{...}
-\vfill
-\block{Results}{...}
-
-% Or manually adjust block spacing
-\vspace{1cm}  % Add space between specific blocks
-```
-
-**Problem**: Poster extends beyond page boundaries
-```latex
-% Check total width calculation
-% For 3 columns with spacing:
-% Total = 3×columnwidth + 2×colspace + 2×margins
-% Ensure this equals \paperwidth
-
-% Debug by adding visible page boundary
-\usepackage{eso-pic}
-\AddToShipoutPictureBG{
-  \AtPageLowerLeft{
-    \put(0,0){\framebox(\LenToUnit{\paperwidth},\LenToUnit{\paperheight}){}}
-  }
-}
-```
-
-**Print Preparation**:
-- Generate PDF/X-1a for professional printing
-- Embed all fonts
-- Convert colors to CMYK if required
-- Check resolution of all images (minimum 300 DPI)
-- Add bleed area if required by printer (usually 3-5mm)
-- Verify page size matches requirements exactly
-
-**Digital Display**:
-- RGB color space for screen display
-- Optimize file size for email/web
-- Test readability on different screens
-
-### 11. PDF Review and Quality Control
-
-**CRITICAL**: Always review the generated PDF before printing or presenting. Use this systematic checklist:
-
-**Step 1: Page Size Verification**
-```bash
-# Check PDF dimensions (should match poster size exactly)
-pdfinfo poster.pdf | grep "Page size"
-
-# Expected outputs:
-# A0: 2384 x 3370 points (841 x 1189 mm)
-# 36x48": 2592 x 3456 points
-# A1: 1684 x 2384 points (594 x 841 mm)
-```
-
-**Step 2: Visual Inspection Checklist**
-
-Open PDF at 100% zoom and check:
-
-**Layout and Spacing**:
-- [ ] Content fills entire page (no large white margins)
-- [ ] Consistent spacing between columns
-- [ ] Consistent spacing between blocks/sections
-- [ ] All elements aligned properly (use ruler tool)
-- [ ] No overlapping text or figures
-- [ ] White space evenly distributed
-
-**Typography**:
-- [ ] Title clearly visible and large (72pt+)
-- [ ] Section headers readable (48-72pt)
-- [ ] Body text readable at 100% zoom (24-36pt minimum)
-- [ ] No text cutoff or running off edges
-- [ ] Consistent font usage throughout
-- [ ] All special characters render correctly (symbols, Greek letters)
-
-**Visual Elements**:
-- [ ] All figures display correctly
-- [ ] No pixelated or blurry images
-- [ ] Figure captions present and readable
-- [ ] Colors render as expected (not washed out or too dark)
-- [ ] Logos display clearly
-- [ ] QR codes visible and scannable
-
-**Content Completeness**:
-- [ ] Title and authors complete
-- [ ] All sections present (Intro, Methods, Results, Conclusions)
-- [ ] References included
-- [ ] Contact information visible
-- [ ] Acknowledgments (if applicable)
-- [ ] No placeholder text remaining (Lorem ipsum, TODO, etc.)
-
-**Technical Quality**:
-- [ ] No LaTeX compilation warnings in important areas
-- [ ] All citations resolved (no [?] marks)
-- [ ] All cross-references working
-- [ ] Page boundaries correct (no content cut off)
-
-**Step 3: Reduced-Scale Print Test**
-
-**Essential Pre-Printing Test**:
-```bash
-# Create reduced-size test print (25% of final size)
-# This simulates viewing full poster from ~8-10 feet
-
-# For A0 poster, print on A4 paper (24.7% scale)
-# For 36x48" poster, print on letter paper (~25% scale)
-```
-
-**Print Test Checklist**:
-- [ ] Title readable from 6 feet away
-- [ ] Section headers readable from 4 feet away
-- [ ] Body text readable from 2 feet away
-- [ ] Figures clear and understandable
-- [ ] Colors printed accurately
-- [ ] No obvious design flaws
-
-**Step 4: Digital Quality Checks**
-
-**Font Embedding Verification**:
-```bash
-# Check that all fonts are embedded (required for printing)
-pdffonts poster.pdf
-
-# All fonts should show "yes" in "emb" column
-# If any show "no", recompile with:
-pdflatex -dEmbedAllFonts=true poster.tex
-```
-
-**Image Resolution Check**:
-```bash
-# Extract image information
-pdfimages -list poster.pdf
-
-# Check that all images are at least 300 DPI
-# Formula: DPI = pixels / (inches in poster)
-# For A0 width (33.1"): 300 DPI = 9930 pixels minimum
-```
-
-**File Size Optimization**:
-```bash
-# For email/web, compress if needed (>50MB)
-gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 \
-   -dPDFSETTINGS=/printer -dNOPAUSE -dQUIET -dBATCH \
-   -sOutputFile=poster_compressed.pdf poster.pdf
-
-# For printing, keep original (no compression)
-```
-
-**Step 5: Accessibility Check**
-
-**Color Contrast Verification**:
-- [ ] Text-background contrast ratio ≥ 4.5:1 (WCAG AA)
-- [ ] Important elements contrast ratio ≥ 7:1 (WCAG AAA)
-- Test online: https://webaim.org/resources/contrastchecker/
-
-**Color Blindness Simulation**:
-- [ ] View PDF through color blindness simulator
-- [ ] Information not lost with red-green simulation
-- [ ] Use Coblis (color-blindness.com) or similar tool
-
-**Step 6: Content Proofreading**
-
-**Systematic Review**:
-- [ ] Spell-check all text
-- [ ] Verify all author names and affiliations
-- [ ] Check all numbers and statistics for accuracy
-- [ ] Confirm all citations are correct
-- [ ] Review figure labels and captions
-- [ ] Check for typos in headers and titles
-
-**Peer Review**:
-- [ ] Ask colleague to review poster
-- [ ] 30-second test: Can they identify main message?
-- [ ] 5-minute review: Do they understand conclusions?
-- [ ] Note any confusing elements
-
-**Step 7: Technical Validation**
-
-**LaTeX Compilation Log Review**:
-```bash
-# Check for warnings in .log file
-grep -i "warning\|error\|overfull\|underfull" poster.log
-
-# Common issues to fix:
-# - Overfull hbox: Text extending beyond margins
-# - Underfull hbox: Excessive spacing
-# - Missing references: Citations not resolved
-# - Missing figures: Image files not found
-```
-
-**Fix Common Warnings**:
-```latex
-% Overfull hbox (text too wide)
-\usepackage{microtype}  % Better spacing
-\sloppy  % Allow slightly looser spacing
-\hyphenation{long-word}  % Manual hyphenation
-
-% Missing fonts
-\usepackage[T1]{fontenc}  % Better font encoding
-
-% Image not found
-% Ensure paths are correct and files exist
-\graphicspath{{./figures/}{./images/}}
-```
-
-**Step 8: Final Pre-Print Checklist**
-
-**Before Sending to Printer**:
-- [ ] PDF size exactly matches requirements (check with pdfinfo)
-- [ ] All fonts embedded (check with pdffonts)
-- [ ] Color mode correct (RGB for screen, CMYK for print if required)
-- [ ] Bleed area added if required (usually 3-5mm)
-- [ ] Crop marks visible if required
-- [ ] Test print completed and reviewed
-- [ ] File naming clear: [LastName]_[Conference]_Poster.pdf
-- [ ] Backup copy saved
-
-**Printing Specifications to Confirm**:
-- [ ] Paper type (matte vs. glossy)
-- [ ] Printing method (inkjet, large format, fabric)
-- [ ] Color profile (provided to printer if required)
-- [ ] Delivery deadline and shipping address
-- [ ] Tube or flat packaging preference
-
-**Digital Presentation Checklist**:
-- [ ] PDF size optimized (<10MB for email)
-- [ ] Tested on multiple PDF viewers (Adobe, Preview, etc.)
-- [ ] Displays correctly on different screens
-- [ ] QR codes tested and functional
-- [ ] Alternative formats prepared (PNG for social media)
-
-**Review Script** (Available in `scripts/review_poster.sh`):
-```bash
-#!/bin/bash
-# Automated poster PDF review script
-
-echo "Poster PDF Quality Check"
-echo "======================="
-
-# Check file exists
-if [ ! -f "$1" ]; then
-    echo "Error: File not found"
-    exit 1
-fi
-
-echo "File: $1"
-echo ""
-
-# Check page size
-echo "1. Page Dimensions:"
-pdfinfo "$1" | grep "Page size"
-echo ""
-
-# Check fonts
-echo "2. Font Embedding:"
-pdffonts "$1" | head -20
-echo ""
-
-# Check file size
-echo "3. File Size:"
-ls -lh "$1" | awk '{print $5}'
-echo ""
-
-# Count pages (should be 1 for poster)
-echo "4. Page Count:"
-pdfinfo "$1" | grep "Pages"
-echo ""
-
-echo "Manual checks required:"
-echo "- Visual inspection at 100% zoom"
-echo "- Reduced-scale print test (25%)"
-echo "- Color contrast verification"
-echo "- Proofreading for typos"
-```
-
-**Common PDF Issues and Solutions**:
-
-| Issue | Cause | Solution |
-|-------|-------|----------|
-| Large white margins | Incorrect margin settings | Reduce margin in documentclass |
-| Content cut off | Exceeds page boundaries | Check total width/height calculations |
-| Blurry images | Low resolution (<300 DPI) | Replace with higher resolution images |
-| Missing fonts | Fonts not embedded | Compile with -dEmbedAllFonts=true |
-| Wrong page size | Incorrect paper size setting | Verify documentclass paper size |
-| Colors look wrong | RGB vs CMYK mismatch | Convert color space for print |
-| File too large (>50MB) | Uncompressed images | Optimize images or compress PDF |
-| QR codes don't work | Too small or low resolution | Minimum 2×2cm, high contrast |
-
-### 11. Common Poster Content Patterns
-
-Effective content organization for different research types:
-
-**Experimental Research Poster**:
-1. Title and authors
-2. Introduction: Problem and hypothesis
-3. Methods: Experimental design (with diagram)
-4. Results: Key findings (2-4 main figures)
-5. Conclusions: Main takeaways (3-5 bullet points)
-6. Future work (optional)
-7. References and acknowledgments
-
-**Computational/Modeling Poster**:
-1. Title and authors
-2. Motivation: Problem statement
-3. Approach: Algorithm or model (with flowchart)
-4. Implementation: Technical details
-5. Results: Performance metrics and comparisons
-6. Applications: Use cases
-7. Code availability (QR code to GitHub)
-8. References
-
-**Review/Survey Poster**:
-1. Title and authors
-2. Scope: Topic overview
-3. Methods: Literature search strategy
-4. Key findings: Main themes (organized by category)
-5. Trends: Visualizations of publication patterns
-6. Gaps: Identified research needs
-7. Conclusions: Summary and implications
-8. References
-
-### 12. Accessibility and Inclusive Design
-
-Design posters that are accessible to diverse audiences:
-
-**Color Blindness Considerations**:
-- Avoid red-green combinations (most common color blindness)
-- Use patterns or shapes in addition to color
-- Test with color-blindness simulators
-- Provide high contrast (WCAG AA standard: 4.5:1 minimum)
-
-**Visual Impairment Accommodations**:
-- Large, clear fonts (minimum 24pt body text)
-- High contrast text and background
-- Clear visual hierarchy
-- Avoid complex textures or patterns in backgrounds
-
-**Language and Content**:
-- Clear, concise language
-- Define acronyms and jargon
-- International audience considerations
-- Consider multilingual QR code options for global conferences
-
-### 13. Poster Presentation Best Practices
-
-Guidance beyond LaTeX for effective poster sessions:
-
-**Content Strategy**:
-- Tell a story, don't just list facts
-- Focus on 1-3 main messages
-- Use visual abstract or graphical summary
-- Leave room for conversation (don't over-explain)
-
-**Physical Presentation Tips**:
-- Bring printed handouts or business cards with QR code
-- Prepare 30-second, 2-minute, and 5-minute verbal summaries
-- Stand to the side, not blocking the poster
-- Engage viewers with open-ended questions
-
-**Digital Backups**:
-- Save poster as PDF on mobile device
-- Prepare digital version for email sharing
-- Create social media-friendly image version
-- Have backup printed copy or digital display option
-
-## Workflow for Poster Creation
-
-### Stage 1: Planning and Content Development
-
-1. **Determine poster requirements**:
-   - Conference size specifications (A0, 36×48", etc.)
-   - Orientation (portrait vs. landscape)
-   - Submission deadlines and format requirements
-
-2. **Develop content outline**:
-   - Identify 1-3 core messages
-   - Select key figures (typically 3-6 main visuals)
-   - Draft concise text for each section (bullet points preferred)
-   - Aim for 300-800 words total
-
-3. **Choose LaTeX package**:
-   - beamerposter: If familiar with Beamer, need institutional themes
-   - tikzposter: For modern, colorful designs with flexibility
-   - baposter: For structured, professional multi-column layouts
-
-### Stage 2: Design and Layout
-
-1. **Select or create template**:
-   - Start with provided templates in `assets/`
-   - Customize color scheme to match branding
-   - Configure page size and orientation
-
-2. **Design layout structure**:
-   - Plan column structure (2, 3, or 4 columns)
-   - Map content flow (typically left-to-right, top-to-bottom)
-   - Allocate space for title (10-15%), content (70-80%), footer (5-10%)
-
-3. **Set typography**:
-   - Configure font sizes for different hierarchy levels
-   - Ensure minimum 24pt body text
-   - Test readability from 4-6 feet distance
-
-### Stage 3: Content Integration
-
-1. **Create poster header**:
-   - Title (concise, descriptive, 10-15 words)
-   - Authors and affiliations
-   - Institution logos (high-resolution)
-   - Conference logo if required
-
-2. **Populate content sections**:
-   - Keep text minimal and scannable
-   - Use bullet points, not paragraphs
-   - Write in active voice
-   - Integrate figures with clear captions
-
-3. **Add visual elements**:
-   - High-resolution figures (300 DPI minimum)
-   - Consistent styling across all figures
-   - Color-coded elements for emphasis
-   - QR codes for supplementary materials
-
-4. **Include references**:
-   - Cite key papers only (5-10 references typical)
-   - Use abbreviated citation style
-   - Consider QR code to full bibliography
-
-### Stage 4: Refinement and Testing
-
-1. **Review and iterate**:
-   - Check for typos and errors
-   - Verify all figures are high resolution
-   - Ensure consistent formatting
-   - Confirm color scheme works well together
-
-2. **Test readability**:
-   - Print at 25% scale and read from 2-3 feet (simulates poster from 8-12 feet)
-   - Check color on different monitors
-   - Verify QR codes function correctly
-   - Ask colleague to review
-
-3. **Optimize for printing**:
-   - Embed all fonts in PDF
-   - Verify image resolution
-   - Check PDF size requirements
-   - Include bleed area if required
-
-### Stage 5: Compilation and Delivery
-
-1. **Compile final PDF**:
-   ```bash
-   pdflatex poster.tex
-   # Or for better font support:
-   lualatex poster.tex
+### Stage 2: Content Preparation
+
+**Objective:** Prepare and organize all poster content
+
+**Steps:**
+1. Draft title (≤15 words, impactful)
+2. List authors and affiliations
+3. Write section content:
+   - Introduction: 50-100 words
+   - Methods: 75-150 words
+   - Results: 100-200 words (figures carry the message)
+   - Conclusions: 50-100 words (3-5 bullet points)
+4. Prepare figures (minimum 300 DPI at final print size)
+5. Compile references (5-10 key citations)
+
+**Content Budget:**
+
+| Section | Word Limit | Visual Elements |
+|---------|-----------|-----------------|
+| Title | 15 words max | Logo placement |
+| Introduction | 100 words | 0-1 figure |
+| Methods | 150 words | 1-2 diagrams |
+| Results | 200 words | 2-4 figures (primary) |
+| Conclusions | 100 words | QR code optional |
+| Total | 500-800 words | 3-6 figures |
+
+**Exit Criteria:**
+- [ ] Total word count: 500-800 words
+- [ ] All figures prepared at ≥300 DPI
+- [ ] Figure-to-text ratio: ≥40% figures
+- [ ] All content fits within section budgets
+
+---
+
+### Stage 3: Layout Construction
+
+**Objective:** Build poster structure in PowerPoint
+
+**Steps:**
+1. Create new presentation with exact dimensions:
    ```
+   File → Page Setup → Custom Size → [width] × [height]
+   ```
+2. Set up grid guides:
+   - Margin: 0.5-1.0 inches all sides
+   - Column spacing: 0.3-0.5 inches
+   - Row guides for header (12-15% height)
+3. Create master slide with:
+   - Header band with title area
+   - Logo placeholders (corners)
+   - Footer band for contact info
+4. Add content placeholders by section
 
-2. **Verify output quality**:
-   - Check all elements are visible and correctly positioned
-   - Zoom to 100% and inspect figure quality
-   - Verify colors match expectations
-   - Confirm PDF opens correctly on different viewers
+**Grid Specifications (3-Column A0 Portrait):**
 
-3. **Prepare for printing**:
-   - Export as PDF/X-1a if required
-   - Save backup copies
-   - Get test print on regular paper first
-   - Order professional printing 2-3 days before deadline
-
-4. **Create supplementary materials**:
-   - Save PNG/JPG version for social media
-   - Create handout version (8.5×11" summary)
-   - Prepare digital version for email sharing
-
-## Integration with Other Skills
-
-This skill works effectively with:
-- **Scientific Writing**: For developing poster content from papers
-- **Figure Creation**: For generating high-quality visualizations
-- **Literature Review**: For contextualizing research
-- **Data Analysis**: For creating result figures and charts
-
-## Common Pitfalls to Avoid
-
-**Design Mistakes**:
-- ❌ Too much text (over 1000 words)
-- ❌ Font sizes too small (under 24pt body text)
-- ❌ Low-contrast color combinations
-- ❌ Cluttered layout with no white space
-- ❌ Inconsistent styling across sections
-- ❌ Poor quality or pixelated images
-
-**Content Mistakes**:
-- ❌ No clear narrative or message
-- ❌ Too many research questions or objectives
-- ❌ Overuse of jargon without definitions
-- ❌ Results without context or interpretation
-- ❌ Missing author contact information
-
-**Technical Mistakes**:
-- ❌ Wrong poster dimensions for conference requirements
-- ❌ RGB colors sent to CMYK printer (color shift)
-- ❌ Fonts not embedded in PDF
-- ❌ File size too large for submission portal
-- ❌ QR codes too small or not tested
-
-**Best Practices**:
-- ✅ Follow conference size specifications exactly
-- ✅ Test print at reduced scale before final printing
-- ✅ Use high-contrast, accessible color schemes
-- ✅ Keep text minimal and highly scannable
-- ✅ Include clear contact information and QR codes
-- ✅ Balance text and visuals (40-50% visual content)
-- ✅ Proofread carefully (errors are magnified on posters!)
-
-## Package Installation
-
-Ensure required LaTeX packages are installed:
-
-```bash
-# For TeX Live (Linux/Mac)
-tlmgr install beamerposter tikzposter baposter
-
-# For MiKTeX (Windows)
-# Packages typically auto-install on first use
-
-# Additional recommended packages
-tlmgr install qrcode graphics xcolor tcolorbox subcaption
+```
+┌────────────────────────────────────────────┐
+│  LOGO    TITLE / AUTHORS / AFFILIATIONS  LOGO  │ 12%
+├────────────┬────────────┬────────────┤
+│            │            │            │
+│ INTRO      │ RESULTS    │ RESULTS    │
+│            │ (cont.)    │ (cont.)    │
+│            │            │            │
+│            ├────────────┤            │
+│ METHODS    │            │ CONCLUSIONS│
+│            │ RESULTS    │            │
+│            │ (main)     │ REFS       │
+│            │            │            │
+├────────────┴────────────┴────────────┤
+│     CONTACT / QR CODE / ACKNOWLEDGMENTS     │ 5%
+└────────────────────────────────────────────┘
 ```
 
-## Scripts and Automation
+**Exit Criteria:**
+- [ ] Dimensions match requirements exactly
+- [ ] Grid guides visible and aligned
+- [ ] Header occupies 10-15% of height
+- [ ] Margins consistent (≥0.5 inches)
+- [ ] Column widths equal (±0.1 inch tolerance)
 
-Helper scripts available in `scripts/` directory:
+---
 
-- `compile_poster.sh`: Automated compilation with error handling
-- `generate_template.py`: Interactive template generator
-- `resize_images.py`: Batch image optimization for posters
-- `poster_checklist.py`: Pre-submission validation tool
+### Stage 4: Content Population
 
-## References
+**Objective:** Add content following visual hierarchy
 
-Comprehensive reference files for detailed guidance:
+**Steps:**
+1. Add title and author block:
+   - Title: 72-120pt bold sans-serif
+   - Authors: 48-60pt
+   - Affiliations: 36-48pt
+2. Add section headers: 48-60pt bold
+3. Add body text: 28-36pt regular
+4. Insert figures with captions
+5. Add references in smaller font (18-24pt)
+6. Place QR code linking to paper/data (minimum 2×2 inches)
 
-- `references/latex_poster_packages.md`: Detailed comparison of beamerposter, tikzposter, and baposter with examples
-- `references/poster_layout_design.md`: Layout principles, grid systems, and visual flow
-- `references/poster_design_principles.md`: Typography, color theory, visual hierarchy, and accessibility
-- `references/poster_content_guide.md`: Content organization, writing style, and section-specific guidance
+**Typography Specifications:**
 
-## Templates
+| Element | Font Size | Font Weight | Color |
+|---------|-----------|-------------|-------|
+| Title | 72-120pt | Bold | Primary |
+| Authors | 48-60pt | Regular | Dark gray |
+| Section headers | 48-60pt | Bold | Primary |
+| Body text | 28-36pt | Regular | Black |
+| Figure captions | 24-30pt | Regular | Dark gray |
+| References | 18-24pt | Regular | Gray |
 
-Ready-to-use poster templates in `assets/` directory:
+**Exit Criteria:**
+- [ ] Title readable from 15+ feet
+- [ ] Body text readable from 4-6 feet
+- [ ] All figures have captions
+- [ ] Font sizes within specified ranges
+- [ ] Consistent styling throughout
 
-- beamerposter templates (classic, modern, colorful)
-- tikzposter templates (default, rays, wave, envelope)
-- baposter templates (portrait, landscape, minimal)
-- Example posters from various scientific disciplines
-- Color scheme definitions and institutional templates
+---
 
-Load these templates and customize for your specific research and conference requirements.
+### Stage 5: Visual Refinement
 
+**Objective:** Polish design for maximum impact
+
+**Steps:**
+1. Apply consistent color scheme:
+   - Maximum 3-4 colors (primary, secondary, accent, neutral)
+   - Background: white or very light shade
+   - Text: dark (≥4.5:1 contrast ratio)
+2. Align all elements to grid
+3. Add visual interest:
+   - Section dividers or colored bars
+   - Icon accents (minimal)
+   - Drop shadows (subtle, if any)
+4. Verify white space distribution (20-30% of poster area)
+5. Add accessibility features:
+   - Alt text for figures
+   - Color-blind safe palette
+   - High contrast text
+
+**Color Contrast Requirements:**
+
+| Element Pair | Minimum Ratio | Target Ratio |
+|-------------|---------------|--------------|
+| Body text / background | 4.5:1 | 7:1 |
+| Title / background | 3:1 | 4.5:1 |
+| Data in figures | 3:1 | 4.5:1 |
+
+**Exit Criteria:**
+- [ ] Maximum 4 colors used
+- [ ] All text meets contrast requirements
+- [ ] Elements aligned to grid (use Align tools)
+- [ ] White space: 20-30% of total area
+- [ ] No orphaned elements (single words on lines)
+
+---
+
+### Stage 6: Quality Validation
+
+**Objective:** Ensure poster meets print and presentation standards
+
+**Steps:**
+1. Zoom to 100% and check:
+   - Text readability
+   - Image quality (no pixelation)
+   - Color rendering
+2. Print test page at 25% scale (A4/Letter):
+   - Title readable from arm's length
+   - Sections clearly delineated
+   - Figures visible and clear
+3. Spell-check entire document
+4. Verify all author names and affiliations
+5. Check figure numbering and references
+6. Test QR codes
+
+**Validation Checklist:**
+
+- [ ] No spelling/grammar errors (run spell-check)
+- [ ] All names spelled correctly
+- [ ] All figures ≥300 DPI (no pixelation at 100% zoom)
+- [ ] Contact information visible
+- [ ] QR code tested and functional
+- [ ] File size reasonable (<100MB for email, <500MB for print)
+
+**Exit Criteria:**
+- [ ] 100% zoom visual inspection passed
+- [ ] 25% scale print test completed
+- [ ] All checklist items verified
+- [ ] No LaTeX compilation needed (ready for print)
+
+---
+
+### Stage 7: Export and Delivery
+
+**Objective:** Generate print-ready files
+
+**Steps:**
+1. Save native PPTX file (backup and collaboration)
+2. Export PDF for printing:
+   ```
+   File → Export → PDF
+   Options: High quality, embed fonts, PDF/A if required
+   ```
+3. Verify PDF dimensions match requirements
+4. Check PDF file size:
+   - <100MB: Email-safe
+   - <500MB: Most print services
+   - >500MB: May need compression
+5. Prepare supplementary formats:
+   - PNG for social media (1920px width)
+   - JPEG for email preview
+
+**Export Settings:**
+
+| Output | Format | Quality | Use Case |
+|--------|--------|---------|----------|
+| Print | PDF | High quality, embedded fonts | Professional printing |
+| Email | PDF | Compressed | Quick sharing |
+| Social | PNG | 150 DPI, 1920px width | Twitter, LinkedIn |
+| Archive | PPTX | Native | Future editing |
+
+**Exit Criteria:**
+- [ ] PPTX saved as backup
+- [ ] PDF dimensions verified (match requirements)
+- [ ] PDF fonts embedded
+- [ ] File size appropriate for delivery method
+- [ ] Print service requirements confirmed
+
+</workflow>
+
+<success_criteria>
+## Success Criteria
+
+**Quantitative Thresholds:**
+
+| Metric | Minimum | Target | Excellent |
+|--------|---------|--------|-----------|
+| Total words | 400 | 600 | 500 |
+| Figure count | 3 | 5 | 4-6 |
+| Figure area | 35% | 45% | 50% |
+| White space | 15% | 25% | 20-30% |
+| Font size (body) | 24pt | 30pt | 28-36pt |
+| Image resolution | 200 DPI | 300 DPI | 300+ DPI |
+| Color count | 2 | 3-4 | 3 |
+| Contrast ratio | 4.5:1 | 7:1 | 7:1+ |
+
+**Completion Checklist:**
+- [ ] Dimensions match conference requirements exactly
+- [ ] Word count within 500-800 word budget
+- [ ] Figures occupy ≥40% of poster area
+- [ ] All text meets contrast requirements (≥4.5:1)
+- [ ] PDF exports without errors
+- [ ] 25% scale print test completed
+- [ ] All QR codes functional
+- [ ] File deliverable to print service
+
+</success_criteria>
+
+<scope>
+## Scope
+
+**In Scope:**
+- PowerPoint poster creation and design
+- Layout optimization for standard sizes (A0, A1, 36×48", etc.)
+- Print-ready PDF export
+- Accessibility optimization
+- Brand-compliant color schemes
+- Quick-turnaround poster production
+
+**Out of Scope** (use specialized resources):
+- Complex mathematical typesetting → use `latex-posters`
+- Programmatic poster generation → use `latex-posters`
+- Version-controlled reproducible posters → use `latex-posters`
+- AI-generated figures → use `scientific-schematics`
+- Data visualization → use `plotting-libraries`
+
+</scope>
+
+<anti_patterns>
+## Common Pitfalls
+
+### 1. Text Overload
+
+**Anti-pattern:**
+```
+Poster with 1500+ words, dense paragraphs,
+minimal figures. Viewers can't process content
+in typical 2-3 minute interaction.
+```
+
+**Solution:**
+```
+Maximum 800 words. Use bullet points.
+Let figures carry the message. Target
+40-50% visual content. Less text = more impact.
+```
+
+---
+
+### 2. Wrong Dimensions
+
+**Anti-pattern:**
+```
+Creating poster at screen dimensions (16:9)
+then scaling up. Results in blurry text
+and pixelated images at print size.
+```
+
+**Solution:**
+```
+Set exact dimensions from the start:
+File → Page Setup → Custom Size → [exact inches]
+A0 Portrait: 33.11" × 46.81"
+```
+
+---
+
+### 3. Low-Resolution Images
+
+**Anti-pattern:**
+```
+Using web images or screenshots (72-150 DPI).
+Look fine on screen but pixelated when printed
+at poster size.
+```
+
+**Solution:**
+```
+All images must be ≥300 DPI at final print size.
+For a 10" wide figure on A0: 3000+ pixels wide.
+Use vector graphics (SVG, EMF) when possible.
+```
+
+---
+
+### 4. Inconsistent Styling
+
+**Anti-pattern:**
+```
+Multiple fonts (5+), inconsistent colors,
+varying text sizes across similar elements,
+misaligned boxes. Looks unprofessional.
+```
+
+**Solution:**
+```
+Use 1-2 font families maximum.
+Define color palette upfront (3-4 colors).
+Create consistent section templates.
+Use PowerPoint's Align tools religiously.
+```
+
+---
+
+### 5. Missing Contact Information
+
+**Anti-pattern:**
+```
+No email, no QR code, no way for interested
+viewers to follow up after the session.
+Missed networking opportunities.
+```
+
+**Solution:**
+```
+Include: Email address (large, readable)
+QR code to paper/data (minimum 2×2 inches)
+Twitter/LinkedIn handle if appropriate
+```
+
+---
+
+### 6. Poor Color Contrast
+
+**Anti-pattern:**
+```
+Light gray text on white background.
+Yellow text on light background.
+Fails accessibility standards.
+```
+
+**Solution:**
+```
+Minimum 4.5:1 contrast ratio for body text.
+Use WebAIM contrast checker.
+Dark text on light backgrounds (or vice versa).
+Test with grayscale preview.
+```
+
+</anti_patterns>
+
+<templates>
+## Output Templates
+
+### Template 1: 3-Column A0 Portrait
+
+```
+Dimensions: 33.11" × 46.81" (841 × 1189 mm)
+
+LAYOUT:
+┌─────────────────────────────────────┐
+│ [LOGO]     TITLE (72-120pt)  [LOGO] │
+│        Authors (48-60pt)            │
+│     Affiliations (36-48pt)          │
+├───────────┬───────────┬─────────────┤
+│           │           │             │
+│ INTRO     │ RESULTS-1 │ RESULTS-3   │
+│ ~100w     │           │             │
+│           │ [FIGURE]  │ [FIGURE]    │
+│           │           │             │
+├───────────┤           ├─────────────┤
+│           │           │             │
+│ METHODS   │ RESULTS-2 │ CONCLUSIONS │
+│ ~150w     │           │ ~100w       │
+│           │ [FIGURE]  │             │
+│ [DIAGRAM] │           │ REFERENCES  │
+│           │           │ (5-10)      │
+├───────────┴───────────┴─────────────┤
+│  Contact: email@example.com  [QR]   │
+│        Acknowledgments              │
+└─────────────────────────────────────┘
+
+SPACING:
+- Margins: 0.75" all sides
+- Column gap: 0.5"
+- Row gap: 0.4"
+```
+
+### Template 2: 48×36" Landscape
+
+```
+Dimensions: 48" × 36" (1219 × 914 mm)
+
+LAYOUT:
+┌─────────────────────────────────────────────────────┐
+│ [LOGO]  TITLE / AUTHORS / AFFILIATIONS       [LOGO] │
+├────────────┬────────────┬────────────┬──────────────┤
+│            │            │            │              │
+│  INTRO     │  METHODS   │  RESULTS   │  CONCLUSIONS │
+│            │            │            │              │
+│            │ [DIAGRAM]  │ [FIGURES]  │  [QR CODE]   │
+│            │            │            │              │
+├────────────┴────────────┴────────────┴──────────────┤
+│              REFERENCES / CONTACT / ACKNOWLEDGMENTS  │
+└─────────────────────────────────────────────────────┘
+
+SPACING:
+- Margins: 0.75" all sides
+- Column gap: 0.4"
+- Header: 12% of height
+- Footer: 8% of height
+```
+
+</templates>
+
+<cross_references>
+## Related Skills
+
+| Skill | Relationship |
+|-------|-------------|
+| `latex-posters` | Alternative for complex equations, reproducible posters |
+| `scientific-schematics` | Use to generate AI-powered figures for poster |
+| `visual-design` | Reference for design principles and color theory |
+| `plotting-libraries` | Use to create publication-quality data visualizations |
+| `scientific-writing` | Source content from papers for poster adaptation |
+
+**Skill Selection:**
+See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
+</cross_references>
+
+<references>
+## Reference Documents
+
+| Document | Purpose |
+|----------|---------|
+| `references/poster_design_principles.md` | Typography, color, visual hierarchy |
+| `references/accessibility_checklist.md` | WCAG compliance for posters |
+| `references/print_specifications.md` | Print service requirements by vendor |
+
+</references>

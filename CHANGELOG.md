@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **Phase 1.3 Skills Determinism Implementation (Partial)**: Refactored Tier 3 skills to use standard template
+- **Phase 1.3 Skills Determinism Implementation (Complete)**: Refactored all Tier 3 skills to use standard template
   - `skills/scientific-slides/SKILL.md` (6.0 → ~8.5): Reduced from 1150 to ~575 lines with proper structure
     - Added talk type selection decision tree (conference/seminar/defense/grant/journal club)
     - Added implementation method decision tree (Nano Banana Pro PDF vs PowerPoint vs LaTeX Beamer)
@@ -41,6 +41,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Visual inspection checklist (layout, typography, visual elements, content, accessibility)
     - 5 anti-patterns with solutions (text-heavy, wrong page size, low-resolution images, poor contrast, skipping print test)
     - Package configuration templates for all three LaTeX packages
+  - `skills/pptx-posters/SKILL.md` (6.0 → ~8.5): Complete rewrite fixing corrupted file (was duplicate of LaTeX content)
+    - Added PPTX vs LaTeX format selection decision tree (equations, timeline, collaboration, template)
+    - Added size selection matrix with PPTX dimensions for A0, A1, 36×48", etc.
+    - Added layout selection matrix by content type (experimental, methods-heavy, results-heavy, review)
+    - 7-stage numbered workflow with exit criteria (Requirements → Content Prep → Layout → Populate → Refine → Validate → Export)
+    - Content budget table with word limits and visual elements per section
+    - Typography specifications table (font sizes by element type)
+    - Color contrast requirements table (WCAG compliance)
+    - 6 anti-patterns with solutions (text overload, wrong dimensions, low-res images, inconsistent styling, missing contact, poor contrast)
+    - ASCII layout templates for 3-column A0 portrait and 48×36" landscape
+  - `skills/literature-review/SKILL.md` (6.5 → ~8.5): Restructured with decision matrices and quantified criteria
+    - Added domain-based database selection decision tree (biomedical, physical sciences, CS/AI, social sciences, multidisciplinary)
+    - Added minimum database requirements table by review type
+    - Added review type selection matrix (systematic vs scoping vs narrative vs rapid)
+    - Added quality assessment tool selection matrix (8 study designs mapped to tools)
+    - 8-stage numbered workflow with exit criteria (Planning → Search → Screening → Extraction → Quality → Synthesis → Citations → Document)
+    - Screening time budgets table (≤15 sec title, ≤2 min abstract, 10-20 min full-text)
+    - Search saturation criteria (quantified thresholds)
+    - Quality rating thresholds (High/Moderate/Low/Very Low)
+    - Citation style quick reference table
+    - 6 anti-patterns with solutions (single database, study-by-study, undocumented search, no quality assessment, unverified citations, missing exclusion reasons)
+    - PRISMA flow diagram template, search documentation template, data extraction template
 
 - **Phase 1.2 Skills Determinism Implementation**: Refactored all Tier 4 skills (lowest scoring) to use standard template
   - `skills/scholar-evaluation/SKILL.md` (5.0 → ~8.5): Added 8-dimension evaluation framework with weighted scoring, 5-point rubric with quality tiers (A-F), recommendation priority matrix, 5 anti-patterns, executive summary and detailed report templates

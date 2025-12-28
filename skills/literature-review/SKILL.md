@@ -1,595 +1,758 @@
 ---
 name: literature-review
-description: Conduct comprehensive, systematic literature reviews using multiple academic databases (PubMed, arXiv, bioRxiv, Semantic Scholar, etc.). This skill should be used when conducting systematic literature reviews, meta-analyses, research synthesis, or comprehensive literature searches across biomedical, scientific, and technical domains. Creates professionally formatted markdown documents and PDFs with verified citations in multiple citation styles (APA, Nature, Vancouver, etc.).
-allowed-tools: [Read, Write, Edit, Bash]
+version: 2.0.0
+description: "Conduct systematic, comprehensive literature reviews using multiple academic databases. Provides structured methodology for search, screening, synthesis, and citation verification with professional output in markdown and PDF formats."
+allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, WebFetch, WebSearch]
 ---
 
 # Literature Review
 
-## Overview
+<overview>
+Conduct systematic, comprehensive literature reviews following rigorous academic methodology. This skill provides structured workflows for multi-database searching, screening, thematic synthesis, and citation verification with professional output generation in markdown and PDF formats.
+</overview>
 
-Conduct systematic, comprehensive literature reviews following rigorous academic methodology. Search multiple literature databases, synthesize findings thematically, verify all citations for accuracy, and generate professional output documents in markdown and PDF formats.
-
-This skill integrates with multiple scientific skills for database access (gget, bioservices, datacommons-client) and provides specialized tools for citation verification, result aggregation, and document generation.
-
-## When to Use This Skill
+<when_to_use>
+## Trigger Conditions
 
 Use this skill when:
 - Conducting a systematic literature review for research or publication
-- Synthesizing current knowledge on a specific topic across multiple sources
-- Performing meta-analysis or scoping reviews
-- Writing the literature review section of a research paper or thesis
-- Investigating the state of the art in a research domain
+- Synthesizing current knowledge on a topic across multiple sources
+- Performing meta-analysis, scoping reviews, or rapid reviews
+- Writing the literature review section of a paper or thesis
+- Investigating state of the art in a research domain
 - Identifying research gaps and future directions
-- Requiring verified citations and professional formatting
 
-## Visual Enhancement with Scientific Schematics
+Do NOT use this skill when:
+- Looking up a single paper or citation → use `research-lookup`
+- Searching a single database for quick reference → use `research-lookup`
+- Formatting existing citations → use `citation-management`
+- Creating figures for the review → use `scientific-schematics` or `plotting-libraries`
+</when_to_use>
 
-**⚠️ MANDATORY: Every literature review MUST include at least 1-2 AI-generated figures using the scientific-schematics skill.**
+<decision_framework>
+## Database Selection Matrix
 
-This is not optional. Literature reviews without visual elements are incomplete. Before finalizing any document:
-1. Generate at minimum ONE schematic or diagram (e.g., PRISMA flow diagram for systematic reviews)
-2. Prefer 2-3 figures for comprehensive reviews (search strategy flowchart, thematic synthesis diagram, conceptual framework)
-
-**How to generate figures:**
-- Use the **scientific-schematics** skill to generate AI-powered publication-quality diagrams
-- Simply describe your desired diagram in natural language
-- Nano Banana Pro will automatically generate, review, and refine the schematic
-
-**How to generate schematics:**
-```bash
-python scripts/generate_schematic.py "your diagram description" -o figures/output.png
+```
+What is the primary research domain?
+│
+├─ Biomedical / Life Sciences
+│  │
+│  ├─ Clinical / Medical → PubMed + Cochrane + CINAHL + Embase
+│  │
+│  ├─ Basic Biology → PubMed + bioRxiv + Web of Science
+│  │
+│  └─ Genomics/Bioinformatics → PubMed + bioRxiv + GEO + UniProt
+│
+├─ Physical Sciences / Engineering
+│  │
+│  ├─ Physics / Math → arXiv + Web of Science + ADS
+│  │
+│  ├─ Chemistry → PubMed + SciFinder + Web of Science
+│  │
+│  └─ Engineering → IEEE Xplore + Scopus + Web of Science
+│
+├─ Computer Science / AI
+│  │
+│  ├─ ML/AI → arXiv + Semantic Scholar + ACM DL + IEEE
+│  │
+│  └─ General CS → ACM DL + IEEE Xplore + arXiv + DBLP
+│
+├─ Social Sciences
+│  │
+│  └─ Psychology / Sociology → PsycINFO + Scopus + SSRN
+│
+└─ Multidisciplinary
+   │
+   └─ Cross-field → Semantic Scholar + Web of Science + Scopus + Google Scholar
 ```
 
-The AI will automatically:
-- Create publication-quality images with proper formatting
-- Review and refine through multiple iterations
-- Ensure accessibility (colorblind-friendly, high contrast)
-- Save outputs in the figures/ directory
+## Minimum Database Requirements
 
-**When to add schematics:**
-- PRISMA flow diagrams for systematic reviews
-- Literature search strategy flowcharts
-- Thematic synthesis diagrams
-- Research gap visualization maps
-- Citation network diagrams
-- Conceptual framework illustrations
-- Any complex concept that benefits from visualization
+| Review Type | Minimum Databases | Recommended |
+|-------------|------------------|-------------|
+| Systematic review | 3 | 4-5 |
+| Scoping review | 2 | 3-4 |
+| Narrative review | 2 | 3 |
+| Rapid review | 2 | 2-3 |
 
-For detailed guidance on creating schematics, refer to the scientific-schematics skill documentation.
+## Review Type Selection
+
+| Factor | Systematic | Scoping | Narrative | Rapid |
+|--------|-----------|---------|-----------|-------|
+| Timeline | 6-18 months | 3-6 months | 1-3 months | 2-5 weeks |
+| Question type | Focused, specific | Broad, exploratory | Broad overview | Urgent, focused |
+| Methodology | Rigorous protocol | Flexible framework | Expert synthesis | Streamlined |
+| Quality assessment | Required | Optional | Informal | Limited |
+| PRISMA required | Yes | PRISMA-ScR | No | Modified |
+| Output papers | ≥30 typical | Variable | Variable | 10-30 typical |
+
+## Quality Assessment Tool Selection
+
+| Study Design | Assessment Tool | Domains Evaluated |
+|-------------|----------------|-------------------|
+| Randomized trials | Cochrane RoB 2.0 | 5 domains, 7 items |
+| Non-randomized interventions | ROBINS-I | 7 domains |
+| Observational cohort | Newcastle-Ottawa Scale | 3 domains, 8 items |
+| Cross-sectional | JBI Checklist | 8 items |
+| Diagnostic accuracy | QUADAS-2 | 4 domains |
+| Qualitative studies | CASP Checklist | 10 items |
+| Systematic reviews | AMSTAR 2 | 16 items, 7 critical |
+| Animal studies | SYRCLE RoB | 10 items |
+
+</decision_framework>
+
+<workflow>
+## Workflow
+
+### Stage 1: Planning and Protocol
+
+**Objective:** Define scope, research questions, and methodology
+
+**Steps:**
+1. Define research question using PICO/PEO/SPIDER framework:
+   - **PICO**: Population, Intervention, Comparison, Outcome (clinical)
+   - **PEO**: Population, Exposure, Outcome (observational)
+   - **SPIDER**: Sample, Phenomenon, Design, Evaluation, Research type (qualitative)
+
+2. Register protocol (for systematic reviews):
+   - PROSPERO (health): https://www.crd.york.ac.uk/prospero/
+   - OSF Registries (general): https://osf.io/registries
+
+3. Define inclusion/exclusion criteria:
+
+| Criterion | Include | Exclude |
+|-----------|---------|---------|
+| Date range | {{start}}-{{end}} | Before {{start}} |
+| Language | English | Non-English |
+| Publication type | Peer-reviewed, preprints | Conference abstracts only |
+| Study design | {{designs}} | {{excluded designs}} |
+| Population | {{target}} | {{excluded populations}} |
+
+4. Select databases (minimum 3 for systematic reviews)
+5. Define search strategy with Boolean operators
+
+**Exit Criteria:**
+- [ ] Research question documented (PICO/PEO/SPIDER format)
+- [ ] Protocol registered (if systematic review)
+- [ ] Inclusion/exclusion criteria table completed
+- [ ] ≥3 databases selected (see Database Selection Matrix)
+- [ ] Search strategy drafted
 
 ---
 
-## Core Workflow
+### Stage 2: Systematic Search
 
-Literature reviews follow a structured, multi-phase workflow:
+**Objective:** Execute comprehensive, documented database searches
 
-### Phase 1: Planning and Scoping
+**Steps:**
+1. Construct search strings for each database:
+   ```
+   Concept 1 terms: (term1 OR synonym1 OR synonym2)
+   AND
+   Concept 2 terms: (term2 OR synonym3 OR synonym4)
+   AND
+   Concept 3 terms: (term3 OR synonym5)
+   ```
 
-1. **Define Research Question**: Use PICO framework (Population, Intervention, Comparison, Outcome) for clinical/biomedical reviews
-   - Example: "What is the efficacy of CRISPR-Cas9 (I) for treating sickle cell disease (P) compared to standard care (C)?"
+2. Execute searches and document:
 
-2. **Establish Scope and Objectives**:
-   - Define clear, specific research questions
-   - Determine review type (narrative, systematic, scoping, meta-analysis)
-   - Set boundaries (time period, geographic scope, study types)
+| Database | Date Searched | Search String | Results |
+|----------|--------------|---------------|---------|
+| PubMed | YYYY-MM-DD | [full query] | N papers |
+| Scopus | YYYY-MM-DD | [full query] | N papers |
+| ... | ... | ... | ... |
 
-3. **Develop Search Strategy**:
-   - Identify 2-4 main concepts from research question
-   - List synonyms, abbreviations, and related terms for each concept
-   - Plan Boolean operators (AND, OR, NOT) to combine terms
-   - Select minimum 3 complementary databases
+3. Export results in structured format (RIS, BibTeX, JSON)
+4. Search citation networks:
+   - Forward citations: Papers citing key papers
+   - Backward citations: References from included papers
+5. Search grey literature if appropriate (theses, reports, preprints)
 
-4. **Set Inclusion/Exclusion Criteria**:
-   - Date range (e.g., last 10 years: 2015-2024)
-   - Language (typically English, or specify multilingual)
-   - Publication types (peer-reviewed, preprints, reviews)
-   - Study designs (RCTs, observational, in vitro, etc.)
-   - Document all criteria clearly
+**Search Saturation Criteria:**
+- [ ] No new relevant papers in last 50 screened titles
+- [ ] Citation chaining yields <5% new papers
+- [ ] Expert consultation confirms no major gaps
 
-### Phase 2: Systematic Literature Search
+**Exit Criteria:**
+- [ ] All selected databases searched
+- [ ] Search strategy documented verbatim for each database
+- [ ] Search dates recorded
+- [ ] All results exported and combined
+- [ ] Total unique results counted after initial deduplication
 
-1. **Multi-Database Search**:
+---
 
-   Select databases appropriate for the domain:
+### Stage 3: Screening and Selection
 
-   **Biomedical & Life Sciences:**
-   - Use `gget` skill: `gget search pubmed "search terms"` for PubMed/PMC
-   - Use `gget` skill: `gget search biorxiv "search terms"` for preprints
-   - Use `bioservices` skill for ChEMBL, KEGG, UniProt, etc.
+**Objective:** Systematically screen papers against criteria
 
-   **General Scientific Literature:**
-   - Search arXiv via direct API (preprints in physics, math, CS, q-bio)
-   - Search Semantic Scholar via API (200M+ papers, cross-disciplinary)
-   - Use Google Scholar for comprehensive coverage (manual or careful scraping)
+**Screening Time Budgets:**
 
-   **Specialized Databases:**
-   - Use `gget alphafold` for protein structures
-   - Use `gget cosmic` for cancer genomics
-   - Use `datacommons-client` for demographic/statistical data
-   - Use specialized databases as appropriate for the domain
+| Stage | Time per Paper | Action |
+|-------|---------------|--------|
+| Title screening | ≤15 seconds | Include/Exclude/Maybe |
+| Abstract screening | ≤2 minutes | Include/Exclude with reason |
+| Full-text screening | 10-20 minutes | Final inclusion decision |
 
-2. **Document Search Parameters**:
+**Steps:**
+1. Remove duplicates:
+   - Primary: Match by DOI
+   - Secondary: Match by title (normalized, ≥90% similarity)
+   - Document: N duplicates removed
+
+2. Title screening:
+   - Apply inclusion criteria to titles only
+   - When uncertain, include for abstract review
+   - Document exclusion count
+
+3. Abstract screening:
+   - Read abstracts of remaining papers
+   - Apply all inclusion/exclusion criteria
+   - Record exclusion reason for each paper
+
+4. Full-text screening:
+   - Obtain full texts of remaining papers
+   - Apply all criteria with detailed review
+   - Record specific exclusion reasons
+
+5. Create PRISMA flow diagram:
+```
+Records identified (n = X)
+├── Database 1 (n = a)
+├── Database 2 (n = b)
+└── Other sources (n = c)
+│
+▼
+Records after duplicates removed (n = Y)
+│
+▼
+Records screened (n = Y)
+├── Excluded at title (n = d)
+│
+▼
+Abstracts assessed (n = Z)
+├── Excluded at abstract (n = e)
+│   ├── Reason 1 (n = e1)
+│   ├── Reason 2 (n = e2)
+│   └── Reason 3 (n = e3)
+│
+▼
+Full-text assessed (n = A)
+├── Excluded (n = f)
+│   ├── Reason 1 (n = f1)
+│   ├── Reason 2 (n = f2)
+│   └── Reason 3 (n = f3)
+│
+▼
+Studies included (n = B)
+├── In quantitative synthesis (n = B1)
+└── In qualitative synthesis (n = B2)
+```
+
+**Exit Criteria:**
+- [ ] Deduplication complete (documented count)
+- [ ] All titles screened (≤15 sec each average)
+- [ ] All abstracts screened (exclusion reasons recorded)
+- [ ] All full texts assessed
+- [ ] PRISMA flow diagram complete with numbers
+- [ ] Inter-rater agreement ≥0.8 (if dual screening)
+
+---
+
+### Stage 4: Data Extraction
+
+**Objective:** Extract standardized data from included studies
+
+**Extraction Template:**
+
+| Field | Description |
+|-------|-------------|
+| Study ID | First author, year |
+| Country | Study location |
+| Design | RCT, cohort, case-control, etc. |
+| Sample size | N participants/samples |
+| Population | Demographics, inclusion criteria |
+| Intervention/Exposure | Details of what was studied |
+| Comparator | Control condition |
+| Outcomes | Primary and secondary outcomes |
+| Key findings | Main results with effect sizes |
+| Limitations | Author-reported limitations |
+| Quality score | From assessment tool |
+| Funding | Funding sources |
+| Conflicts | Declared conflicts of interest |
+
+**Steps:**
+1. Create extraction spreadsheet with all fields
+2. Pilot extraction on 3-5 papers
+3. Refine extraction form based on pilot
+4. Extract data from all included studies
+5. Verify extraction accuracy (dual extraction for ≥20%)
+
+**Exit Criteria:**
+- [ ] Extraction form finalized after pilot
+- [ ] Data extracted from 100% of included studies
+- [ ] Quality assessment completed for all studies
+- [ ] Extraction verified (dual extraction ≥20%)
+- [ ] Missing data documented as "NR" (not reported)
+
+---
+
+### Stage 5: Quality Assessment
+
+**Objective:** Evaluate risk of bias and study quality
+
+**Steps:**
+1. Select appropriate tool (see Quality Assessment Tool Selection matrix)
+2. Assess each study independently
+3. Create summary table:
+
+| Study | Domain 1 | Domain 2 | Domain 3 | Overall |
+|-------|---------|---------|---------|---------|
+| Smith 2020 | Low | Low | High | Moderate |
+| Jones 2021 | Low | Low | Low | Low |
+| ... | ... | ... | ... | ... |
+
+4. Create risk of bias visualization (traffic light plot)
+5. Consider excluding very low quality studies
+
+**Quality Rating Thresholds:**
+
+| Overall Rating | Criteria |
+|---------------|----------|
+| High quality (Low RoB) | All domains low or some concerns |
+| Moderate quality | One high-risk domain, others low |
+| Low quality (High RoB) | ≥2 high-risk domains |
+| Very low quality | ≥3 high-risk or critical flaw |
+
+**Exit Criteria:**
+- [ ] All studies assessed with selected tool
+- [ ] Summary table complete
+- [ ] Risk of bias plot generated
+- [ ] Quality ratings assigned (High/Moderate/Low/Very Low)
+- [ ] Decision made on study exclusions (if any)
+
+---
+
+### Stage 6: Synthesis and Analysis
+
+**Objective:** Synthesize findings thematically across studies
+
+**Synthesis Approaches:**
+
+| Data Type | Approach | Output |
+|-----------|----------|--------|
+| Quantitative, similar outcomes | Meta-analysis | Forest plot, pooled effect |
+| Quantitative, diverse outcomes | Narrative synthesis | Comparison tables |
+| Qualitative | Thematic analysis | Theme framework |
+| Mixed | Integrated synthesis | Mixed methods matrix |
+
+**Steps:**
+1. Identify 3-7 major themes from extracted data
+2. Group studies by theme (studies may appear in multiple themes)
+3. For each theme, synthesize across studies:
+   - Consensus areas (≥80% agreement)
+   - Conflicting findings (document discrepancies)
+   - Gaps (what's not studied)
+
+4. Write thematic synthesis (NOT study-by-study):
    ```markdown
-   ## Search Strategy
+   #### Theme 1: [Theme Name]
 
-   ### Database: PubMed
-   - **Date searched**: 2024-10-25
-   - **Date range**: 2015-01-01 to 2024-10-25
-   - **Search string**:
-     ```
-     ("CRISPR"[Title] OR "Cas9"[Title])
-     AND ("sickle cell"[MeSH] OR "SCD"[Title/Abstract])
-     AND 2015:2024[Publication Date]
-     ```
-   - **Results**: 247 articles
+   [Synthesis paragraph integrating findings from multiple studies]
+   Multiple studies (n=X) found that... [citations].
+   However, conflicting evidence exists regarding...
+   [citations]. A notable gap is...
    ```
 
-   Repeat for each database searched.
+5. Create summary tables per theme
+6. If meta-analysis: calculate pooled effects, heterogeneity (I²)
 
-3. **Export and Aggregate Results**:
-   - Export results in JSON format from each database
-   - Combine all results into a single file
-   - Use `scripts/search_databases.py` for post-processing:
-     ```bash
-     python search_databases.py combined_results.json \
-       --deduplicate \
-       --format markdown \
-       --output aggregated_results.md
-     ```
+**Exit Criteria:**
+- [ ] 3-7 themes identified and documented
+- [ ] All studies mapped to themes
+- [ ] Thematic synthesis written (not study-by-study)
+- [ ] Consensus/conflict/gaps identified per theme
+- [ ] Summary tables created
+- [ ] Meta-analysis complete (if applicable)
 
-### Phase 3: Screening and Selection
+---
 
-1. **Deduplication**:
-   ```bash
-   python search_databases.py results.json --deduplicate --output unique_results.json
-   ```
-   - Removes duplicates by DOI (primary) or title (fallback)
-   - Document number of duplicates removed
+### Stage 7: Citation Verification
 
-2. **Title Screening**:
-   - Review all titles against inclusion/exclusion criteria
-   - Exclude obviously irrelevant studies
-   - Document number excluded at this stage
+**Objective:** Verify accuracy of all citations
 
-3. **Abstract Screening**:
-   - Read abstracts of remaining studies
-   - Apply inclusion/exclusion criteria rigorously
-   - Document reasons for exclusion
+**Steps:**
+1. Extract all DOIs and citations from document
+2. Verify each DOI resolves correctly
+3. Cross-check metadata (authors, title, year, journal)
+4. Format citations consistently (see Citation Style Matrix)
 
-4. **Full-Text Screening**:
-   - Obtain full texts of remaining studies
-   - Conduct detailed review against all criteria
-   - Document specific reasons for exclusion
-   - Record final number of included studies
+**Citation Verification Checklist:**
 
-5. **Create PRISMA Flow Diagram**:
-   ```
-   Initial search: n = X
-   ├─ After deduplication: n = Y
-   ├─ After title screening: n = Z
-   ├─ After abstract screening: n = A
-   └─ Included in review: n = B
-   ```
+- [ ] All DOIs tested and resolve
+- [ ] Author names match source
+- [ ] Publication year correct
+- [ ] Journal name correct (abbreviated or full per style)
+- [ ] Page numbers/article IDs correct
+- [ ] In-text citations match reference list
 
-### Phase 4: Data Extraction and Quality Assessment
+**Citation Style Quick Reference:**
 
-1. **Extract Key Data** from each included study:
-   - Study metadata (authors, year, journal, DOI)
-   - Study design and methods
-   - Sample size and population characteristics
-   - Key findings and results
-   - Limitations noted by authors
-   - Funding sources and conflicts of interest
+| Style | In-text | Reference Format |
+|-------|---------|------------------|
+| APA 7 | (Smith et al., 2023) | Smith, J. D., Johnson, M. L., & Williams, K. (2023). Title. *Journal*, *22*(4), 301-318. |
+| Nature | Superscript^1,2^ | 1. Smith, J. D. et al. Title. *J. Name* **22**, 301-318 (2023). |
+| Vancouver | Superscript^1,2^ | 1. Smith JD, Johnson ML. Title. J Name. 2023;22(4):301-18. |
+| IEEE | Bracketed [1], [2] | [1] J. D. Smith et al., "Title," *J. Name*, vol. 22, no. 4, pp. 301-318, 2023. |
 
-2. **Assess Study Quality**:
-   - **For RCTs**: Use Cochrane Risk of Bias tool
-   - **For observational studies**: Use Newcastle-Ottawa Scale
-   - **For systematic reviews**: Use AMSTAR 2
-   - Rate each study: High, Moderate, Low, or Very Low quality
-   - Consider excluding very low-quality studies
+**Exit Criteria:**
+- [ ] 100% of DOIs verified
+- [ ] All metadata cross-checked
+- [ ] Citation style consistent throughout
+- [ ] No [?] or broken references
+- [ ] Reference list formatted correctly
 
-3. **Organize by Themes**:
-   - Identify 3-5 major themes across studies
-   - Group studies by theme (studies may appear in multiple themes)
-   - Note patterns, consensus, and controversies
+---
 
-### Phase 5: Synthesis and Analysis
+### Stage 8: Document Generation
 
-1. **Create Review Document** from template:
-   ```bash
-   cp assets/review_template.md my_literature_review.md
-   ```
+**Objective:** Produce final review document
 
-2. **Write Thematic Synthesis** (NOT study-by-study summaries):
-   - Organize Results section by themes or research questions
-   - Synthesize findings across multiple studies within each theme
-   - Compare and contrast different approaches and results
-   - Identify consensus areas and points of controversy
-   - Highlight the strongest evidence
+**Steps:**
+1. Compile review from template:
+   - Abstract (structured: Background, Methods, Results, Conclusions)
+   - Introduction (context, rationale, objectives)
+   - Methods (search strategy, selection, assessment)
+   - Results (PRISMA, synthesis by theme, quality summary)
+   - Discussion (interpretation, limitations, implications)
+   - Conclusions (key findings, future directions)
 
-   Example structure:
-   ```markdown
-   #### 3.3.1 Theme: CRISPR Delivery Methods
+2. Generate PDF with citations formatted
+3. Review and proofread
 
-   Multiple delivery approaches have been investigated for therapeutic
-   gene editing. Viral vectors (AAV) were used in 15 studies^1-15^ and
-   showed high transduction efficiency (65-85%) but raised immunogenicity
-   concerns^3,7,12^. In contrast, lipid nanoparticles demonstrated lower
-   efficiency (40-60%) but improved safety profiles^16-23^.
-   ```
+**Document Quality Checklist:**
 
-3. **Critical Analysis**:
-   - Evaluate methodological strengths and limitations across studies
-   - Assess quality and consistency of evidence
-   - Identify knowledge gaps and methodological gaps
-   - Note areas requiring future research
+- [ ] Abstract covers all sections (≤350 words for structured)
+- [ ] PRISMA flow diagram included
+- [ ] Search strategy fully reproducible
+- [ ] Results organized thematically (not study-by-study)
+- [ ] Quality assessment summarized
+- [ ] Limitations section included
+- [ ] All references verified
+- [ ] PDF generates without errors
 
-4. **Write Discussion**:
-   - Interpret findings in broader context
-   - Discuss clinical, practical, or research implications
-   - Acknowledge limitations of the review itself
-   - Compare with previous reviews if applicable
-   - Propose specific future research directions
+**Exit Criteria:**
+- [ ] All sections complete
+- [ ] PRISMA diagram included
+- [ ] Citations verified and formatted
+- [ ] PDF generated successfully
+- [ ] Proofread for errors
 
-### Phase 6: Citation Verification
+</workflow>
 
-**CRITICAL**: All citations must be verified for accuracy before final submission.
+<success_criteria>
+## Success Criteria
 
-1. **Verify All DOIs**:
-   ```bash
-   python scripts/verify_citations.py my_literature_review.md
-   ```
+**Quantitative Thresholds:**
 
-   This script:
-   - Extracts all DOIs from the document
-   - Verifies each DOI resolves correctly
-   - Retrieves metadata from CrossRef
-   - Generates verification report
-   - Outputs properly formatted citations
+| Metric | Minimum | Target | Systematic Review |
+|--------|---------|--------|-------------------|
+| Databases searched | 2 | 3 | ≥4 |
+| Search documentation | Dates only | Full queries | Reproducible queries |
+| Included studies | ≥10 | ≥20 | ≥30 |
+| Quality assessment | Informal | Standardized tool | Dual assessment |
+| Citation verification | Spot-check | 100% DOIs | 100% + metadata |
+| PRISMA compliance | None | Partial | Full checklist |
 
-2. **Review Verification Report**:
-   - Check for any failed DOIs
-   - Verify author names, titles, and publication details match
-   - Correct any errors in the original document
-   - Re-run verification until all citations pass
+**Completion Checklist:**
+- [ ] Research question in structured format (PICO/PEO/SPIDER)
+- [ ] ≥3 databases searched with documented queries
+- [ ] PRISMA flow diagram with complete numbers
+- [ ] Quality assessment using standardized tool
+- [ ] Thematic synthesis (not study-by-study)
+- [ ] 100% of DOIs verified and resolving
+- [ ] PDF generates without citation errors
+- [ ] All PRISMA checklist items addressed (for systematic reviews)
 
-3. **Format Citations Consistently**:
-   - Choose one citation style and use throughout (see `references/citation_styles.md`)
-   - Common styles: APA, Nature, Vancouver, Chicago, IEEE
-   - Use verification script output to format citations correctly
-   - Ensure in-text citations match reference list format
+</success_criteria>
 
-### Phase 7: Document Generation
+<scope>
+## Scope
 
-1. **Generate PDF**:
-   ```bash
-   python scripts/generate_pdf.py my_literature_review.md \
-     --citation-style apa \
-     --output my_review.pdf
-   ```
+**In Scope:**
+- Systematic, scoping, narrative, and rapid reviews
+- Multi-database literature searching
+- Screening and selection workflows
+- Quality assessment guidance
+- Thematic synthesis methodology
+- Citation verification
+- PRISMA-compliant documentation
+- PDF generation
 
-   Options:
-   - `--citation-style`: apa, nature, chicago, vancouver, ieee
-   - `--no-toc`: Disable table of contents
-   - `--no-numbers`: Disable section numbering
-   - `--check-deps`: Check if pandoc/xelatex are installed
+**Out of Scope** (use specialized resources):
+- Meta-analysis statistical calculations → use `statistical-analysis`
+- Single paper lookups → use `research-lookup`
+- Citation formatting only → use `citation-management`
+- Figure creation → use `plotting-libraries` or `scientific-schematics`
+- Full-text retrieval → manual or institutional access
 
-2. **Review Final Output**:
-   - Check PDF formatting and layout
-   - Verify all sections are present
-   - Ensure citations render correctly
-   - Check that figures/tables appear properly
-   - Verify table of contents is accurate
+</scope>
 
-3. **Quality Checklist**:
-   - [ ] All DOIs verified with verify_citations.py
-   - [ ] Citations formatted consistently
-   - [ ] PRISMA flow diagram included (for systematic reviews)
-   - [ ] Search methodology fully documented
-   - [ ] Inclusion/exclusion criteria clearly stated
-   - [ ] Results organized thematically (not study-by-study)
-   - [ ] Quality assessment completed
-   - [ ] Limitations acknowledged
-   - [ ] References complete and accurate
-   - [ ] PDF generates without errors
+<anti_patterns>
+## Common Pitfalls
 
-## Database-Specific Search Guidance
+### 1. Single Database Search
 
-### PubMed / PubMed Central
-
-Access via `gget` skill:
-```bash
-# Search PubMed
-gget search pubmed "CRISPR gene editing" -l 100
-
-# Search with filters
-# Use PubMed Advanced Search Builder to construct complex queries
-# Then execute via gget or direct Entrez API
+**Anti-pattern:**
+```
+Searched only PubMed for a systematic review.
+Missed 40% of relevant papers indexed only
+in Scopus, Web of Science, or preprint servers.
 ```
 
-**Search tips**:
-- Use MeSH terms: `"sickle cell disease"[MeSH]`
-- Field tags: `[Title]`, `[Title/Abstract]`, `[Author]`
-- Date filters: `2020:2024[Publication Date]`
-- Boolean operators: AND, OR, NOT
-- See MeSH browser: https://meshb.nlm.nih.gov/search
-
-### bioRxiv / medRxiv
-
-Access via `gget` skill:
-```bash
-gget search biorxiv "CRISPR sickle cell" -l 50
+**Solution:**
+```
+Minimum 3 databases for systematic reviews.
+Select based on domain (see Database Selection Matrix).
+Include preprint servers for recent findings.
+Document all searches for reproducibility.
 ```
 
-**Important considerations**:
-- Preprints are not peer-reviewed
-- Verify findings with caution
-- Check if preprint has been published (CrossRef)
-- Note preprint version and date
+---
 
-### arXiv
+### 2. Study-by-Study Summaries
 
-Access via direct API or WebFetch:
-```python
-# Example search categories:
-# q-bio.QM (Quantitative Methods)
-# q-bio.GN (Genomics)
-# q-bio.MN (Molecular Networks)
-# cs.LG (Machine Learning)
-# stat.ML (Machine Learning Statistics)
-
-# Search format: category AND terms
-search_query = "cat:q-bio.QM AND ti:\"single cell sequencing\""
+**Anti-pattern:**
+```
+Results section:
+"Smith (2020) found X. Jones (2021) found Y.
+Brown (2022) found Z..."
+No synthesis, just serial summaries.
 ```
 
-### Semantic Scholar
-
-Access via direct API (requires API key, or use free tier):
-- 200M+ papers across all fields
-- Excellent for cross-disciplinary searches
-- Provides citation graphs and paper recommendations
-- Use for finding highly influential papers
-
-### Specialized Biomedical Databases
-
-Use appropriate skills:
-- **ChEMBL**: `bioservices` skill for chemical bioactivity
-- **UniProt**: `gget` or `bioservices` skill for protein information
-- **KEGG**: `bioservices` skill for pathways and genes
-- **COSMIC**: `gget` skill for cancer mutations
-- **AlphaFold**: `gget alphafold` for protein structures
-- **PDB**: `gget` or direct API for experimental structures
-
-### Citation Chaining
-
-Expand search via citation networks:
-
-1. **Forward citations** (papers citing key papers):
-   - Use Google Scholar "Cited by"
-   - Use Semantic Scholar or OpenAlex APIs
-   - Identifies newer research building on seminal work
-
-2. **Backward citations** (references from key papers):
-   - Extract references from included papers
-   - Identify highly cited foundational work
-   - Find papers cited by multiple included studies
-
-## Citation Style Guide
-
-Detailed formatting guidelines are in `references/citation_styles.md`. Quick reference:
-
-### APA (7th Edition)
-- In-text: (Smith et al., 2023)
-- Reference: Smith, J. D., Johnson, M. L., & Williams, K. R. (2023). Title. *Journal*, *22*(4), 301-318. https://doi.org/10.xxx/yyy
-
-### Nature
-- In-text: Superscript numbers^1,2^
-- Reference: Smith, J. D., Johnson, M. L. & Williams, K. R. Title. *Nat. Rev. Drug Discov.* **22**, 301-318 (2023).
-
-### Vancouver
-- In-text: Superscript numbers^1,2^
-- Reference: Smith JD, Johnson ML, Williams KR. Title. Nat Rev Drug Discov. 2023;22(4):301-18.
-
-**Always verify citations** with verify_citations.py before finalizing.
-
-## Best Practices
-
-### Search Strategy
-1. **Use multiple databases** (minimum 3): Ensures comprehensive coverage
-2. **Include preprint servers**: Captures latest unpublished findings
-3. **Document everything**: Search strings, dates, result counts for reproducibility
-4. **Test and refine**: Run pilot searches, review results, adjust search terms
-
-### Screening and Selection
-1. **Use clear criteria**: Document inclusion/exclusion criteria before screening
-2. **Screen systematically**: Title → Abstract → Full text
-3. **Document exclusions**: Record reasons for excluding studies
-4. **Consider dual screening**: For systematic reviews, have two reviewers screen independently
-
-### Synthesis
-1. **Organize thematically**: Group by themes, NOT by individual studies
-2. **Synthesize across studies**: Compare, contrast, identify patterns
-3. **Be critical**: Evaluate quality and consistency of evidence
-4. **Identify gaps**: Note what's missing or understudied
-
-### Quality and Reproducibility
-1. **Assess study quality**: Use appropriate quality assessment tools
-2. **Verify all citations**: Run verify_citations.py script
-3. **Document methodology**: Provide enough detail for others to reproduce
-4. **Follow guidelines**: Use PRISMA for systematic reviews
-
-### Writing
-1. **Be objective**: Present evidence fairly, acknowledge limitations
-2. **Be systematic**: Follow structured template
-3. **Be specific**: Include numbers, statistics, effect sizes where available
-4. **Be clear**: Use clear headings, logical flow, thematic organization
-
-## Common Pitfalls to Avoid
-
-1. **Single database search**: Misses relevant papers; always search multiple databases
-2. **No search documentation**: Makes review irreproducible; document all searches
-3. **Study-by-study summary**: Lacks synthesis; organize thematically instead
-4. **Unverified citations**: Leads to errors; always run verify_citations.py
-5. **Too broad search**: Yields thousands of irrelevant results; refine with specific terms
-6. **Too narrow search**: Misses relevant papers; include synonyms and related terms
-7. **Ignoring preprints**: Misses latest findings; include bioRxiv, medRxiv, arXiv
-8. **No quality assessment**: Treats all evidence equally; assess and report quality
-9. **Publication bias**: Only positive results published; note potential bias
-10. **Outdated search**: Field evolves rapidly; clearly state search date
-
-## Example Workflow
-
-Complete workflow for a biomedical literature review:
-
-```bash
-# 1. Create review document from template
-cp assets/review_template.md crispr_sickle_cell_review.md
-
-# 2. Search multiple databases using appropriate skills
-# - Use gget skill for PubMed, bioRxiv
-# - Use direct API access for arXiv, Semantic Scholar
-# - Export results in JSON format
-
-# 3. Aggregate and process results
-python scripts/search_databases.py combined_results.json \
-  --deduplicate \
-  --rank citations \
-  --year-start 2015 \
-  --year-end 2024 \
-  --format markdown \
-  --output search_results.md \
-  --summary
-
-# 4. Screen results and extract data
-# - Manually screen titles, abstracts, full texts
-# - Extract key data into the review document
-# - Organize by themes
-
-# 5. Write the review following template structure
-# - Introduction with clear objectives
-# - Detailed methodology section
-# - Results organized thematically
-# - Critical discussion
-# - Clear conclusions
-
-# 6. Verify all citations
-python scripts/verify_citations.py crispr_sickle_cell_review.md
-
-# Review the citation report
-cat crispr_sickle_cell_review_citation_report.json
-
-# Fix any failed citations and re-verify
-python scripts/verify_citations.py crispr_sickle_cell_review.md
-
-# 7. Generate professional PDF
-python scripts/generate_pdf.py crispr_sickle_cell_review.md \
-  --citation-style nature \
-  --output crispr_sickle_cell_review.pdf
-
-# 8. Review final PDF and markdown outputs
+**Solution:**
+```
+Organize by themes, synthesize across studies:
+"Multiple studies (n=8) found consistent evidence
+that [finding], though effect sizes varied (d=0.3-0.8).
+Conflicting results emerged regarding [topic]..."
 ```
 
-## Integration with Other Skills
+---
 
-This skill works seamlessly with other scientific skills:
+### 3. Undocumented Search Strategy
 
-### Database Access Skills
-- **gget**: PubMed, bioRxiv, COSMIC, AlphaFold, Ensembl, UniProt
-- **bioservices**: ChEMBL, KEGG, Reactome, UniProt, PubChem
-- **datacommons-client**: Demographics, economics, health statistics
-
-### Analysis Skills
-- **pydeseq2**: RNA-seq differential expression (for methods sections)
-- **scanpy**: Single-cell analysis (for methods sections)
-- **anndata**: Single-cell data (for methods sections)
-- **biopython**: Sequence analysis (for background sections)
-
-### Visualization Skills
-- **matplotlib**: Generate figures and plots for review
-- **seaborn**: Statistical visualizations
-
-### Writing Skills
-- **brand-guidelines**: Apply institutional branding to PDF
-- **internal-comms**: Adapt review for different audiences
-- **venue-templates**: Access venue-specific writing style guides when preparing reviews for publication
-
-### Venue-Specific Writing Styles
-
-When preparing a literature review for a specific journal, consult the **venue-templates** skill for writing style guidance:
-- `venue_writing_styles.md`: Master style comparison across venues
-- `nature_science_style.md`: Nature/Science flowing abstract style, story-driven structure
-- `cell_press_style.md`: Cell Press graphical abstracts, Highlights format
-- `medical_journal_styles.md`: NEJM/Lancet/JAMA structured abstracts, PRISMA compliance
-
-These guides help adapt your review's tone, abstract format, and structure to match the target venue's expectations.
-
-## Resources
-
-### Bundled Resources
-
-**Scripts:**
-- `scripts/verify_citations.py`: Verify DOIs and generate formatted citations
-- `scripts/generate_pdf.py`: Convert markdown to professional PDF
-- `scripts/search_databases.py`: Process, deduplicate, and format search results
-
-**References:**
-- `references/citation_styles.md`: Detailed citation formatting guide (APA, Nature, Vancouver, Chicago, IEEE)
-- `references/database_strategies.md`: Comprehensive database search strategies
-
-**Assets:**
-- `assets/review_template.md`: Complete literature review template with all sections
-
-### External Resources
-
-**Guidelines:**
-- PRISMA (Systematic Reviews): http://www.prisma-statement.org/
-- Cochrane Handbook: https://training.cochrane.org/handbook
-- AMSTAR 2 (Review Quality): https://amstar.ca/
-
-**Tools:**
-- MeSH Browser: https://meshb.nlm.nih.gov/search
-- PubMed Advanced Search: https://pubmed.ncbi.nlm.nih.gov/advanced/
-- Boolean Search Guide: https://www.ncbi.nlm.nih.gov/books/NBK3827/
-
-**Citation Styles:**
-- APA Style: https://apastyle.apa.org/
-- Nature Portfolio: https://www.nature.com/nature-portfolio/editorial-policies/reporting-standards
-- NLM/Vancouver: https://www.nlm.nih.gov/bsd/uniform_requirements.html
-
-## Dependencies
-
-### Required Python Packages
-```bash
-pip install requests  # For citation verification
+**Anti-pattern:**
+```
+Methods: "We searched PubMed and Google Scholar
+for relevant articles."
+Not reproducible. No dates, no search terms.
 ```
 
-### Required System Tools
-```bash
-# For PDF generation
-brew install pandoc  # macOS
-apt-get install pandoc  # Linux
-
-# For LaTeX (PDF generation)
-brew install --cask mactex  # macOS
-apt-get install texlive-xetex  # Linux
+**Solution:**
+```
+Document verbatim for each database:
+- Database name
+- Date searched
+- Exact search string used
+- Number of results
+- Filters applied (date range, language, etc.)
 ```
 
-Check dependencies:
-```bash
-python scripts/generate_pdf.py --check-deps
+---
+
+### 4. No Quality Assessment
+
+**Anti-pattern:**
+```
+Included all studies regardless of quality.
+Weighted a flawed pilot study equally with
+a rigorous multi-center RCT.
 ```
 
-## Summary
+**Solution:**
+```
+Use standardized quality assessment tool:
+- RCTs: Cochrane RoB 2.0
+- Observational: Newcastle-Ottawa Scale
+- Systematic reviews: AMSTAR 2
+Report quality in results, consider in synthesis.
+```
 
-This literature-review skill provides:
+---
 
-1. **Systematic methodology** following academic best practices
-2. **Multi-database integration** via existing scientific skills
-3. **Citation verification** ensuring accuracy and credibility
-4. **Professional output** in markdown and PDF formats
-5. **Comprehensive guidance** covering the entire review process
-6. **Quality assurance** with verification and validation tools
-7. **Reproducibility** through detailed documentation requirements
+### 5. Unverified Citations
 
-Conduct thorough, rigorous literature reviews that meet academic standards and provide comprehensive synthesis of current knowledge in any domain.
+**Anti-pattern:**
+```
+Copy-pasted citations from Google Scholar
+without verification. Final document has
+3 broken DOIs and 2 wrong publication years.
+```
+
+**Solution:**
+```
+Verify 100% of citations:
+1. Test all DOIs resolve
+2. Cross-check author names, titles, years
+3. Use reference manager for consistency
+4. Run verification script before submission
+```
+
+---
+
+### 6. Missing Exclusion Reasons
+
+**Anti-pattern:**
+```
+PRISMA diagram shows "312 excluded" at
+abstract screening with no breakdown.
+Not reproducible or auditable.
+```
+
+**Solution:**
+```
+Track exclusion reasons at each stage:
+- Wrong population (n=45)
+- Wrong study design (n=82)
+- Wrong outcome (n=31)
+- Not English (n=12)
+- Conference abstract only (n=142)
+```
+
+</anti_patterns>
+
+<templates>
+## Output Templates
+
+### PRISMA Flow Diagram Template
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                     IDENTIFICATION                       │
+├─────────────────────────────────────────────────────────┤
+│  Records identified through          Additional records  │
+│  database searching                  from other sources  │
+│  (n = {{db_total}})                  (n = {{other}})     │
+└─────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│                      SCREENING                           │
+├─────────────────────────────────────────────────────────┤
+│  Records after duplicates removed                        │
+│  (n = {{after_dedup}})                                   │
+│                           │                              │
+│                           ▼                              │
+│  Records screened ──────────────► Records excluded       │
+│  (n = {{screened}})                (n = {{title_excl}})  │
+│                           │                              │
+│                           ▼                              │
+│  Full-text assessed ────────────► Excluded with reasons  │
+│  (n = {{ft_assessed}})            (n = {{ft_excl}})      │
+│                                   • Reason 1 (n = )      │
+│                                   • Reason 2 (n = )      │
+│                                   • Reason 3 (n = )      │
+└─────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│                       INCLUDED                           │
+├─────────────────────────────────────────────────────────┤
+│  Studies included in synthesis                           │
+│  (n = {{included}})                                      │
+│  • Quantitative synthesis (n = {{quant}})                │
+│  • Qualitative synthesis (n = {{qual}})                  │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Search Documentation Template
+
+```markdown
+## Search Strategy
+
+### Database: {{database_name}}
+
+**Date searched:** {{YYYY-MM-DD}}
+
+**Search query:**
+```
+{{full_search_string}}
+```
+
+**Filters applied:**
+- Date range: {{start}} to {{end}}
+- Language: {{language}}
+- Publication type: {{types}}
+
+**Results:** {{N}} records
+
+---
+
+### Database: {{database_name_2}}
+
+[Repeat for each database]
+```
+
+### Data Extraction Template
+
+```markdown
+## Study: {{First Author}} {{Year}}
+
+| Field | Value |
+|-------|-------|
+| Full citation | {{citation}} |
+| Country | {{country}} |
+| Study design | {{design}} |
+| Sample size | n = {{N}} |
+| Population | {{demographics}} |
+| Intervention | {{intervention}} |
+| Comparator | {{comparator}} |
+| Primary outcome | {{outcome}} |
+| Key finding | {{finding with effect size}} |
+| Quality rating | {{High/Moderate/Low}} |
+| Limitations | {{limitations}} |
+| Funding | {{funding}} |
+```
+
+</templates>
+
+<cross_references>
+## Related Skills
+
+| Skill | Relationship |
+|-------|-------------|
+| `research-lookup` | Use for single paper lookups and quick searches |
+| `citation-management` | Use for citation formatting after extraction |
+| `scientific-schematics` | Generate PRISMA diagrams and synthesis figures |
+| `plotting-libraries` | Create forest plots and summary visualizations |
+| `statistical-analysis` | Perform meta-analysis calculations |
+| `scientific-writing` | Write manuscript sections from review |
+| `venue-templates` | Format for specific journal requirements |
+
+**Skill Selection:**
+See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
+</cross_references>
+
+<references>
+## Reference Documents
+
+| Document | Purpose |
+|----------|---------|
+| `references/citation_styles.md` | Detailed formatting for APA, Nature, Vancouver, IEEE |
+| `references/database_strategies.md` | Database-specific search optimization |
+| `references/quality_assessment_tools.md` | Tool selection and scoring guidance |
+| `references/prisma_checklist.md` | Full PRISMA 2020 checklist |
+
+## External Resources
+
+| Resource | URL |
+|----------|-----|
+| PRISMA Statement | http://www.prisma-statement.org/ |
+| Cochrane Handbook | https://training.cochrane.org/handbook |
+| PROSPERO Registry | https://www.crd.york.ac.uk/prospero/ |
+| MeSH Browser | https://meshb.nlm.nih.gov/search |
+| AMSTAR 2 | https://amstar.ca/ |
+
+</references>

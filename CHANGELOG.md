@@ -24,6 +24,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **Phase 1.3 Skills Determinism Implementation (Complete)**: Refactored all Tier 3 skills to use standard template
+  - `skills/citation-management/SKILL.md` (6.5 → ~8.5): Complete restructure with deterministic patterns
+    - Added citation style selection decision tree by venue (biomedical, life sciences, social sciences, engineering, conferences, grants)
+    - Added identifier-to-metadata source routing table (DOI→CrossRef, PMID→PubMed, arXiv ID→arXiv API)
+    - Added database selection matrix by research domain (8 domains with primary/secondary/specialized sources)
+    - 5-stage numbered workflow with exit criteria (Discovery → Metadata Extraction → BibTeX Generation → Validation → Integration)
+    - Required fields matrix by BibTeX entry type (@article, @inproceedings, @book, @misc)
+    - Validation checklist with severity ratings (DOI resolution, required fields, year format, unique keys)
+    - Quantitative success criteria table (DOI resolution rate, field completeness, duplicate detection)
+    - 7 anti-patterns with solutions (single database bias, accepting metadata blindly, missing DOI validation, inconsistent citation keys, citing outdated preprints, duplicate entries, manual BibTeX entry)
+    - Search strategy documentation template and validation report JSON template
+  - `skills/scientific-schematics/SKILL.md` (6.5 → ~8.5): Restructured with decision frameworks and quantified criteria
+    - Added schematic type selection decision tree (study design, ML/AI, biological systems, systems/engineering, abstract concepts)
+    - Added quality threshold matrix by document type (journal 8.5, conference 8.0, poster 7.0, presentation 6.5)
+    - Added tool selection matrix (flowcharts, neural networks, pathways, circuits, architecture)
+    - 5-stage numbered workflow with exit criteria (Requirements Analysis → Prompt Construction → AI Generation → Quality Verification → Integration)
+    - Prompt construction template with component checklist
+    - Smart iteration logic diagram (early stop when quality threshold met)
+    - Quality scoring rubric (5 dimensions: scientific accuracy, clarity, labels, layout, professional appearance)
+    - 6 anti-patterns with solutions (vague prompts, missing component details, wrong quality threshold, ignoring accessibility, no flow direction, overcrowded diagrams)
+    - Example prompts for CONSORT flowchart, neural network architecture, biological pathway
+  - `skills/visual-design/SKILL.md` (6.5 → ~8.5): Converted prose to matrices with quantified criteria
+    - Added design direction selection decision tree by audience (academic peers, conference, public, internal)
+    - Added chart type selection matrix (8 data types with recommended/avoid guidance)
+    - Added color palette selection matrix by data context (sequential, diverging, categorical, binary)
+    - Added colorblind-safe palettes table (Okabe-Ito, Viridis, Cividis, Blue-Orange, Magenta-Green)
+    - 5-stage numbered workflow with exit criteria (Context Analysis → Visual Strategy → Accessibility Check → Implementation Handoff → Quality Review)
+    - Typography hierarchy table with size ranges by element
+    - Accessibility checklist with specific requirements and verification tools
+    - Quantitative success criteria table (contrast ratio, font size, color count, line weight, resolution)
+    - Design quality indicators table (intentionality, clarity, consistency, accessibility, brand alignment)
+    - 7 anti-patterns with solutions (default syndrome, rainbow colormap, color-only encoding, cramming, inconsistent styling, truncated axes, 3D charts for 2D data)
+    - Visual specifications document template and pre-submission design checklist
   - `skills/scientific-slides/SKILL.md` (6.0 → ~8.5): Reduced from 1150 to ~575 lines with proper structure
     - Added talk type selection decision tree (conference/seminar/defense/grant/journal club)
     - Added implementation method decision tree (Nano Banana Pro PDF vs PowerPoint vs LaTeX Beamer)

@@ -1,243 +1,553 @@
 ---
 name: visual-design
-description: Provides design philosophy and publication specifications for scientific visuals. Use when the user needs guidance on figures, charts, infographics, posters, or slides. Triggers on questions about typography, color, layout, accessibility, journal requirements, or visual best practices for science communication. Delivers design principles and publication specs—delegates code implementation to plotting-libraries skill.
-version: 1.0.0
-license: Internal use - Oligon brand standards apply
-allowed-tools: Read, Glob, Write
+version: 2.0.0
+description: "Design philosophy and publication specifications for scientific visuals. Provides guidance on typography, color, layout, accessibility, and journal requirements. Delegates implementation to specialized skills."
+allowed-tools: [Read, Glob, Write]
 ---
 
-Apply intentional design thinking to create publication-quality scientific visuals that avoid generic "default matplotlib" aesthetics.
+# Visual Design for Scientific Communication
 
-Analyze the user's visualization requirements—figure, chart, infographic, poster, or presentation—considering their audience, publication venue, and technical constraints.
+<overview>
+Apply intentional design thinking to create publication-quality scientific visuals that avoid generic "default matplotlib" aesthetics. This skill provides the design philosophy layer—establishing visual direction, ensuring accessibility, and meeting publication standards—while delegating code implementation to specialized skills like `plotting-libraries` and `scientific-schematics`.
+</overview>
 
-## Design Thinking
+<when_to_use>
+## Trigger Conditions
 
-Before creating visuals, understand the context and commit to a clear aesthetic direction:
+Use this skill when:
+- Planning visual strategy for a manuscript or presentation
+- Need guidance on typography, color, or layout decisions
+- Checking accessibility requirements (colorblind-safe, contrast)
+- Determining publication specifications for a specific journal
+- Establishing consistent visual identity across figures
+- Reviewing design quality before submission
 
-- **Story**: What single insight should the viewer take away? Every visual tells one story.
-- **Audience**: Journal reviewers (precise, restrained)? Conference attendees (bold, scannable)? Internal team (functional, clear)? General public (accessible, engaging)?
-- **Constraints**: Journal figure specs, color count limits, file format requirements, accessibility needs, brand guidelines.
-- **Differentiation**: What makes this visual memorable? What element will someone recall tomorrow?
+Do NOT use this skill when:
+- Writing matplotlib/seaborn/R code → use `plotting-libraries`
+- Generating diagrams → use `scientific-schematics`
+- Creating photorealistic images → use `generate-image`
+- Building slides or posters → use `scientific-slides`, `latex-posters`, `pptx-posters`
+</when_to_use>
 
-**CRITICAL**: Choose a clear visual direction and execute it with precision. Scientific visuals can be bold OR restrained - the key is intentionality. A striking conference poster and an elegant journal figure both succeed through deliberate choices.
+<decision_framework>
+## Decision Matrix
 
-## Output Formats
+### Design Direction Selection
 
-This skill applies to:
+```
+Who is your primary audience?
+│
+├─ Journal Reviewers / Academic Peers
+│  │
+│  ├─ Data-heavy figures → Precise, restrained, minimal decoration
+│  │  • Maximum clarity over visual impact
+│  │  • Publication specs: exact dimensions, 300 DPI
+│  │  • Conservative color palette
+│  │
+│  └─ Conceptual figures → Clean, professional, publishable
+│     • Focus on clarity of scientific message
+│     • Standard typography (Helvetica/Arial)
+│
+├─ Conference Audience
+│  │
+│  ├─ Poster presentation → Bold, scannable in 3 seconds
+│  │  • Large fonts (≥24pt body, ≥48pt headers)
+│  │  • High contrast colors
+│  │  • Visual hierarchy guides viewer
+│  │
+│  └─ Talk slides → Impactful, one idea per slide
+│     • Minimal text, maximum visual
+│     • Dark backgrounds can work well
+│
+├─ General Public / Media
+│  │
+│  └─ Accessible, engaging, memorable
+│     • Avoid jargon in labels
+│     • Use visual metaphors
+│     • Higher visual impact acceptable
+│
+└─ Internal Team
+   │
+   └─ Functional, clear, quick to produce
+      • Standard templates acceptable
+      • Focus on information over aesthetics
+```
 
-| Output | Tools | Typical Use |
-|--------|-------|-------------|
-| **Figures** | matplotlib, seaborn, plotly, SVG | Journal papers, reports (see [plotting-libraries](../plotting-libraries/SKILL.md)) |
-| **Infographics** | SVG, Illustrator-ready output | Summaries, educational content |
-| **Report illustrations** | ReportLab, PDF components | Internal reports, branded documents |
-| **Presentations** | PPTX (python-pptx), Beamer/LaTeX | Talks, seminars, conferences |
-| **Posters** | LaTeX (tikzposter, beamerposter), PPTX | Conference presentations |
+### Chart Type Selection
 
-## Visual Design Principles
-
-### Typography
-
-Scientific visuals demand legible, professional typography:
-
-**Hierarchy matters:**
-- **Titles**: Bold, larger, establish context immediately
-- **Axis labels**: Clear, readable at final reproduction size
-- **Annotations**: Smaller but never sacrificed for aesthetics
-- **Legends**: Positioned to not obscure data
-
-**Font selection:**
-- Use Oligon brand fonts when available (see brand standards)
-- For figures: sans-serif for labels (Helvetica, Arial, Source Sans Pro)
-- For posters/slides: pair a distinctive display font with a clean body font
-- **Test at final size**: A beautiful font that's illegible at 8pt fails
-
-**Typography rules:**
-- **Maximum 2 font families** - One for headings, one for body; create variation through weight/size
-- **High contrast required** - Dark text on light backgrounds (or vice versa); minimum 4.5:1 ratio
-- **Consistent sizing** - Establish a type scale and stick to it across all panels/slides
-
-**Anti-patterns to avoid:**
-- Default matplotlib fonts without customization
-- Inconsistent font sizes across panels
-- Decorative fonts that sacrifice legibility
-- ALL CAPS for long text strings
-
-### Color
-
-Color communicates data and establishes visual identity:
-
-**Brand integration:**
-- Use Oligon color palette as the foundation (see `references/BRAND_COLORS_v4.md`)
-- Primary colors for main data series
-- Accent colors for highlights and callouts
-- Neutral palette for backgrounds, axes, gridlines
-
-**Data visualization principles:**
-- Sequential palettes for continuous data (light→dark)
-- Diverging palettes for data with meaningful center (e.g., fold change)
-- Categorical palettes for discrete groups (max 7-8 distinguishable colors)
-
-**Accessibility essentials:**
-- **Avoid red/green contrast alone** - ~8% of males are red-green colorblind; use blue/orange or magenta/green instead
-- **Redundant coding** - Never rely on color alone; add shapes, patterns, or direct labels to convey meaning
-- **Greyscale test** - Convert your design to black & white; if meaning is lost, contrast is insufficient
-- **Colorblind-safe palettes** - Verify with simulators (e.g., Coblis, Color Oracle) before finalizing
-- **Sufficient contrast** - WCAG recommends 4.5:1 ratio for text; avoid light-on-light or dark-on-dark
-
-**Color hierarchy:**
-- Dominant color draws attention to the key insight
-- Supporting colors provide context without competing
-- Background colors create depth without distraction
-
-**Anti-patterns to avoid:**
-- Rainbow colormaps for sequential data (perceptually uneven)
-- Too many colors competing for attention
-- Pure black on pure white (harsh; use soft blacks like #1a1a1a)
-- Colors that clash with brand identity
-
-### Composition & Layout
-
-Spatial arrangement guides the viewer's eye:
-
-**Visual hierarchy:**
-- Most important element gets most visual weight (size, color, position)
-- Guide the eye: top-left → bottom-right (Western reading order)
-- Group related elements; separate distinct concepts with whitespace
-
-**Gestalt principles** (how the brain groups visual elements):
-- **Proximity** - Elements placed close together are perceived as related; use spacing to create logical groups
-- **Similarity** - Elements sharing color, shape, or size are seen as belonging together
-- **Alignment** - Use a grid system; misaligned elements look unprofessional and confuse relationships
-
-**Figure panels:**
-- Consistent sizing across multi-panel figures
-- Aligned axes when comparing related data
-- Clear panel labels (A, B, C or descriptive titles)
-- Shared legends when appropriate to reduce redundancy
-
-**Whitespace:**
-- Generous margins prevent cramped appearance
-- Space between elements creates visual breathing room
-- Don't fill every pixel - emptiness is a design choice
-
-**Posters and slides:**
-- Scannable in 3 seconds: title → key figure → conclusion
-- Limit text density; visuals carry the message
-- Create visual flow that guides through the narrative
-
-**Anti-patterns to avoid:**
-- Cramming too much into one figure
-- Misaligned elements across panels
-- Inconsistent spacing
-- Text-heavy slides that could be a document
-
-### Data Visualization Best Practices
-
-**Chart selection:**
-| Data Type | Recommended | Avoid |
-|-----------|-------------|-------|
+| Data Type | ✓ Recommended | ✗ Avoid |
+|-----------|---------------|---------|
 | Comparison (few categories) | Bar chart, dot plot | Pie chart (hard to compare) |
-| Comparison (many categories) | Horizontal bar, heatmap | 3D charts |
-| Time series | Line chart, area chart | Bar charts (implies discrete) |
+| Comparison (many categories) | Horizontal bar, heatmap | 3D charts (distorted perception) |
+| Time series | Line chart, area chart | Bar chart (implies discrete) |
 | Distribution | Histogram, violin, box plot | Bar chart of means only |
-| Relationship | Scatter plot, bubble chart | Connected scatter (implies order) |
+| Relationship (2 variables) | Scatter plot | Connected scatter (implies order) |
+| Relationship (3 variables) | Scatter + color/size | 3D scatter (depth perception poor) |
 | Part-to-whole | Stacked bar, treemap | Pie chart (if >5 segments) |
+| Flow/Network | Sankey, network graph | Tables |
 
-**Clarity principles:**
-- Data-ink ratio: maximize data, minimize chartjunk
-- Label directly on the plot when possible (reduces legend lookups)
-- Use consistent scales when comparing panels
-- Show uncertainty (error bars, confidence intervals) when relevant
+### Color Palette Selection
 
-**Anti-patterns to avoid:**
-- 3D effects that distort perception
-- Dual y-axes (often misleading)
-- Truncated axes that exaggerate differences
-- Excessive gridlines, borders, backgrounds
+| Context | Palette Type | Example Use |
+|---------|--------------|-------------|
+| Continuous data (low→high) | Sequential | Expression levels, intensity |
+| Continuous data (diverging) | Diverging | Fold change (up/down regulation) |
+| Discrete groups (≤5) | Categorical | Treatment groups |
+| Discrete groups (>5) | Extended categorical | Multiple cell types |
+| Binary comparison | Two-color | Control vs treatment |
+| Highlighting | Neutral + accent | One emphasized element |
 
-## Avoiding Generic Defaults
+**Colorblind-Safe Palettes:**
 
-Scientific visuals suffer from "default syndrome" - using tool defaults without intentional design.
+| Palette | Colors | Best For |
+|---------|--------|----------|
+| Okabe-Ito | 8 colors | Categorical data, general use |
+| Viridis | Continuous | Sequential data |
+| Cividis | Continuous | Sequential, colorblind-optimized |
+| Blue-Orange | 2 colors | Binary comparisons |
+| Magenta-Green | 2 colors | Binary (alternative to red-green) |
 
-**The problem:**
-- Default matplotlib: gray background, thin lines, small fonts, cramped spacing
-- Default Excel: garish colors, 3D effects, excessive gridlines
-- Default PowerPoint: clip art, WordArt, busy templates
+</decision_framework>
 
-**The solution:**
+<workflow>
+## Workflow
+
+### Stage 1: Context Analysis
+
+**Objective:** Understand requirements and constraints before designing
+
+**Steps:**
+1. Identify target audience (reviewers, conference, public)
+2. Determine output format (journal figure, poster, slides)
+3. Check venue-specific requirements (dimensions, format, DPI)
+4. Identify brand guidelines if applicable
+5. Assess accessibility requirements
+
+**Exit Criteria:**
+- [ ] Audience identified (academic/conference/public/internal)
+- [ ] Output format specified with dimensions
+- [ ] Venue requirements documented (if applicable)
+- [ ] Accessibility requirements noted (colorblind, contrast)
+
+**Context Questions:**
+1. **Story**: What single insight should the viewer take away?
+2. **Audience**: What level of expertise? What are their expectations?
+3. **Constraints**: Size limits? Color restrictions? File format requirements?
+4. **Differentiation**: What will make this memorable?
+
+---
+
+### Stage 2: Visual Strategy
+
+**Objective:** Establish clear design direction before implementation
+
+**Steps:**
+1. Select chart type(s) from decision matrix
+2. Choose color palette based on data type
+3. Define typography hierarchy
+4. Plan layout and composition
+5. Document visual strategy for consistency
+
+**Exit Criteria:**
+- [ ] Chart type(s) selected with rationale
+- [ ] Color palette chosen (≤7 colors for categorical)
+- [ ] Typography defined (max 2 font families)
+- [ ] Layout grid established
+- [ ] Visual strategy documented for multi-panel figures
+
+**Typography Hierarchy:**
+
+| Element | Size Range | Style | Purpose |
+|---------|------------|-------|---------|
+| Figure title | 12-14pt | Bold | Establish context |
+| Axis titles | 10-12pt | Regular | Label dimensions |
+| Axis labels | 8-10pt | Regular | Show values |
+| Annotations | 8-9pt | Regular/Italic | Add context |
+| Legend | 8-10pt | Regular | Decode colors/shapes |
+
+---
+
+### Stage 3: Accessibility Check
+
+**Objective:** Ensure visual is accessible to all viewers
+
+**Steps:**
+1. Verify colorblind-safe palette used
+2. Check contrast ratios (≥4.5:1 for text)
+3. Add redundant encoding (shapes + colors)
+4. Test at final reproduction size
+5. Convert to grayscale to verify contrast
+
+**Exit Criteria:**
+- [ ] No red/green only distinctions
+- [ ] Contrast ratio ≥4.5:1 for all text
+- [ ] Redundant encoding present (not color-only)
+- [ ] Readable at final size (≥7pt minimum)
+- [ ] Works in grayscale
+
+**Accessibility Checklist:**
+
+| Check | Requirement | Tool to Verify |
+|-------|-------------|----------------|
+| Colorblind safe | Distinguishable in CVD simulation | Color Oracle, Coblis |
+| Contrast ratio | ≥4.5:1 for text on background | WebAIM Contrast Checker |
+| Redundant coding | Information not color-only | Remove color mentally |
+| Font size | ≥7pt at final reproduction | Measure in layout |
+| Line weight | ≥0.5pt at final size | Measure in layout |
+
+---
+
+### Stage 4: Implementation Handoff
+
+**Objective:** Provide clear specifications for implementation skill
+
+**Steps:**
+1. Compile visual specifications document
+2. Hand off to appropriate skill:
+   - Plots/charts → `plotting-libraries`
+   - Diagrams → `scientific-schematics`
+   - AI images → `generate-image`
+3. Review implementation against specifications
+4. Iterate if needed
+
+**Exit Criteria:**
+- [ ] Specifications document complete
+- [ ] Implementation skill identified
+- [ ] Design intent communicated
+- [ ] Review criteria established
+
+**Specifications Template:**
+```markdown
+## Figure Specifications
+
+**Dimensions:** {{width}} × {{height}} mm (journal column width)
+**Resolution:** 300 DPI
+**Color Mode:** RGB (will convert to CMYK for print)
+
+**Color Palette:**
+- Primary: {{hex code}}
+- Secondary: {{hex code}}
+- Accent: {{hex code}}
+- Background: {{hex code}}
+
+**Typography:**
+- Font: {{font family}}
+- Axis labels: {{size}}pt
+- Legend: {{size}}pt
+
+**Accessibility:**
+- Colorblind-safe palette: Yes
+- Redundant encoding: Shapes for groups
+```
+
+---
+
+### Stage 5: Quality Review
+
+**Objective:** Verify final visual meets design criteria
+
+**Steps:**
+1. Check against original design specifications
+2. Verify publication requirements met
+3. Run accessibility verification
+4. Confirm brand consistency (if applicable)
+5. Final approval for submission
+
+**Exit Criteria:**
+- [ ] Matches design specifications
+- [ ] Meets publication requirements
+- [ ] Passes accessibility checks
+- [ ] Consistent with other figures in document
+- [ ] Ready for submission
+
+</workflow>
+
+<success_criteria>
+## Success Criteria
+
+**Quantitative Thresholds:**
+
+| Metric | Minimum | Target | Excellent |
+|--------|---------|--------|-----------|
+| Contrast ratio (text) | 4.5:1 | 7:1 | 10:1 |
+| Minimum font size | 7pt | 8pt | 10pt |
+| Color count (categorical) | ≤10 | ≤7 | ≤5 |
+| Line weight | 0.5pt | 1.0pt | 1.5pt |
+| Resolution (print) | 150 DPI | 300 DPI | 600 DPI |
+
+**Design Quality Indicators:**
+
+| Quality Signal | How to Assess |
+|----------------|---------------|
+| Intentionality | Every element has a purpose; nothing is default |
+| Clarity | Message understood in <10 seconds |
+| Consistency | Same style across all panels/figures |
+| Accessibility | Passes colorblind and grayscale tests |
+| Brand alignment | Matches organizational visual identity |
+
+**Completion Checklist:**
+- [ ] Single clear message communicated
+- [ ] Appropriate for target audience
+- [ ] No default/generic styling
+- [ ] Accessibility requirements met
+- [ ] Publication specifications followed
+- [ ] Consistent with other document figures
+- [ ] Brand guidelines applied (if applicable)
+
+</success_criteria>
+
+<scope>
+## Scope
+
+**In Scope:**
+- Design philosophy and visual strategy
+- Typography, color, and layout guidance
+- Accessibility requirements and verification
+- Publication specifications by venue
+- Brand integration guidance
+- Design quality review
+
+**Out of Scope** (use specialized resources):
+- matplotlib/seaborn/ggplot2 code → use `plotting-libraries`
+- Diagram generation → use `scientific-schematics`
+- Photorealistic images → use `generate-image`
+- Slide creation → use `scientific-slides`
+- Poster creation → use `latex-posters`, `pptx-posters`
+
+</scope>
+
+<anti_patterns>
+## Common Pitfalls
+
+### 1. Default Syndrome
+
+**Anti-pattern:**
+Using tool defaults without customization—gray backgrounds, thin lines, small fonts, default colors.
+
+**Solution:**
 Every visual choice should be intentional:
-- "Why this color?" → Brand palette, colorblind-safe, emphasizes key data
+- "Why this color?" → Brand palette / colorblind-safe / emphasizes key data
 - "Why this font size?" → Legible at final reproduction size
 - "Why this layout?" → Guides viewer to the key insight
 
-**Before finalizing, ask:**
-1. Could this be mistaken for a default output? If yes, refine.
-2. Does every element serve the story? If not, remove.
-3. Would I recognize this as "ours"? Brand consistency matters.
+---
 
-## Output-Specific Guidance
+### 2. Rainbow Colormap for Sequential Data
 
-For detailed format-specific guidance, see `references/OUTPUT_FORMATS.md`. Key formats:
-- **Figures**: Journal specs, resolution, vector vs raster
-- **Infographics**: SVG best practices, visual metaphors
-- **Reports**: ReportLab components (MetricCard, CalloutBox, etc.)
-- **Presentations**: Slide design, poster hierarchy
+**Anti-pattern:**
+Using rainbow/jet colormap for continuous data—perceptually uneven, not colorblind-safe.
 
-## Publication Requirements
+**Solution:**
+Use perceptually uniform colormaps:
+- Viridis, Plasma, Magma for sequential data
+- Cividis for colorblind optimization
+- Diverging colormaps (RdBu, PuOr) for data with meaningful center
 
-For journal-specific figure requirements, export settings, and pre-submission checklists, see `references/publication_specs.md`.
+---
 
-**Quick reference:**
-| Journal | Single Column | Double Column | Max DPI |
-|---------|---------------|---------------|---------|
-| Nature | 89 mm | 183 mm | 300 |
-| Science | 55 mm | 175 mm | 300 |
-| Cell | 85 mm | 178 mm | 300 |
+### 3. Color-Only Encoding
 
-**Export workflow:**
-1. Configure figure size for target journal
-2. Use vector format (PDF/EPS) for plots
-3. Verify fonts are embedded
-4. Check resolution meets requirements
+**Anti-pattern:**
+Distinguishing groups by color alone—fails for colorblind viewers and grayscale printing.
 
-## Brand Integration
+**Solution:**
+Add redundant encoding:
+- Different shapes for scatter plot groups
+- Different line styles (solid, dashed, dotted)
+- Direct labels on the plot
+- Patterns/hatching for bar charts
 
-This skill operates within the Oligon visual identity system:
+---
 
-| Resource | Purpose |
-|----------|---------|
-| `references/BRAND_COLORS_v4.md` | Color palette definitions |
-| `oligon-brand` skill | Brand application guidance |
-| `src/oligon_reports/` | Python components for branded PDFs |
+### 4. Cramming Too Much
 
-When creating visuals:
-1. Start with brand color palette
-2. Apply brand typography where appropriate
-3. Maintain consistency across outputs
-4. Deviate intentionally, not accidentally
+**Anti-pattern:**
+Putting too many elements, too much data, or too many panels in one figure.
 
-## Quality Checklist
+**Solution:**
+Follow data-ink ratio principle:
+- Remove chartjunk (excessive gridlines, borders, backgrounds)
+- Limit to 1 main message per figure
+- Break complex figures into multiple panels
+- Use supplementary figures for additional data
 
-Before delivering any visual:
+---
 
-- [ ] **Story**: Does it communicate one clear insight?
-- [ ] **Audience**: Is it appropriate for the target viewer?
-- [ ] **Legibility**: Readable at final reproduction size?
-- [ ] **Accessibility**: Colorblind-safe? Sufficient contrast?
-- [ ] **Brand**: Aligned with Oligon visual identity?
-- [ ] **Intentionality**: Every choice deliberate, not default?
-- [ ] **Technical**: Correct resolution, format, dimensions?
+### 5. Inconsistent Styling
 
+**Anti-pattern:**
+Different fonts, colors, or sizing across panels or figures in the same document.
+
+**Solution:**
+Create style guide before starting:
+- Document color palette with hex codes
+- Specify typography hierarchy
+- Use consistent axis ranges when comparing
+- Create template/style file for reuse
+
+---
+
+### 6. Truncated Axes
+
+**Anti-pattern:**
+Starting y-axis above zero to exaggerate small differences.
+
+**Solution:**
+- Start bar charts at zero
+- Clearly indicate axis breaks if necessary
+- Use appropriate chart type for the comparison
+- Show full range with inset for detail if needed
+
+---
+
+### 7. 3D Charts for 2D Data
+
+**Anti-pattern:**
+Using 3D effects (3D bar charts, 3D pie charts) that distort perception.
+
+**Solution:**
+- Use 2D representations for 2D data
+- 3D only for actual 3D data (volumetric, spatial)
+- If 3D needed, use isometric projections with care
+
+</anti_patterns>
+
+<templates>
+## Output Templates
+
+### Visual Specifications Document
+
+```markdown
+# Figure {{N}} Visual Specifications
+
+## Context
+- **Purpose:** {{What insight does this communicate?}}
+- **Audience:** {{Who will view this?}}
+- **Venue:** {{Journal/conference/presentation}}
+
+## Technical Requirements
+- **Dimensions:** {{W}} × {{H}} mm
+- **Resolution:** {{DPI}} DPI
+- **File format:** {{PDF/PNG/TIFF}}
+- **Color mode:** {{RGB/CMYK}}
+
+## Color Palette
+| Role | Color | Hex Code |
+|------|-------|----------|
+| Primary | {{name}} | #{{hex}} |
+| Secondary | {{name}} | #{{hex}} |
+| Accent | {{name}} | #{{hex}} |
+| Background | {{name}} | #{{hex}} |
+| Text | {{name}} | #{{hex}} |
+
+## Typography
+- **Font family:** {{name}}
+- **Title:** {{size}}pt bold
+- **Axis labels:** {{size}}pt regular
+- **Legend:** {{size}}pt regular
+
+## Accessibility
+- [ ] Colorblind-safe palette verified
+- [ ] Contrast ≥4.5:1 for all text
+- [ ] Redundant encoding used
+- [ ] Readable at final size
+
+## Notes
+{{Additional specifications or constraints}}
+```
+
+### Pre-Submission Design Checklist
+
+```markdown
+## Figure Quality Checklist
+
+### Clarity
+- [ ] Single clear message communicated
+- [ ] Can be understood in <10 seconds
+- [ ] Labels are complete and unambiguous
+
+### Technical Quality
+- [ ] Resolution ≥300 DPI
+- [ ] Correct file format for venue
+- [ ] Dimensions match journal requirements
+- [ ] Fonts embedded (for vector formats)
+
+### Accessibility
+- [ ] Colorblind-safe palette used
+- [ ] Contrast ratio ≥4.5:1
+- [ ] Redundant encoding present
+- [ ] Minimum 7pt font at final size
+
+### Consistency
+- [ ] Matches style of other figures
+- [ ] Consistent color usage
+- [ ] Same typography throughout
+- [ ] Aligned with brand guidelines
+
+### Publication Ready
+- [ ] Caption written and complete
+- [ ] Abbreviations defined
+- [ ] Referenced in main text
+- [ ] Meets journal-specific requirements
+```
+
+</templates>
+
+<cross_references>
 ## Related Skills
 
-This skill provides the **design philosophy layer**. For implementation details, see:
+| Skill | Relationship |
+|-------|-------------|
+| `plotting-libraries` | Use for matplotlib/seaborn/R implementation after design decisions made |
+| `scientific-schematics` | Use for diagram generation; visual-design provides principles |
+| `generate-image` | Use for photorealistic images; visual-design provides aesthetics guidance |
+| `scientific-slides` | Visual-design principles apply to presentation design |
+| `latex-posters` / `pptx-posters` | Visual-design principles apply to poster design |
+| `oligon-brand` | Brand-specific color and typography standards |
 
-| Skill | Use For |
-|-------|---------|
-| `plotting-libraries` | matplotlib/seaborn code patterns and examples |
-| `scientific-schematics` | AI-generated diagrams (Nano Banana Pro) |
-| `scientific-slides` | Presentation creation (PPTX/Beamer) |
-| `latex-posters` / `pptx-posters` | Conference poster creation |
-| `generate-image` | AI image generation (FLUX/Gemini) |
+**Skill Selection:**
+See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
-**Workflow**: Start here for design decisions → use implementation skills for execution.
+**Typical Workflow:**
+1. `visual-design` → establish design direction and specifications
+2. `plotting-libraries` or `scientific-schematics` → implement visuals
+3. `visual-design` → review quality before submission
+
+</cross_references>
+
+<references>
+## Reference Documents
+
+| Document | Purpose |
+|----------|---------|
+| `references/BRAND_COLORS_v4.md` | Oligon brand color palette definitions |
+| `references/OUTPUT_FORMATS.md` | Format-specific guidance for figures, reports, presentations |
+| `references/publication_specs.md` | Journal-specific requirements and export settings |
+
+### Publication Requirements Quick Reference
+
+| Journal | Single Column | Double Column | Max DPI | Format |
+|---------|---------------|---------------|---------|--------|
+| Nature | 89 mm | 183 mm | 300 | PDF/EPS/TIFF |
+| Science | 55 mm | 175 mm | 300 | PDF/EPS |
+| Cell | 85 mm | 178 mm | 300 | PDF/EPS/TIFF |
+| PNAS | 87 mm | 178 mm | 300 | PDF/EPS/TIFF |
+| eLife | 139 mm | 178 mm | 300 | PDF/PNG |
+
+### External Resources
+
+**Accessibility:**
+- Okabe-Ito Palette: https://jfly.uni-koeln.de/color/
+- Color Oracle: https://colororacle.org/
+- WebAIM Contrast Checker: https://webaim.org/resources/contrastchecker/
+- Coblis Colorblindness Simulator: https://www.color-blindness.com/coblis-color-blindness-simulator/
+
+**Typography:**
+- Google Fonts: https://fonts.google.com/
+- Font combinations: https://fontpair.co/
+
+**Data Visualization Theory:**
+- Edward Tufte principles
+- Grammar of Graphics (Wilkinson)
+
+</references>

@@ -206,7 +206,7 @@ See `docs/PHASE1_IMPLEMENTATION_PLAN.md` for detailed implementation notes.
 - [x] Implement `/new-doc <type>` command definition
 - [x] Implement `/doc-to-pdf <file>` command with confirmation workflow
 - [x] Create component mapping reference (`references/component_map.md`)
-- [ ] Integrate with `scientific-schematics` for visual enhancement (deferred to Phase 5)
+- [x] Integrate with `scientific-schematics` for visual enhancement (optional `--figures` flag)
 
 **Deliverables:**
 - `skills/markdown-to-pdf/SKILL.md` - Unified skill with 3 commands
@@ -353,13 +353,17 @@ claude-scientific-writer_fork/
 
 ---
 
-## 9. Key Decisions Required
+## 9. Design Decisions (Resolved)
 
-1. **Template inheritance**: Should templates support inheritance (e.g., shared footer)?
-2. **Custom templates**: Should users be able to define their own templates?
-3. **Partial documents**: How to handle documents that don't fill all template sections?
-4. **Multiple outputs**: Should one markdown generate multiple PDFs (full + executive summary)?
-5. **Version tracking**: How to handle template version changes over time?
+| Decision | Resolution | Rationale |
+|----------|------------|-----------|
+| **Template inheritance** | Deferred | Not needed for current use cases; templates are self-contained |
+| **Custom templates** | Supported (manual) | Users can add schemas to `templates/schemas/` and markdown to `templates/markdown/` |
+| **Partial documents** | Render available | Current behavior renders available sections; empty/missing sections are skipped |
+| **Multiple outputs** | Deferred | Single output per conversion is sufficient; users can run multiple conversions |
+| **Version tracking** | Not implemented | No versioning system needed; templates evolve with the codebase |
+
+**Note:** These decisions prioritize simplicity for the initial implementation. Future enhancements can revisit these based on user feedback.
 
 ---
 
@@ -591,5 +595,6 @@ Execute Option D during **Phase 2-3** of the main integration roadmap, specifica
 ---
 
 *Integration Analysis*
-*Version 1.6 | December 28, 2025*
+*Version 1.7 | December 28, 2025*
 *All 5 phases complete - template system ready for use*
+*Design decisions documented - implementation finalized*

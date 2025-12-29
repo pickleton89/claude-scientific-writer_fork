@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Scientific Schematics: Configurable Review Model**: Added `--review-model` flag to switch between Gemini 3 Flash (default, faster/cheaper) and Gemini 3 Pro (higher quality for critical work)
+  - `generate_schematic_ai.py`: New `review_model` constructor parameter with Flash as default
+  - `generate_schematic.py`: New `--review-model {flash,pro}` CLI flag
+  - Updated SKILL.md documentation with new option
+  - Reduces API costs for routine diagram generation while preserving Pro option for journal submissions
+
 - **Phase 1 Template Infrastructure - Steps 1-6 (Markdown Templates Complete)**: Foundation for markdown-to-PDF conversion
   - **Step 1 Setup**: Added `python-frontmatter>=1.1.0` dependency, created `src/oligon_reports/templates/` directory structure
   - **Step 2 Parser Foundation**: Created TemplateParser class (~300 lines) in `src/oligon_reports/templates/parser.py`

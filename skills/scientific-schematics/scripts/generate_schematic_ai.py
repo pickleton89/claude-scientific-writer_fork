@@ -78,10 +78,10 @@ def _load_env_file():
 
 class ScientificSchematicGenerator:
     """Generate scientific schematics using AI with smart iterative refinement.
-    
-    Uses Gemini 3 Pro for quality review to determine if regeneration is needed.
-    Multiple passes only occur if the generated schematic doesn't meet the
-    quality threshold for the target document type.
+
+    Uses Gemini 3 Flash (default) or Pro for quality review to determine if
+    regeneration is needed. Multiple passes only occur if the generated
+    schematic doesn't meet the quality threshold for the target document type.
     """
     
     # Quality thresholds by document type (score out of 10)
@@ -137,22 +137,24 @@ LAYOUT:
 - No clutter or unnecessary decorative elements
 """
     
-    def __init__(self, api_key: Optional[str] = None, verbose: bool = False):
+    def __init__(self, api_key: Optional[str] = None, verbose: bool = False,
+                 review_model: str = "flash"):
         """
         Initialize the generator.
-        
+
         Args:
             api_key: OpenRouter API key (or use OPENROUTER_API_KEY env var)
             verbose: Print detailed progress information
+            review_model: "flash" (default, faster/cheaper) or "pro" (higher quality)
         """
         # Priority: 1) explicit api_key param, 2) environment variable, 3) .env file
         self.api_key = api_key or os.getenv("OPENROUTER_API_KEY")
-        
+
         # If not found in environment, try loading from .env file
         if not self.api_key:
             _load_env_file()
             self.api_key = os.getenv("OPENROUTER_API_KEY")
-        
+
         if not self.api_key:
             raise ValueError(
                 "OPENROUTER_API_KEY not found. Please either:\n"
@@ -161,15 +163,20 @@ LAYOUT:
                 "  3. Pass api_key parameter to the constructor\n"
                 "Get your API key from: https://openrouter.ai/keys"
             )
-        
+
         self.verbose = verbose
         self._last_error = None  # Track last error for better reporting
         self.base_url = "https://openrouter.ai/api/v1"
         # Nano Banana Pro - Google's advanced image generation model
         # https://openrouter.ai/google/gemini-3-pro-image-preview
         self.image_model = "google/gemini-3-pro-image-preview"
-        # Gemini 3 Pro for quality review - excellent vision and reasoning
-        self.review_model = "google/gemini-3-pro"
+        # Review model selection: flash (faster/cheaper) or pro (higher quality)
+        if review_model.lower() == "pro":
+            self.review_model = "google/gemini-3-pro"
+            self.review_model_name = "Gemini 3 Pro"
+        else:
+            self.review_model = "google/gemini-3-flash"
+            self.review_model_name = "Gemini 3 Flash"
         
     def _log(self, message: str):
         """Log message if verbose mode is enabled."""
@@ -677,8 +684,8 @@ Generate a publication-quality scientific diagram that meets all the guidelines 
                 f.write(image_data)
             print(f"✓ Saved: {iter_path}")
             
-            # Review image using Gemini 3 Pro
-            print(f"Reviewing image with Gemini 3 Pro...")
+            # Review image
+            print(f"Reviewing image with {self.review_model_name}...")
             critique, score, needs_improvement = self.review_image(
                 str(iter_path), user_prompt, i, doc_type, iterations
             )
@@ -792,6 +799,8 @@ Environment:
                                "report", "grant", "thesis", "preprint", "default"],
                        help="Document type for quality threshold (default: default)")
     parser.add_argument("--api-key", help="OpenRouter API key (or set OPENROUTER_API_KEY)")
+    parser.add_argument("--review-model", default="flash", choices=["flash", "pro"],
+                       help="Review model: flash (default, faster) or pro (higher quality)")
     parser.add_argument("-v", "--verbose", action="store_true",
                        help="Verbose output")
     
@@ -812,7 +821,9 @@ Environment:
         sys.exit(1)
     
     try:
-        generator = ScientificSchematicGenerator(api_key=api_key, verbose=args.verbose)
+        generator = ScientificSchematicGenerator(
+            api_key=api_key, verbose=args.verbose, review_model=args.review_model
+        )
         results = generator.generate_iterative(
             user_prompt=args.prompt,
             output_path=args.output,

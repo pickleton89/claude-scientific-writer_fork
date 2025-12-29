@@ -1,7 +1,7 @@
 ---
 name: scientific-schematics
 version: 2.1.0
-description: "Create publication-quality scientific diagrams using Nano Banana Pro AI with iterative refinement and Gemini 3 Pro quality review. Specialized in neural networks, flowcharts, biological pathways, and system architectures."
+description: "Create publication-quality scientific diagrams using Nano Banana Pro AI with iterative refinement and Gemini 3 Flash/Pro quality review. Specialized in neural networks, flowcharts, biological pathways, and system architectures."
 allowed-tools: [Read, Write, Edit, Bash]
 shared-thresholds: "../QUANTIFICATION_THRESHOLDS.md"
 ---
@@ -11,7 +11,7 @@ shared-thresholds: "../QUANTIFICATION_THRESHOLDS.md"
 > **Quantified Thresholds:** This skill references shared thresholds from [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §7 (Quality Rubrics) and §8 (Iteration & Stopping Criteria).
 
 <overview>
-Generate publication-quality scientific diagrams through AI-powered creation with iterative refinement. Uses Nano Banana Pro for image generation and Gemini 3 Pro for quality review. Smart iteration stops early when quality score ≥ document threshold (6.5-8.5/10), with soft limit of 3 iterations and hard limit of 5 iterations per diagram.
+Generate publication-quality scientific diagrams through AI-powered creation with iterative refinement. Uses Nano Banana Pro for image generation and Gemini 3 Flash (default) or Pro for quality review. Smart iteration stops early when quality score ≥ document threshold (6.5-8.5/10), with soft limit of 3 iterations and hard limit of 5 iterations per diagram.
 </overview>
 
 <when_to_use>
@@ -211,7 +211,7 @@ Visual style: {{style preferences}}
 1. Set OPENROUTER_API_KEY environment variable
 2. Execute generation script with document type
 3. Nano Banana Pro generates initial image
-4. Gemini 3 Pro reviews quality against threshold
+4. Gemini 3 Flash (or Pro) reviews quality against threshold
 5. If quality < threshold AND iterations < max, improve and regenerate
 
 **Exit Criteria:**
@@ -228,6 +228,8 @@ python scripts/generate_schematic.py "{{prompt}}" \
   --doc-type {{document_type}} \
   --iterations 2 \
   -v
+# For high-stakes work, use Pro review:
+# --review-model pro
 ```
 
 **Smart Iteration Logic:**
@@ -274,7 +276,7 @@ Generate Image → Review Quality → Score >= Threshold?
 **Objective:** Verify diagram meets publication standards
 
 **Steps:**
-1. Review Gemini 3 Pro quality assessment
+1. Review quality assessment from Gemini 3 Flash/Pro
 2. Check 5 quality dimensions (see scoring rubric)
 3. Verify accessibility (colorblind-safe, contrast)
 4. Confirm all labels readable at final size
@@ -362,7 +364,7 @@ Generate Image → Review Quality → Score >= Threshold?
 
 **In Scope:**
 - AI-generated scientific diagrams via Nano Banana Pro
-- Quality review via Gemini 3 Pro
+- Quality review via Gemini 3 Flash (default) or Pro
 - CONSORT/PRISMA flowcharts
 - Neural network architecture diagrams
 - Biological pathway illustrations
@@ -556,7 +558,7 @@ Vertical top-to-bottom layout.
       "image_path": "figures/{{name}}_v1.png",
       "score": {{score}},
       "needs_improvement": {{true|false}},
-      "critique": "{{Gemini 3 Pro review text}}"
+      "critique": "{{Gemini review text}}"
     }
   ],
   "final_score": {{final score}},

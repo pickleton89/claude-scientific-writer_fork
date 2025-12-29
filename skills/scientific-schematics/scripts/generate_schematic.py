@@ -6,7 +6,7 @@ Generate any scientific diagram by describing it in natural language.
 Nano Banana Pro handles everything automatically with smart iterative refinement.
 
 Smart iteration: Only regenerates if quality is below threshold for your document type.
-Quality review: Uses Gemini 3 Pro for professional scientific evaluation.
+Quality review: Uses Gemini 3 Flash (default) or Pro for professional scientific evaluation.
 
 Usage:
     # Generate for journal paper (highest quality threshold)
@@ -36,9 +36,13 @@ How it works:
   Simply describe your diagram in natural language
   Nano Banana Pro generates it automatically with:
   - Smart iteration (only regenerates if quality is below threshold)
-  - Quality review by Gemini 3 Pro
+  - Quality review by Gemini 3 Flash (or Pro with --review-model pro)
   - Document-type aware quality thresholds
   - Publication-ready output
+
+Review Models:
+  flash (default)  Gemini 3 Flash - faster, cost-effective
+  pro              Gemini 3 Pro - higher quality for critical work
 
 Document Types (quality thresholds):
   journal      8.5/10  - Nature, Science, peer-reviewed journals
@@ -84,9 +88,11 @@ Environment Variables:
                        help="Maximum refinement iterations (default: 2, max: 2)")
     parser.add_argument("--api-key", 
                        help="OpenRouter API key (or use OPENROUTER_API_KEY env var)")
+    parser.add_argument("--review-model", default="flash", choices=["flash", "pro"],
+                       help="Review model: flash (default, faster) or pro (higher quality)")
     parser.add_argument("-v", "--verbose", action="store_true",
                        help="Verbose output")
-    
+
     args = parser.parse_args()
     
     # Check for API key
@@ -118,7 +124,11 @@ Environment Variables:
     iterations = min(args.iterations, 2)
     if iterations != 2:
         cmd.extend(["--iterations", str(iterations)])
-    
+
+    # Pass review model (only if not default)
+    if args.review_model != "flash":
+        cmd.extend(["--review-model", args.review_model])
+
     if api_key:
         cmd.extend(["--api-key", api_key])
     

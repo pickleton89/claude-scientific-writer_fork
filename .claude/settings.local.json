@@ -69,7 +69,13 @@
       "Bash(skills/scientific-critical-thinking/)",
       "Skill(fresh-eyes)",
       "Bash(PYTHONPATH=src uv run python:*)",
-      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork diff --cached --stat)"
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork diff --cached --stat)",
+      "Bash(uv run ruff:*)",
+      "Bash(uv sync:*)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork diff pyproject.toml)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork diff docs/PHASE1_IMPLEMENTATION_PLAN.md)",
+      "Bash(uv build:*)",
+      "Bash(python -m zipfile:*)"
     ]
   },
   "outputStyle": "default"

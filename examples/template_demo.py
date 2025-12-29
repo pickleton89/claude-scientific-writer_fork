@@ -11,13 +11,10 @@ Shows how to:
 Run with: uv run python examples/template_demo.py
 """
 
-from pathlib import Path
-
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.platypus import SimpleDocTemplate, Spacer, Paragraph, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib import colors
 
 from oligon_reports import (
     BRAND_COLORS,
@@ -178,13 +175,6 @@ def demo_generate_pdf(tree, output_path: str = "template_demo.pdf"):
 
     # Styles
     styles = getSampleStyleSheet()
-    title_style = ParagraphStyle(
-        "DocTitle",
-        parent=styles["Heading1"],
-        fontSize=20,
-        spaceAfter=12,
-        textColor=BRAND_COLORS.DARK_GRAY,
-    )
     h2_style = ParagraphStyle(
         "H2",
         parent=styles["Heading2"],

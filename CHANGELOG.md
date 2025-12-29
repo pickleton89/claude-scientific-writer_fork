@@ -156,6 +156,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Archived completed implementation plans**: Moved completed planning documents to `docs/archived/`
+  - `PHASE1_IMPLEMENTATION_PLAN.md` - Template infrastructure (complete)
+  - `PHASE3_IMPLEMENTATION_PLAN.md` - Skill creation (complete)
+  - `IMPLEMENTATION_PLAN_GEMINI_MODELS.md` - Review model config (complete)
+
 - **Skills Consolidation (Complete)**: Applied recommendations from SKILLS_ANALYSIS.md
   - **Merged `scientific-critical-thinking` into `peer-review`**: Critical analysis frameworks now part of peer-review
     - Added "Critical Analysis Framework" section covering GRADE evidence quality, logical fallacies, claim evaluation, bias detection

@@ -2,7 +2,7 @@
 
 > Claude Scientific Writer Fork - Development Documentation
 > Forked from: [K-Dense-AI/claude-scientific-writer](https://github.com/K-Dense-AI/claude-scientific-writer) v2.10.0
-> Last Updated: 2025-12-26
+> Last Updated: 2025-12-28
 
 ## Project Overview
 
@@ -10,8 +10,9 @@ This is a **customized fork** of the Claude Scientific Writer plugin, adapted fo
 
 ### What This Fork Is
 
-- A scientific research writing assistant with 18 specialized skills
+- A scientific research writing assistant with 19 specialized skills
 - Integrated with Oligon brand standards for document generation
+- Template-based document system with 12 document types and branded PDF output
 - Focused on academic papers, literature reviews, posters, and presentations
 - Uses LaTeX with BibTeX as the default output format
 
@@ -23,10 +24,14 @@ Clinical and business-focused skills removed to streamline scientific focus:
 
 ### What Was Added
 
+- `skills/markdown-to-pdf/` - Template-based document generation with 12 types
 - `skills/plotting-libraries/` - Python plotting library reference (matplotlib, seaborn)
 - `skills/visual-design/` - Design philosophy and publication specifications for scientific visuals
 - `src/oligon_reports/` - Python package for branded PDF generation (ReportLab)
+  - `templates/` - 12 YAML schemas and markdown templates
+  - `components.py` - FindingCard, StatusTable, GradedTable, MethodBlock, CalloutBox
 - `docs/template-project/brand/` - Oligon brand standards and visual identity
+- `tests/` - Integration test suite (24 tests)
 - `INTEGRATION_ANALYSIS.md` - Roadmap for template-project merge
 
 ---
@@ -85,7 +90,7 @@ uv run ty                  # Type check
 | `INTEGRATION_ANALYSIS.md` | Template-project merge roadmap |
 | `docs/original/` | Archived upstream documentation |
 
-### Active Skills (18 top-level + 4 document sub-skills)
+### Active Skills (19 top-level + 4 document sub-skills)
 
 | Category | Skills |
 |----------|--------|
@@ -93,7 +98,7 @@ uv run ty                  # Type check
 | **Presentations** | `scientific-slides`, `latex-posters`, `pptx-posters` |
 | **Research** | `research-lookup`, `citation-management`, `peer-review`, `scholar-evaluation` |
 | **Visuals** | `scientific-schematics`, `generate-image`, `plotting-libraries`, `visual-design` |
-| **Documents** | `markitdown`, `venue-templates`, `document-skills/*` (docx, pdf, pptx, xlsx) |
+| **Documents** | `markdown-to-pdf`, `markitdown`, `venue-templates`, `document-skills/*` (docx, pdf, pptx, xlsx) |
 | **Analysis** | `scientific-critical-thinking` |
 | **Conversion** | `paper-2-web` |
 
@@ -103,7 +108,8 @@ uv run ty                  # Type check
 
 ```
 claude-scientific-writer_fork/
-├── skills/                  # ⭐ CANONICAL skill definitions (18 + 4 sub-skills)
+├── skills/                  # ⭐ CANONICAL skill definitions (19 + 4 sub-skills)
+│   ├── markdown-to-pdf/     # NEW: Template-based PDF generation
 │   ├── citation-management/
 │   ├── generate-image/
 │   ├── hypothesis-generation/
@@ -128,8 +134,16 @@ claude-scientific-writer_fork/
 ├── src/
 │   └── oligon_reports/      # Branded PDF generation package
 │       ├── brand_colors.py  # Color palette constants
-│       ├── components.py    # Visual components (MetricCard, CalloutBox, etc.)
-│       └── report_generator.py  # PDF orchestrator
+│       ├── components.py    # Visual components (10 components)
+│       ├── report_generator.py  # PDF orchestrator
+│       └── templates/       # Document templating system
+│           ├── schemas/     # YAML validation schemas (12 types)
+│           ├── markdown/    # Markdown templates (12 types)
+│           └── parser.py    # TemplateParser class
+├── tests/                   # Integration test suite (24 tests)
+│   ├── conftest.py          # Pytest fixtures
+│   ├── test_integration.py  # Full workflow tests
+│   └── fixtures/            # Sample documents
 ├── docs/
 │   ├── original/            # Archived upstream documentation
 │   └── template-project/

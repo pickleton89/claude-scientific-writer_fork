@@ -12,6 +12,7 @@ This fork serves as a **customized skill repository** built on top of the Claude
 - Oligon brand standards are integrated for document generation
 - Clinical/business-focused skills have been removed to maintain a pure scientific focus
 - New visualization and design skills have been added
+- **Template-based document generation** with 12 document types and branded PDF output
 
 ### Key Customizations
 
@@ -20,9 +21,10 @@ This fork serves as a **customized skill repository** built on top of the Claude
 | **Skills Streamlined** | Removed 5 clinical/business skills (`research-grants`, `clinical-decision-support`, `clinical-reports`, `market-research-reports`, `treatment-plans`) |
 | **Brand Integration** | Added Oligon brand standards for PDF generation and visual identity |
 | **Visualization Skills** | Added `plotting-libraries` and `visual-design` skills |
+| **Document Templates** | Added `markdown-to-pdf` skill with 12 document types and schema validation |
 | **Single Source of Truth** | Consolidated skills to one location (`skills/`) instead of three |
 
-## Skills (18 top-level + 4 document sub-skills)
+## Skills (19 top-level + 4 document sub-skills)
 
 | Category | Skills |
 |----------|--------|
@@ -30,23 +32,63 @@ This fork serves as a **customized skill repository** built on top of the Claude
 | **Presentations** | `scientific-slides`, `latex-posters`, `pptx-posters` |
 | **Research** | `research-lookup`, `citation-management`, `peer-review`, `scholar-evaluation` |
 | **Visuals** | `scientific-schematics`, `generate-image`, `plotting-libraries`, `visual-design` |
-| **Documents** | `markitdown`, `venue-templates`, `document-skills/*` (docx, pdf, pptx, xlsx) |
+| **Documents** | `markdown-to-pdf`, `markitdown`, `venue-templates`, `document-skills/*` (docx, pdf, pptx, xlsx) |
 | **Analysis** | `scientific-critical-thinking` |
 | **Conversion** | `paper-2-web` |
+
+## Document Template System
+
+The `markdown-to-pdf` skill provides a template-based document generation system with **12 document types** across 4 categories:
+
+| Category | Document Types |
+|----------|----------------|
+| **Scientific** | `analysis-report`, `literature-review`, `data-report` |
+| **Project Management** | `meeting-notes`, `project-status`, `task-list`, `phase-plan` |
+| **Development** | `technical-spec`, `agent-definition`, `readme` |
+| **Reference** | `standards-guide`, `method-guide` |
+
+### Usage
+
+```bash
+# List available templates
+/list-templates
+
+# Create a new document from template
+/new-doc analysis-report
+
+# Convert markdown to branded PDF
+/doc-to-pdf my-document.md
+```
+
+### Components
+
+The `oligon_reports` package provides branded PDF components:
+
+- **FindingCard** - Highlighted finding boxes with numbering
+- **StatusTable** - Tables with ✓/✗ color-coded cells
+- **GradedTable** - Tables with tier-based color bands
+- **MethodBlock** - What/Why/How structured blocks
+- **CalloutBox** - Styled callouts (Note, Warning, Example)
 
 ## Project Structure
 
 ```
 claude-scientific-writer_fork/
-├── skills/                  # Canonical skill definitions (18 + 4 sub-skills)
+├── skills/                  # Canonical skill definitions (19 + 4 sub-skills)
+│   └── markdown-to-pdf/     # Template-based PDF generation
 ├── .claude/
 │   └── WRITER.md            # Agent system instructions
 ├── src/oligon_reports/      # Branded PDF generation (ReportLab)
+│   ├── components.py        # Visual components
+│   └── templates/           # Document schemas and templates
+│       ├── schemas/         # YAML validation schemas (12 types)
+│       ├── markdown/        # Markdown templates (12 types)
+│       └── parser.py        # TemplateParser class
 ├── docs/
 │   ├── original/            # Archived upstream documentation
 │   └── template-project/    # Oligon brand standards
+├── tests/                   # Integration test suite
 ├── scientific_writer/       # Python package (CLI/API)
-├── templates/               # Document templates
 ├── examples/                # Working examples
 ├── CLAUDE.md                # Development documentation
 ├── CHANGELOG.md             # Fork development history

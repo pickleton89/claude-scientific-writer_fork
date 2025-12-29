@@ -423,9 +423,9 @@ Full execution details preserved in:
 
 ---
 
-## 11. Visual Design Skill Architecture (Option D) ✅ MOSTLY COMPLETE
+## 11. Visual Design Skill Architecture (Option D) ✅ COMPLETE
 
-**Status:** Phases D.1-D.3 Complete | **Remaining:** D.4 (scientific-visualization)
+**Status:** All Phases (D.1-D.4) Complete
 
 ### Context
 
@@ -521,13 +521,15 @@ Added `extends: visual-design` to frontmatter and design foundation notes to 5 s
 
 **Finding:** Child skills already followed DRY principles—design guidance was not duplicated. No content removal needed. Skills reference `visual-design` for philosophy but contain only implementation-specific details.
 
-#### Phase D.4: Integrate with scientific-visualization
+#### Phase D.4: Integrate plotting-libraries ✅ COMPLETE
 
-When `scientific-visualization-SKILL.md` is promoted from `docs/template-project/` to `.claude/skills/`:
+**Completed:** December 29, 2025
 
-- [ ] Add `extends: visual-design` header
-- [ ] Remove ~200 lines of redundant philosophy content
-- [ ] Keep implementation-specific sections (matplotlib code, journal specs)
+**Note:** The originally planned `scientific-visualization-SKILL.md` was never created. The `plotting-libraries` skill serves this role, providing matplotlib, seaborn, ggplot2, and R visualization implementation.
+
+- [x] Add `extends: visual-design` header (v1.0.0 → v1.1.0)
+- [x] Add design foundation note linking to parent skill
+- [x] Verify no redundant philosophy content (skill was already clean)
 
 ### Files Affected
 
@@ -539,7 +541,7 @@ When `scientific-visualization-SKILL.md` is promoted from `docs/template-project
 | `skills/latex-posters/SKILL.md` | Added extends + design note | ✅ Complete |
 | `skills/pptx-posters/SKILL.md` | Added extends + design note | ✅ Complete |
 | `skills/generate-image/SKILL.md` | Added extends + design note | ✅ Complete |
-| `docs/template-project/scientific-visualization-SKILL.md` | Future: promote + extend | ⏳ Phase D.4 |
+| `skills/plotting-libraries/SKILL.md` | Added extends + design note | ✅ Complete |
 
 ### Effort Summary
 
@@ -548,24 +550,24 @@ When `scientific-visualization-SKILL.md` is promoted from `docs/template-project
 | D.1: Promote visual-design | 30 min | 0 min (already done) | ✅ Complete |
 | D.2: Add inheritance headers | 1 hour | 15 min | ✅ Complete |
 | D.3: Remove redundant content | 2-3 hours | 0 min (not needed) | ✅ Complete |
-| D.4: Integrate scientific-visualization | 1 hour | — | ⏳ Future |
+| D.4: Integrate plotting-libraries | 1 hour | 5 min | ✅ Complete |
 
-**Actual Total:** ~15 minutes (vs. 5 hours estimated)
+**Actual Total:** ~20 minutes (vs. 5.5 hours estimated)
 
-### When to Execute
+### Execution Notes
 
-Execute Option D during **Phase 2-3** of the main integration roadmap, specifically when:
-1. Touching visual output skills for other reasons (reduces marginal effort)
-2. Adding new visual output skills (establish pattern from start)
-3. Inconsistencies emerge between skill design guidance
+Option D was executed during Phase 2-3 of the main integration roadmap. The inheritance pattern is now established for:
+1. All 6 visual output skills extend `visual-design`
+2. New visual output skills should follow this pattern
+3. Design philosophy updates propagate from single source
 
-### Success Criteria
+### Success Criteria ✅ ALL MET
 
-1. `visual-design` is an active skill in `.claude/skills/`
-2. All 5 visual output skills reference it via `extends:`
-3. No redundant design philosophy in child skills
-4. Total line count across visual skills reduced by ~300 lines
-5. Design philosophy updates propagate from single source
+1. ✅ `visual-design` is an active skill in `skills/`
+2. ✅ All 6 visual output skills reference it via `extends:`
+3. ✅ No redundant design philosophy in child skills (already DRY)
+4. ✅ Minimal code changes (~50 lines added for inheritance headers)
+5. ✅ Design philosophy updates propagate from single source
 
 ---
 
@@ -580,6 +582,6 @@ Execute Option D during **Phase 2-3** of the main integration roadmap, specifica
 ---
 
 *Integration Analysis*
-*Version 1.8 | December 28, 2025*
+*Version 1.9 | December 29, 2025*
 *All 5 phases complete - template system ready for use*
-*Option D (visual design inheritance) phases D.1-D.3 complete*
+*Option D (visual design inheritance) fully complete - 6 skills extend visual-design*

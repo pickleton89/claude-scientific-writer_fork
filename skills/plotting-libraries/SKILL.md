@@ -1,7 +1,11 @@
 ---
 name: plotting-libraries
+version: 1.1.0
 description: "Data visualization for scientific research. Decision frameworks for Python (matplotlib, seaborn) and R (ggplot2, Bioconductor), common patterns, and bioinformatics-specific plots (volcano, heatmaps, survival curves, genome tracks). Use when creating plots, charts, figures, or visualizations."
+extends: visual-design
 ---
+
+> **Design Foundation:** This skill extends `visual-design` for design philosophy, typography principles, color theory, and publication specifications. See [visual-design](../visual-design/SKILL.md) for the foundational design layer.
 
 <objective>
 Guide effective use of data visualization libraries for creating publication-quality scientific figures. This skill provides decision frameworks for choosing between Python and R libraries, common patterns for bioinformatics visualizations, and links to detailed reference documentation.

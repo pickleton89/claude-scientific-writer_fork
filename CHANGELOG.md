@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **README Update Plan**: Created comprehensive analysis and update plan for README.md
+  - Identified skill count discrepancy (README shows 19, actual is 22 top-level skills)
+  - 4 missing skills: `code-documentation`, `reproducible-research`, `statistical-analysis`, `markdown-to-pdf`
+  - Plan includes: badges, "What's New" section, Architecture section, Testing section
+  - Updated project structure tree, expanded components list (5→11)
+  - Step-by-step implementation checklist with priorities
+  - Saved to `docs/README_UPDATE_PLAN.md`
+
 - **Visual Design Skill Inheritance (Option D) - COMPLETE**: Implemented parent-child architecture for visual output skills
   - All 6 visual output skills now `extends: visual-design` in their frontmatter
   - Added "Design Foundation" note linking to parent skill for design philosophy

@@ -77,7 +77,9 @@
       "Bash(uv build:*)",
       "Bash(python -m zipfile:*)",
       "Bash(uv add:*)",
-      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork show HEAD -- README.md)"
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork show HEAD -- README.md)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork log --oneline -50)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork diff .claude/settings.local.json)"
     ]
   },
   "outputStyle": "default"

@@ -47,5 +47,7 @@ build-backend = "hatchling.build"
 packages = ["scientific_writer", "src/oligon_reports"]
 
 [tool.uv]
-dev-dependencies = []
+dev-dependencies = [
+    "pytest>=9.0.2",
+]
 

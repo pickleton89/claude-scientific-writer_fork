@@ -76,7 +76,8 @@
       "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork diff docs/PHASE1_IMPLEMENTATION_PLAN.md)",
       "Bash(uv build:*)",
       "Bash(python -m zipfile:*)",
-      "Bash(uv add:*)"
+      "Bash(uv add:*)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork show HEAD -- README.md)"
     ]
   },
   "outputStyle": "default"

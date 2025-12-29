@@ -1,12 +1,15 @@
 ---
 name: scientific-schematics
-version: 2.1.0
+version: 2.2.0
+extends: visual-design
 description: "Create publication-quality scientific diagrams using Nano Banana Pro AI with iterative refinement and Gemini 3 Flash/Pro quality review. Specialized in neural networks, flowcharts, biological pathways, and system architectures."
 allowed-tools: [Read, Write, Edit, Bash]
 shared-thresholds: "../QUANTIFICATION_THRESHOLDS.md"
 ---
 
 # Scientific Schematics and Diagrams
+
+> **Design Foundation**: This skill extends [`visual-design`](../visual-design/SKILL.md) for typography, color, composition, and accessibility standards.
 
 > **Quantified Thresholds:** This skill references shared thresholds from [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §7 (Quality Rubrics) and §8 (Iteration & Stopping Criteria).
 

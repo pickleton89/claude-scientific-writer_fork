@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Visual Design Skill Inheritance (Option D)**: Implemented parent-child architecture for visual output skills
+  - All 5 visual output skills now `extends: visual-design` in their frontmatter
+  - Added "Design Foundation" note linking to parent skill for design philosophy
+  - Skills updated: `scientific-schematics` (v2.2.0), `scientific-slides` (v2.1.0), `latex-posters` (v2.1.0), `pptx-posters` (v2.1.0), `generate-image` (v2.2.0)
+  - **Finding:** Phase D.3 (content removal) was not needed—skills already followed DRY principles
+  - Phase D.4 (`scientific-visualization`) remains future work
+  - Updated INTEGRATION_ANALYSIS.md to v1.8 with Option D completion status
+
 - **Scientific Schematics: Configurable Review Model**: Added `--review-model` flag to switch between Gemini 3 Flash (default, faster/cheaper) and Gemini 3 Pro (higher quality for critical work)
   - `generate_schematic_ai.py`: New `review_model` constructor parameter with Flash as default
   - `generate_schematic.py`: New `--review-model {flash,pro}` CLI flag

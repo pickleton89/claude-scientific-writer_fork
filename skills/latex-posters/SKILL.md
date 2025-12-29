@@ -1,11 +1,14 @@
 ---
 name: latex-posters
-version: 2.0.0
+version: 2.1.0
+extends: visual-design
 description: "Create professional research posters in LaTeX using beamerposter, tikzposter, or baposter. Supports conference presentations, academic posters, and scientific communication with layout design, color schemes, and figure integration."
 allowed-tools: [Read, Write, Edit, Bash]
 ---
 
 # LaTeX Research Posters
+
+> **Design Foundation**: This skill extends [`visual-design`](../visual-design/SKILL.md) for typography, color, composition, and accessibility standards.
 
 <overview>
 Create publication-quality research posters using LaTeX packages (beamerposter, tikzposter, baposter). This skill provides decision frameworks for package selection, structured workflows for poster development, and quality validation checklists. Posters are primarily visual media—text-heavy posters fail to communicate effectively.

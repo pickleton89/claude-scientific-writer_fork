@@ -1,11 +1,14 @@
 ---
 name: scientific-slides
-version: 2.0.0
+version: 2.1.0
+extends: visual-design
 description: "Build slide decks and presentations for research talks. Use for PowerPoint slides, conference presentations, seminar talks, research presentations, thesis defense slides, or any scientific talk."
 allowed-tools: [Read, Write, Edit, Bash]
 ---
 
 # Scientific Slides
+
+> **Design Foundation**: This skill extends [`visual-design`](../visual-design/SKILL.md) for typography, color, composition, and accessibility standards.
 
 <overview>
 Create effective scientific presentations for conferences, seminars, defenses, and professional talks. This skill provides decision frameworks for selecting presentation format, structured workflows for development, and integration with AI slide generation tools. Supports PDF (via Nano Banana Pro), PowerPoint (via PPTX skill), and LaTeX Beamer outputs.

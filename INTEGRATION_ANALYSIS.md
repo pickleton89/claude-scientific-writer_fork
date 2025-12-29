@@ -423,9 +423,9 @@ Full execution details preserved in:
 
 ---
 
-## 11. Future: Visual Design Skill Architecture (Option D)
+## 11. Visual Design Skill Architecture (Option D) ✅ MOSTLY COMPLETE
 
-**Status:** Planned | **Priority:** Phase 2-3 Integration
+**Status:** Phases D.1-D.3 Complete | **Remaining:** D.4 (scientific-visualization)
 
 ### Context
 
@@ -495,46 +495,31 @@ docs/template-project/brand/
 
 ### Implementation Phases
 
-#### Phase D.1: Promote visual-design to Active Skill
+#### Phase D.1: Promote visual-design to Active Skill ✅ COMPLETE
 
-```bash
-# Move from docs to active skills
-mkdir -p .claude/skills/visual-design/
-cp docs/template-project/brand/visual-design-SKILL.md .claude/skills/visual-design/SKILL.md
-```
+**Completed:** December 28, 2025
 
-- [ ] Adapt YAML frontmatter for active skill format
-- [ ] Remove output-specific implementation details (keep abstract)
-- [ ] Add `allowed-tools` if needed
+The `visual-design` skill already exists as an active skill in `skills/visual-design/SKILL.md` with:
+- [x] Proper YAML frontmatter (name, version, description, allowed-tools)
+- [x] Comprehensive design philosophy content (~530 lines)
+- [x] Reference files in `references/` directory
 
-#### Phase D.2: Add Inheritance Headers to Child Skills
+#### Phase D.2: Add Inheritance Headers to Child Skills ✅ COMPLETE
 
-Each visual output skill gets an `extends:` reference:
+**Completed:** December 28, 2025
 
-```markdown
----
-name: scientific-schematics
-extends: visual-design
-description: ...
----
+Added `extends: visual-design` to frontmatter and design foundation notes to 5 skills:
+- [x] `scientific-schematics` (v2.1.0 → v2.2.0)
+- [x] `scientific-slides` (v2.0.0 → v2.1.0)
+- [x] `latex-posters` (v2.0.0 → v2.1.0)
+- [x] `pptx-posters` (v2.0.0 → v2.1.0)
+- [x] `generate-image` (v2.1.0 → v2.2.0)
 
-# Scientific Schematics
+#### Phase D.3: Remove Redundant Content from Child Skills ✅ COMPLETE (Minimal)
 
-> **Design Foundation**: This skill implements principles from `visual-design`.
-> See that skill for typography, color, composition, and quality standards.
+**Completed:** December 28, 2025
 
-## Implementation Details
-[Skill-specific content only]
-```
-
-#### Phase D.3: Remove Redundant Content from Child Skills
-
-For each child skill, remove sections now covered by parent:
-- [ ] `scientific-schematics`: Remove inline design philosophy (if any)
-- [ ] `scientific-slides`: Remove "Design Philosophy" section (~50 lines)
-- [ ] `latex-posters`: Remove typography/color guidance (defer to parent)
-- [ ] `pptx-posters`: Remove typography/color guidance (defer to parent)
-- [ ] `generate-image`: Remove aesthetic guidance (if any)
+**Finding:** Child skills already followed DRY principles—design guidance was not duplicated. No content removal needed. Skills reference `visual-design` for philosophy but contain only implementation-specific details.
 
 #### Phase D.4: Integrate with scientific-visualization
 
@@ -546,26 +531,26 @@ When `scientific-visualization-SKILL.md` is promoted from `docs/template-project
 
 ### Files Affected
 
-| File | Change |
-|------|--------|
-| `.claude/skills/visual-design/SKILL.md` | NEW (promoted from docs) |
-| `.claude/skills/scientific-schematics/SKILL.md` | Add extends header, minor cleanup |
-| `.claude/skills/scientific-slides/SKILL.md` | Add extends header, remove ~50 lines |
-| `.claude/skills/latex-posters/SKILL.md` | Add extends header, minor cleanup |
-| `.claude/skills/pptx-posters/SKILL.md` | Add extends header, minor cleanup |
-| `.claude/skills/generate-image/SKILL.md` | Add extends header, minor cleanup |
-| `docs/template-project/scientific-visualization-SKILL.md` | Eventually promote + extend |
+| File | Change | Status |
+|------|--------|--------|
+| `skills/visual-design/SKILL.md` | Already active skill | ✅ No change needed |
+| `skills/scientific-schematics/SKILL.md` | Added extends + design note | ✅ Complete |
+| `skills/scientific-slides/SKILL.md` | Added extends + design note | ✅ Complete |
+| `skills/latex-posters/SKILL.md` | Added extends + design note | ✅ Complete |
+| `skills/pptx-posters/SKILL.md` | Added extends + design note | ✅ Complete |
+| `skills/generate-image/SKILL.md` | Added extends + design note | ✅ Complete |
+| `docs/template-project/scientific-visualization-SKILL.md` | Future: promote + extend | ⏳ Phase D.4 |
 
-### Estimated Effort
+### Effort Summary
 
-| Phase | Effort | Dependencies |
-|-------|--------|--------------|
-| D.1: Promote visual-design | 30 min | None |
-| D.2: Add inheritance headers | 1 hour | D.1 |
-| D.3: Remove redundant content | 2-3 hours | D.2, careful review |
-| D.4: Integrate scientific-visualization | 1 hour | Phase 1-3 of main roadmap |
+| Phase | Original Estimate | Actual | Status |
+|-------|-------------------|--------|--------|
+| D.1: Promote visual-design | 30 min | 0 min (already done) | ✅ Complete |
+| D.2: Add inheritance headers | 1 hour | 15 min | ✅ Complete |
+| D.3: Remove redundant content | 2-3 hours | 0 min (not needed) | ✅ Complete |
+| D.4: Integrate scientific-visualization | 1 hour | — | ⏳ Future |
 
-**Total:** ~5 hours of focused work
+**Actual Total:** ~15 minutes (vs. 5 hours estimated)
 
 ### When to Execute
 
@@ -595,6 +580,6 @@ Execute Option D during **Phase 2-3** of the main integration roadmap, specifica
 ---
 
 *Integration Analysis*
-*Version 1.7 | December 28, 2025*
+*Version 1.8 | December 28, 2025*
 *All 5 phases complete - template system ready for use*
-*Design decisions documented - implementation finalized*
+*Option D (visual design inheritance) phases D.1-D.3 complete*

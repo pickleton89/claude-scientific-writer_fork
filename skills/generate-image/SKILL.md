@@ -1,12 +1,15 @@
 ---
 name: generate-image
-version: 2.1.0
+version: 2.2.0
+extends: visual-design
 description: "Generate and edit images using AI models (FLUX, Gemini) via OpenRouter. For photos, illustrations, artwork, and visual assets. Use scientific-schematics for technical diagrams."
 allowed-tools: [Read, Write, Edit, Bash]
 quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
 ---
 
 # Generate Image
+
+> **Design Foundation**: This skill extends [`visual-design`](../visual-design/SKILL.md) for typography, color, composition, and accessibility standards.
 
 <overview>
 Generate and edit high-quality images using OpenRouter's image generation models including FLUX.2 Pro and Gemini 3 Pro. Produces photos, illustrations, artwork, and visual assets for scientific documents, presentations, and publications. For technical diagrams (flowcharts, circuits, pathways), use `scientific-schematics` instead.

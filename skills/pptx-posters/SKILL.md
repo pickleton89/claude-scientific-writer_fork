@@ -1,11 +1,14 @@
 ---
 name: pptx-posters
-version: 2.0.0
+version: 2.1.0
+extends: visual-design
 description: "Create professional research posters in PowerPoint/PPTX format with structured layouts, brand-compliant styling, and print-ready export. Optimized for quick turnaround and collaborative editing."
 allowed-tools: [Read, Write, Edit, Bash, Glob]
 ---
 
 # PowerPoint Research Posters
+
+> **Design Foundation**: This skill extends [`visual-design`](../visual-design/SKILL.md) for typography, color, composition, and accessibility standards.
 
 <overview>
 Create publication-quality research posters using Microsoft PowerPoint or compatible applications. This skill provides structured workflows for poster design, layout optimization, and print-ready export. Optimized for rapid iteration, collaborative editing, and scenarios where LaTeX is impractical.

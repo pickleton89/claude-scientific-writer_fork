@@ -2,7 +2,7 @@
 
 > Claude Scientific Writer Fork - Development Documentation
 > Forked from: [K-Dense-AI/claude-scientific-writer](https://github.com/K-Dense-AI/claude-scientific-writer) v2.10.0
-> Last Updated: 2025-12-28
+> Last Updated: 2025-12-29
 
 ## Project Overview
 
@@ -32,7 +32,7 @@ Clinical and business-focused skills removed to streamline scientific focus:
   - `components.py` - FindingCard, StatusTable, GradedTable, MethodBlock, CalloutBox
 - `docs/template-project/brand/` - Oligon brand standards and visual identity
 - `tests/` - Integration test suite (24 tests)
-- `INTEGRATION_ANALYSIS.md` - Roadmap for template-project merge
+- `docs/archived/INTEGRATION_ANALYSIS.md` - Completed template-project merge roadmap
 
 ---
 
@@ -87,7 +87,7 @@ uv run ty                  # Type check
 | `skills/` | ⭐ Canonical skill definitions (edit skills here) |
 | `.claude/WRITER.md` | Agent instructions for scientific writing |
 | `CHANGELOG.md` | Fork customization history |
-| `INTEGRATION_ANALYSIS.md` | Template-project merge roadmap |
+| `docs/archived/INTEGRATION_ANALYSIS.md` | Completed template-project merge |
 | `docs/original/` | Archived upstream documentation |
 
 ### Active Skills (19 top-level + 4 document sub-skills)
@@ -155,7 +155,6 @@ claude-scientific-writer_fork/
 ├── examples/                # Working examples
 ├── references/              # Reference materials
 ├── CHANGELOG.md             # Fork development history
-├── INTEGRATION_ANALYSIS.md  # Template merge roadmap
 └── pyproject.toml           # uv/Python project config
 ```
 
@@ -217,9 +216,9 @@ For substantial changes or new features, create a planning document first:
 4. **Trade-offs**: What are the alternatives and their pros/cons?
 5. **Execution phases**: Break into manageable steps
 
-Examples of documents created for this fork:
-- `INTEGRATION_ANALYSIS.md` - Template-project merge strategy
-- `SKILL_REMOVAL_PLAN.md` - Clinical skill removal (completed, archived to CHANGELOG)
+Examples of completed planning documents (now archived in `docs/archived/`):
+- `INTEGRATION_ANALYSIS.md` - Template-project merge strategy (completed)
+- `SKILL_REMOVAL_PLAN.md` - Clinical skill removal (archived to CHANGELOG)
 
 ### Making Changes
 
@@ -274,15 +273,17 @@ Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>"
 
 ---
 
-## Integration Roadmap
+## Integration Status ✅ COMPLETE
 
-See `INTEGRATION_ANALYSIS.md` for the 5-phase plan to merge template-project concepts:
+The template-project merge is complete. See `docs/archived/INTEGRATION_ANALYSIS.md` for historical reference.
 
-1. **Phase 1**: Template infrastructure (schemas, markdown templates)
-2. **Phase 2**: Component extension (FindingCard, StatusTable, etc.)
-3. **Phase 3**: Skill creation (`markdown-to-pdf` unified skill)
-4. **Phase 4**: Document type expansion (meeting-notes, project-status, etc.)
-5. **Phase 5**: Integration polish and testing
+**Completed phases:**
+1. ✅ Template infrastructure (12 schemas, 12 markdown templates)
+2. ✅ Component extension (FindingCard, StatusTable, GradedTable, MethodBlock, MetadataHeader)
+3. ✅ Skill creation (`markdown-to-pdf` unified skill)
+4. ✅ Document type expansion (meeting-notes, project-status, etc.)
+5. ✅ Integration polish and testing (24 tests passing)
+6. ✅ Visual design skill inheritance (6 skills extend `visual-design`)
 
 ---
 
@@ -291,7 +292,7 @@ See `INTEGRATION_ANALYSIS.md` for the 5-phase plan to merge template-project con
 | Document | Description |
 |----------|-------------|
 | `.claude/WRITER.md` | Scientific writing agent instructions |
-| `INTEGRATION_ANALYSIS.md` | Template-project merge analysis |
+| `docs/archived/INTEGRATION_ANALYSIS.md` | Completed template-project merge (archived) |
 | `docs/template-project/brand/BRAND_COLORS_v4.md` | Visual identity spec |
 | `docs/template-project/brand/DOCUMENT_TEMPLATING_SYSTEM.md` | Templating design |
 | `docs/original/SKILLS.md` | Original upstream skills reference |

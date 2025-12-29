@@ -91,8 +91,7 @@ claude-scientific-writer_fork/
 ├── scientific_writer/       # Python package (CLI/API)
 ├── examples/                # Working examples
 ├── CLAUDE.md                # Development documentation
-├── CHANGELOG.md             # Fork development history
-└── INTEGRATION_ANALYSIS.md  # Template merge roadmap
+└── CHANGELOG.md             # Fork development history
 ```
 
 ## Getting Started
@@ -157,7 +156,7 @@ All skill edits happen in the `skills/` directory. Each skill has:
 |----------|-------------|
 | `CLAUDE.md` | Development documentation and workflow |
 | `CHANGELOG.md` | Fork customization history |
-| `INTEGRATION_ANALYSIS.md` | Template-project merge roadmap |
+| `docs/archived/INTEGRATION_ANALYSIS.md` | Completed template-project merge |
 | `.claude/WRITER.md` | Scientific writing agent instructions |
 
 ## Upstream Reference

@@ -1,18 +1,24 @@
+---
+name: skill-router
+description: Decision trees for selecting the correct skill when multiple options apply. Consult when task scope is ambiguous or spans multiple scientific writing domains.
+when_to_use: When a user request could be handled by 2+ skills, when unclear which skill is primary vs. supporting, or when planning multi-skill workflows.
+version: 1.1.0
+---
+
 # Skill Router
 
 > Decision trees and routing logic for selecting the right skill(s) for scientific writing tasks
-> Version: 1.0.0 | Created: 2025-12-28
+> Version: 1.1.0 | Updated: 2025-12-30
 
 ---
 
 ## Overview
 
-This document provides explicit routing logic for selecting skills when multiple options may apply. Use these decision trees to deterministically route tasks to the appropriate skill(s).
+Use these decision trees to deterministically route tasks to the appropriate skill(s). Consult this router when:
 
-**When to use this router:**
 - Task could be handled by multiple skills
 - Unclear which skill is primary vs. supporting
-- Need to understand skill relationships for complex workflows
+- Planning multi-skill workflows for complex deliverables
 
 ---
 
@@ -662,6 +668,35 @@ User has content ready for final document format
 
 ---
 
+## Fallback Routing
+
+When no decision tree clearly matches the user's request:
+
+### Step 1: Clarify Intent
+Ask the user to specify:
+1. **Output type**: Document, visual, analysis, or research task?
+2. **Primary deliverable**: What artifact should result from this work?
+3. **Domain**: Does this involve data, diagrams, text, or evaluation?
+
+### Step 2: Default by Category
+If clarification isn't possible, use these defaults:
+
+| Task Characteristic | Default Skill | Rationale |
+|---------------------|---------------|-----------|
+| Text-heavy, unstructured | `scientific-writing` | General manuscript guidance |
+| Visual but unclear type | `visual-design` | Design philosophy applies broadly |
+| Research/information need | `research-lookup` | Quick scoping before deeper work |
+| Analysis/statistics | `statistical-analysis` | Covers most quantitative needs |
+| Unknown document format | `venue-templates` | Has format specifications |
+
+### Step 3: Escalate if Needed
+If task genuinely doesn't fit existing skills:
+1. Acknowledge the gap to the user
+2. Identify the closest skill and explain limitations
+3. Suggest whether a new skill might be warranted
+
+---
+
 ## Cross-References
 
 Each skill's `<cross_references>` section should include:
@@ -678,4 +713,4 @@ Each skill's `<cross_references>` section should include:
 
 ---
 
-*This router provides deterministic skill selection for the 26-skill scientific writing library (22 top-level + 4 document-skills sub-skills). For threshold values and quality criteria, see `QUANTIFICATION_THRESHOLDS.md`.*
+*This router provides deterministic skill selection for the 23-skill scientific writing library (19 top-level + 4 document-skills sub-skills). For threshold values and quality criteria, see `QUANTIFICATION_THRESHOLDS.md`.*

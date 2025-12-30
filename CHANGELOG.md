@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Skills Dependency Audit**: Comprehensive analysis of skill interactions and workflows
+  - Mapped dependencies for all 27 skills (23 top-level + 4 document sub-skills)
+  - Identified 3 foundational skills: `visual-design`, `research-lookup`, `scientific-writing`
+  - Documented extension hierarchy: 5 skills extend `visual-design`
+  - Identified 4 standalone skills: `code-documentation`, `markitdown`, `generate-image`, `statistical-analysis`
+  - Documented 5 workflow patterns: Research Paper Pipeline, Conference Presentation, Research Poster, Reproducibility Pipeline, Literature Review
+  - Created dependency summary table with skill types (Foundation, Hub, Input, Processing, Output, Support)
+  - Identified 2 gaps: `statistical-analysis` ↔ `plotting-libraries`, `code-documentation` ↔ `plotting-libraries`
+  - Added 5-phase implementation plan with acceptance criteria
+  - Saved to `docs/SKILLS_DEPENDENCY_AUDIT.md`
+
 - **Document Skills Integration - COMPLETE**: Implemented all 6 tasks from `docs/DOCUMENT_SKILLS_INTEGRATION_PLAN.md`
   - **SKILL_ROUTER.md**: Added "Document Export & Output Formats" decision tree with routing for docx/pdf/pptx/xlsx
   - **SKILL_ROUTER.md**: Added "Document Output" category to Quick Reference Matrix (5 new entries)

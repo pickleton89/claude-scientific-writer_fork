@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **plotting-libraries skill audit**: Applied best practices framework fixes (v1.2.0 → v1.3.0)
+  - **Line count reduced**: 440 → 342 lines (22% reduction, well under 500-line limit)
+  - **Frontmatter `when_to_use`**: Added comprehensive activation triggers for plots, charts, figures, visualizations, heatmaps, volcano plots, survival curves, genome tracks, PCA/UMAP, correlation matrices, forest plots
+  - **Prerequisites section added**: New `<prerequisites>` with Python (core, statistical, bioinformatics) and R (core, Bioconductor) installation commands
+  - **Error handling section added**: New `<error_handling>` with 10 common errors (Python and R), causes, and solutions plus debugging patterns
+  - **Validation workflow added**: 5-step validation workflow in success criteria (preview, test output, check dimensions, colorblind accessibility, final review)
+  - **Progressive disclosure**: Extracted `<statistical_visualization>` section (185 lines) to new reference file:
+    - `references/statistical_visualization.md` (165 lines) - Group comparisons, Q-Q plots, regression diagnostics, correlation matrices, forest plots with Python and R implementations
+  - **`{baseDir}` path resolution**: All 12 reference paths now use portable `{baseDir}/references/` format
+  - **Description streamlined**: Shortened description field, moved trigger terms to `when_to_use`
+  - Audit compliance: All Section 5.2 checklist items now pass
+
 - **peer-review skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
   - **Line count reduced**: 837 → 541 lines (35% reduction, approaching 500-line target)
   - **Frontmatter `when_to_use`**: Added activation triggers for journal manuscript review, grant evaluation, methodology assessment, presentation feedback, and reporting guideline compliance

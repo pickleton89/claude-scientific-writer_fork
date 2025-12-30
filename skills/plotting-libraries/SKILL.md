@@ -1,7 +1,8 @@
 ---
 name: plotting-libraries
-version: 1.2.0
-description: "Data visualization for scientific research. Decision frameworks for Python (matplotlib, seaborn) and R (ggplot2, Bioconductor), common patterns, and bioinformatics-specific plots (volcano, heatmaps, survival curves, genome tracks). Use when creating plots, charts, figures, or visualizations."
+version: 1.3.0
+description: "Data visualization for scientific research using Python (matplotlib, seaborn) or R (ggplot2, Bioconductor)"
+when_to_use: "Creating plots, charts, figures, visualizations, heatmaps, volcano plots, survival curves, genome tracks, PCA/UMAP, correlation matrices, forest plots, or any scientific figure for publication"
 extends: visual-design
 quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
 ---
@@ -45,6 +46,37 @@ ggplot(df, aes(x = group, y = value, fill = group)) +
 ggsave("figure.pdf", width = 7, height = 5)
 ```
 </quick_start>
+
+<prerequisites>
+## Required Packages
+
+**Python (core):**
+```bash
+pip install matplotlib seaborn numpy pandas
+```
+
+**Python (statistical annotations):**
+```bash
+pip install statannotations scipy statsmodels
+```
+
+**Python (bioinformatics):**
+```bash
+pip install adjustText lifelines pyGenomeTracks scanpy
+```
+
+**R (core):**
+```r
+install.packages(c("ggplot2", "ggpubr", "patchwork", "corrplot", "ggsci"))
+```
+
+**R (Bioconductor):**
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install(c("ComplexHeatmap", "EnhancedVolcano", "survminer", "Gviz", "clusterProfiler"))
+```
+</prerequisites>
 
 <decision_framework>
 ## Python vs R Decision
@@ -100,10 +132,10 @@ ggsave("figure.pdf", width = 7, height = 5)
 
 | Plot Type | Python | R | Reference |
 |-----------|--------|---|-----------|
-| Volcano plot | matplotlib + adjustText | EnhancedVolcano, ggplot2 | [volcano_plots.md](references/volcano_plots.md) |
-| Expression heatmap | seaborn clustermap | ComplexHeatmap, pheatmap | [heatmaps.md](references/heatmaps.md) |
-| Survival curves | lifelines | survminer | [survival_curves.md](references/survival_curves.md) |
-| Genome tracks | pyGenomeTracks | Gviz | [genome_tracks.md](references/genome_tracks.md) |
+| Volcano plot | matplotlib + adjustText | EnhancedVolcano, ggplot2 | [{baseDir}/references/volcano_plots.md]({baseDir}/references/volcano_plots.md) |
+| Expression heatmap | seaborn clustermap | ComplexHeatmap, pheatmap | [{baseDir}/references/heatmaps.md]({baseDir}/references/heatmaps.md) |
+| Survival curves | lifelines | survminer | [{baseDir}/references/survival_curves.md]({baseDir}/references/survival_curves.md) |
+| Genome tracks | pyGenomeTracks | Gviz | [{baseDir}/references/genome_tracks.md]({baseDir}/references/genome_tracks.md) |
 | PCA/UMAP | matplotlib, scanpy | ggplot2 | See respective guides |
 
 **When to use which:**
@@ -121,188 +153,19 @@ ggsave("figure.pdf", width = 7, height = 5)
 <statistical_visualization>
 ## Visualizing Statistical Results
 
-Coordinate with **statistical-analysis** skill for test selection. This section provides implementation patterns for common statistical visualizations.
+Coordinate with **statistical-analysis** skill for test selection.
 
-### Group Comparisons (t-test, ANOVA)
+For complete implementation patterns, see **[{baseDir}/references/statistical_visualization.md]({baseDir}/references/statistical_visualization.md)**.
 
-**Python:**
-```python
-import seaborn as sns
-import matplotlib.pyplot as plt
-from scipy import stats
+| Visualization | Python | R |
+|--------------|--------|---|
+| Group comparisons | seaborn boxplot + stripplot | ggpubr stat_compare_means |
+| Q-Q plots | scipy.stats.probplot | ggplot2 stat_qq |
+| Regression diagnostics | statsmodels.graphics | ggfortify autoplot |
+| Correlation matrices | seaborn heatmap | corrplot |
+| Forest plots | matplotlib errorbar | ggplot2 geom_errorbarh |
 
-fig, ax = plt.subplots(figsize=(8, 6))
-
-# Box plot with individual data points (preferred over bar plots)
-sns.boxplot(data=df, x='group', y='value', ax=ax, width=0.5)
-sns.stripplot(data=df, x='group', y='value', ax=ax, color='black', alpha=0.5, size=4)
-
-# Add significance annotation
-# For automated significance bars, use statannotations package
-ax.set_ylabel('Measurement (units)')
-ax.set_title('Group Comparison')
-```
-
-**R:**
-```r
-library(ggplot2)
-library(ggpubr)
-
-ggplot(df, aes(x = group, y = value, fill = group)) +
-  geom_boxplot(outlier.shape = NA, width = 0.5) +
-  geom_jitter(width = 0.15, alpha = 0.5) +
-  stat_compare_means(method = "t.test") +  # or "anova", "wilcox.test"
-  theme_classic() +
-  theme(legend.position = "none")
-```
-
-### Normality Assessment (Q-Q Plots)
-
-**Python:**
-```python
-from scipy import stats
-import matplotlib.pyplot as plt
-
-fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-
-# Histogram with normal curve overlay
-axes[0].hist(data, bins=30, density=True, alpha=0.7)
-x = np.linspace(data.min(), data.max(), 100)
-axes[0].plot(x, stats.norm.pdf(x, data.mean(), data.std()), 'r-', lw=2)
-axes[0].set_title('Distribution')
-
-# Q-Q plot
-stats.probplot(data, dist="norm", plot=axes[1])
-axes[1].set_title('Q-Q Plot')
-```
-
-**R:**
-```r
-library(ggplot2)
-library(patchwork)
-
-p1 <- ggplot(df, aes(x = value)) +
-  geom_histogram(aes(y = after_stat(density)), bins = 30, fill = "steelblue") +
-  stat_function(fun = dnorm, args = list(mean = mean(df$value), sd = sd(df$value)),
-                color = "red", linewidth = 1)
-
-p2 <- ggplot(df, aes(sample = value)) +
-  stat_qq() + stat_qq_line(color = "red")
-
-p1 + p2
-```
-
-### Regression Diagnostics
-
-**Python:**
-```python
-import statsmodels.api as sm
-import matplotlib.pyplot as plt
-
-# Fit model
-model = sm.OLS(y, sm.add_constant(X)).fit()
-
-fig, axes = plt.subplots(2, 2, figsize=(12, 10))
-
-# Residuals vs Fitted
-axes[0, 0].scatter(model.fittedvalues, model.resid, alpha=0.5)
-axes[0, 0].axhline(y=0, color='r', linestyle='--')
-axes[0, 0].set_xlabel('Fitted values')
-axes[0, 0].set_ylabel('Residuals')
-
-# Q-Q plot of residuals
-sm.qqplot(model.resid, line='45', ax=axes[0, 1])
-
-# Scale-Location
-axes[1, 0].scatter(model.fittedvalues, np.sqrt(np.abs(model.resid)), alpha=0.5)
-axes[1, 0].set_xlabel('Fitted values')
-axes[1, 0].set_ylabel('√|Residuals|')
-
-# Residuals vs Leverage
-sm.graphics.influence_plot(model, ax=axes[1, 1])
-
-plt.tight_layout()
-```
-
-**R:**
-```r
-# Base R diagnostic plots (4 classic plots)
-par(mfrow = c(2, 2))
-plot(model)
-
-# ggplot2 version with ggfortify
-library(ggfortify)
-autoplot(model, which = 1:4)
-```
-
-### Correlation Matrices
-
-**Python:**
-```python
-import seaborn as sns
-
-# Compute correlation matrix
-corr = df.corr()
-
-# Create mask for upper triangle (avoid redundancy)
-mask = np.triu(np.ones_like(corr, dtype=bool))
-
-fig, ax = plt.subplots(figsize=(10, 8))
-sns.heatmap(corr, mask=mask, annot=True, fmt='.2f', cmap='RdBu_r',
-            center=0, vmin=-1, vmax=1, ax=ax)
-ax.set_title('Correlation Matrix')
-```
-
-**R:**
-```r
-library(corrplot)
-
-cor_matrix <- cor(df, use = "pairwise.complete.obs")
-corrplot(cor_matrix, method = "color", type = "lower",
-         addCoef.col = "black", number.cex = 0.7,
-         tl.col = "black", tl.srt = 45)
-```
-
-### Forest Plots (Effect Sizes)
-
-**Python:**
-```python
-import matplotlib.pyplot as plt
-
-# Data: estimates, lower CI, upper CI, labels
-fig, ax = plt.subplots(figsize=(8, 6))
-
-y_pos = range(len(labels))
-ax.errorbar(estimates, y_pos, xerr=[estimates - lower_ci, upper_ci - estimates],
-            fmt='o', capsize=5, color='steelblue')
-ax.axvline(x=0, color='gray', linestyle='--')  # or x=1 for ratios
-ax.set_yticks(y_pos)
-ax.set_yticklabels(labels)
-ax.set_xlabel('Effect Size (95% CI)')
-```
-
-**R:**
-```r
-library(ggplot2)
-
-ggplot(results, aes(x = estimate, y = reorder(variable, estimate))) +
-  geom_point(size = 3) +
-  geom_errorbarh(aes(xmin = lower_ci, xmax = upper_ci), height = 0.2) +
-  geom_vline(xintercept = 0, linetype = "dashed", color = "gray") +
-  labs(x = "Effect Size (95% CI)", y = NULL) +
-  theme_minimal()
-```
-
-### Recommended Packages
-
-| Task | Python | R |
-|------|--------|---|
-| Significance annotations | `statannotations` | `ggpubr::stat_compare_means` |
-| Regression diagnostics | `statsmodels.graphics` | `ggfortify::autoplot` |
-| Correlation plots | `seaborn.heatmap` | `corrplot`, `ggcorrplot` |
-| Forest plots | `forestplot` | `forestplot`, `ggforestplot` |
-| Effect size visualization | Custom matplotlib | `effectsize` + ggplot2 |
-
+**Key packages:** `statannotations` (Python), `ggpubr` (R) for significance annotations.
 </statistical_visualization>
 
 <common_patterns>
@@ -397,18 +260,18 @@ scale_fill_manual(values = c("Control" = "#377EB8", "Treatment" = "#E41A1C"))
 ## Detailed Library Documentation
 
 ### Python
-- **[references/matplotlib.md](references/matplotlib.md)**: Complete matplotlib reference—OO API, plot types, subplots, 3D, styling, saving
-- **[references/seaborn.md](references/seaborn.md)**: Complete seaborn reference—statistical plots, figure-level vs axes-level, palettes, theming
+- **[{baseDir}/references/matplotlib.md]({baseDir}/references/matplotlib.md)**: Complete matplotlib reference—OO API, plot types, subplots, 3D, styling, saving
+- **[{baseDir}/references/seaborn.md]({baseDir}/references/seaborn.md)**: Complete seaborn reference—statistical plots, figure-level vs axes-level, palettes, theming
 
 ### R
-- **[references/ggplot2.md](references/ggplot2.md)**: Complete ggplot2 reference—grammar of graphics, geoms, faceting, themes, publication export
-- **[references/bioconductor_viz.md](references/bioconductor_viz.md)**: Bioconductor packages—ComplexHeatmap, EnhancedVolcano, ggpubr, clusterProfiler
+- **[{baseDir}/references/ggplot2.md]({baseDir}/references/ggplot2.md)**: Complete ggplot2 reference—grammar of graphics, geoms, faceting, themes, publication export
+- **[{baseDir}/references/bioconductor_viz.md]({baseDir}/references/bioconductor_viz.md)**: Bioconductor packages—ComplexHeatmap, EnhancedVolcano, ggpubr, clusterProfiler
 
 ### Bioinformatics-Specific
-- **[references/volcano_plots.md](references/volcano_plots.md)**: Volcano plots for differential expression (Python + R)
-- **[references/heatmaps.md](references/heatmaps.md)**: Expression heatmaps with clustering (Python + R)
-- **[references/survival_curves.md](references/survival_curves.md)**: Kaplan-Meier and survival analysis (Python lifelines + R survminer)
-- **[references/genome_tracks.md](references/genome_tracks.md)**: Genome visualization (pyGenomeTracks + Gviz)
+- **[{baseDir}/references/volcano_plots.md]({baseDir}/references/volcano_plots.md)**: Volcano plots for differential expression (Python + R)
+- **[{baseDir}/references/heatmaps.md]({baseDir}/references/heatmaps.md)**: Expression heatmaps with clustering (Python + R)
+- **[{baseDir}/references/survival_curves.md]({baseDir}/references/survival_curves.md)**: Kaplan-Meier and survival analysis (Python lifelines + R survminer)
+- **[{baseDir}/references/genome_tracks.md]({baseDir}/references/genome_tracks.md)**: Genome visualization (pyGenomeTracks + Gviz)
 </reference_guides>
 
 <cross_references>
@@ -423,6 +286,39 @@ scale_fill_manual(values = c("Control" = "#377EB8", "Treatment" = "#E41A1C"))
 - **[code-documentation](../code-documentation/SKILL.md)**: Docstring patterns for plotting functions—see `visualization_documentation` section for templates
 </cross_references>
 
+<error_handling>
+## Common Errors and Solutions
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| Figure not showing | Missing `plt.show()` or wrong backend | Use `%matplotlib inline` in Jupyter or call `plt.show()` |
+| Empty figure saved | Called `plt.savefig()` after `plt.show()` | Save BEFORE showing: `plt.savefig()` then `plt.show()` |
+| `SettingWithCopyWarning` | Modifying DataFrame view | Use `df = df.copy()` before modifications |
+| Font not found | Missing system font | Use `plt.rcParams['font.family'] = 'sans-serif'` |
+| Figure too large for PDF | High DPI raster in vector format | Reduce DPI or use `rasterized=True` for dense scatter plots |
+| Truncated labels | Labels extend beyond figure bounds | Use `bbox_inches='tight'` in `savefig()` |
+| Colorbar overlap | Default positioning conflicts | Use `fig.colorbar(im, ax=ax, shrink=0.8)` |
+| R: `Error in grid.Call.graphics` | Plotting before device open | Run `dev.new()` or use `ggsave()` directly |
+| R: Object not found in ggplot | Variable not in `aes()` | Check column names match DataFrame exactly |
+| R: Facet labels cut off | Long labels exceed panel width | Use `labeller = label_wrap_gen(width = 15)` |
+
+**Python debugging pattern:**
+```python
+# Check figure state before saving
+print(f"Figure size: {fig.get_size_inches()}")
+print(f"Number of axes: {len(fig.axes)}")
+fig.savefig('debug.png', dpi=100)  # Quick preview
+```
+
+**R debugging pattern:**
+```r
+# Check plot object
+p <- ggplot(...)
+print(p)  # Renders to screen
+ggsave("debug.png", p, width = 7, height = 5)
+```
+</error_handling>
+
 <success_criteria>
 > **Reference:** See [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §9 (Figure & Plot Quality) for detailed metrics.
 
@@ -436,4 +332,11 @@ scale_fill_manual(values = c("Control" = "#377EB8", "Treatment" = "#E41A1C"))
 - [ ] Figure dimensions match journal requirements
 - [ ] Error bars include measure type (SE, SD, 95% CI) and sample size
 - [ ] No chart junk (unnecessary gridlines, borders, 3D effects)
+
+**Validation Workflow:**
+1. **Preview before saving**: Display figure to verify layout and content
+2. **Test output file**: Re-open saved PDF/PNG to confirm no corruption or truncation
+3. **Check dimensions**: Verify exported figure matches target dimensions (journal single-column: 89mm, double-column: 183mm)
+4. **Colorblind accessibility**: Test with `pip install colorblindcheck` (Python) or `colorBlindness` (R)
+5. **Final review**: Zoom to 100% to verify text readability at final print size
 </success_criteria>

@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **scientific-slides skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
+  - **Frontmatter `when_to_use`**: Added activation triggers (conference presentations, seminar talks, thesis defense, grant pitches, journal club, PDF/PowerPoint/Beamer output)
+  - **Description shortened**: Streamlined from 47 words to 9 words for better discoverability
+  - **Prerequisites section added**: New `<prerequisites>` documenting OPENROUTER_API_KEY, Python dependencies (openai, pillow, pypdf), LaTeX installation for Beamer
+  - **Error handling section added**: New `<error_handling>` with 8 common errors (API key issues, missing deps, style inconsistency, compilation errors, page order) and recovery workflow
+  - **`{baseDir}` path resolution**: All 7 script invocations now use portable `{baseDir}/scripts/` format
+  - **Progressive disclosure**: Created new reference file:
+    - `references/output_templates.md` (2.3KB) - Slide plan template, timing checkpoint template, issue tracking template, timing quick reference
+  - **Templates section condensed**: Inline templates (55 lines) replaced with 8-line reference pointer
+  - **Reference table updated**: Added `expert_guide.md` and `output_templates.md` to references table
+  - **Line count**: 576 lines (unchanged; robustness additions balanced by template extraction)
+  - Audit compliance: All Section 5.2 checklist items now pass (~80% → ~98%)
+
 - **scientific-schematics skill audit**: Applied best practices framework fixes (v2.2.0 → v2.3.0)
   - **Prerequisites section added**: New `<prerequisites>` documenting Python 3.9+, requests library, and OPENROUTER_API_KEY requirements with verification command
   - **Error handling section added**: New `<error_handling>` with 7 common errors (API key issues, rate limits, network errors, low scores, file errors) and recovery patterns

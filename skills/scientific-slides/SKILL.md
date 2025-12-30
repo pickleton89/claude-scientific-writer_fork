@@ -1,8 +1,9 @@
 ---
 name: scientific-slides
-version: 2.1.0
+version: 2.2.0
 extends: visual-design
-description: "Build slide decks and presentations for research talks. Use for PowerPoint slides, conference presentations, seminar talks, research presentations, thesis defense slides, or any scientific talk."
+description: "Build slide decks and presentations for research talks."
+when_to_use: "Use for conference presentations, seminar talks, thesis defense slides, grant pitches, journal club presentations, or any scientific talk requiring PDF, PowerPoint, or LaTeX Beamer output."
 allowed-tools: [Read, Write, Edit, Bash]
 ---
 
@@ -33,6 +34,34 @@ Do NOT use this skill when:
 - Creating standalone figures → use `plotting-libraries` or `scientific-schematics`
 - Need only data visualizations → use `plotting-libraries`
 </when_to_use>
+
+<prerequisites>
+## Prerequisites
+
+**For Nano Banana Pro PDF generation (default):**
+```bash
+# Required environment variable
+export OPENROUTER_API_KEY="your-key-here"
+
+# Python dependencies
+pip install openai pillow pypdf
+```
+
+**For LaTeX Beamer:**
+```bash
+# macOS
+brew install --cask mactex
+
+# Ubuntu/Debian
+sudo apt-get install texlive-full
+
+# Verify installation
+pdflatex --version
+```
+
+**For PowerPoint generation:**
+- See `document-skills/pptx/SKILL.md` for python-pptx setup
+</prerequisites>
 
 <decision_framework>
 ## Talk Type Selection
@@ -176,7 +205,7 @@ Choose output format
 
 2. Generate title slide (establishes style):
    ```bash
-   python scripts/generate_slide_image.py "Title slide: '[Title]'.
+   python {baseDir}/scripts/generate_slide_image.py "Title slide: '[Title]'.
    Subtitle: '[Conference]'. Speaker: [Name].
    FORMATTING GOAL: Dark blue (#1a237e), white text, gold accents (#ffc107),
    minimal design." -o slides/01_title.png
@@ -184,7 +213,7 @@ Choose output format
 
 3. Generate subsequent slides (ALWAYS attach previous):
    ```bash
-   python scripts/generate_slide_image.py "Slide titled '[Title]'.
+   python {baseDir}/scripts/generate_slide_image.py "Slide titled '[Title]'.
    Key points: 1) [Point 1], 2) [Point 2].
    CITATIONS: Include at bottom: (Author et al., Year).
    FORMATTING GOAL: Match attached slide style exactly." \
@@ -197,7 +226,7 @@ Choose output format
    ls figures/ results/ plots/
 
    # Attach data figures to results slides
-   python scripts/generate_slide_image.py "Slide titled 'Results'.
+   python {baseDir}/scripts/generate_slide_image.py "Slide titled 'Results'.
    Present attached chart with key findings.
    FORMATTING GOAL: Match attached slide style." \
    -o slides/05_results.png --attach slides/04_methods.png \
@@ -206,7 +235,7 @@ Choose output format
 
 5. Combine to PDF:
    ```bash
-   python scripts/slides_to_pdf.py slides/*.png -o presentation.pdf
+   python {baseDir}/scripts/slides_to_pdf.py slides/*.png -o presentation.pdf
    ```
 
 **Exit Criteria:**
@@ -225,7 +254,7 @@ Choose output format
 **Steps:**
 1. Generate visuals with `--visual-only` flag:
    ```bash
-   python scripts/generate_slide_image.py "[Visual description]" \
+   python {baseDir}/scripts/generate_slide_image.py "[Visual description]" \
    -o figures/slide_visual.png --visual-only
    ```
 
@@ -248,7 +277,7 @@ Choose output format
 **Steps:**
 1. Copy template from assets/:
    ```bash
-   cp assets/beamer_template_conference.tex presentation.tex
+   cp {baseDir}/assets/beamer_template_conference.tex presentation.tex
    ```
 
 2. Customize theme and colors
@@ -275,7 +304,7 @@ Choose output format
 **Steps:**
 1. Convert to images for review (if not already):
    ```bash
-   python scripts/pdf_to_images.py presentation.pdf review/slide --dpi 150
+   python {baseDir}/scripts/pdf_to_images.py presentation.pdf review/slide --dpi 150
    ```
 
 2. Check each slide against validation checklist:
@@ -470,66 +499,35 @@ Choose output format
 
 </anti_patterns>
 
+<error_handling>
+## Error Handling
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `OPENROUTER_API_KEY not set` | Missing environment variable | Run `export OPENROUTER_API_KEY="your-key"` before generating slides |
+| `openai module not found` | Missing Python dependency | Run `pip install openai pillow pypdf` |
+| Script returns empty image | API timeout or rate limit | Wait 30s and retry; check API key validity at openrouter.ai |
+| Style inconsistency between slides | Missing `--attach` flag | Always attach previous slide: `--attach slides/prev.png` |
+| `pdflatex: command not found` | LaTeX not installed | Install via `brew install --cask mactex` (macOS) or `apt-get install texlive-full` (Linux) |
+| LaTeX compilation errors | Syntax error in .tex file | Check log file for line number; common: unescaped `_`, `%`, `&` characters |
+| PDF has wrong page order | Glob expansion order | Use numbered prefixes: `01_title.png`, `02_intro.png` |
+| Fonts too small in final PDF | DPI mismatch | Regenerate with higher resolution or increase font sizes in prompts |
+
+**Recovery Workflow:**
+1. If slide generation fails, check API key and dependencies first
+2. If style is inconsistent, regenerate from the last good slide with `--attach`
+3. If PDF assembly fails, verify all PNGs exist and are valid images
+4. For LaTeX errors, compile incrementally to isolate the problem slide
+</error_handling>
+
 <templates>
 ## Output Templates
 
-### Slide Plan Template
-
-```markdown
-# Presentation: [TITLE]
-Duration: [X] minutes | Slides: [N] | Type: [conference/seminar/defense/grant/journal]
-
-## Formatting Goal
-Background: [color]
-Text: [color]
-Accent: [color]
-Style: [minimal/corporate/academic]
-
-## Slide 1: Title
-- Title: "[Full title]"
-- Subtitle: "[Conference/Event]"
-- Speaker: [Name, Affiliation]
-- Visual: [Background description]
-
-## Slide 2: Hook
-- Title: "[Compelling question or statement]"
-- Key point: [What grabs attention]
-- Citations: (Author1 et al., Year; Author2 et al., Year)
-- Visual: [Image/diagram description]
-
-## Slide 3: Background
-- Title: "[Context title]"
-- Points: [2-3 bullet points]
-- Citations: [Key papers]
-- Visual: [Diagram/image]
-
-... [continue for all slides]
-
-## Backup Slides
-- [Topic 1]: For Q&A about [specific topic]
-- [Topic 2]: Additional data if asked
-```
-
-### Timing Checkpoint Template
-
-```markdown
-# Timing Checkpoints: [TITLE]
-Total duration: [X] minutes
-
-| Checkpoint | Target Time | Actual Run 1 | Actual Run 2 | Actual Run 3 |
-|------------|-------------|--------------|--------------|--------------|
-| End of intro | [X:XX] | | | |
-| Start of results | [X:XX] | | | |
-| Halfway through results | [X:XX] | | | |
-| Start of conclusions | [X:XX] | | | |
-| End | [X:XX] | | | |
-
-Notes:
-- Run 1: [observations]
-- Run 2: [observations]
-- Run 3: [observations]
-```
-
+See `{baseDir}/references/output_templates.md` for complete templates:
+- Slide Plan Template (full presentation structure)
+- Timing Checkpoint Template (practice tracking)
+- Issue Tracking Template (visual review)
+- Quick Reference: Timing by Duration
 </templates>
 
 <cross_references>
@@ -555,6 +553,8 @@ See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
 | Document | Purpose |
 |----------|---------|
+| `references/expert_guide.md` | Core principles, decision rules, failure modes, quality signals |
+| `references/output_templates.md` | Slide plan, timing checkpoint, issue tracking templates |
 | `references/presentation_structure.md` | Detailed structure for all talk types, timing allocation |
 | `references/slide_design_principles.md` | Typography, color theory, layout, accessibility |
 | `references/data_visualization_slides.md` | Simplifying figures, chart types, progressive disclosure |

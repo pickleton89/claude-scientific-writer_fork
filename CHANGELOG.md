@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **markdown-to-pdf skill audit**: Applied best practices framework fixes (v1.0.0 → v1.1.0)
+  - **Fixed invalid reference**: Replaced non-existent `docs/PHASE3_IMPLEMENTATION_PLAN.md` with valid `docs/template-project/brand/BRAND_COLORS_v4.md`
+  - **`{baseDir}` path resolution**: All 3 reference paths now use portable `{baseDir}/references/component_map.md` format
+  - **Prerequisites section added**: New section with `uv sync` installation and verification code for oligon_reports dependencies
+  - **Error handling added**: Comprehensive error table for `/doc-to-pdf` command with 5 common errors, causes, and solutions plus recovery workflow diagram
+  - **Description improved**: Shortened for better discoverability, removed implementation details, highlights 12 templates and 3 categories
+  - Audit score: B+ → A- against claude-skills-best-practices.md framework
+
 - **generate-image skill audit**: Applied best practices framework fixes (v2.2.0)
   - **Progressive disclosure**: Created `references/` directory with 2 new files:
     - `references/prompt_templates.md` (3.9KB) - Complete prompt templates with examples, component guide, scientific patterns

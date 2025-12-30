@@ -1,7 +1,7 @@
 ---
 name: markdown-to-pdf
 version: 1.0.0
-description: "Convert templated markdown documents to branded PDFs using Oligon Reports. Provides template listing, document creation, and PDF generation with structure confirmation."
+description: "Convert templated markdown to branded PDFs. Create documents from 12 templates (scientific, project-mgmt, technical), generate professional PDFs with Oligon styling."
 allowed-tools: [Read, Write, Edit, Bash]
 ---
 
@@ -15,6 +15,25 @@ This skill bridges the template infrastructure and PDF component system to provi
 - `oligon_reports.components` - PDF visual components
 - `oligon_reports.ReportGenerator` - PDF orchestration
 </overview>
+
+<prerequisites>
+## Prerequisites
+
+Before using this skill, verify the oligon_reports package is installed:
+
+```bash
+uv sync  # Install all project dependencies
+```
+
+**Quick verification:**
+```python
+from oligon_reports import ReportGenerator
+from oligon_reports.templates import TemplateParser
+print("Dependencies ready")
+```
+
+If imports fail, ensure you're in the project directory with `pyproject.toml`.
+</prerequisites>
 
 <when_to_use>
 ## Trigger Conditions
@@ -199,7 +218,7 @@ Proceed with PDF generation? [Y/n/edit]
 
 #### Step 3: Map Elements to Components
 
-Use the component mapping (see `references/component_map.md`):
+Use the component mapping (see `{baseDir}/references/component_map.md`):
 
 | Markdown Element | Detection | PDF Component |
 |------------------|-----------|---------------|
@@ -255,12 +274,31 @@ Summary:
 - Brand styling applied (Oligon)
 ```
 
+**Error Handling:**
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `FileNotFoundError` | Markdown file doesn't exist | Verify path, check working directory |
+| `KeyError: 'type'` | Missing frontmatter type field | Add `type: <template-type>` to YAML header |
+| `ValidationError` | Required sections missing | Check template schema for required fields |
+| `PermissionError` on output/ | Directory not writable | Check permissions or use different output path |
+| `ModuleNotFoundError` | oligon_reports not installed | Run `uv sync` in project directory |
+
+**Recovery workflow:**
+```
+Error detected?
+├─ Missing frontmatter → Add YAML header with type, title, date
+├─ Validation errors → Compare against template schema
+├─ Import errors → Run `uv sync` and retry
+└─ Permission errors → Check output/ directory permissions
+```
+
 </commands>
 
 <component_mapping>
 ## Component Mapping Reference
 
-See `references/component_map.md` for the complete element-to-component mapping.
+See `{baseDir}/references/component_map.md` for the complete element-to-component mapping.
 
 ### Quick Reference
 
@@ -422,10 +460,10 @@ See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
 | Document | Purpose |
 |----------|---------|
-| `references/component_map.md` | Complete element → component mapping |
+| `{baseDir}/references/component_map.md` | Complete element → component mapping |
 | `src/oligon_reports/templates/` | Template schemas and markdown files |
 | `src/oligon_reports/components.py` | PDF component implementations |
-| `docs/PHASE3_IMPLEMENTATION_PLAN.md` | Design decisions and rationale |
+| `docs/template-project/brand/BRAND_COLORS_v4.md` | Brand colors and visual identity |
 
 ## API Reference
 

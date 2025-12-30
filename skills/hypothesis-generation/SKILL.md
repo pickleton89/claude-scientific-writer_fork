@@ -1,7 +1,8 @@
 ---
 name: hypothesis-generation
-version: 2.1.0
+version: 2.2.0
 description: "Generate testable hypotheses with quantified quality criteria. Formulate from observations, design experiments, explore competing explanations, develop predictions, propose mechanisms, for scientific inquiry across domains."
+when_to_use: "Use when developing hypotheses from observations, designing experiments to test scientific questions, exploring competing explanations, formulating testable predictions, or planning mechanistic studies across scientific domains."
 allowed-tools: [Read, Write, Edit, Bash]
 shared-thresholds: "../QUANTIFICATION_THRESHOLDS.md"
 ---
@@ -24,6 +25,45 @@ This skill should be used when:
 - Conducting literature-based hypothesis generation
 - Planning mechanistic studies across scientific domains
 
+## Setup Requirements
+
+### LaTeX Environment
+
+This skill generates professional LaTeX documents requiring specific compiler and packages:
+
+| Requirement | Specification |
+|-------------|---------------|
+| **Compiler** | XeLaTeX or LuaLaTeX (required for fontspec) |
+| **Style file** | `hypothesis_generation.sty` (in `assets/`) |
+| **Template** | `hypothesis_report_template.tex` (in `assets/`) |
+
+**Required LaTeX packages:**
+- `tcolorbox` - Colored hypothesis boxes
+- `xcolor` - Color definitions
+- `fontspec` - Font handling (requires XeLaTeX/LuaLaTeX)
+- `fancyhdr` - Header/footer formatting
+- `titlesec` - Section styling
+- `enumitem` - List customization
+- `booktabs` - Professional tables
+- `natbib` - Citation management
+
+### Verification
+
+Before generating reports, verify the LaTeX environment:
+
+```bash
+# Check compiler availability
+xelatex --version
+
+# Verify required packages are installed
+kpsewhich tcolorbox.sty natbib.sty fontspec.sty
+
+# Test template compilation (from skill directory)
+cd {baseDir}/assets && xelatex hypothesis_report_template.tex
+```
+
+If packages are missing, install via your TeX distribution (TeX Live, MiKTeX, or MacTeX).
+
 ## Visual Enhancement with Scientific Schematics
 
 **⚠️ MANDATORY: Every hypothesis generation report MUST include at least 1-2 AI-generated figures using the scientific-schematics skill.**
@@ -33,20 +73,16 @@ This is not optional. Hypothesis reports without visual elements are incomplete.
 2. Prefer 2-3 figures for comprehensive reports (mechanistic pathway, experimental design flowchart, prediction decision tree)
 
 **How to generate figures:**
-- Use the **scientific-schematics** skill to generate AI-powered publication-quality diagrams
-- Simply describe your desired diagram in natural language
-- Nano Banana Pro will automatically generate, review, and refine the schematic
 
-**How to generate schematics:**
-```bash
-python scripts/generate_schematic.py "your diagram description" -o figures/output.png
-```
+Invoke the **scientific-schematics** skill to generate AI-powered publication-quality diagrams:
+1. Describe your desired diagram in natural language
+2. The skill will automatically generate, review, and refine the schematic
+3. Outputs are saved as publication-ready images
 
-The AI will automatically:
-- Create publication-quality images with proper formatting
-- Review and refine through multiple iterations
-- Ensure accessibility (colorblind-friendly, high contrast)
-- Save outputs in the figures/ directory
+**Integration with scientific-schematics skill:**
+- The scientific-schematics skill handles all figure generation
+- Describe the concept; the skill produces the visual
+- Figures are automatically formatted for accessibility (colorblind-friendly, high contrast)
 
 **When to add schematics:**
 - Hypothesis framework diagrams showing competing explanations
@@ -310,34 +346,36 @@ xelatex hypothesis_report.tex
 
 **Required packages:** The `hypothesis_generation.sty` style package must be in the same directory or LaTeX path. It requires: tcolorbox, xcolor, fontspec, fancyhdr, titlesec, enumitem, booktabs, natbib.
 
-**Page Overflow Prevention:**
+**Ensuring Proper Page Layout:**
 
-To prevent content from overflowing on pages, follow these critical guidelines:
+Follow these guidelines for professional document formatting:
 
-1. **Monitor Box Content Length:** Each hypothesis box should fit comfortably on a single page. If content exceeds ~0.7 pages, it will likely overflow.
+1. **Size Each Box Appropriately:** Each hypothesis box fits comfortably on a single page when content stays within ~0.6 pages:
+   - Mechanistic explanation: 1-2 brief paragraphs (6-10 sentences max)
+   - Key evidence: 2-3 bullet points
+   - Core assumptions: 1-2 items
+   - Move additional details to appendices
 
-2. **Use Strategic Page Breaks:** Insert `\newpage` before boxes that contain substantial content:
+2. **Use Strategic Page Breaks:** Start substantial boxes on fresh pages with `\newpage`:
    ```latex
    \newpage
    \begin{hypothesisbox1}[Hypothesis 1: Title]
-   % Long content here
+   % Content here
    \end{hypothesisbox1}
    ```
 
-3. **Keep Main Text Boxes Concise:** For the 4-page main text limit:
-   - Each hypothesis box: Maximum 0.5-0.6 pages
-   - Mechanistic explanation: 1-2 brief paragraphs only (6-10 sentences max)
-   - Key evidence: 2-3 bullet points only
-   - Core assumptions: 1-2 items only
-   - If content is longer, move details to appendices
-
-4. **Break Long Content:** If a hypothesis requires extensive explanation, split across main text and appendix:
+3. **Split Long Content Across Sections:** For hypotheses requiring extensive explanation:
    - Main text box: Brief mechanistic overview + 2-3 key evidence points
-   - Appendix A: Detailed mechanism explanation, comprehensive evidence, extended discussion
+   - Appendix A: Detailed mechanism, comprehensive evidence, extended discussion
 
-5. **Test Page Boundaries:** Before each new box, consider if remaining page space is sufficient. If less than 0.6 pages remain, use `\newpage` to start the box on a fresh page.
+4. **Maintain the 4-Page Main Text Limit:** Allocate space intentionally:
+   - Executive summary: 0.5-1 page
+   - Each hypothesis box: ≤0.6 pages
+   - Predictions and comparisons: 0.5-1 page each
 
-6. **Appendix Page Management:** In appendices, use `\newpage` between major sections to avoid overflow in detailed content areas.
+5. **Check Remaining Space:** Before each new box, verify sufficient page space remains. If less than 0.6 pages remain, use `\newpage`.
+
+6. **Structure Appendices Clearly:** Use `\newpage` between major appendix sections for clean organization.
 
 **Quick Reference:** See `assets/FORMATTING_GUIDE.md` for detailed examples of all box types, color schemes, and common formatting patterns.
 

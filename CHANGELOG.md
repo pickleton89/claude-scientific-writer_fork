@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **hypothesis-generation skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
+  - **Frontmatter `when_to_use`**: Added activation triggers to YAML frontmatter for better discoverability
+  - **Setup section added**: New 38-line section with LaTeX environment requirements (XeLaTeX/LuaLaTeX), 8 required packages with purposes, and verification commands
+  - **Fixed orphaned script reference**: Removed non-existent `scripts/generate_schematic.py` code block; clarified scientific-schematics skill integration
+  - **Positive framing**: Renamed "Page Overflow Prevention" → "Ensuring Proper Page Layout"; reframed all guidance constructively
+  - **Line count**: 467 → 504 lines (slightly above 500-line guideline but within acceptable range)
+
 - **code-documentation skill audit**: Applied best practices framework fixes
   - **Setup section added**: Dependencies declared for Python (sphinx, pydocstyle), R (roxygen2, devtools), and notebooks (watermark, Quarto)
   - **Validation section added**: Verification checklists for docstrings (`doctest`, `pydocstyle`), READMEs (7-point checklist), notebooks (6-point checklist), and R (`devtools::check()`)

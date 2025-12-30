@@ -1,7 +1,12 @@
 ---
 name: statistical-analysis
-version: 1.1.0
-description: "Statistical methods for scientific data analysis. Test selection decision trees, code generation (Python scipy/statsmodels, R), multiple testing correction, and result interpretation. Use for hypothesis testing, experimental design validation, and quantitative analysis in papers and grants."
+version: 1.2.0
+description: "Statistical methods for scientific data analysis. Test selection decision trees, code generation (Python scipy/statsmodels, R), multiple testing correction, and result interpretation."
+when_to_use: |
+  Use when: selecting statistical tests, generating Python/R code for hypothesis testing,
+  interpreting p-values and effect sizes, planning sample sizes, reporting statistics in manuscripts.
+  Do NOT use for: machine learning model development, Bayesian inference, time series analysis,
+  or causal inference methods (these require specialized resources).
 license: MIT
 quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
 ---
@@ -11,6 +16,26 @@ quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
 <objective>
 Guide rigorous statistical analysis for scientific research, with emphasis on bioinformatics and high-dimensional data. This skill provides decision frameworks for test selection, code patterns for implementation, and interpretation guidance for manuscripts.
 </objective>
+
+<prerequisites>
+## Required Packages
+
+**Python:**
+```bash
+pip install scipy statsmodels numpy pandas
+# For power analysis:
+pip install statsmodels  # includes power module
+```
+
+**R:**
+```r
+install.packages(c("stats", "car", "effectsize", "pwr"))
+# For RNA-seq:
+BiocManager::install(c("DESeq2", "edgeR", "limma"))
+```
+
+Code patterns in `references/` assume these packages are available. Verify installation before running generated code.
+</prerequisites>
 
 <scope>
 ## In Scope
@@ -100,26 +125,6 @@ Guide rigorous statistical analysis for scientific research, with emphasis on bi
 5. Calculate effect sizes → Biological relevance
 6. Report results → Methods + Results sections
 ```
-
-### Stage Progress Milestones
-
-**Stage 1 - Research Question:**
-- 25%: Hypothesis articulated → 50%: Comparison type identified → 75%: Variables defined → 100%: Ready for data assessment
-
-**Stage 2 - Data Assessment:**
-- 25%: Normality tested → 50%: Sample size documented → 75%: Outliers identified → 100%: Data characteristics complete
-
-**Stage 3 - Test Selection:**
-- 25%: Test identified from framework → 50%: Assumptions verified → 75%: Code implemented → 100%: Raw p-values computed
-
-**Stage 4 - Corrections:**
-- 25%: Number of tests documented → 50%: Correction method selected → 75%: Adjusted p-values computed → 100%: Significance determined
-
-**Stage 5 - Effect Sizes:**
-- 25%: Metric selected → 50%: Effect sizes computed → 75%: Confidence intervals calculated → 100%: Biological relevance assessed
-
-**Stage 6 - Reporting:**
-- 25%: Methods section drafted → 50%: Results section with statistics → 75%: Figures created → 100%: All comparisons reported
 
 ## Workflow Transitions
 
@@ -211,6 +216,35 @@ SE shows precision of mean estimate; SD shows data spread.
 - **Solution**: Use SD for describing variability; SE for comparing means
 </common_pitfalls>
 
+<error_handling>
+## Common Runtime Errors
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `ValueError: sample size too small` | n < 3 for normality tests | Skip normality test; use non-parametric method |
+| `RuntimeWarning: divide by zero` | Zero variance in a group | Check for constant values; exclude or handle |
+| `LinAlgError: singular matrix` | Multicollinearity in regression | Remove correlated predictors; use VIF > 10 threshold |
+| All FDR-adjusted p-values = 1.0 | All raw p-values identical or very high | Verify test ran correctly; check data |
+| `ConvergenceWarning` in logistic | Perfect separation or small sample | Add regularization; check sample size |
+| NaN in effect size calculation | Zero denominator (e.g., pooled SD = 0) | Verify data variability; use alternative metric |
+
+### Handling Missing Data
+
+```python
+# Check for missing values before analysis
+if df.isnull().any().any():
+    print(f"Missing values: {df.isnull().sum().sum()}")
+    # Options: df.dropna(), df.fillna(method), or use imputation
+```
+
+### Assumption Verification Failures
+
+When assumptions are violated, fall back to robust alternatives:
+- Non-normality → Non-parametric tests (Mann-Whitney, Kruskal-Wallis)
+- Heteroscedasticity → Welch's t-test, robust standard errors
+- Non-independence → Mixed models or GEE
+</error_handling>
+
 <reporting_guidelines>
 ## How to Report Statistical Results
 
@@ -247,17 +281,17 @@ p = 0.001, Cramér's V = 0.31)"
 
 Detailed guidance available in `references/` subdirectory:
 
-| Reference | Purpose |
-|-----------|---------|
-| `test_decision_framework.md` | Detailed decision trees with code examples |
-| `python_scipy_patterns.md` | Complete scipy.stats API patterns |
-| `r_stats_patterns.md` | R base stats and specialized packages |
-| `multiple_testing_correction.md` | FDR, Bonferroni, permutation methods |
-| `normalization_methods.md` | RNA-seq normalization (TMM, DESeq2, limma-voom) |
-| `dimensionality_reduction.md` | PCA, t-SNE, UMAP theory and implementation |
-| `clustering_methods.md` | Hierarchical, k-means, graph-based methods |
-| `survival_analysis.md` | Kaplan-Meier, log-rank, Cox regression |
-| `power_sample_size.md` | Power analysis for omics studies |
+| Reference | Purpose | Size |
+|-----------|---------|------|
+| `test_decision_framework.md` | Detailed decision trees with code examples | 17KB |
+| `python_scipy_patterns.md` | Complete scipy.stats API patterns | 31KB |
+| `r_stats_patterns.md` | R base stats and specialized packages | 16KB |
+| `multiple_testing_correction.md` | FDR, Bonferroni, permutation methods | 14KB |
+| `normalization_methods.md` | RNA-seq normalization (TMM, DESeq2, limma-voom) | 17KB |
+| `dimensionality_reduction.md` | PCA, t-SNE, UMAP theory and implementation | 24KB |
+| `clustering_methods.md` | Hierarchical, k-means, graph-based methods | 27KB |
+| `survival_analysis.md` | Kaplan-Meier, log-rank, Cox regression | 23KB |
+| `power_sample_size.md` | Power analysis for omics studies | 21KB |
 </references>
 
 <visualization_guidance>

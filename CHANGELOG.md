@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Document Skills Integration Plan**: Created implementation plan for integrating `document-skills` into skill routing
+  - Identified gaps: SKILL_ROUTER missing document export decision tree, scientific-writing and venue-templates missing cross-references
+  - 6 tasks across 3 phases: Core Routing (SKILL_ROUTER updates), Cross-References (skill file updates), Verification
+  - New decision tree: "Document Export & Output Formats" routing to docx/pdf/pptx/xlsx skills
+  - New workflows: "PDF Report from Markdown", "Report to Presentation Conversion"
+  - Saved to `docs/DOCUMENT_SKILLS_INTEGRATION_PLAN.md`
+
 - **README.md Comprehensive Update**: Implemented the README update plan (docs/README_UPDATE_PLAN.md)
   - Added status badges: Python 3.10+, 24 tests passing, 22 skills active, MIT license
   - Fixed skill count: 19 → 22 top-level skills

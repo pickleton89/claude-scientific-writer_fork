@@ -342,6 +342,13 @@ This skill works seamlessly with other scientific skills:
 - Use for conference-specific poster requirements
 - Integrate with visualization skills for figure creation
 
+### Document Export
+- Use **document-skills/docx** to export formatted manuscript to Word for journal submission systems
+- Use **document-skills/pdf** to generate PDF version for preprint servers (arXiv, bioRxiv)
+- Use **markdown-to-pdf** for branded PDF output with Oligon templates
+
+**Export Workflow**: After applying venue-specific formatting with this skill, use `document-skills/docx` to generate the final Word document for submission.
+
 ## Template Categories
 
 ### By Document Type

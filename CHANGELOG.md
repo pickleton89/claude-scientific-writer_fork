@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Document Skills Integration - COMPLETE**: Implemented all 6 tasks from `docs/DOCUMENT_SKILLS_INTEGRATION_PLAN.md`
+  - **SKILL_ROUTER.md**: Added "Document Export & Output Formats" decision tree with routing for docx/pdf/pptx/xlsx
+  - **SKILL_ROUTER.md**: Added "Document Output" category to Quick Reference Matrix (5 new entries)
+  - **SKILL_ROUTER.md**: Updated Workflow 1 with step 11 (document-skills/docx export)
+  - **SKILL_ROUTER.md**: Added Workflow 5 (PDF Report from Markdown) and Workflow 6 (Report to Presentation Conversion)
+  - **scientific-writing/SKILL.md**: Added document-skills/docx and document-skills/pdf to Related skills, added Output Workflow
+  - **venue-templates/SKILL.md**: Added Document Export subsection with export workflow guidance
+  - **document-skills sub-skills**: Added Cross-References sections to docx, pdf, pptx, xlsx with SKILL_ROUTER links
+  - Validation: 17 document-skills references in SKILL_ROUTER (target was 10+), all sub-skills reference SKILL_ROUTER
+
 - **Document Skills Integration Plan**: Created implementation plan for integrating `document-skills` into skill routing
   - Identified gaps: SKILL_ROUTER missing document export decision tree, scientific-writing and venue-templates missing cross-references
   - 6 tasks across 3 phases: Core Routing (SKILL_ROUTER updates), Cross-References (skill file updates), Verification

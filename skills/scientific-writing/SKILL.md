@@ -287,8 +287,12 @@ Run three tests before submission:
 - **statistical-analysis**: Test selection, statistical reporting in Methods, interpreting results
 - **reproducible-research**: Data Availability statements, environment documentation, FAIR compliance
 - **code-documentation**: Documenting analysis code referenced in Methods sections
+- **document-skills/docx**: Export manuscript to Word format for journal submission
+- **document-skills/pdf**: PDF output for preprints or supplementary materials
 
 **Workflow**: Use this skill for general principles (IMRAD, citations, clarity), then consult `venue-templates` for venue-specific style adaptation (Nature/Science, Cell Press, medical journals, ML/CS conferences). For quantitative Methods sections, reference `statistical-analysis` for proper test selection and reporting. For Data Availability statements, use `reproducible-research` guidance.
+
+**Output Workflow**: After drafting content with this skill, use `venue-templates` for journal-specific formatting, then export via `document-skills/docx` for Word submissions or `markdown-to-pdf` for branded PDF output.
 
 ## References
 

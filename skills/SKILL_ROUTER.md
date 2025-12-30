@@ -278,6 +278,78 @@ User needs to convert or transform content
 
 ---
 
+## Decision Tree: Document Export & Output Formats
+
+```
+User has content ready for final document format
+│
+├─ Need Word document (.docx)?
+│  │
+│  └─ YES → document-skills/docx
+│            │
+│            ├─ From scientific-writing content
+│            │  └─ Export manuscript to Word format
+│            │
+│            ├─ With venue-templates formatting
+│            │  └─ Apply journal-specific styles
+│            │
+│            ├─ Need tracked changes/redlining?
+│            │  └─ Use OOXML redline workflow
+│            │
+│            └─ Edit existing DOCX?
+│               └─ Raw XML or docx-js manipulation
+│
+├─ Need PDF output?
+│  │
+│  ├─ Branded/templated PDF from Markdown?
+│  │  └─ YES → markdown-to-pdf
+│  │            └─ Uses Oligon templates & brand colors
+│  │
+│  └─ PDF manipulation (forms, merge, extract)?
+│     └─ YES → document-skills/pdf
+│              │
+│              ├─ Fill PDF forms
+│              ├─ Extract text/tables
+│              ├─ Merge/split PDFs
+│              └─ Metadata handling
+│
+├─ Need PowerPoint (.pptx)?
+│  │
+│  ├─ Creating presentation from scratch?
+│  │  └─ YES → scientific-slides → document-skills/pptx
+│  │            │
+│  │            ├─ Plan content with scientific-slides
+│  │            └─ Build PPTX with document-skills/pptx
+│  │
+│  └─ Editing existing presentation?
+│     └─ YES → document-skills/pptx
+│              │
+│              ├─ OOXML manipulation
+│              ├─ Template-based creation
+│              └─ html2pptx workflow
+│
+└─ Need Excel (.xlsx)?
+   │
+   └─ YES → document-skills/xlsx
+            │
+            ├─ Create spreadsheets with formulas
+            ├─ Data analysis and manipulation
+            ├─ Chart generation
+            └─ Recalculate formulas (recalc.py)
+```
+
+### Document Export: Quick Selection
+
+| Content Source | Output Format | Primary Skill | Supporting Skill |
+|----------------|---------------|---------------|------------------|
+| Manuscript text | Word (.docx) | document-skills/docx | venue-templates |
+| Markdown content | Branded PDF | markdown-to-pdf | visual-design |
+| Existing PDF | Modified PDF | document-skills/pdf | — |
+| Slide plan | PowerPoint | document-skills/pptx | scientific-slides |
+| Data/analysis | Excel | document-skills/xlsx | — |
+
+---
+
 ## Quick Reference Matrix
 
 ### Task → Skill Mapping
@@ -312,6 +384,12 @@ User needs to convert or transform content
 | **Conversion** | | |
 | File → Markdown | markitdown | — |
 | Paper → Web/Media | paper-2-web | — |
+| **Document Output** | | |
+| Export to Word | document-skills/docx | + venue-templates (for journal styles) |
+| Create branded PDF | markdown-to-pdf | + visual-design |
+| PDF forms/manipulation | document-skills/pdf | — |
+| Create/edit PowerPoint | document-skills/pptx | + scientific-slides |
+| Create/edit Excel | document-skills/xlsx | — |
 
 ---
 
@@ -330,6 +408,7 @@ User needs to convert or transform content
 8. scientific-schematics  → Create method diagrams
 9. visual-design          → Polish all visuals
 10. peer-review           → Self-review before submission
+11. document-skills/docx  → Export to Word for submission
 ```
 
 ### Workflow 2: Conference Poster
@@ -359,6 +438,27 @@ User needs to convert or transform content
 2. code-documentation     → Document code thoroughly
 3. reproducible-research  → Ensure FAIR compliance
 4. plotting-libraries     → Create reproducible figures
+```
+
+### Workflow 5: PDF Report from Markdown
+
+```
+1. scientific-writing     → Draft content in Markdown
+2. visual-design          → Establish design specifications
+3. plotting-libraries     → Create data figures
+4. markdown-to-pdf        → Apply branded template
+   OR
+   document-skills/pdf    → Advanced PDF manipulation
+```
+
+### Workflow 6: Report to Presentation Conversion
+
+```
+1. markitdown             → Extract PDF/DOCX to Markdown
+2. visual-design          → Load brand specifications
+3. scientific-slides      → Plan slide structure
+4. document-skills/pptx   → Build PowerPoint file
+5. visual-design          → Validate accessibility
 ```
 
 ---

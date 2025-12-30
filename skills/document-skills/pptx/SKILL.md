@@ -516,3 +516,12 @@ Required dependencies (should already be installed):
 - **LibreOffice**: `sudo apt-get install libreoffice` (for PDF conversion)
 - **Poppler**: `sudo apt-get install poppler-utils` (for pdftoppm to convert PDF to images)
 - **defusedxml**: `pip install defusedxml` (for secure XML parsing)
+
+## Cross-References
+
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
+**Related skills:**
+- **scientific-slides**: Plan presentation content and structure before building PowerPoint
+- **visual-design**: Apply design principles and brand specifications
+- **markitdown**: Extract content from existing PPTX files to Markdown

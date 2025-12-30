@@ -229,3 +229,12 @@ Required dependencies (install if not available):
 - **LibreOffice**: `sudo apt-get install libreoffice` (for PDF conversion)
 - **Poppler**: `sudo apt-get install poppler-utils` (for pdftoppm to convert PDF to images)
 - **defusedxml**: `pip install defusedxml` (for secure XML parsing)
+
+## Cross-References
+
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
+**Related skills:**
+- **scientific-writing**: Draft manuscript content before exporting to Word format
+- **venue-templates**: Apply journal-specific formatting before Word export
+- **markitdown**: Convert existing DOCX files to Markdown for editing

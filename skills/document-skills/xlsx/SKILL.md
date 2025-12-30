@@ -321,3 +321,12 @@ The script returns JSON with error details:
 - Add comments to cells with complex formulas or important assumptions
 - Document data sources for hardcoded values
 - Include notes for key calculations and model sections
+
+## Cross-References
+
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
+**Related skills:**
+- **statistical-analysis**: Statistical methods and test selection for data analysis
+- **plotting-libraries**: Create visualizations from spreadsheet data
+- **reproducible-research**: Ensure data analysis follows FAIR principles

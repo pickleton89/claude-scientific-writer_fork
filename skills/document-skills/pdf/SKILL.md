@@ -325,3 +325,12 @@ with open("encrypted.pdf", "wb") as output:
 - For JavaScript libraries (pdf-lib), see reference.md
 - If you need to fill out a PDF form, follow the instructions in forms.md
 - For troubleshooting guides, see reference.md
+
+## Cross-References
+
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
+**Related skills:**
+- **markdown-to-pdf**: Create branded PDFs from Markdown content with Oligon templates
+- **markitdown**: Extract content from existing PDFs to Markdown for editing
+- **scientific-writing**: Draft content before PDF generation

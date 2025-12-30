@@ -34,6 +34,34 @@ Do NOT use this skill when:
 - Need quick turnaround without LaTeX expertise → use `pptx-posters`
 </when_to_use>
 
+<setup>
+## Prerequisites
+
+**Required Tools:**
+```bash
+# Verify LaTeX installation
+pdflatex --version   # or lualatex --version
+pdfinfo --version    # for PDF quality checks (poppler-utils)
+```
+
+**Required LaTeX Packages:**
+- `beamerposter` - for Beamer-based posters
+- `tikzposter` - for TikZ-based posters
+- `baposter` - for multi-column block posters
+- `qrcode` - for QR code generation
+
+**Package Installation (TeX Live):**
+```bash
+tlmgr install beamerposter tikzposter baposter qrcode
+```
+
+**Dependency Check:**
+Before starting, verify the poster class compiles:
+```bash
+echo '\documentclass[25pt,a0paper]{tikzposter}\begin{document}\end{document}' | pdflatex
+```
+</setup>
+
 <decision_framework>
 ## LaTeX vs PowerPoint Decision
 
@@ -70,15 +98,15 @@ Which LaTeX package?
 │
 ├─ Already know Beamer or have Beamer theme?
 │   └─ YES → beamerposter
-│       Templates: assets/beamerposter_*.tex
+│       Template: {baseDir}/assets/beamerposter_template.tex
 │
 ├─ Want modern, colorful, highly customizable?
 │   └─ YES → tikzposter
-│       Templates: assets/tikzposter_*.tex
+│       Template: {baseDir}/assets/tikzposter_template.tex
 │
 └─ Need structured multi-column with automatic spacing?
     └─ YES → baposter
-        Templates: assets/baposter_*.tex
+        Template: {baseDir}/assets/baposter_template.tex
 ```
 
 ## Poster Size Selection
@@ -135,7 +163,7 @@ Which LaTeX package?
 **Steps:**
 1. Copy appropriate template:
    ```bash
-   cp assets/[package]_[style].tex poster.tex
+   cp {baseDir}/assets/[package]_template.tex poster.tex
    ```
 
 2. Configure page size:
@@ -175,14 +203,12 @@ Which LaTeX package?
 **Objective:** Generate required figures and schematics
 
 **Steps:**
-1. Generate schematics using scientific-schematics skill:
-   ```bash
-   python scripts/generate_schematic.py "methodology flowchart showing [process]" \
-     -o figures/methodology.png
-
-   python scripts/generate_schematic.py "conceptual framework diagram for [topic]" \
-     -o figures/framework.png
-   ```
+1. Generate schematics using the `scientific-schematics` skill:
+   - Invoke the skill with prompts for each required figure
+   - Example prompts:
+     - "methodology flowchart showing [process]"
+     - "conceptual framework diagram for [topic]"
+   - Save outputs to `figures/` directory at ≥300 DPI
 
 2. Ensure all figures are high resolution:
    - Minimum 300 DPI at final print size
@@ -552,28 +578,24 @@ See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
 | Document | Purpose |
 |----------|---------|
-| `references/latex_poster_packages.md` | Detailed package comparison with examples |
-| `references/poster_layout_design.md` | Layout principles, grid systems, visual flow |
-| `references/poster_design_principles.md` | Typography, color theory, accessibility |
-| `references/poster_content_guide.md` | Content organization, writing style |
+| `{baseDir}/references/latex_poster_packages.md` | Detailed package comparison with examples |
+| `{baseDir}/references/poster_layout_design.md` | Layout principles, grid systems, visual flow |
+| `{baseDir}/references/poster_design_principles.md` | Typography, color theory, accessibility |
+| `{baseDir}/references/poster_content_guide.md` | Content organization, writing style |
 
 ## Templates
 
 | Template | Description |
 |----------|-------------|
-| `assets/beamerposter_classic.tex` | Traditional academic style |
-| `assets/beamerposter_modern.tex` | Clean, minimal design |
-| `assets/tikzposter_default.tex` | Standard tikzposter layout |
-| `assets/tikzposter_rays.tex` | Modern design with ray theme |
-| `assets/baposter_portrait.tex` | Classic portrait layout |
-| `assets/baposter_landscape.tex` | Landscape multi-column |
+| `{baseDir}/assets/beamerposter_template.tex` | Beamer-based academic poster |
+| `{baseDir}/assets/tikzposter_template.tex` | TikZ-based modern poster |
+| `{baseDir}/assets/baposter_template.tex` | Multi-column block poster |
+| `{baseDir}/assets/poster_quality_checklist.md` | Quality review checklist |
 
 ## Scripts
 
 | Script | Usage |
 |--------|-------|
-| `scripts/compile_poster.sh` | Automated compilation with error handling |
-| `scripts/review_poster.sh` | PDF quality checks (dimensions, fonts, size) |
-| `scripts/resize_images.py` | Batch image optimization |
+| `{baseDir}/scripts/review_poster.sh` | PDF quality checks (dimensions, fonts, size) |
 
 </references>

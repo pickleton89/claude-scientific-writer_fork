@@ -622,28 +622,34 @@ Master routing document that defines:
 
 ---
 
-### Phase 4: Quality Metrics Integration (Priority: Low)
+### Phase 4: Quality Metrics Integration (Priority: Low) ✅ COMPLETE
 
-#### 4.1 Extend QUANTIFICATION_THRESHOLDS.md
+#### 4.1 Create QUANTIFICATION_THRESHOLDS.md
 
-**Goal**: Add quality metrics for skills that lack them
+**Goal**: Create shared thresholds document and add quality metrics for skills that lack them
 
-**Currently covered**: scientific-schematics, scientific-writing, reproducible-research
+**File created**: `skills/QUANTIFICATION_THRESHOLDS.md` (v1.0.0)
 
-**Candidates for addition**:
-- `plotting-libraries` - figure quality thresholds
-- `literature-review` - review completeness metrics
-- `statistical-analysis` - reporting completeness checklist
+**Sections implemented**:
+- §1 Literature Coverage (referenced by literature-review, hypothesis-generation, scientific-writing)
+- §2 Visual Quality (visual-design, peer-review, generate-image, plotting-libraries)
+- §3 Replication & Sample Size (peer-review, hypothesis-generation, statistical-analysis)
+- §4 Issue Severity Classification (peer-review, scholar-evaluation)
+- §5 Documentation Completeness (reproducible-research, code-documentation)
+- §6 Time-Based Thresholds (literature-review, research-lookup)
+- §7 Quality Scoring Rubrics (scientific-writing, scientific-schematics, peer-review, generate-image)
+- §8 Iteration & Stopping Criteria (scientific-schematics, generate-image)
+- §9 Figure & Plot Quality **NEW** (plotting-libraries, visual-design)
+- §10 Statistical Reporting Completeness **NEW** (statistical-analysis, scientific-writing, peer-review)
 
-**Steps**:
-1. Review QUANTIFICATION_THRESHOLDS.md structure
-2. For each candidate, define measurable quality dimensions
-3. Add thresholds appropriate to document type (journal vs. presentation)
-4. Update skill SKILL.md to reference thresholds
+**Skills updated**:
+- `plotting-libraries` (v1.1.0 → v1.2.0) - references §2, §7.2, §9
+- `statistical-analysis` (added v1.1.0) - references §3, §10, §4
+- `literature-review` - already referenced §1, §6 (verified)
 
 **Acceptance criteria**:
-- [ ] At least one new skill added to QUANTIFICATION_THRESHOLDS.md
-- [ ] Skill cross-references updated to mention thresholds
+- [x] At least one new skill added to QUANTIFICATION_THRESHOLDS.md (plotting-libraries, statistical-analysis)
+- [x] Skill cross-references updated to mention thresholds
 
 ---
 
@@ -678,7 +684,7 @@ Master routing document that defines:
 
 **Acceptance criteria**:
 - [ ] Mermaid diagram added to audit document
-- [ ] All 27 skills represented
+- [ ] All 26 skills represented
 
 ---
 

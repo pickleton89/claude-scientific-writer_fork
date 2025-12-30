@@ -1,8 +1,12 @@
 ---
 name: statistical-analysis
+version: 1.1.0
 description: "Statistical methods for scientific data analysis. Test selection decision trees, code generation (Python scipy/statsmodels, R), multiple testing correction, and result interpretation. Use for hypothesis testing, experimental design validation, and quantitative analysis in papers and grants."
 license: MIT
+quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
 ---
+
+> **Quantified Thresholds:** This skill references shared thresholds from [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §3 (Replication & Sample Size), §10 (Statistical Reporting Completeness), and §4 (Issue Severity Classification for statistical errors).
 
 <objective>
 Guide rigorous statistical analysis for scientific research, with emphasis on bioinformatics and high-dimensional data. This skill provides decision frameworks for test selection, code patterns for implementation, and interpretation guidance for manuscripts.
@@ -209,6 +213,8 @@ SE shows precision of mean estimate; SD shows data spread.
 
 <reporting_guidelines>
 ## How to Report Statistical Results
+
+> **Reference:** See [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §10 (Statistical Reporting Completeness) for required elements by test type.
 
 ### Methods Section Template
 ```

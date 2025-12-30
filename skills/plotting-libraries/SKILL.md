@@ -1,9 +1,12 @@
 ---
 name: plotting-libraries
-version: 1.1.0
+version: 1.2.0
 description: "Data visualization for scientific research. Decision frameworks for Python (matplotlib, seaborn) and R (ggplot2, Bioconductor), common patterns, and bioinformatics-specific plots (volcano, heatmaps, survival curves, genome tracks). Use when creating plots, charts, figures, or visualizations."
 extends: visual-design
+quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
 ---
+
+> **Quantified Thresholds:** This skill references shared thresholds from [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §2 (Visual Quality), §7.2 (Figure Quality Rubric), and §9 (Figure & Plot Quality).
 
 > **Design Foundation:** This skill extends `visual-design` for design philosophy, typography principles, color theory, and publication specifications. See [visual-design](../visual-design/SKILL.md) for the foundational design layer.
 
@@ -421,11 +424,16 @@ scale_fill_manual(values = c("Control" = "#377EB8", "Treatment" = "#E41A1C"))
 </cross_references>
 
 <success_criteria>
-- Appropriate library/ecosystem chosen for the task
-- Figure renders correctly with all elements visible
-- Exported at appropriate resolution (300 DPI for print, 150 for web)
-- Labels, legends, and titles are readable
-- Color palette is accessible (colorblind-friendly when possible)
-- Vector format used for publications (PDF, SVG)
-- Figure size matches journal requirements
+> **Reference:** See [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §9 (Figure & Plot Quality) for detailed metrics.
+
+**Quality Checklist:**
+- [ ] Appropriate library/ecosystem chosen for the task
+- [ ] Figure renders correctly with all elements visible
+- [ ] Exported at appropriate resolution (≥300 DPI for print, ≥150 for web)
+- [ ] Labels, legends, and titles are readable (≥7pt final size)
+- [ ] Color palette is accessible (colorblind-safe)
+- [ ] Vector format used for publications (PDF, SVG)
+- [ ] Figure dimensions match journal requirements
+- [ ] Error bars include measure type (SE, SD, 95% CI) and sample size
+- [ ] No chart junk (unnecessary gridlines, borders, 3D effects)
 </success_criteria>

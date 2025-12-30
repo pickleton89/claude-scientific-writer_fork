@@ -246,10 +246,49 @@ User needs analysis or code support
 | Task | Primary Skill | Supporting Skill |
 |------|---------------|------------------|
 | "Which test should I use?" | statistical-analysis | — |
+| "Visualize my statistical results" | statistical-analysis | plotting-libraries |
 | "Make my analysis reproducible" | reproducible-research | code-documentation |
-| "Document my code" | code-documentation | — |
+| "Document my code" | code-documentation | plotting-libraries (for figure code) |
 | "Archive my data" | reproducible-research | — |
 | "Report my statistics" | statistical-analysis | scientific-writing |
+
+### Statistical Visualization Routing
+
+```
+Need to visualize statistical results?
+│
+├─ Assessing data before analysis?
+│  │
+│  ├─ Normality check → Q-Q plot, histogram
+│  ├─ Variance by group → Box plot
+│  └─ Outlier detection → Box plot, scatter
+│  │
+│  └─ Use: plotting-libraries (see statistical_visualization section)
+│
+├─ Showing group comparisons?
+│  │
+│  ├─ Two groups → Box + strip plot, violin plot
+│  ├─ Multiple groups → Grouped box, significance brackets
+│  └─ Paired data → Before-after line plot
+│  │
+│  └─ Use: statistical-analysis (visualization_guidance) → plotting-libraries
+│
+├─ Showing relationships?
+│  │
+│  ├─ Correlation → Scatter + fit line, correlation heatmap
+│  ├─ Regression diagnostics → Residual plot, Q-Q of residuals
+│  └─ Multiple effects → Forest plot, coefficient plot
+│  │
+│  └─ Use: statistical-analysis → plotting-libraries
+│
+└─ High-dimensional results?
+   │
+   ├─ Differential expression → Volcano plot, MA plot
+   ├─ Clustering → Heatmap with dendrograms
+   └─ Multiple testing → P-value histogram
+   │
+   └─ Use: plotting-libraries (bioinformatics section)
+```
 
 ---
 

@@ -128,6 +128,168 @@ Is this code for a package/library?
 - Limit large outputs with `.head()` or sampling
 </notebook_guidelines>
 
+<visualization_documentation>
+## Documenting Plotting Code
+
+Coordinate with **plotting-libraries** skill for implementation. This section provides docstring patterns for figure-generating functions.
+
+### Python: NumPy-Style Docstring for Plotting Functions
+
+```python
+def plot_group_comparison(
+    data: pd.DataFrame,
+    x: str,
+    y: str,
+    hue: str = None,
+    figsize: tuple = (8, 6),
+    output_path: str = None
+) -> plt.Figure:
+    """Create a box plot with overlaid data points for group comparisons.
+
+    Generates a publication-ready figure showing distribution of values
+    across groups, suitable for t-test or ANOVA results visualization.
+
+    Parameters
+    ----------
+    data : pd.DataFrame
+        Tidy data with one row per observation.
+    x : str
+        Column name for grouping variable (x-axis).
+    y : str
+        Column name for continuous variable (y-axis).
+    hue : str, optional
+        Column name for color-coding subgroups.
+    figsize : tuple, default (8, 6)
+        Figure size in inches (width, height).
+    output_path : str, optional
+        If provided, saves figure to this path. Supports PDF, PNG, SVG.
+
+    Returns
+    -------
+    plt.Figure
+        Matplotlib Figure object for further customization.
+
+    Examples
+    --------
+    >>> fig = plot_group_comparison(df, x='treatment', y='expression')
+    >>> fig.savefig('results/expression_by_treatment.pdf')
+
+    >>> # With statistical annotation (requires statannotations)
+    >>> fig = plot_group_comparison(df, x='genotype', y='phenotype')
+
+    See Also
+    --------
+    plotting-libraries : Full visualization patterns
+    statistical-analysis : Test selection for group comparisons
+
+    Notes
+    -----
+    - Uses seaborn boxplot with stripplot overlay
+    - Applies visual-design color palette if configured
+    - For significance annotations, use statannotations package
+    """
+    # Implementation...
+```
+
+### Python: Google-Style Docstring for Plotting Functions
+
+```python
+def create_volcano_plot(
+    data: pd.DataFrame,
+    log2fc_col: str = 'log2FoldChange',
+    pval_col: str = 'padj',
+    label_col: str = None,
+    fc_threshold: float = 1.0,
+    pval_threshold: float = 0.05
+) -> plt.Figure:
+    """Create a volcano plot for differential expression results.
+
+    Args:
+        data: DataFrame with log2 fold changes and p-values.
+        log2fc_col: Column name for log2 fold change values.
+        pval_col: Column name for (adjusted) p-values.
+        label_col: Column name for gene labels. If None, no labels shown.
+        fc_threshold: Log2 fold change threshold for significance.
+        pval_threshold: P-value threshold for significance.
+
+    Returns:
+        Matplotlib Figure with volcano plot.
+
+    Raises:
+        ValueError: If required columns not found in data.
+
+    Example:
+        >>> results = pd.read_csv('deseq2_results.csv')
+        >>> fig = create_volcano_plot(results, label_col='gene_symbol')
+        >>> fig.savefig('volcano.pdf', dpi=300)
+    """
+    # Implementation...
+```
+
+### R: roxygen2 for Plotting Functions
+
+```r
+#' Create a survival curve plot
+#'
+#' Generates Kaplan-Meier survival curves with risk table and
+#' optional confidence intervals, suitable for clinical publications.
+#'
+#' @param data A data frame with survival data.
+#' @param time_col Name of column containing survival times.
+#' @param event_col Name of column containing event indicators (0/1).
+#' @param group_col Optional grouping variable for stratified curves.
+#' @param conf_int Logical; show confidence intervals? Default TRUE.
+#' @param risk_table Logical; show risk table below plot? Default TRUE.
+#' @param palette Color palette name or vector. Default "npg" (Nature).
+#'
+#' @return A ggsurvplot object (list with plot and table components).
+#'
+#' @examples
+#' library(survival)
+#' fit <- survfit(Surv(time, status) ~ sex, data = lung)
+#' plot_survival(lung, "time", "status", "sex")
+#'
+#' @seealso
+#' \code{\link[survminer]{ggsurvplot}} for underlying implementation.
+#' See statistical-analysis skill for survival analysis methods.
+#'
+#' @export
+plot_survival <- function(data, time_col, event_col, group_col = NULL,
+                          conf_int = TRUE, risk_table = TRUE,
+                          palette = "npg") {
+    # Implementation...
+}
+```
+
+### Key Documentation Elements for Plots
+
+| Element | Why It Matters |
+|---------|----------------|
+| **Parameter types** | Clarifies expected input format |
+| **Defaults** | Shows what happens if omitted |
+| **Output format** | Specifies return type (Figure, Axes, path) |
+| **File formats** | Lists supported export formats |
+| **Examples** | Shows typical usage pattern |
+| **See Also** | Links to related skills/functions |
+| **Notes** | Implementation details, dependencies |
+
+### Anti-Patterns to Avoid
+
+```python
+# BAD: No documentation
+def make_plot(data, x, y):
+    return sns.boxplot(data=data, x=x, y=y)
+
+# BAD: Useless documentation
+def make_plot(data, x, y):
+    """Makes a plot."""  # Says nothing useful
+    return sns.boxplot(data=data, x=x, y=y)
+
+# GOOD: Useful documentation (see examples above)
+```
+
+</visualization_documentation>
+
 <usage_patterns>
 ## When to Apply This Skill
 
@@ -172,5 +334,5 @@ Good documentation:
 - **reproducible-research**: Project structure and environment documentation
 - **scientific-writing**: Methods section describing analysis
 - **statistical-analysis**: Documenting statistical choices and parameters
-- **plotting-libraries**: Documenting figure generation code
+- **plotting-libraries**: Documenting figure generation code—see `<visualization_documentation>` above for docstring patterns
 </cross_references>

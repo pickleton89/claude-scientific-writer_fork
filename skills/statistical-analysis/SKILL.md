@@ -254,13 +254,57 @@ Detailed guidance available in `references/` subdirectory:
 | `power_sample_size.md` | Power analysis for omics studies |
 </references>
 
+<visualization_guidance>
+## Visualizing Statistical Results
+
+Use **plotting-libraries** skill for creating figures. Match visualization to statistical context:
+
+### Data Assessment Plots
+| Purpose | Plot Type | When to Use |
+|---------|-----------|-------------|
+| Normality check | Q-Q plot, histogram | Before parametric tests |
+| Variance homogeneity | Box plot by group | Before ANOVA/t-test |
+| Outlier detection | Box plot, scatter | During data cleaning |
+| Distribution shape | Violin plot, density | Choosing test type |
+
+### Group Comparison Plots
+| Test Type | Recommended Plots |
+|-----------|-------------------|
+| t-test, Mann-Whitney | Box plot + individual points, violin plot |
+| ANOVA, Kruskal-Wallis | Grouped box plot, bar + error bars (with data points) |
+| Paired tests | Before-after line plot, paired dot plot |
+| Post-hoc comparisons | Box plot with significance brackets |
+
+### Regression & Correlation Plots
+| Analysis | Recommended Plots |
+|----------|-------------------|
+| Linear regression | Scatter + fit line, residual plot, Q-Q of residuals |
+| Multiple regression | Partial regression plots, coefficient forest plot |
+| Correlation matrix | Heatmap with values, corrplot |
+| Logistic regression | ROC curve, calibration plot |
+
+### High-Dimensional Data Plots
+| Analysis | Recommended Plots |
+|----------|-------------------|
+| Differential expression | Volcano plot, MA plot |
+| Clustering | Heatmap with dendrograms, silhouette plot |
+| Dimensionality reduction | PCA/UMAP scatter, scree plot |
+| Multiple testing | P-value histogram, adjusted vs raw p-values |
+
+**Anti-patterns to avoid:**
+- Bar plots without individual data points (hides distribution)
+- Pie charts for comparing quantities
+- 3D plots when 2D suffices
+- Dynamite plots (bar + error bar only)
+</visualization_guidance>
+
 <cross_references>
 ## Related Skills
 
 **Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
 - **peer-review**: Manuscript evaluation and critical analysis frameworks (evidence evaluation, bias detection, logical fallacies)
-- **plotting-libraries**: Visualizing statistical results (volcano plots, heatmaps)
+- **plotting-libraries**: Visualizing statistical results—see `<visualization_guidance>` above for test-specific plot recommendations
 - **scientific-writing**: Reporting statistical methods and results in manuscripts
 - **reproducible-research**: Documenting analysis parameters for reproducibility
 - **research-lookup**: Finding appropriate statistical methods in literature

@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Skills Dependency Audit Phase 1 - COMPLETE**: Addressed identified gaps in skill cross-references
+  - **Gap 1.1 - statistical-analysis → plotting-libraries**:
+    - Added `<visualization_guidance>` section to `statistical-analysis/SKILL.md` with test-specific plot recommendations
+    - Tables mapping: Data Assessment Plots, Group Comparison Plots, Regression & Correlation Plots, High-Dimensional Data Plots
+    - Added anti-patterns to avoid (dynamite plots, pie charts for quantities, etc.)
+  - **Gap 1.2 - code-documentation → plotting-libraries**:
+    - Added `<visualization_documentation>` section to `code-documentation/SKILL.md` with docstring templates
+    - Complete examples: NumPy-style, Google-style (Python), roxygen2 (R) for plotting functions
+    - Key documentation elements table and anti-patterns
+  - **plotting-libraries enhancements**:
+    - Added `<statistical_visualization>` section with Python/R code patterns
+    - Coverage: group comparisons, Q-Q plots, regression diagnostics, correlation matrices, forest plots
+    - Recommended packages table for significance annotations, diagnostics, etc.
+  - **SKILL_ROUTER.md updates**:
+    - Added "Statistical Visualization Routing" decision tree
+    - Updated Analysis Support Routing table with visualization and documentation tasks
+  - All acceptance criteria from `docs/SKILLS_DEPENDENCY_AUDIT.md` Phase 1 met
+
 - **Skills Dependency Audit**: Comprehensive analysis of skill interactions and workflows
   - Mapped dependencies for all 27 skills (23 top-level + 4 document sub-skills)
   - Identified 3 foundational skills: `visual-design`, `research-lookup`, `scientific-writing`

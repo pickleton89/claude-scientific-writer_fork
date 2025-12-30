@@ -58,22 +58,16 @@ What kind of image is needed?
    └─ Image editing → generate-image (this skill)
 ```
 
-## Model Selection Matrix
+## Model Selection
 
-| Use Case | Recommended Model | Rationale |
-|----------|------------------|-----------|
-| High-quality generation | `google/gemini-3-pro-image-preview` | Best quality |
-| Fast generation | `black-forest-labs/flux.2-pro` | Speed + quality |
-| Image editing | `google/gemini-3-pro-image-preview` | Best editing |
-| Budget generation | `black-forest-labs/flux.2-flex` | Lower cost |
+> **Full Reference:** See `{baseDir}/references/model_capabilities.md` for detailed model comparison, capabilities, and pricing.
 
-## Model Capabilities
-
-| Model | Generation | Editing | Quality | Cost |
-|-------|------------|---------|---------|------|
-| gemini-3-pro-image-preview | Yes | Yes | Excellent | $$ |
-| flux.2-pro | Yes | Yes | Excellent | $$ |
-| flux.2-flex | Yes | No | Good | $ |
+| Use Case | Recommended Model |
+|----------|------------------|
+| High-quality generation | `google/gemini-3-pro-image-preview` |
+| Fast generation | `black-forest-labs/flux.2-pro` |
+| Image editing | `google/gemini-3-pro-image-preview` |
+| Budget generation | `black-forest-labs/flux.2-flex` |
 
 </decision_framework>
 
@@ -102,36 +96,15 @@ What kind of image is needed?
 
 **Objective:** Craft effective prompt for optimal generation
 
+**Prompt Formula:** `[SUBJECT] + [STYLE] + [MEDIUM] + [TECHNICAL] + [QUALITY]`
+
+> **Full Reference:** See `{baseDir}/references/prompt_templates.md` for component guide and scientific prompt patterns.
+
 **Steps:**
 1. Start with subject description
 2. Add style and medium specifications
 3. Include technical requirements
 4. Add quality modifiers
-
-**Prompt Structure:**
-
-```
-[SUBJECT] + [STYLE] + [MEDIUM] + [TECHNICAL] + [QUALITY]
-```
-
-**Component Guide:**
-
-| Component | Examples |
-|-----------|----------|
-| Subject | "DNA double helix", "laboratory setting", "cancer cells" |
-| Style | "scientific illustration", "photorealistic", "modern", "minimalist" |
-| Medium | "digital art", "3D render", "photograph", "watercolor" |
-| Technical | "high contrast", "neutral background", "well-lit" |
-| Quality | "detailed", "professional", "publication-quality", "4K" |
-
-**Scientific Image Prompts:**
-
-| Image Type | Prompt Pattern |
-|------------|----------------|
-| Conceptual | "Conceptual illustration of [topic], scientific visualization style, clean background" |
-| Microscopy | "Microscopic view of [subject], scientific imaging style, detailed, high contrast" |
-| Lab setting | "Modern laboratory with [equipment], photorealistic, professional lighting" |
-| Molecular | "[Molecule/structure] visualization, 3D render, scientific accuracy, clean background" |
 
 **Exit Criteria:**
 - [ ] Prompt includes all 5 components
@@ -145,6 +118,12 @@ What kind of image is needed?
 
 **Objective:** Generate image using script
 
+**Prerequisites:**
+```bash
+# Install required dependency (one-time)
+pip install requests
+```
+
 **Steps:**
 1. Verify API key configuration
 2. Execute generation command
@@ -155,22 +134,22 @@ What kind of image is needed?
 
 **Basic Generation:**
 ```bash
-python scripts/generate_image.py "Your detailed prompt here"
+python {baseDir}/scripts/generate_image.py "Your detailed prompt here"
 ```
 
 **With Model Selection:**
 ```bash
-python scripts/generate_image.py "Your prompt" --model "google/gemini-3-pro-image-preview"
+python {baseDir}/scripts/generate_image.py "Your prompt" --model "google/gemini-3-pro-image-preview"
 ```
 
 **Custom Output Path:**
 ```bash
-python scripts/generate_image.py "Your prompt" --output figures/my_image.png
+python {baseDir}/scripts/generate_image.py "Your prompt" --output figures/my_image.png
 ```
 
 **Image Editing:**
 ```bash
-python scripts/generate_image.py "Make the background blue" --input photo.jpg
+python {baseDir}/scripts/generate_image.py "Make the background blue" --input photo.jpg
 ```
 
 **API Key Configuration:**
@@ -216,21 +195,15 @@ export OPENROUTER_API_KEY=your-api-key-here
 - **7-8:** Accept—suitable for most uses
 - **9-10:** Excellent—publication quality
 
-**Iteration Decision Logic:**
+**Iteration Stopping Rules:**
 
-```
-Score current image
-│
-├─ Score ≥ 8/10 → STOP (excellent quality)
-│
-├─ Score 7/10 AND iterations ≥ 3 → STOP (acceptable + budget)
-│
-├─ Score improvement < 0.5 for 2 consecutive iterations → STOP (plateau)
-│
-├─ Iterations = 5 (hard limit) → STOP (budget exhausted)
-│
-└─ Otherwise → Continue with refined prompt
-```
+| Condition | Action |
+|-----------|--------|
+| Score ≥ 8/10 | STOP (excellent) |
+| Score ≥ 7/10 AND iterations ≥ 3 | STOP (acceptable) |
+| Score improvement < 0.5 for 2 iterations | STOP (plateau) |
+| Iterations = 5 | STOP (hard limit) |
+| Otherwise | Continue refining |
 
 **Quality Checklist (Pass/Fail):**
 
@@ -359,13 +332,13 @@ project/
 
 **Anti-pattern:**
 ```bash
-python scripts/generate_image.py "a cell"
+python {baseDir}/scripts/generate_image.py "a cell"
 # Result: Generic, unusable image
 ```
 
 **Solution:**
 ```bash
-python scripts/generate_image.py "Microscopic view of a human cancer cell being attacked by immunotherapy T-cells, scientific illustration style, high detail, colorful, professional medical visualization"
+python {baseDir}/scripts/generate_image.py "Microscopic view of a human cancer cell being attacked by immunotherapy T-cells, scientific illustration style, high detail, colorful, professional medical visualization"
 ```
 
 ---
@@ -374,7 +347,7 @@ python scripts/generate_image.py "Microscopic view of a human cancer cell being 
 
 **Anti-pattern:**
 ```bash
-python scripts/generate_image.py "prompt"
+python {baseDir}/scripts/generate_image.py "prompt"
 # Error: API key not found
 ```
 
@@ -386,7 +359,7 @@ if [ -z "$OPENROUTER_API_KEY" ] && ! grep -q OPENROUTER_API_KEY .env 2>/dev/null
     exit 1
 fi
 
-python scripts/generate_image.py "prompt"
+python {baseDir}/scripts/generate_image.py "prompt"
 ```
 
 ---
@@ -408,14 +381,14 @@ Use decision tree:
 
 **Anti-pattern:**
 ```bash
-python scripts/generate_image.py "prompt" --output final_figure.png
+python {baseDir}/scripts/generate_image.py "prompt" --output final_figure.png
 # Used directly without checking
 ```
 
 **Solution:**
 ```bash
 # Generate to temp location
-python scripts/generate_image.py "prompt" --output temp_image.png
+python {baseDir}/scripts/generate_image.py "prompt" --output temp_image.png
 
 # Open and validate
 open temp_image.png  # macOS
@@ -445,65 +418,51 @@ Apply quantified stopping criteria:
 - Presentation/poster: 4 max
 - Publication/hero image: 5 max
 
+---
+
+### 6. Transient API Failures
+
+**Anti-pattern:**
+Giving up after a single API timeout or temporary error.
+
+**Solution:**
+Retry with exponential backoff for transient failures:
+
+```bash
+# Retry logic (conceptual)
+for attempt in 1 2 3; do
+    python {baseDir}/scripts/generate_image.py "prompt" --output image.png && break
+    echo "Attempt $attempt failed, waiting..."
+    sleep $((2 ** attempt))  # 2s, 4s, 8s
+done
+```
+
+**Transient vs. Permanent Errors:**
+| Error Type | Action |
+|------------|--------|
+| Timeout / 503 | Retry (transient) |
+| Rate limit (429) | Wait and retry |
+| Invalid API key (401) | Fix key (permanent) |
+| Invalid model (404) | Fix model name (permanent) |
+| Bad request (400) | Fix prompt (permanent) |
+
 </anti_patterns>
 
 <templates>
 ## Prompt Templates
 
-### Template 1: Scientific Illustration
+> **Full Reference:** See `{baseDir}/references/prompt_templates.md` for complete templates with examples.
 
-```
-[SUBJECT DESCRIPTION], scientific illustration style,
-clean white background, high detail,
-professional medical/scientific visualization,
-suitable for academic publication
-```
+**Quick Reference - Template Patterns:**
 
-**Example:**
-```bash
-python scripts/generate_image.py "DNA double helix structure with highlighted mutation site, scientific illustration style, clean white background, high detail, professional molecular visualization, suitable for academic publication" --output figures/dna_mutation.png
-```
+| Template | Pattern |
+|----------|---------|
+| Scientific Illustration | `[SUBJECT], scientific illustration style, clean white background, high detail` |
+| Conceptual Visualization | `Conceptual illustration of [CONCEPT], modern scientific visualization, [COLOR] palette` |
+| Laboratory/Equipment | `Modern [EQUIPMENT] in research laboratory, photorealistic, professional lighting` |
+| Image Editing | `[EDIT INSTRUCTION]. Keep [ELEMENTS]. Make natural and professional.` |
 
-### Template 2: Conceptual Visualization
-
-```
-Conceptual illustration representing [CONCEPT],
-modern scientific visualization,
-abstract yet professional,
-[COLOR SCHEME] color palette,
-clean composition
-```
-
-**Example:**
-```bash
-python scripts/generate_image.py "Conceptual illustration representing machine learning in drug discovery, modern scientific visualization, abstract yet professional, blue and teal color palette, clean composition" --output figures/ml_drug_discovery.png
-```
-
-### Template 3: Laboratory/Equipment
-
-```
-Modern [EQUIPMENT/SETTING] in a contemporary research laboratory,
-photorealistic, professional photography style,
-well-lit, clean environment,
-suitable for presentation or publication
-```
-
-**Example:**
-```bash
-python scripts/generate_image.py "Modern CRISPR gene editing equipment in a contemporary research laboratory, photorealistic, professional photography style, well-lit, clean environment, suitable for presentation" --output slides/lab_hero.png
-```
-
-### Template 4: Image Editing
-
-```
-[EDIT INSTRUCTION]. Keep the [ELEMENTS TO PRESERVE].
-Make the change look natural and professional.
-```
-
-**Example:**
-```bash
-python scripts/generate_image.py "Change the background to a clean white color. Keep the main subject and its details. Make the change look natural and professional." --input original.png --output edited.png
-```
+**Prompt Formula:** `[SUBJECT] + [STYLE] + [MEDIUM] + [TECHNICAL] + [QUALITY]`
 
 </templates>
 
@@ -528,7 +487,10 @@ See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
 | Document | Purpose |
 |----------|---------|
-| `scripts/generate_image.py` | Main generation script |
+| `{baseDir}/scripts/generate_image.py` | Main generation script |
+| `{baseDir}/references/prompt_templates.md` | Complete prompt templates with examples |
+| `{baseDir}/references/model_capabilities.md` | Model comparison and selection guide |
+| `../QUANTIFICATION_THRESHOLDS.md` | Shared quality thresholds (§7-8) |
 
 ## External Resources
 

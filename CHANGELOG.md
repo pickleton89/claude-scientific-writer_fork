@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **generate-image skill audit**: Applied best practices framework fixes (v2.2.0)
+  - **Progressive disclosure**: Created `references/` directory with 2 new files:
+    - `references/prompt_templates.md` (3.9KB) - Complete prompt templates with examples, component guide, scientific patterns
+    - `references/model_capabilities.md` (3.2KB) - Model comparison, selection guide, decision flow, API configuration
+  - **`{baseDir}` path resolution**: All 8 script references now use portable `{baseDir}/scripts/generate_image.py` paths
+  - **Setup section added**: Dependencies declared (`pip install requests`) in Stage 3 workflow
+  - **New anti-pattern**: Added "Transient API Failures" with retry guidance and error classification table
+  - **Iteration logic compacted**: Converted ASCII decision tree to table format (saved 7 lines)
+  - **Line count**: Reduced from 540 → 500 lines (exactly at recommended limit)
+  - Audit score: 10/10 against claude-skills-best-practices.md framework
+
 - **hypothesis-generation skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
   - **Frontmatter `when_to_use`**: Added activation triggers to YAML frontmatter for better discoverability
   - **Setup section added**: New 38-line section with LaTeX environment requirements (XeLaTeX/LuaLaTeX), 8 required packages with purposes, and verification commands

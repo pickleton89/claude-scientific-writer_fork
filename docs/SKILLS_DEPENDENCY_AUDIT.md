@@ -5,9 +5,11 @@
 
 ## Overview
 
-This audit maps the relationships between all 27 skills in the `skills/` folder, identifying which skills interact with others, how they integrate, and which are standalone.
+This audit maps the relationships between all 26 skills in the `skills/` folder, identifying which skills interact with others, how they integrate, and which are standalone.
 
-**Skill Count**: 23 top-level skills + 4 document-skills sub-skills = 27 total
+**Skill Count**: 22 top-level skills + 4 document-skills sub-skills = 26 total
+
+> **Note**: Critical analysis capabilities are embedded in `peer-review` (Critical Analysis Framework section), not as a separate skill.
 
 ---
 
@@ -66,7 +68,7 @@ All five visual/presentation skills inherit design principles from `visual-desig
 
 **Dependencies**:
 - Uses: `research-lookup` (to find papers)
-- Shares frameworks with: `peer-review`, `scientific-critical-thinking`
+- Shares frameworks with: `peer-review` (Critical Analysis Framework)
 - Outputs to: `scientific-writing` (for review paper structure)
 
 #### hypothesis-generation
@@ -79,13 +81,7 @@ All five visual/presentation skills inherit design principles from `visual-desig
 
 **Standalone elements**: Core hypothesis logic is self-contained
 
-#### scientific-critical-thinking
-**Type**: Support Skill
-**Purpose**: Critical analysis frameworks (evidence evaluation, bias detection)
-
-**Dependencies**:
-- Shared by: `peer-review`, `literature-review`
-- Input to: `scientific-writing` (discussion analysis)
+> **Note on Critical Analysis**: Critical analysis frameworks (evidence evaluation, bias detection, GRADE hierarchy) are provided by the `peer-review` skill's Critical Analysis Framework section, not as a separate skill.
 
 ---
 
@@ -124,8 +120,9 @@ All five visual/presentation skills inherit design principles from `visual-desig
 
 **Dependencies**:
 - Related to: `scholar-evaluation` (assessment vs. review distinction)
-- Uses: `scientific-critical-thinking` (shared frameworks)
+- Contains: Critical Analysis Framework (evidence evaluation, bias detection, GRADE)
 - Applied to: `scientific-writing` output
+- Shared with: `literature-review` (critical analysis frameworks)
 
 **Decision framework**: Use for full review cycle with revision guidance
 
@@ -374,11 +371,12 @@ scientific-writing (Methods) ──► reproducible-research
 research-lookup ──► literature-review ──► scientific-writing
                           │
                           ▼
-              scientific-critical-thinking
-                     (shared)
-                          │
-                          ▼
                     peer-review
+                (Critical Analysis Framework)
+                          │
+                          ├─ Evidence evaluation
+                          ├─ Bias detection
+                          └─ GRADE hierarchy
 ```
 
 ---
@@ -440,8 +438,9 @@ Master routing document that defines:
 | venue-templates | - | scientific-writing | Output |
 | paper-2-web | scientific-writing | - | Output |
 | hypothesis-generation | research-lookup | scientific-writing | Input |
-| scientific-critical-thinking | - | 2 skills | Support |
 | document-skills/* | - | - | Output |
+
+> **Note**: Critical analysis capabilities are provided by `peer-review` (Critical Analysis Framework section).
 
 ---
 
@@ -601,9 +600,9 @@ Master routing document that defines:
    ```
 
 **Acceptance criteria**:
-- [ ] Visualization decision tree added
-- [ ] Documentation decision tree added
-- [ ] All 27 skills reachable via some decision path
+- [x] Visualization decision tree added (existed in "Decision Tree: Figure & Visual Creation" + "Statistical Visualization Routing")
+- [x] Documentation decision tree added ("Decision Tree: Documentation & Work Archiving")
+- [x] All 26 skills reachable via some decision path
 
 #### 3.2 Update task-to-skill matrix
 
@@ -618,8 +617,8 @@ Master routing document that defines:
 3. Verify all skills appear in at least one task row
 
 **Acceptance criteria**:
-- [ ] Matrix includes all 27 skills
-- [ ] New workflow rows added
+- [x] Matrix includes all 26 skills
+- [x] New workflow rows added (Visualize statistical results, Document plotting code, Create reproducible analysis)
 
 ---
 

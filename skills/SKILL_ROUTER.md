@@ -292,6 +292,87 @@ Need to visualize statistical results?
 
 ---
 
+## Decision Tree: Documentation & Work Archiving
+
+```
+User needs to document their work
+│
+├─ What type of documentation?
+│  │
+│  ├─ CODE documentation?
+│  │  │
+│  │  └─ YES → code-documentation
+│  │            │
+│  │            ├─ README structure
+│  │            ├─ Function docstrings (NumPy, Google, R)
+│  │            ├─ API documentation
+│  │            ├─ CLI help documentation
+│  │            └─ For visualization code → see plotting-libraries
+│  │
+│  ├─ METHODS section for paper?
+│  │  │
+│  │  └─ YES → scientific-writing
+│  │            │
+│  │            ├─ IMRAD Methods structure
+│  │            ├─ Statistical reporting
+│  │            └─ + reproducible-research (for environment specs)
+│  │
+│  ├─ REPRODUCIBILITY documentation?
+│  │  │
+│  │  └─ YES → reproducible-research
+│  │            │
+│  │            ├─ Environment specifications
+│  │            ├─ FAIR principles compliance
+│  │            ├─ Data/code archiving
+│  │            ├─ Seed management
+│  │            └─ + code-documentation (for code comments)
+│  │
+│  └─ DATA AVAILABILITY statement?
+│     │
+│     └─ YES → reproducible-research
+│              │
+│              ├─ Repository selection (Zenodo, Figshare, etc.)
+│              ├─ FAIR metadata
+│              └─ Accession numbers / DOIs
+│
+├─ Need to document ANALYSIS workflow?
+│  │
+│  └─ YES → Which aspect?
+│            │
+│            ├─ Statistical methods used?
+│            │  └─ statistical-analysis → scientific-writing (Methods)
+│            │
+│            ├─ Visualization code?
+│            │  └─ code-documentation + plotting-libraries
+│            │
+│            └─ Full pipeline?
+│               └─ reproducible-research (workflow managers, containers)
+│
+└─ Need CRITICAL ANALYSIS documentation?
+   │
+   └─ YES → peer-review (Critical Analysis Framework section)
+            │
+            ├─ Evidence quality assessment
+            ├─ Bias identification
+            ├─ Logical reasoning evaluation
+            └─ GRADE evidence hierarchy
+```
+
+### Documentation Task Routing
+
+| Documentation Need | Primary Skill | Supporting Skill |
+|--------------------|---------------|------------------|
+| README for code repository | code-documentation | — |
+| Function/API docs | code-documentation | — |
+| Methods section | scientific-writing | reproducible-research |
+| Data availability statement | reproducible-research | — |
+| Environment specification | reproducible-research | code-documentation |
+| Analysis workflow | reproducible-research | code-documentation, statistical-analysis |
+| Critical analysis notes | peer-review | — |
+| Visualization code docs | code-documentation | plotting-libraries |
+
+---
+
 ## Decision Tree: Conversion & Transformation
 
 ```
@@ -418,8 +499,11 @@ User has content ready for final document format
 | Analyze arguments | peer-review | (use Critical Analysis Framework) |
 | **Analysis** | | |
 | Statistical guidance | statistical-analysis | + reproducible-research |
+| Visualize statistical results | statistical-analysis | + plotting-libraries |
 | Reproducibility | reproducible-research | + code-documentation |
+| Create reproducible analysis | reproducible-research | + code-documentation, statistical-analysis |
 | Code documentation | code-documentation | — |
+| Document plotting code | code-documentation | + plotting-libraries |
 | **Conversion** | | |
 | File → Markdown | markitdown | — |
 | Paper → Web/Media | paper-2-web | — |
@@ -594,4 +678,4 @@ Each skill's `<cross_references>` section should include:
 
 ---
 
-*This router provides deterministic skill selection for the 21-skill scientific writing library. For threshold values and quality criteria, see `QUANTIFICATION_THRESHOLDS.md`.*
+*This router provides deterministic skill selection for the 26-skill scientific writing library (22 top-level + 4 document-skills sub-skills). For threshold values and quality criteria, see `QUANTIFICATION_THRESHOLDS.md`.*

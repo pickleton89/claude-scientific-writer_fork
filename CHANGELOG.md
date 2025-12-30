@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Skills Dependency Audit Phase 3 - COMPLETE**: Update Routing Documentation
+  - **SKILL_ROUTER.md updates**:
+    - Added "Decision Tree: Documentation & Work Archiving" with routing for code documentation, methods sections, reproducibility, data availability, analysis workflow, and critical analysis
+    - Added "Documentation Task Routing" table mapping 8 documentation needs to skills
+    - Added 3 new workflow rows to Task → Skill Mapping: "Visualize statistical results", "Document plotting code", "Create reproducible analysis"
+    - Updated footer to reflect correct skill count (26 skills: 22 top-level + 4 document-skills sub-skills)
+  - **SKILLS_DEPENDENCY_AUDIT.md corrections**:
+    - Fixed skill count from 27 to 26 (scientific-critical-thinking is embedded in peer-review, not a separate skill)
+    - Updated all references to `scientific-critical-thinking` to point to peer-review's Critical Analysis Framework
+    - Corrected Pattern 5: Literature Review workflow diagram
+    - Updated dependency summary table
+    - All Phase 3 acceptance criteria marked complete
+  - **Verification**: All 26 skills are reachable via decision paths in SKILL_ROUTER.md
+
 - **Skills Dependency Audit Phase 2 - COMPLETE**: Strengthen Cross-References
   - **scientific-writing cross-references overhauled**:
     - Reorganized into 4 categories: Uses (Input From), Feeds (Output To), Related, Workflow Guidance
@@ -44,7 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - All acceptance criteria from `docs/SKILLS_DEPENDENCY_AUDIT.md` Phase 1 met
 
 - **Skills Dependency Audit**: Comprehensive analysis of skill interactions and workflows
-  - Mapped dependencies for all 27 skills (23 top-level + 4 document sub-skills)
+  - Mapped dependencies for all 26 skills (22 top-level + 4 document sub-skills)
   - Identified 3 foundational skills: `visual-design`, `research-lookup`, `scientific-writing`
   - Documented extension hierarchy: 5 skills extend `visual-design`
   - Identified 4 standalone skills: `code-documentation`, `markitdown`, `generate-image`, `statistical-analysis`

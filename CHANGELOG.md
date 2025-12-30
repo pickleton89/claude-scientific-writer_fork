@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **scholar-evaluation skill audit**: Applied best practices framework fixes (v2.0.0 → v2.1.0)
+  - **Line count increased**: 448 → 462 lines (3% increase, well under 500-line limit)
+  - **Frontmatter `when_to_use`**: Added activation triggers (evaluating papers, assessing methodology, scoring analysis, structured feedback, benchmarking quality)
+  - **Prerequisites section added**: New `<prerequisites>` documenting Python 3.7+ for optional automated scoring
+  - **Weight inconsistency fixed**: Aligned SKILL.md weights with calculate_scores.py (Literature Review 10%→15%, Results 15%→10%)
+  - **Script integration**: Added `calculate_scores.py` usage instructions to Stage 3 workflow
+  - **Missing reference added**: Added `expert_guide.md` to references table (was orphaned)
+  - **`{baseDir}` path resolution**: All 3 reference paths now use portable `{baseDir}/` format
+  - Audit compliance: All Section 5.2 checklist items now pass (~75% → ~95%)
+
 - **reproducible-research skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
   - **Line count increased**: 280 → 349 lines (25% increase, still well under 500-line limit)
   - **Frontmatter `when_to_use`**: Added 9 activation triggers (Methods section, Data Availability, environment.yml, data deposition, project organization, archiving code, FAIR compliance, reproducibility checklist)

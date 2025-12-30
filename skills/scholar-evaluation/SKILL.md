@@ -1,7 +1,8 @@
 ---
 name: scholar-evaluation
-version: 2.0.0
+version: 2.1.0
 description: "Systematic evaluation of scholarly work using the ScholarEval framework with quantitative scoring and structured feedback"
+when_to_use: "Evaluating research papers for quality, assessing literature review comprehensiveness, reviewing methodology design, scoring data analysis approaches, providing structured feedback on academic work, benchmarking research quality"
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep]
 ---
 
@@ -10,6 +11,18 @@ allowed-tools: [Read, Write, Edit, Bash, Glob, Grep]
 <overview>
 Apply the ScholarEval framework to systematically evaluate scholarly and research work. This skill provides structured evaluation methodology based on peer-reviewed research assessment criteria, enabling comprehensive analysis of academic papers, research proposals, literature reviews, and scholarly writing across 8 quality dimensions with quantitative scoring.
 </overview>
+
+<prerequisites>
+## Prerequisites
+
+**Required:** None - core evaluation workflow uses only standard tools.
+
+**For automated scoring (optional):**
+```bash
+# Python 3.7+ with standard library only
+python {baseDir}/scripts/calculate_scores.py --interactive
+```
+</prerequisites>
 
 <when_to_use>
 ## Trigger Conditions
@@ -127,7 +140,11 @@ What is the evaluation purpose?
 
 **Steps:**
 1. Apply dimension scores using the 5-point rubric
-2. Calculate weighted aggregate score
+2. Calculate weighted aggregate score (use automated calculator for precision):
+   ```bash
+   python {baseDir}/scripts/calculate_scores.py --scores scores.json --output report.txt
+   ```
+   Or run interactively: `python {baseDir}/scripts/calculate_scores.py --interactive`
 3. Determine overall quality tier
 4. Compare against publication thresholds
 
@@ -146,11 +163,11 @@ What is the evaluation purpose?
 | Dimension | Weight | Rationale |
 |-----------|--------|-----------|
 | Problem Formulation | 15% | Foundation of research value |
-| Literature Review | 10% | Context and positioning |
+| Literature Review | 15% | Context and positioning |
 | Methodology | 20% | Core scientific rigor |
 | Data Collection | 10% | Evidence quality |
 | Analysis | 15% | Interpretation validity |
-| Results | 15% | Findings significance |
+| Results | 10% | Findings significance |
 | Writing | 10% | Communication quality |
 | Citations | 5% | Scholarly conventions |
 
@@ -436,7 +453,9 @@ See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
 | Document | Purpose |
 |----------|---------|
-| `references/evaluation_framework.md` | Detailed criteria and rubrics for each dimension |
+| `{baseDir}/references/evaluation_framework.md` | Detailed criteria and rubrics for each dimension |
+| `{baseDir}/references/expert_guide.md` | Expert synthesis on evaluation principles and failure modes |
+| `{baseDir}/scripts/calculate_scores.py` | Automated score calculation with weighted averaging |
 
 ## Citation
 

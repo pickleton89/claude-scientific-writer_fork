@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **reproducible-research skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
+  - **Line count increased**: 280 → 349 lines (25% increase, still well under 500-line limit)
+  - **Frontmatter `when_to_use`**: Added 9 activation triggers (Methods section, Data Availability, environment.yml, data deposition, project organization, archiving code, FAIR compliance, reproducibility checklist)
+  - **Prerequisites section added**: New `<prerequisites>` documenting no installation required plus user prerequisites
+  - **Workflow section added**: New 4-stage `<workflow>` with 13 sequential steps:
+    - Stage 1: Assess current state (project type, existing elements, baseline score)
+    - Stage 2: Prioritize gaps (critical → major → minor items)
+    - Stage 3: Generate deliverables (environment files, Data Availability, project structure, FAIR docs)
+    - Stage 4: Validate (re-score, confirm ≥75 points, iterate if needed)
+  - **Error handling section added**: New `<error_handling>` with 8 common issues and solutions (repository selection, missing versions, private data, DOI setup, pipelines, large files, Conda resolution, Docker builds)
+  - **Resources section added**: New `<resources>` table linking all 8 reference files with usage guidance
+  - **`{baseDir}` path resolution**: All 4 reference paths now use portable `{baseDir}` format (was relative `../`)
+  - **Cross-references improved**: Updated to table format with handoff triggers; fixed SKILL_ROUTER path
+  - Audit compliance: All Section 5.2 checklist items now pass (61% → 100%)
+
 - **pptx-posters skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
   - **Line count reduced**: 635 → 558 lines (12% reduction)
   - **Frontmatter `when_to_use`**: Added activation triggers for tight deadlines, collaborative editing, PPTX templates, image manipulation

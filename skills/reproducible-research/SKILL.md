@@ -1,15 +1,51 @@
 ---
 name: reproducible-research
-version: 2.1.0
-description: "Reproducibility and FAIR data practices with quantified completeness thresholds. Environment management (Conda, Docker), data repositories (GEO, SRA, Zenodo), metadata standards (MIAME, MINSEQE), and project organization. Use for Methods sections, Data Availability statements, and analysis documentation."
-shared-thresholds: "../QUANTIFICATION_THRESHOLDS.md"
+version: 2.2.0
+description: "Reproducibility and FAIR data practices for scientific computing. Environment management (Conda, Docker), data repositories (GEO, SRA, Zenodo), metadata standards (MIAME, MINSEQE), and project organization."
+when_to_use: "Methods section writing, Data Availability statements, Code Availability statements, environment.yml or requirements.txt creation, data deposition guidance, project organization templates, archiving code with DOI, FAIR compliance assessment, reproducibility checklist review"
+shared-thresholds: "{baseDir}/../QUANTIFICATION_THRESHOLDS.md"
 ---
 
-> **Quantified Thresholds:** This skill references shared thresholds from [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §5 (Documentation Completeness) and §8 (Iteration & Stopping Criteria).
+> **Quantified Thresholds:** This skill references shared thresholds from [`QUANTIFICATION_THRESHOLDS.md`]({baseDir}/../QUANTIFICATION_THRESHOLDS.md) §5 (Documentation Completeness) and §8 (Iteration & Stopping Criteria).
 
 <objective>
-Guide the documentation and infrastructure needed for reproducible scientific computing with quantified completeness levels. Achieve ≥75% reproducibility checklist compliance for publication-ready projects. This skill focuses on what to document and where to deposit data—not on executing analyses, but on making them reproducible by others.
+Guide users through documenting and structuring reproducible scientific computing projects. Achieve ≥75% reproducibility checklist compliance for publication-ready projects. Focus on what to document and where to deposit data—making analyses reproducible by others.
 </objective>
+
+<prerequisites>
+No installation required. This skill provides documentation guidance.
+
+**User should have access to:**
+- Their project repository or working directory
+- List of Python/R/tool dependencies used in analysis
+- Knowledge of data types being generated or analyzed
+- Understanding of target journal requirements (if preparing for publication)
+</prerequisites>
+
+<workflow>
+## Reproducibility Assessment Workflow
+
+**Stage 1: Assess Current State**
+1. Ask user what type of project they're documenting (RNA-seq, proteomics, general analysis, etc.)
+2. Identify which reproducibility elements already exist (environment files, README, license)
+3. Calculate baseline score using the 20-item checklist in `<common_pitfalls>`
+
+**Stage 2: Prioritize Gaps**
+4. Focus first on critical items (🔴): environment files, random seeds, data archiving
+5. Then address major items (🟡): hardcoded paths, preprocessing documentation
+6. Finally handle minor items (🟢): intermediate files, license
+
+**Stage 3: Generate Deliverables**
+7. Create environment.yml or requirements.txt with pinned versions
+8. Write Data Availability statement using templates in `<data_availability_templates>`
+9. Generate project structure following `<project_structure>`
+10. Document FAIR compliance using `<fair_quick_reference>`
+
+**Stage 4: Validate**
+11. Re-score using 20-item checklist
+12. Confirm score ≥75 points (15/20 items) for publication readiness
+13. If below threshold, identify remaining gaps and iterate
+</workflow>
 
 <scope>
 **In Scope:**
@@ -97,7 +133,7 @@ Guide the documentation and infrastructure needed for reproducible scientific co
 | 3 | Complete | Docker/Singularity container | 75-89% |
 | 4 | Exemplary | Container + CI tests + archived DOI | 90-100% |
 
-**Scoring Thresholds** (see [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §5):
+**Scoring Thresholds** (see [`QUANTIFICATION_THRESHOLDS.md`]({baseDir}/../QUANTIFICATION_THRESHOLDS.md) §5):
 - **Not reproducible:** <50% checklist items
 - **Partially reproducible:** 50-74%
 - **Reproducible (publication-ready):** 75-89%
@@ -267,13 +303,47 @@ https://github.com/username/project.
 
 </data_availability_templates>
 
+<error_handling>
+## Common Issues and Solutions
+
+| Situation | Response |
+|-----------|----------|
+| User unsure which repository to use | Consult `{baseDir}/references/data_repositories.md` decision tree |
+| Missing dependency versions | Run `pip freeze > requirements.txt` or `conda env export > environment.yml` |
+| Private/sensitive data | Guide to controlled-access repositories (EGA for human genomics, dbGaP for NIH-funded) |
+| No DOI for code yet | Recommend Zenodo GitHub integration for automatic DOI on release |
+| Complex multi-tool pipeline | Suggest Snakemake/Nextflow for workflow definition, document in `{baseDir}/references/workflow_documentation.md` |
+| Large files (>100MB) | Use Git LFS or DVC; see `{baseDir}/references/version_control_data.md` |
+| Conda environment won't resolve | Try mamba for faster solving; check channel priority order |
+| Docker build fails | Verify base image tag exists; use specific version tags, not `latest` |
+</error_handling>
+
+<resources>
+## Reference Documentation
+
+Consult these files for detailed guidance on specific topics:
+
+| Topic | Reference File | Use When |
+|-------|----------------|----------|
+| FAIR principles | `{baseDir}/references/fair_principles.md` | Deep FAIR implementation, compliance scoring |
+| Conda environments | `{baseDir}/references/conda_environments.md` | Complex environment setup, mamba/micromamba |
+| Docker containers | `{baseDir}/references/docker_containers.md` | Container-based reproducibility, Singularity |
+| Data repositories | `{baseDir}/references/data_repositories.md` | Repository selection by data type |
+| Metadata standards | `{baseDir}/references/metadata_standards.md` | MIAME, MINSEQE, MIQE compliance |
+| Project structure | `{baseDir}/references/project_structure.md` | Directory organization patterns |
+| Version control | `{baseDir}/references/version_control_data.md` | Git LFS, DVC, large file handling |
+| Workflow docs | `{baseDir}/references/workflow_documentation.md` | Pipeline documentation, Snakemake/Nextflow |
+</resources>
+
 <cross_references>
 ## Related Skills
 
-**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+**Skill Selection:** See [`{baseDir}/../SKILL_ROUTER.md`] for decision trees when multiple skills may apply.
 
-- **scientific-writing**: Data Availability statement text, Methods section writing
-- **code-documentation**: README templates, docstring standards
-- **venue-templates**: Journal-specific deposition requirements
-- **statistical-analysis**: Reproducible analysis code patterns
+| Skill | Handoff Trigger |
+|-------|-----------------|
+| `scientific-writing` | Data Availability statement text, Methods section prose |
+| `venue-templates` | Journal-specific deposition requirements and formatting |
+| `statistical-analysis` | Reproducible analysis code patterns, random seed management |
+| `plotting-libraries` | Reproducible figure generation with version-pinned libraries |
 </cross_references>

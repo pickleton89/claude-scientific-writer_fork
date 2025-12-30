@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **citation-management skill audit**: Applied best practices framework fixes
+  - **Setup section added**: Dependencies declared (`pip install requests`), all 6 scripts documented with `{baseDir}` paths
+  - **Positive framing**: Replaced negative "Do NOT use" with skill routing table
+  - **Progressive disclosure**: Extracted 65-line decision framework to `references/decision_framework.md`
+  - **Progressive disclosure**: Extracted 52-line templates section to `references/output_templates.md`
+  - **Robustness**: Added inline validation pattern to Stage 3 (verify-as-you-go)
+  - **Path resolution**: All reference paths now use `{baseDir}` variable
+  - **Line count**: Reduced from 570 → 522 lines (closer to 500-line recommendation)
+  - New reference files created:
+    - `references/decision_framework.md` - Citation style, metadata routing, database selection
+    - `references/output_templates.md` - Search strategy and validation report templates
+
+- **claude-skills-best-practices.md**: Added comprehensive skill development and auditing guide
+  - Core principles for skill authoring
+  - Anatomy of high-performing skills
+  - Advanced techniques for robust and deterministic skills
+  - Audit framework with checklist
+
 - **Skills Dependency Audit Phase 5 - COMPLETE**: Documentation & Validation
   - **5.1 SKILL_TEMPLATE.md verification**:
     - Cross-reference section template already exists (lines 226-260) with Extends/Uses/Feeds/Related structure

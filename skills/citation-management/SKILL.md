@@ -11,6 +11,27 @@ allowed-tools: [Read, Write, Edit, Bash, WebSearch, WebFetch]
 Systematic citation management throughout the research and writing workflow. Search academic databases (Google Scholar, PubMed), extract accurate metadata from multiple sources (CrossRef, PubMed, arXiv), validate citation information, and generate properly formatted BibTeX entries. Critical for maintaining citation accuracy and ensuring reproducible research.
 </overview>
 
+<setup>
+## Prerequisites
+
+**Install dependencies before using scripts:**
+```bash
+pip install requests
+```
+
+**Available Scripts:**
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `doi_to_bibtex.py` | Convert DOIs to BibTeX | `python {baseDir}/scripts/doi_to_bibtex.py 10.1038/s41586-021-03819-2` |
+| `extract_metadata.py` | Extract metadata from any identifier | `python {baseDir}/scripts/extract_metadata.py --doi 10.xxxx/xxxxx` |
+| `validate_citations.py` | Validate BibTeX file | `python {baseDir}/scripts/validate_citations.py references.bib` |
+| `search_pubmed.py` | Search PubMed programmatically | `python {baseDir}/scripts/search_pubmed.py "query terms"` |
+| `search_google_scholar.py` | Search Google Scholar | `python {baseDir}/scripts/search_google_scholar.py "query"` |
+| `format_bibtex.py` | Clean and format BibTeX | `python {baseDir}/scripts/format_bibtex.py input.bib -o output.bib` |
+
+</setup>
+
 <when_to_use>
 ## Trigger Conditions
 
@@ -24,76 +45,30 @@ Use this skill when:
 - Checking for duplicate citations
 - Ensuring consistent citation formatting
 
-Do NOT use this skill when:
-- Conducting systematic literature review methodology → use `literature-review`
-- Synthesizing findings thematically → use `literature-review`
-- Formatting manuscript for specific journal → use `venue-templates`
-- Determining which statistical results to cite → use `statistical-analysis`
+**For these tasks, use specialized skills instead:**
+
+| Task | Recommended Skill |
+|------|-------------------|
+| Systematic literature review methodology | `literature-review` |
+| Thematic synthesis of findings | `literature-review` |
+| Journal-specific manuscript formatting | `venue-templates` |
+| Statistical result selection for citation | `statistical-analysis` |
+
 </when_to_use>
 
 <decision_framework>
 ## Decision Matrix
 
-### Citation Style Selection by Venue
+For detailed decision trees on citation style selection, metadata source routing, and database selection by field, see:
+→ `{baseDir}/references/decision_framework.md`
 
-```
-What is your target venue?
-│
-├─ Academic Journal
-│  │
-│  ├─ Biomedical (NEJM, JAMA, Lancet) → Vancouver/NLM style
-│  │
-│  ├─ Life Sciences (Nature, Science, Cell) → Nature/Science style
-│  │
-│  ├─ Social Sciences → APA 7th edition
-│  │
-│  ├─ Humanities → Chicago/MLA
-│  │
-│  └─ Engineering/CS (IEEE venues) → IEEE style
-│
-├─ Conference Paper
-│  │
-│  ├─ ACM venues → ACM Reference Format
-│  │
-│  ├─ IEEE venues → IEEE style
-│  │
-│  └─ Other CS → Check CFP for style guide
-│
-├─ Thesis/Dissertation
-│  │
-│  └─ Check institution requirements → Usually APA or Chicago
-│
-└─ Grant Proposal
-   │
-   ├─ NIH → Vancouver/NLM style
-   │
-   ├─ NSF → No strict requirement (APA common)
-   │
-   └─ Other → Check sponsor guidelines
-```
+**Quick Reference:**
 
-### Identifier to Metadata Source Routing
-
-| Identifier Type | Primary Source | Fallback Source | Coverage |
-|-----------------|----------------|-----------------|----------|
-| DOI | CrossRef API | DataCite API | ~99% of journal articles |
-| PMID | PubMed E-utilities | CrossRef (via DOI) | Biomedical literature |
-| PMCID | PubMed Central | PubMed E-utilities | Open access subset |
-| arXiv ID | arXiv API | CrossRef (if published) | Preprints in physics/math/CS |
-| ISBN | OpenLibrary/Google Books | WorldCat | Books |
-| URL | Page scraping + DOI extraction | Manual entry | Varies |
-
-### Database Selection by Field
-
-| Research Domain | Primary Database | Secondary Database | Specialized Sources |
-|-----------------|------------------|-------------------|---------------------|
-| Biomedical | PubMed | Google Scholar | ClinicalTrials.gov, Cochrane |
-| Life Sciences | PubMed | Web of Science | UniProt, GenBank citations |
-| Computer Science | Google Scholar | ACM/IEEE DL | DBLP, arXiv |
-| Physics/Math | arXiv | Google Scholar | ADS, MathSciNet |
-| Social Sciences | Google Scholar | PsycINFO | ERIC, Sociological Abstracts |
-| Chemistry | SciFinder | PubMed | ChemRxiv, Reaxys |
-| Engineering | IEEE Xplore | Google Scholar | Compendex |
+| Decision | Key Guidance |
+|----------|--------------|
+| Citation style | Match to venue type (biomedical→Vancouver, CS→IEEE, social sciences→APA) |
+| Metadata source | DOI→CrossRef, PMID→PubMed E-utilities, arXiv→arXiv API |
+| Database selection | Search ≥2 databases per domain for comprehensive coverage |
 
 </decision_framework>
 
@@ -208,6 +183,20 @@ AND/OR/NOT              # Boolean operators
 - [ ] All required fields present
 - [ ] DOI field included (if available)
 - [ ] Special characters properly escaped
+
+**Inline Validation (verify as you generate):**
+
+After generating each entry, immediately verify before proceeding:
+```bash
+# Quick validation of single entry
+python {baseDir}/scripts/validate_citations.py entry.bib
+
+# Or validate DOI resolution manually
+curl -sI "https://doi.org/10.xxxx/xxxxx" | head -1
+# Should return: HTTP/2 302 or HTTP/1.1 302
+```
+
+Fix any errors before generating the next entry. This prevents error accumulation.
 
 **BibTeX Templates:**
 
@@ -466,53 +455,15 @@ Never type entries manually; copy-paste introduces errors.
 <templates>
 ## Output Templates
 
-### Search Strategy Documentation
+For complete templates with examples, see:
+→ `{baseDir}/references/output_templates.md`
 
-```markdown
-## Search Strategy
+**Available Templates:**
 
-**Date:** {{YYYY-MM-DD}}
-**Databases searched:** {{list databases}}
-
-### Database 1: {{Name}}
-**Query:** {{exact query string}}
-**Filters:** {{date range, article types, etc.}}
-**Results:** {{N}} papers retrieved
-
-### Database 2: {{Name}}
-**Query:** {{exact query string}}
-**Filters:** {{filters applied}}
-**Results:** {{N}} papers retrieved
-
-**Total unique papers after deduplication:** {{N}}
-```
-
-### Validation Report
-
-```json
-{
-  "file": "{{references.bib}}",
-  "validation_date": "{{YYYY-MM-DD}}",
-  "total_entries": {{N}},
-  "valid_entries": {{N}},
-  "errors": [
-    {
-      "citation_key": "{{key}}",
-      "error_type": "{{missing_field|invalid_doi|duplicate}}",
-      "field": "{{affected field}}",
-      "severity": "{{high|medium|low}}",
-      "fix": "{{suggested fix}}"
-    }
-  ],
-  "warnings": [
-    {
-      "citation_key": "{{key}}",
-      "warning_type": "{{type}}",
-      "message": "{{description}}"
-    }
-  ]
-}
-```
+| Template | Used In | Purpose |
+|----------|---------|---------|
+| Search Strategy Documentation | Stage 1 | Document searches for reproducibility |
+| Validation Report (JSON) | Stage 4 | Machine-readable validation output |
 
 </templates>
 
@@ -543,11 +494,13 @@ See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
 | Document | Purpose |
 |----------|---------|
-| `references/google_scholar_search.md` | Complete Google Scholar search guide |
-| `references/pubmed_search.md` | PubMed and E-utilities API documentation |
-| `references/metadata_extraction.md` | Metadata sources and field requirements |
-| `references/citation_validation.md` | Validation criteria and quality checks |
-| `references/bibtex_formatting.md` | BibTeX entry types and formatting rules |
+| `{baseDir}/references/decision_framework.md` | Citation style, metadata routing, database selection |
+| `{baseDir}/references/output_templates.md` | Search strategy and validation report templates |
+| `{baseDir}/references/google_scholar_search.md` | Complete Google Scholar search guide |
+| `{baseDir}/references/pubmed_search.md` | PubMed and E-utilities API documentation |
+| `{baseDir}/references/metadata_extraction.md` | Metadata sources and field requirements |
+| `{baseDir}/references/citation_validation.md` | Validation criteria and quality checks |
+| `{baseDir}/references/bibtex_formatting.md` | BibTeX entry types and formatting rules |
 
 ### External Resources
 

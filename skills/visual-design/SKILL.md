@@ -1,6 +1,6 @@
 ---
 name: visual-design
-version: 2.1.0
+version: 2.2.0
 description: "Design philosophy and publication specifications for scientific visuals. Provides guidance on typography, color, layout, accessibility, and journal requirements. Delegates implementation to specialized skills."
 allowed-tools: [Read, Glob, Write]
 quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
@@ -29,6 +29,21 @@ Do NOT use this skill when:
 - Creating photorealistic images → use `generate-image`
 - Building slides or posters → use `scientific-slides`, `latex-posters`, `pptx-posters`
 </when_to_use>
+
+<prerequisites>
+## Prerequisites
+
+Before using this skill, ensure:
+- [ ] Target publication venue identified (journal, conference, or internal)
+- [ ] Source data or figures ready for design planning
+- [ ] Access to brand guidelines if organizational standards apply (see `references/BRAND_COLORS_v4.md`)
+- [ ] Knowledge of target audience (reviewers, conference attendees, general public)
+
+**Environment:**
+- No special tools required (design philosophy skill)
+- Implementation delegated to `plotting-libraries` or `scientific-schematics`
+- For journal specifications, verify against target venue guidelines
+</prerequisites>
 
 <decision_framework>
 ## Decision Matrix
@@ -436,84 +451,92 @@ Using 3D effects (3D bar charts, 3D pie charts) that distort perception.
 
 </anti_patterns>
 
+<error_handling>
+## Error Handling
+
+### Design Fails Journal Review
+
+**Symptoms:** Editor requests figure revisions; reviewer comments on clarity or format
+
+**Resolution:**
+1. Review specific feedback against `references/publication_specs.md`
+2. Identify if issue is technical (DPI, format, dimensions) vs. design (clarity, accessibility)
+3. For technical issues: adjust export settings and re-export
+4. For design issues: revisit Stage 2 (Visual Strategy) with new constraints
+5. Re-run accessibility checks before resubmission
+
+---
+
+### Color Count Exceeds Palette
+
+**Symptoms:** More data categories than recommended colors (>5 categorical)
+
+**Resolution:**
+1. **First choice:** Restructure figure using faceting/small multiples
+2. **Second choice:** Group categories hierarchically (e.g., combine similar conditions)
+3. **Third choice:** Use shapes/patterns as primary encoding, color as secondary
+4. **Last resort:** Extend to Cycle 4 (4 colors) with mandatory shape encoding
+
+**Never:** Use more than 5-7 colors in a single panel—redesign instead.
+
+---
+
+### Accessibility Conflict with Brand
+
+**Symptoms:** Brand colors fail WCAG contrast checks or colorblind simulation
+
+**Resolution:**
+1. Check if darker/lighter variants of brand colors pass (e.g., Dark Teal #0F5D7D instead of Brand Blue #2DB2E8 for small text)
+2. Add redundant encoding (shapes, patterns, direct labels)
+3. Use brand colors for large elements only (where 3:1 contrast suffices)
+4. Document deviation with justification in figure notes
+
+---
+
+### Venue Requirements Unknown
+
+**Symptoms:** No clear target publication; designing speculatively
+
+**Resolution:**
+1. Design for Nature single-column (89mm / 3.5") as conservative default
+2. Use 300 DPI, PDF vector format
+3. Apply WCAG AA accessibility standards
+4. Document assumptions in specifications for later adjustment
+5. When venue is determined, verify against `references/publication_specs.md`
+
+---
+
+### Figure Dimensions Exceed Venue Limits
+
+**Symptoms:** Complex figure doesn't fit in journal column width
+
+**Resolution:**
+1. Split into multiple panels across pages (Figure 1A-D, Figure 2A-D)
+2. Move supplementary data to Extended Data or Supplementary Figures
+3. Reduce complexity: fewer subpanels, larger individual panels
+4. Consider landscape orientation if journal permits
+
+---
+
+### Inconsistent Styling Across Figures
+
+**Symptoms:** Figures in same manuscript have different fonts, colors, or sizing
+
+**Resolution:**
+1. Create a style specification document before starting any figures
+2. Document: color palette (hex codes), font family, font sizes, line weights
+3. Review all figures together at 100% zoom before submission
+4. Use the same implementation skill and code template for all figures
+
+</error_handling>
+
 <templates>
 ## Output Templates
 
-### Visual Specifications Document
-
-```markdown
-# Figure {{N}} Visual Specifications
-
-## Context
-- **Purpose:** {{What insight does this communicate?}}
-- **Audience:** {{Who will view this?}}
-- **Venue:** {{Journal/conference/presentation}}
-
-## Technical Requirements
-- **Dimensions:** {{W}} × {{H}} mm
-- **Resolution:** {{DPI}} DPI
-- **File format:** {{PDF/PNG/TIFF}}
-- **Color mode:** {{RGB/CMYK}}
-
-## Color Palette
-| Role | Color | Hex Code |
-|------|-------|----------|
-| Primary | {{name}} | #{{hex}} |
-| Secondary | {{name}} | #{{hex}} |
-| Accent | {{name}} | #{{hex}} |
-| Background | {{name}} | #{{hex}} |
-| Text | {{name}} | #{{hex}} |
-
-## Typography
-- **Font family:** {{name}}
-- **Title:** {{size}}pt bold
-- **Axis labels:** {{size}}pt regular
-- **Legend:** {{size}}pt regular
-
-## Accessibility
-- [ ] Colorblind-safe palette verified
-- [ ] Contrast ≥4.5:1 for all text
-- [ ] Redundant encoding used
-- [ ] Readable at final size
-
-## Notes
-{{Additional specifications or constraints}}
-```
-
-### Pre-Submission Design Checklist
-
-```markdown
-## Figure Quality Checklist
-
-### Clarity
-- [ ] Single clear message communicated
-- [ ] Can be understood in <10 seconds
-- [ ] Labels are complete and unambiguous
-
-### Technical Quality
-- [ ] Resolution ≥300 DPI
-- [ ] Correct file format for venue
-- [ ] Dimensions match journal requirements
-- [ ] Fonts embedded (for vector formats)
-
-### Accessibility
-- [ ] Colorblind-safe palette used
-- [ ] Contrast ratio ≥4.5:1
-- [ ] Redundant encoding present
-- [ ] Minimum 7pt font at final size
-
-### Consistency
-- [ ] Matches style of other figures
-- [ ] Consistent color usage
-- [ ] Same typography throughout
-- [ ] Aligned with brand guidelines
-
-### Publication Ready
-- [ ] Caption written and complete
-- [ ] Abbreviations defined
-- [ ] Referenced in main text
-- [ ] Meets journal-specific requirements
-```
+See `references/output_templates.md` for:
+- **Visual Specifications Document** — Template for documenting design decisions
+- **Pre-Submission Design Checklist** — Quality verification before submission
+- **Quick Specification Card** — Rapid documentation format
 
 </templates>
 
@@ -547,6 +570,7 @@ See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 | `references/BRAND_COLORS_v4.md` | Oligon brand color palette definitions |
 | `references/OUTPUT_FORMATS.md` | Format-specific guidance for figures, reports, presentations |
 | `references/publication_specs.md` | Journal-specific requirements and export settings |
+| `references/output_templates.md` | Reusable templates for specifications and checklists |
 
 ### Publication Requirements Quick Reference
 

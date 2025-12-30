@@ -1,9 +1,19 @@
 ---
 name: scientific-writing
-version: 2.1.0
+version: 2.2.0
 description: "Guides scientific manuscript writing using IMRAD structure, citations (APA/AMA/Vancouver), and reporting guidelines (CONSORT/STROBE/PRISMA). Use when writing research papers, journal submissions, abstracts, or scientific documents requiring structured prose with proper citations."
 allowed-tools: Read, Write, Edit, Bash
 quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
+when_to_use: |
+  - Writing or revising any section of a scientific manuscript (abstract, introduction, methods, results, discussion)
+  - Structuring a research paper using IMRAD or other standard formats
+  - Formatting citations and references in specific styles (APA, AMA, Vancouver, Chicago, IEEE)
+  - Creating, formatting, or improving figures, tables, and data visualizations
+  - Applying study-specific reporting guidelines (CONSORT, STROBE, PRISMA)
+  - Drafting abstracts that meet journal requirements
+  - Preparing manuscripts for submission to specific journals
+  - Improving writing clarity, conciseness, and precision
+  - Addressing reviewer comments and revising manuscripts
 ---
 
 # Scientific Writing
@@ -15,6 +25,34 @@ quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
 Scientific writing is a process for communicating research with precision and clarity. Write manuscripts using IMRAD structure, citations (APA/AMA/Vancouver), figures/tables, and reporting guidelines (CONSORT/STROBE/PRISMA). Apply this skill for research papers and journal submissions.
 
 **Critical Principle: Always write in full paragraphs with flowing prose. Never submit bullet points in the final manuscript.** Use a two-stage process: first create section outlines with key points using research-lookup, then convert those outlines into complete paragraphs.
+
+## Prerequisites
+
+### Required Skills
+
+| Skill | Purpose | When Needed |
+|-------|---------|-------------|
+| `research-lookup` | Literature search and citation retrieval | Stage 1 (outline creation), Introduction, Discussion |
+| `statistical-analysis` | Test selection and statistical reporting | Methods and Results sections |
+
+### Validation Scripts
+
+This skill includes validation scripts for quality assurance. Run from the skill directory:
+
+```bash
+# Validate writing quality (sentence length, passive voice)
+python {baseDir}/scripts/validate_writing_quality.py manuscript.md
+
+# Count and verify citations by section
+python {baseDir}/scripts/count_citations.py manuscript.md --by-section
+
+# Calculate readability scores
+python {baseDir}/scripts/readability_score.py manuscript.md
+```
+
+**No external dependencies required** - all scripts use Python standard library only.
+
+---
 
 ## Core Philosophy
 
@@ -33,20 +71,6 @@ Less is more. Include only what is necessary to support the conclusion. If a det
 Determine the narrative arc before writing. Experiments may be performed out of order, but the report must present them in a linear logic that builds a coherent argument. The reader should never wonder "why am I reading this?"—every section should connect to the central thesis.
 
 ---
-
-## When to Use This Skill
-
-This skill should be used when:
-- Writing or revising any section of a scientific manuscript (abstract, introduction, methods, results, discussion)
-- Structuring a research paper using IMRAD or other standard formats
-- Formatting citations and references in specific styles (APA, AMA, Vancouver, Chicago, IEEE)
-- Creating, formatting, or improving figures, tables, and data visualizations
-- Applying study-specific reporting guidelines (CONSORT for trials, STROBE for observational studies, PRISMA for reviews)
-- Drafting abstracts that meet journal requirements (structured or unstructured)
-- Preparing manuscripts for submission to specific journals
-- Improving writing clarity, conciseness, and precision
-- Ensuring proper use of field-specific terminology and nomenclature
-- Addressing reviewer comments and revising manuscripts
 
 ## Visual Enhancement with Scientific Schematics
 
@@ -255,6 +279,26 @@ For detailed discipline-specific guides covering Biomedical, Molecular Biology, 
 
 **Writing issues**: Tense mixing (past for methods/results, present for facts), undefined jargon, disrupted flow, missing transitions.
 
+### 11. Error Handling
+
+Common failure scenarios and how to resolve them:
+
+| Scenario | Symptoms | Resolution |
+|----------|----------|------------|
+| **Literature search returns no results** | Empty citation list, unable to support claims | Broaden search terms, try synonyms, check alternative databases (PubMed, Scopus, Google Scholar). If topic is truly novel, state this explicitly and cite foundational work. |
+| **Conflicting reporting guidelines** | Study crosses categories (e.g., observational + interventional) | Use primary guideline for main study type, incorporate relevant items from secondary guidelines, document in Methods which guidelines were followed. |
+| **Word count exceeds journal limit** | Section totals exceed target | Run `validate_writing_quality.py` to identify verbose passages. Prioritize cutting: redundant citations, over-explained methods, tangential discussion points. Move details to supplementary materials. |
+| **Citation count below minimum** | `count_citations.py` reports LOW status | Return to research-lookup for additional sources. Focus on: recent review articles, seminal papers, methodological references. Verify you haven't missed citing relevant work. |
+| **Readability score too high (>16)** | `readability_score.py` reports TOO_COMPLEX | Break compound sentences, replace jargon with simpler terms where precision allows, add transitional phrases. Target: 1 idea per sentence. |
+| **Mixed tense throughout manuscript** | Reviewer feedback on inconsistent tense | Methods/Results: past tense ("We measured..."). Introduction/Discussion: present for established facts ("Cancer is..."), past for specific studies ("Smith found..."). |
+| **Figures rejected by journal** | Resolution/format/size errors | Check journal guidelines for DPI (typically 300+), format (TIFF/EPS preferred), dimensions. Use vector formats (PDF/SVG) when possible. |
+| **Missing ethics statement** | Desk rejection | Add required statements: IRB approval number, informed consent process, data availability, conflict of interest declarations. Check ICMJE requirements. |
+
+**Validation workflow after each section:**
+1. Run `python {baseDir}/scripts/validate_writing_quality.py section.md`
+2. Run `python {baseDir}/scripts/count_citations.py section.md`
+3. Address any FAIL or LOW status before proceeding
+
 ## Workflow for Manuscript Development
 
 **Stage 1: Planning** — Identify journal, determine reporting guideline, outline IMRAD structure, plan figures/tables.
@@ -322,4 +366,16 @@ Run three tests before submission:
 
 ## References
 
-Load as needed: `references/imrad_structure.md`, `references/citation_styles.md`, `references/figures_tables.md`, `references/reporting_guidelines.md`, `references/writing_principles.md`, `references/field_terminology.md`, `references/writing_process.md`.
+**Reference Documents** (load as needed):
+- `references/imrad_structure.md` - Detailed IMRAD section guidance
+- `references/citation_styles.md` - APA, AMA, Vancouver, Chicago, IEEE formats
+- `references/figures_tables.md` - Data visualization best practices
+- `references/reporting_guidelines.md` - CONSORT, STROBE, PRISMA checklists
+- `references/writing_principles.md` - Clarity, conciseness, style
+- `references/field_terminology.md` - Discipline-specific language guides
+- `references/writing_process.md` - Outline-to-prose conversion examples
+
+**Validation Scripts** (run for quality assurance):
+- `scripts/validate_writing_quality.py` - Sentence/paragraph length, passive voice
+- `scripts/count_citations.py` - Citation counts by section
+- `scripts/readability_score.py` - Flesch-Kincaid, Gunning Fog, SMOG indices

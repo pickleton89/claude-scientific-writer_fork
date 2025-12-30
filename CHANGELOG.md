@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **visual-design skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
+  - **Prerequisites section added**: New `<prerequisites>` documenting target venue requirements, brand guidelines access, and audience identification
+  - **Error handling section added**: New `<error_handling>` with 6 common scenarios:
+    - Design fails journal review (technical vs design issues)
+    - Color count exceeds palette (redesign strategies)
+    - Accessibility conflict with brand (variant colors, redundant encoding)
+    - Venue requirements unknown (conservative defaults)
+    - Figure dimensions exceed limits (splitting strategies)
+    - Inconsistent styling across figures (style specification workflow)
+  - **Progressive disclosure**: Extracted templates to new reference file:
+    - `references/output_templates.md` - Visual Specifications Document template with filled example, Pre-Submission Design Checklist, Quick Specification Card
+  - **Templates section condensed**: Inline templates (~80 lines) replaced with 7-line reference pointer
+  - **Reference table updated**: Added `output_templates.md` to references table
+  - **Line count**: 578 → 601 lines (4% increase; robustness additions outweighed template extraction)
+  - Audit compliance: 84% → 94% (Section E Robustness: 5/10 → 9/10)
+
 - **scientific-slides skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
   - **Frontmatter `when_to_use`**: Added activation triggers (conference presentations, seminar talks, thesis defense, grant pitches, journal club, PDF/PowerPoint/Beamer output)
   - **Description shortened**: Streamlined from 47 words to 9 words for better discoverability

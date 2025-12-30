@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **venue-templates skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
+  - **Frontmatter restructured**:
+    - Description shortened from 93 words to 18 words for better discoverability
+    - Added `when_to_use` field with activation triggers (journals, conferences, posters, grants, formatting requirements)
+    - Added `version: 2.2.0` field
+  - **Prerequisites section added**: Documenting LaTeX distribution, Poppler utilities (pdfinfo/pdffonts), Python 3.7+ requirements with installation commands
+  - **Error handling section added**: 7 common errors (pdfinfo not found, unknown venue, missing LaTeX packages, template not found, compilation failures, page count exceeded, font size issues) with solutions
+  - **Removed misplaced content**: Removed 32-line "Visual Enhancement with Scientific Schematics" section (referenced non-existent script, belonged in Integration section)
+  - **Removed duplicate sections**: Removed redundant "When to Use This Skill" section (now in frontmatter `when_to_use`)
+  - **`{baseDir}` path resolution**: All 12 script/asset paths now use portable `{baseDir}/` format
+  - **Scientific Schematics integration added**: Added 4-line integration subsection pointing to scientific-schematics skill
+  - **Resources section consolidated**: Replaced 52-line verbose listing with 10-line reference table
+  - **Removed Common Formatting Requirements**: Section duplicated content from references/journals_formatting.md (35 lines removed)
+  - **Line count reduced**: 691 → 617 lines (11% reduction)
+  - Audit compliance: 58% → ~90% (major improvements in Discovery/Activation and Robustness)
+
 - **visual-design skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
   - **Prerequisites section added**: New `<prerequisites>` documenting target venue requirements, brand guidelines access, and audience identification
   - **Error handling section added**: New `<error_handling>` with 6 common scenarios:

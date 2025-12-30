@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **research-lookup skill audit**: Applied best practices framework fixes (v2.2.0 → v2.3.0)
+  - **Line count reduced**: 543 → 303 lines (44% reduction, well under 500-line limit)
+  - **Frontmatter `when_to_use`**: Added activation triggers (literature search, find papers, research lookup, recent studies, citation sources, verify claims, academic search, scientific literature, find references)
+  - **Description shortened**: From 47 words to 14 words for better discoverability
+  - **Version field added**: Added `version: 2.3.0` to YAML frontmatter
+  - **Prerequisites section added**: API key requirements with verification command
+  - **Validation workflow added**: 4-step DOI verification workflow (Execute → Verify → Cross-reference → Document)
+  - **Progressive disclosure**: Created new reference file:
+    - `references/model_selection.md` - Detailed complexity scoring, keyword triggers, cost optimization, manual override patterns
+  - **Removed tangential content**: Removed 32-line "Visual Enhancement with Scientific Schematics" section (cross-skill promotion doesn't belong in skill)
+  - **Python files consolidated**: Moved `lookup.py` and `examples.py` to `scripts/`, removed duplicate `research_lookup.py` from root
+  - **Removed redundant README.md**: SKILL.md is the single source of truth per best practices
+  - **Fixed import paths**: Updated `lookup.py` imports after move to scripts/
+  - **`{baseDir}` path resolution**: All 3 reference paths now use portable `{baseDir}/references/` format
+  - **WebSearch added to allowed-tools**: For DOI verification workflow
+  - Audit compliance: All Section 5.2 checklist items now pass
+
 - **scholar-evaluation skill audit**: Applied best practices framework fixes (v2.0.0 → v2.1.0)
   - **Line count increased**: 448 → 462 lines (3% increase, well under 500-line limit)
   - **Frontmatter `when_to_use`**: Added activation triggers (evaluating papers, assessing methodology, scoring analysis, structured feedback, benchmarking quality)

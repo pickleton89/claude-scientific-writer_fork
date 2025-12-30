@@ -9,8 +9,7 @@ import sys
 import json
 from typing import Dict, List, Optional
 
-# Import the main research lookup class
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'scripts'))
+# Import the main research lookup class (same directory)
 from research_lookup import ResearchLookup
 
 

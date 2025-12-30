@@ -1,6 +1,6 @@
 ---
 name: scientific-schematics
-version: 2.2.0
+version: 2.3.0
 extends: visual-design
 description: "Create publication-quality scientific diagrams using Nano Banana Pro AI with iterative refinement and Gemini 3 Flash/Pro quality review. Specialized in neural networks, flowcharts, biological pathways, and system architectures."
 allowed-tools: [Read, Write, Edit, Bash]
@@ -35,6 +35,31 @@ Do NOT use this skill when:
 - Designing slides or posters → use `scientific-slides`, `latex-posters`, `pptx-posters`
 - Need design philosophy guidance → use `visual-design`
 </when_to_use>
+
+<prerequisites>
+## Prerequisites
+
+| Dependency | Version | Purpose |
+|------------|---------|---------|
+| Python | ≥3.9 | Runtime environment |
+| requests | any | HTTP API calls to OpenRouter |
+| OPENROUTER_API_KEY | required | Environment variable for API authentication |
+
+**Installation:**
+```bash
+# Install Python dependency
+pip install requests
+
+# Set API key (get from https://openrouter.ai/keys)
+export OPENROUTER_API_KEY='sk-or-v1-your_key_here'
+```
+
+**Verification:**
+```bash
+# Verify setup
+python {baseDir}/scripts/generate_schematic.py --help
+```
+</prerequisites>
 
 <decision_framework>
 ## Decision Matrix
@@ -131,12 +156,6 @@ What do you need to visualize?
 
 ### Stage 1: Requirements Analysis
 
-**Progress Milestones:**
-- 25%: Diagram type identified from matrix
-- 50%: Document type and quality threshold determined
-- 75%: Component list complete
-- 100%: Flow direction and labels documented
-
 **Objective:** Understand diagram requirements and constraints
 
 **Steps:**
@@ -156,12 +175,6 @@ What do you need to visualize?
 ---
 
 ### Stage 2: Prompt Construction
-
-**Progress Milestones:**
-- 25%: Diagram type and layout specified
-- 50%: Components and relationships added
-- 75%: Quantitative details included
-- 100%: Style and accessibility requirements specified
 
 **Objective:** Create effective prompt for AI generation
 
@@ -202,12 +215,6 @@ Visual style: {{style preferences}}
 
 ### Stage 3: AI Generation
 
-**Progress Milestones:**
-- 25%: API configured and generation started
-- 50%: Initial image generated
-- 75%: Quality review completed
-- 100%: Score ≥ threshold or iterations exhausted
-
 **Objective:** Generate diagram with quality review
 
 **Steps:**
@@ -226,7 +233,7 @@ Visual style: {{style preferences}}
 
 **Command:**
 ```bash
-python scripts/generate_schematic.py "{{prompt}}" \
+python {baseDir}/scripts/generate_schematic.py "{{prompt}}" \
   -o figures/{{output_name}}.png \
   --doc-type {{document_type}} \
   --iterations 2 \
@@ -270,12 +277,6 @@ Generate Image → Review Quality → Score >= Threshold?
 
 ### Stage 4: Quality Verification
 
-**Progress Milestones:**
-- 25%: Quality assessment reviewed
-- 50%: 5 quality dimensions checked
-- 75%: Accessibility verified (colorblind-safe)
-- 100%: Labels and file format validated
-
 **Objective:** Verify diagram meets publication standards
 
 **Steps:**
@@ -313,12 +314,6 @@ Generate Image → Review Quality → Score >= Threshold?
 ---
 
 ### Stage 5: Integration
-
-**Progress Milestones:**
-- 25%: Image moved to figures/ directory
-- 50%: LaTeX includegraphics command added
-- 75%: Caption written with all elements described
-- 100%: Cross-reference added, style verified
 
 **Objective:** Integrate diagram into manuscript/presentation
 
@@ -490,6 +485,26 @@ Limit complexity per diagram type:
 
 </anti_patterns>
 
+<error_handling>
+## Error Handling
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `OPENROUTER_API_KEY not set` | Missing environment variable | Run `export OPENROUTER_API_KEY='your_key'` |
+| `401 Unauthorized` | Invalid or expired API key | Verify key at https://openrouter.ai/keys |
+| `429 Rate Limited` | Too many requests | Wait 60 seconds, reduce iteration count |
+| `Connection timeout` | Network issues | Check internet connection, retry |
+| `Score < threshold after max iterations` | Complex diagram or vague prompt | Refine prompt with more specific details |
+| `FileNotFoundError: scripts/` | Wrong working directory | Run from skill directory or use `{baseDir}` paths |
+| `ImportError: requests` | Missing dependency | Run `pip install requests` |
+
+**Recovery Patterns:**
+
+1. **API failures**: The script saves partial results; check `*_review_log.json` for last successful iteration
+2. **Low scores**: Review critique in JSON log, improve prompt specificity
+3. **Timeout**: Reduce diagram complexity or break into multiple figures
+</error_handling>
+
 <templates>
 ## Output Templates
 
@@ -497,15 +512,15 @@ Limit complexity per diagram type:
 
 ```bash
 # Basic usage
-python scripts/generate_schematic.py "{{prompt}}" -o figures/{{name}}.png
+python {baseDir}/scripts/generate_schematic.py "{{prompt}}" -o figures/{{name}}.png
 
 # With document type
-python scripts/generate_schematic.py "{{prompt}}" \
+python {baseDir}/scripts/generate_schematic.py "{{prompt}}" \
   -o figures/{{name}}.png \
   --doc-type {{journal|conference|thesis|grant|preprint|report|poster|presentation}}
 
 # Verbose with custom iterations
-python scripts/generate_schematic.py "{{prompt}}" \
+python {baseDir}/scripts/generate_schematic.py "{{prompt}}" \
   -o figures/{{name}}.png \
   --doc-type journal \
   --iterations 2 \
@@ -599,8 +614,9 @@ See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
 | Document | Purpose |
 |----------|---------|
-| `references/diagram_types.md` | Catalog of scientific diagram types with examples |
-| `references/best_practices.md` | Publication standards and accessibility guidelines |
+| `{baseDir}/references/diagram_types.md` | Catalog of scientific diagram types with prompt keywords |
+| `{baseDir}/references/best_practices.md` | Publication standards and accessibility guidelines |
+| `{baseDir}/references/quick_reference.md` | Quick start guide and common examples |
 
 ### External Resources
 

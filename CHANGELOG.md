@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **scientific-schematics skill audit**: Applied best practices framework fixes (v2.2.0 → v2.3.0)
+  - **Prerequisites section added**: New `<prerequisites>` documenting Python 3.9+, requests library, and OPENROUTER_API_KEY requirements with verification command
+  - **Error handling section added**: New `<error_handling>` with 7 common errors (API key issues, rate limits, network errors, low scores, file errors) and recovery patterns
+  - **`{baseDir}` path resolution**: All script paths now use portable `{baseDir}/scripts/` format instead of relative paths
+  - **Missing reference created**: Created `references/diagram_types.md` (6.6KB) - comprehensive catalog of 18 scientific diagram types with use cases, key elements, and prompt keywords
+  - **Progress milestones removed**: Removed redundant percentage-based milestones from all 5 workflow stages (retained Exit Criteria only)
+  - **File structure reorganized**:
+    - Moved `QUICK_REFERENCE.md` → `references/quick_reference.md`
+    - Moved `example_usage.sh` → `scripts/example_usage.sh`
+    - Moved `test_ai_generation.py` → `scripts/test_ai_generation.py`
+    - Removed redundant `README.md` (content duplicated SKILL.md)
+  - **Reference table updated**: All 3 reference paths now use `{baseDir}/references/` format with accurate file descriptions
+  - **Line count**: 626 → 642 lines (3% increase due to robustness sections; complexity of AI-powered skill justifies length)
+  - Audit compliance: All Section 5.2 checklist items now pass (~74% → ~95%)
+
 - **research-lookup skill audit**: Applied best practices framework fixes (v2.2.0 → v2.3.0)
   - **Line count reduced**: 543 → 303 lines (44% reduction, well under 500-line limit)
   - **Frontmatter `when_to_use`**: Added activation triggers (literature search, find papers, research lookup, recent studies, citation sources, verify claims, academic search, scientific literature, find references)

@@ -7,7 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **WRITER.md deprecated**: Modularized monolithic agent instructions into authoritative locations
+  - **Agent behavior policies** (completion policy, decision making) → `CLAUDE.md` §Scientific Writing Execution Policies
+  - **Workflow standards** (file organization, progress logging, PDF review, version management) → `docs/EXECUTION_STANDARDS.md` (new)
+  - **Skill routing** → `skills/SKILL_ROUTER.md` (already existed)
+  - **Writing guidance** → `skills/scientific-writing/SKILL.md` (already comprehensive)
+  - **Citation verification** → `skills/citation-management/SKILL.md` (already comprehensive)
+  - WRITER.md retained with deprecation notice pointing to new locations
+  - Eliminates duplication between WRITER.md and individual skills (10 items were duplicated)
+  - Preserves 6 unique cross-cutting policies that were distributed to appropriate locations
+
+- **scientific-writing skill** (v2.2.0 → v2.3.0): Added version management section and EXECUTION_STANDARDS.md reference
+
+- **CLAUDE.md updated**: Added "Scientific Writing Execution Policies" section with completion policy, autonomous decision making guidance, and default output format
+
 ### Added
+
+- **docs/EXECUTION_STANDARDS.md** (new): Centralized workflow standards for scientific writing
+  - File organization structure (`writing_outputs/<timestamp>/`)
+  - Progress logging format (`[HH:MM:SS] ACTION: Description`)
+  - Version management rules (v1, v2, v3 naming)
+  - PDF review workflow (via image conversion)
+  - Quality assurance checklist
+  - SUMMARY.md template
 
 - **venue-templates skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
   - **Frontmatter restructured**:

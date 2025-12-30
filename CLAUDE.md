@@ -2,7 +2,7 @@
 
 > Claude Scientific Writer Fork - Development Documentation
 > Forked from: [K-Dense-AI/claude-scientific-writer](https://github.com/K-Dense-AI/claude-scientific-writer) v2.10.0
-> Last Updated: 2025-12-29
+> Last Updated: 2025-12-30
 
 ## Project Overview
 
@@ -67,6 +67,34 @@ When active, suspend brevity and analyze from multiple angles:
 - If errors/logs are provided, prioritize debugging over rewriting
 - If ambiguous, choose the simplest viable interpretation
 
+### Scientific Writing Execution Policies
+
+When executing scientific writing tasks (papers, reviews, posters, presentations):
+
+**Completion Policy:**
+- **ALWAYS complete the ENTIRE task without stopping**
+- **NEVER ask "Would you like me to continue?" mid-task**
+- **NEVER offer abbreviated versions or stop after partial completion**
+- For long documents: Write from start to finish until 100% complete
+- Context window will be automatically compacted as needed—do not stop early due to token concerns
+
+**Autonomous Decision Making:**
+
+Make independent decisions for:
+- Standard formatting choices (margins, spacing, fonts)
+- File organization within project structure
+- Technical details (LaTeX packages, BibTeX style)
+- Choosing between acceptable approaches when both are valid
+
+Only ask for input when:
+- Critical information is genuinely missing BEFORE starting
+- Unrecoverable errors occur that require user intervention
+- Initial request is fundamentally ambiguous about deliverable type
+
+**Default Output Format:**
+- LaTeX with BibTeX citations unless user specifies otherwise
+- See `docs/EXECUTION_STANDARDS.md` for file organization and workflow standards
+
 ---
 
 ## Quick Reference
@@ -85,7 +113,8 @@ uv run ty                  # Type check
 | File | Purpose |
 |------|---------|
 | `skills/` | ⭐ Canonical skill definitions (edit skills here) |
-| `.claude/WRITER.md` | Agent instructions for scientific writing |
+| `skills/SKILL_ROUTER.md` | Decision trees for skill selection |
+| `docs/EXECUTION_STANDARDS.md` | File organization & workflow standards |
 | `CHANGELOG.md` | Fork customization history |
 | `docs/archived/INTEGRATION_ANALYSIS.md` | Completed template-project merge |
 | `docs/original/` | Archived upstream documentation |
@@ -291,11 +320,13 @@ The template-project merge is complete. See `docs/archived/INTEGRATION_ANALYSIS.
 
 | Document | Description |
 |----------|-------------|
-| `.claude/WRITER.md` | Scientific writing agent instructions |
+| `skills/SKILL_ROUTER.md` | Decision trees for skill selection |
+| `docs/EXECUTION_STANDARDS.md` | File organization, progress logging, PDF review workflow |
 | `docs/archived/INTEGRATION_ANALYSIS.md` | Completed template-project merge (archived) |
 | `docs/template-project/brand/BRAND_COLORS_v4.md` | Visual identity spec |
 | `docs/template-project/brand/DOCUMENT_TEMPLATING_SYSTEM.md` | Templating design |
 | `docs/original/SKILLS.md` | Original upstream skills reference |
+| `.claude/WRITER.md` | ⚠️ DEPRECATED - see CLAUDE.md and EXECUTION_STANDARDS.md |
 
 ---
 

@@ -1,9 +1,10 @@
 ---
 name: scientific-writing
-version: 2.2.0
+version: 2.3.0
 description: "Guides scientific manuscript writing using IMRAD structure, citations (APA/AMA/Vancouver), and reporting guidelines (CONSORT/STROBE/PRISMA). Use when writing research papers, journal submissions, abstracts, or scientific documents requiring structured prose with proper citations."
 allowed-tools: Read, Write, Edit, Bash
 quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
+execution-standards: "../../docs/EXECUTION_STANDARDS.md"
 when_to_use: |
   - Writing or revising any section of a scientific manuscript (abstract, introduction, methods, results, discussion)
   - Structuring a research paper using IMRAD or other standard formats
@@ -308,6 +309,20 @@ Common failure scenarios and how to resolve them:
 **Stage 3: Revision** — Check flow, consistency, figure clarity, guideline adherence, citations, word counts, proofread.
 
 **Stage 4: Final Preparation** — Format for journal, prepare supplementary materials, write cover letter, complete checklists.
+
+### Version Management
+
+**Never overwrite previous versions.** Always increment version numbers when editing manuscripts:
+
+| Version | File Name | Purpose |
+|---------|-----------|---------|
+| Initial | `v1_draft.tex` | First complete draft |
+| Revision 1 | `v2_draft.tex` | After first round of edits |
+| Revision 2 | `v3_draft.tex` | After second round of edits |
+
+Document changes in `revision_notes.md` with date and summary of modifications.
+
+> **Full workflow standards:** See `docs/EXECUTION_STANDARDS.md` for file organization, progress logging, and PDF review procedures.
 
 ### Pre-Submission Diagnostic Tests
 

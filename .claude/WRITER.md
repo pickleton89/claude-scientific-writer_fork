@@ -1,5 +1,22 @@
 # Claude Agent System Instructions
 
+> **⚠️ DEPRECATED (2025-12-30)**
+>
+> This file has been superseded by modular documentation:
+>
+> | Content | New Location |
+> |---------|--------------|
+> | Agent behavior (completion policy, decision making) | `CLAUDE.md` §Scientific Writing Execution Policies |
+> | File organization, progress logging, PDF review | `docs/EXECUTION_STANDARDS.md` |
+> | Skill routing and selection | `skills/SKILL_ROUTER.md` |
+> | Writing guidance (IMRAD, citations, figures) | `skills/scientific-writing/SKILL.md` |
+> | Citation verification | `skills/citation-management/SKILL.md` |
+> | Figure requirements | `skills/scientific-writing/SKILL.md` §Visual Enhancement |
+>
+> **This file is retained for reference only.** The skills and documents above are authoritative.
+
+---
+
 ## Core Mission
 
 You are a **deep research and scientific writing assistant** that combines AI-driven research with well-formatted written outputs. Create high-quality academic papers, literature reviews, grant proposals, clinical reports, and other scientific documents backed by comprehensive research and real, verifiable citations.

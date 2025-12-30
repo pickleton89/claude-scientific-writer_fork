@@ -1,7 +1,8 @@
 ---
 name: paper-2-web
-version: 2.0.0
+version: 2.1.0
 description: "Transform academic papers into promotional formats: interactive websites (Paper2Web), presentation videos (Paper2Video), and conference posters (Paper2Poster)"
+when_to_use: "Creating conference materials (posters, videos, companion websites), promoting published papers or preprints, generating video abstracts, creating interactive research homepages, batch processing papers for dissemination"
 allowed-tools: [Read, Write, Edit, Bash]
 ---
 
@@ -15,6 +16,30 @@ Transform academic papers (LaTeX or PDF) into three promotional formats using th
 
 The pipeline uses LLM-powered content extraction and iterative refinement to create high-quality outputs for conferences, journals, and academic promotion.
 </overview>
+
+<prerequisites>
+## Prerequisites
+
+Before using this skill, ensure:
+
+| Requirement | Details | Verification |
+|-------------|---------|--------------|
+| Paper2All repository | Clone from GitHub | `ls Paper2All/pipeline_all.py` |
+| Python 3.11+ | With conda environment | `python --version` |
+| API keys | OpenAI or OpenRouter configured | Check `.env` file |
+| LibreOffice | Document conversion | `libreoffice --version` |
+| Poppler utilities | PDF processing | `pdftoppm -v` |
+| NVIDIA GPU (optional) | 48GB for talking-head video | `nvidia-smi` |
+
+**Quick Setup:**
+```bash
+git clone https://github.com/YuhangChen1/Paper2All.git && cd Paper2All
+conda create -n paper2all python=3.11 && conda activate paper2all
+pip install -r requirements.txt
+```
+
+See `{baseDir}/references/installation.md` for complete installation guide.
+</prerequisites>
 
 <when_to_use>
 ## Trigger Conditions
@@ -158,6 +183,15 @@ GOOGLE_CSE_ID=optional_for_logo_search
 - [ ] System dependencies verified
 - [ ] GPU check passed (if using talking-head)
 
+**Error Handling:**
+
+| Error | Cause | Resolution |
+|-------|-------|------------|
+| `ModuleNotFoundError` | Dependencies missing | Run `pip install -r requirements.txt` |
+| `libreoffice: command not found` | LibreOffice not in PATH | Install LibreOffice; add to PATH |
+| `pdftoppm: command not found` | Poppler missing | Install poppler-utils (apt) or poppler (brew) |
+| `CUDA not available` | GPU drivers/CUDA issue | Update NVIDIA drivers; use `pipeline_light.py` |
+
 ---
 
 ### Stage 3: Content Generation
@@ -213,6 +247,16 @@ python pipeline_light.py \
 - [ ] Output files generated in expected locations
 - [ ] No API errors or rate limits hit
 - [ ] Intermediate files preserved for debugging
+
+**Error Handling:**
+
+| Error | Cause | Resolution |
+|-------|-------|------------|
+| `RateLimitError` | API quota exceeded | Wait 60s and retry; reduce batch size |
+| `InvalidAPIKeyError` | API key invalid/expired | Verify key in `.env`; check account status |
+| `FileNotFoundError: .tex` | LaTeX source not found | Check input path; ensure main.tex exists |
+| `Timeout during generation` | Large paper or slow API | Use `--model-choice 3` (GPT-3.5-turbo) |
+| `Memory Error` | Insufficient RAM | Close other apps; process fewer components |
 
 ---
 
@@ -345,155 +389,36 @@ python pipeline_light.py \
 
 </scope>
 
-<anti_patterns>
-## Common Pitfalls
+<best_practices>
+## Best Practices Quick Reference
 
-### 1. Using PDF When LaTeX Available
+| Practice | Guideline |
+|----------|-----------|
+| **Prefer LaTeX input** | Use LaTeX source over PDF for better structure and quality |
+| **Verify poster dimensions** | Check conference specs before generation (48"x36", 60"x40", A0) |
+| **Always validate outputs** | Test website on mobile, print poster sample, watch full video |
+| **Implement rate limiting** | Add 60s delays between batch jobs |
+| **Use high-resolution figures** | Vector formats preferred; 300 DPI minimum for poster rasters |
+| **Match model to use case** | GPT-4 for production, GPT-3.5-turbo for testing |
+| **Organize input files** | Standard structure: main.tex, figures/, bibliography.bib |
+| **Plan deployment early** | Choose platform before generation to configure outputs |
 
-**Anti-pattern:**
-Converting PDF when LaTeX source exists (loses structure, figure quality)
+For detailed guidance with code examples, see `{baseDir}/references/best_practices.md`.
 
-**Solution:**
-Always prefer LaTeX input:
-```bash
-# Check for LaTeX first
-ls paper_dir/*.tex
-
-# Use LaTeX if available
-python pipeline_all.py --input-dir paper_dir/  # Will find .tex
-```
-
----
-
-### 2. Wrong Poster Dimensions
-
-**Anti-pattern:**
-Using default dimensions without checking conference requirements
-
-**Solution:**
-```bash
-# Always verify conference specs first
-# Common sizes: 48"x36", 60"x40", A0 (33.1"x46.8")
-
-python pipeline_all.py \
-  --generate-poster \
-  --poster-width-inches 48 \
-  --poster-height-inches 36
-```
-
----
-
-### 3. Skipping Quality Validation
-
-**Anti-pattern:**
-Deploying without testing (broken links, unreadable text, audio sync issues)
-
-**Solution:**
-Run validation checklist before deployment:
-1. Website: Test on mobile device
-2. Poster: Print test section at actual size
-3. Video: Watch entire video, check audio sync
-
----
-
-### 4. Ignoring API Rate Limits
-
-**Anti-pattern:**
-```bash
-# Batch processing without delays
-for paper in papers/*; do
-    python pipeline_all.py --input-dir $paper &
-done
-# Results in rate limiting, failed jobs
-```
-
-**Solution:**
-```bash
-# Sequential with monitoring
-for paper in papers/*; do
-    echo "Processing: $paper"
-    python pipeline_all.py --input-dir $paper
-    echo "Completed: $paper"
-    sleep 60  # Rate limit buffer
-done
-```
-
----
-
-### 5. Low-Resolution Figures
-
-**Anti-pattern:**
-Using web-quality images (72 DPI) for poster output
-
-**Solution:**
-- Use vector formats (PDF, SVG, EPS) when possible
-- Minimum 300 DPI for raster images at poster size
-- Re-export figures from source if needed
-
-</anti_patterns>
+</best_practices>
 
 <templates>
 ## Output Templates
 
-### Template 1: Deployment Checklist
-
-```markdown
-# Paper2All Deployment Checklist
-
-**Paper:** {{PAPER_TITLE}}
-**Date:** {{YYYY-MM-DD}}
-
-## Components Generated
-- [ ] Website: {{URL or N/A}}
-- [ ] Poster: {{filename or N/A}}
-- [ ] Video: {{URL or N/A}}
-
-## Quality Checks
-### Website
-- [ ] Loads in <5s
-- [ ] Mobile responsive
-- [ ] All links work
-- [ ] Figures display correctly
-
-### Poster
-- [ ] 300+ DPI resolution
-- [ ] Text readable at distance
-- [ ] Colors print-safe
-- [ ] QR code functional
-
-### Video
-- [ ] Audio synced
-- [ ] Captions accurate
-- [ ] Duration appropriate
-- [ ] 1080p quality
-
-## Deployment
-- [ ] Files backed up
-- [ ] URLs documented
-- [ ] Shared with collaborators
+**Standard Output Structure:**
+```
+output/{{paper_name}}/
+├── website/     # index.html, styles.css, assets/
+├── poster/      # poster_final.pdf, poster_final.png
+└── video/       # final_video.mp4, slides/, subtitles.srt
 ```
 
-### Template 2: Output Directory Structure
-
-```
-output/
-└── {{paper_name}}/
-    ├── website/
-    │   ├── index.html
-    │   ├── styles.css
-    │   └── assets/
-    │       ├── figures/
-    │       └── logos/
-    ├── poster/
-    │   ├── poster_final.pdf
-    │   ├── poster_final.png
-    │   └── source/
-    └── video/
-        ├── final_video.mp4
-        ├── slides/
-        ├── audio/
-        └── subtitles.srt
-```
+For deployment checklists, quality metrics, and detailed templates, see `{baseDir}/references/output_templates.md`.
 
 </templates>
 
@@ -518,15 +443,17 @@ See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
 | Document | Purpose |
 |----------|---------|
-| `references/paper2web.md` | Detailed website generation documentation |
-| `references/paper2video.md` | Video generation with talking-head setup |
-| `references/paper2poster.md` | Poster design templates and specifications |
-| `references/installation.md` | Complete installation guide |
-| `references/usage_examples.md` | Real-world workflow examples |
+| `{baseDir}/references/installation.md` | Complete installation and configuration guide |
+| `{baseDir}/references/best_practices.md` | Detailed guidelines with code examples |
+| `{baseDir}/references/output_templates.md` | Deployment checklists and quality metrics |
+| `{baseDir}/references/paper2web.md` | Website generation documentation |
+| `{baseDir}/references/paper2video.md` | Video generation with talking-head setup |
+| `{baseDir}/references/paper2poster.md` | Poster design templates and specifications |
+| `{baseDir}/references/usage_examples.md` | Real-world workflow examples |
 
 ## External Resources
 
-- **GitHub**: https://github.com/YuhangChen1/Paper2All
+- **GitHub Repository**: https://github.com/YuhangChen1/Paper2All
 - **Dataset**: Hugging Face (13 research categories)
 
 </references>

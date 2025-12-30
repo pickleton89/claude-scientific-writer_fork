@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **paper-2-web skill audit**: Applied best practices framework fixes (v2.0.0 → v2.1.0)
+  - **Line count reduced**: 533 → 459 lines (14% reduction, now under 500-line limit)
+  - **Frontmatter `when_to_use`**: Added activation triggers for better discoverability
+  - **Prerequisites section added**: Requirements table with verification commands (Paper2All, Python 3.11+, API keys, LibreOffice, Poppler, GPU)
+  - **Progressive disclosure**: Created 2 new reference files:
+    - `references/best_practices.md` (6.1KB) - 8 detailed guidelines with code examples
+    - `references/output_templates.md` (6.0KB) - Deployment checklists, directory structure, quality metrics
+  - **Positive framing**: Replaced 85-line `<anti_patterns>` section with 12-line `<best_practices>` summary table
+  - **`{baseDir}` path resolution**: All 7 reference paths now use portable `{baseDir}/references/` format
+  - **Error handling added**: New tables in Stage 2 (4 errors) and Stage 3 (5 errors) with causes and resolutions
+  - **Templates condensed**: Inline templates replaced with 9-line summary + reference pointer
+  - Audit compliance: All Section 5.2 checklist items now pass (B+ → A-)
+
 - **literature-review skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
   - **Line count reduced**: 848 → 495 lines (41% reduction, now under 500-line limit)
   - **Frontmatter `when_to_use`**: Added activation triggers for better discoverability

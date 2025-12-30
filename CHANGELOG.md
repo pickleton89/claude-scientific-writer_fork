@@ -25,6 +25,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **oligon-brand skill** (new): Standalone brand identity skill migrated from global `~/.claude/skills/`
+  - Scientific brand visual identity for figures, charts, presentations, and documents
+  - Color palette with scenario-specific cycles (treatment/control, opposing effects, neutrals)
+  - Matplotlib style file (`assets/oligon_color_brand.mplstyle`)
+  - Setup scripts for matplotlib and ggplot2
+  - Logo assets (SVG) in Brand Blue and White variants
+  - Complements `visual-design` skill (design philosophy) with brand-specific implementation
+
+- **research-paper-summarizer skill** (new): Multi-format paper summarization migrated from global `~/.claude/skills/`
+  - Summarizes scientific papers into markdown, HTML, PDF, and SVG infographic formats
+  - Two processing modes: Standard (≤12 pages) and Chunked (>12 pages with subagent pipeline)
+  - Article-type-specific prompts: General, Review, CompBio, Cell/Molecular Biology
+  - 6-agent chunked pipeline: overview → methods → results → critique → context → synthesis
+  - Complements `literature-review` skill (multi-paper synthesis) with single-paper analysis
+
 - **docs/EXECUTION_STANDARDS.md** (new): Centralized workflow standards for scientific writing
   - File organization structure (`writing_outputs/<timestamp>/`)
   - Progress logging format (`[HH:MM:SS] ACTION: Description`)

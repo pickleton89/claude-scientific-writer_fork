@@ -1,9 +1,9 @@
 ---
 name: peer-review
-version: 2.1.0
+version: 2.2.0
 description: "Systematic peer review toolkit. Evaluate methodology, statistics, design, reproducibility, ethics, figure integrity, reporting standards, for manuscript and grant review across disciplines."
+when_to_use: "For journal manuscript review, grant proposal evaluation, methodology assessment, statistical analysis review, presentation feedback, or compliance checking against reporting guidelines (CONSORT, STROBE, PRISMA, ARRIVE)."
 allowed-tools: [Read, Write, Edit, Bash]
-quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
 ---
 
 # Scientific Critical Evaluation and Peer Review
@@ -24,6 +24,21 @@ This skill should be used when:
 - Providing constructive feedback on scientific writing
 
 **Related Resource:** The **venue-templates** skill provides `reviewer_expectations.md` with detailed guidance on what reviewers look for at different venues (Nature/Science, Cell Press, medical journals, ML conferences). Use this to calibrate your review standards to the target venue.
+
+## Prerequisites
+
+**Required for all reviews:**
+- Read tool for manuscript access
+- Write tool for generating review reports
+
+**Required for presentation review:**
+- Python with PyMuPDF package (no external dependencies needed)
+- Script: `{baseDir}/scripts/pdf_to_images.py`
+
+**Install dependencies for presentation review:**
+```bash
+pip install pymupdf
+```
 
 ## Visual Enhancement with Scientific Schematics
 
@@ -66,12 +81,6 @@ Conduct peer review systematically through the following stages, adapting depth 
 
 ### Stage 1: Initial Assessment
 
-**Progress Milestones:**
-- 25%: Central research question identified
-- 50%: Main findings and conclusions noted
-- 75%: Venue appropriateness assessed
-- 100%: Initial impression documented, ready for deep review
-
 Begin with a high-level evaluation to determine the manuscript's scope, novelty, and overall quality.
 
 **Key Questions:**
@@ -84,12 +93,6 @@ Begin with a high-level evaluation to determine the manuscript's scope, novelty,
 **Output:** Brief summary (2-3 sentences) capturing the manuscript's essence and initial impression.
 
 ### Stage 2: Detailed Section-by-Section Review
-
-**Progress Milestones:**
-- 25%: Abstract/Title and Introduction reviewed
-- 50%: Methods section evaluated
-- 75%: Results and Discussion reviewed
-- 100%: References assessed, all sections documented
 
 Conduct a thorough evaluation of each manuscript section, documenting specific concerns and strengths.
 
@@ -162,13 +165,7 @@ Conduct a thorough evaluation of each manuscript section, documenting specific c
 
 ### Stage 3: Methodological and Statistical Rigor
 
-**Progress Milestones:**
-- 25%: Statistical assumptions and test appropriateness checked
-- 50%: Sample size and replication verified against thresholds
-- 75%: Experimental design (controls, blinding, randomization) assessed
-- 100%: Computational methods reviewed, all issues documented
-
-> **Reference:** See `../QUANTIFICATION_THRESHOLDS.md` §3 (Replication & Sample Size) for shared thresholds.
+> **Reference:** See `{baseDir}/../QUANTIFICATION_THRESHOLDS.md` §3 (Replication & Sample Size) for shared thresholds.
 
 Evaluate the technical quality and rigor of the research with particular attention to common pitfalls.
 
@@ -218,12 +215,6 @@ Evaluate the technical quality and rigor of the research with particular attenti
 
 ### Stage 4: Reproducibility and Transparency
 
-**Progress Milestones:**
-- 25%: Data availability assessed (repositories, accession numbers)
-- 50%: Code and materials availability checked
-- 75%: Reporting guideline compliance verified
-- 100%: Protocol detail sufficiency evaluated, issues documented
-
 Assess whether the research meets modern standards for reproducibility and open science.
 
 **Data Availability:**
@@ -239,18 +230,12 @@ Assess whether the research meets modern standards for reproducibility and open 
 
 **Reporting Standards:**
 - Does the manuscript follow discipline-specific reporting guidelines (CONSORT, PRISMA, ARRIVE, MIAME, MINSEQE, etc.)?
-- See `references/reporting_standards.md` for common guidelines
+- See `{baseDir}/references/reporting_standards.md` for common guidelines
 - Are all elements of the appropriate checklist addressed?
 
 ### Stage 5: Figure and Data Presentation
 
-**Progress Milestones:**
-- 25%: Figure resolution and labeling quality checked
-- 50%: Error bars and statistical indicators verified
-- 75%: Image integrity checked (manipulation, duplications)
-- 100%: Figure clarity assessed, quality scores documented
-
-> **Reference:** See `../QUANTIFICATION_THRESHOLDS.md` §2 (Visual Quality) and §7 (Figure Quality Rubric) for shared thresholds.
+> **Reference:** See `{baseDir}/../QUANTIFICATION_THRESHOLDS.md` §2 (Visual Quality) and §7 (Figure Quality Rubric) for shared thresholds.
 
 Evaluate the quality, clarity, and integrity of data visualization.
 
@@ -286,12 +271,6 @@ Evaluate the quality, clarity, and integrity of data visualization.
 
 ### Stage 6: Ethical Considerations
 
-**Progress Milestones:**
-- 25%: Human subjects (IRB, consent) verified if applicable
-- 50%: Animal research (IACUC, 3Rs) verified if applicable
-- 75%: Conflicts of interest and funding checked
-- 100%: Authorship and integrity concerns assessed
-
 Verify that the research meets ethical standards and guidelines.
 
 **Human Subjects:**
@@ -316,12 +295,6 @@ Verify that the research meets ethical standards and guidelines.
 
 ### Stage 7: Writing Quality and Clarity
 
-**Progress Milestones:**
-- 25%: Structure and organization assessed
-- 50%: Language clarity and conciseness evaluated
-- 75%: Jargon minimization and accessibility checked
-- 100%: All stages complete, ready for report drafting
-
 Assess the manuscript's clarity, organization, and accessibility.
 
 **Structure and Organization:**
@@ -344,175 +317,45 @@ Assess the manuscript's clarity, organization, and accessibility.
 
 ## Workflow Transitions
 
-### Stage 1 → 2: Initial Assessment → Section-by-Section Review
-**Exit criteria:**
-□ Central research question/hypothesis identified in 1-2 sentences
-□ Main findings and conclusions summarized
-□ Initial impression documented (sound/flawed, significant/incremental)
-□ Venue appropriateness assessed
-□ No immediate disqualifying flaws identified (or flagged for rejection)
+Each review stage has specific exit criteria to verify before proceeding. See `{baseDir}/references/workflow_transitions.md` for complete stage-by-stage checklists and progress indicators.
 
-### Stage 2 → 3: Section-by-Section Review → Methodological Rigor
-**Exit criteria:**
-□ All sections evaluated (Abstract, Introduction, Methods, Results, Discussion, References)
-□ ≥2 strengths and ≥2 concerns documented per major section
-□ Specific issues located by section/paragraph
-□ Key claims identified for evidence verification
-□ Citation coverage assessed (complete, current, balanced)
+**Quick reference:**
 
-### Stage 3 → 4: Methodological Rigor → Reproducibility Assessment
-**Exit criteria:**
-□ Statistical assumptions verified or flagged
-□ Sample size adequacy checked against replication thresholds
-□ Controls and replicates assessed (≥2 controls, ≥3 biological replicates)
-□ Multiple testing correction evaluated
-□ Effect sizes and confidence intervals checked
-□ Experimental design appropriateness documented
-
-### Stage 4 → 5: Reproducibility → Figure Evaluation
-**Exit criteria:**
-□ Data availability assessed (raw data, accession numbers)
-□ Code availability checked (GitHub, Zenodo, etc.)
-□ Reporting guideline compliance verified (CONSORT, PRISMA, ARRIVE, etc.)
-□ Protocol detail sufficiency evaluated
-□ Materials availability confirmed
-
-### Stage 5 → 6: Figure Evaluation → Ethical Considerations
-**Exit criteria:**
-□ All figures inspected for resolution (≥300 DPI target)
-□ Labeling and legends assessed for completeness
-□ Error bars and statistical indicators verified
-□ Colorblind accessibility checked
-□ Image integrity verified (no manipulation concerns)
-□ Figure quality scores documented
-
-### Stage 6 → 7: Ethical Considerations → Writing Quality
-**Exit criteria:**
-□ Human subjects: IRB approval and consent verified (if applicable)
-□ Animal research: IACUC approval verified (if applicable)
-□ Conflicts of interest disclosure checked
-□ Funding source disclosed
-□ No plagiarism or duplicate publication concerns
-□ Authorship appropriateness assessed
-
-### Stage 7 Complete: Writing Quality → Report Drafting
-**Exit criteria:**
-□ Structure and organization assessed
-□ Language clarity evaluated
-□ Jargon minimization checked
-□ Accessibility for non-specialists considered
-□ All 7 stages completed with documented findings
-□ Ready to draft structured review report
+| Stage | Key Gate |
+|-------|----------|
+| 1 → 2 | Clear summary + initial recommendation |
+| 2 → 3 | All sections documented with specific concerns |
+| 3 → 4 | Statistical validity + design rigor assessed |
+| 4 → 5 | Data/code availability + guideline compliance checked |
+| 5 → 6 | Figure quality + integrity verified |
+| 6 → 7 | Ethics approvals + disclosures confirmed |
+| 7 → Report | Writing quality assessed, findings synthesized |
 
 ## Critical Analysis Framework
 
-Apply these frameworks throughout the peer review process to systematically evaluate scientific rigor, identify flaws, and assess evidence quality.
+Apply systematic frameworks to evaluate scientific rigor, identify logical flaws, and assess evidence quality. See `{baseDir}/references/critical_analysis.md` for complete guidance on:
 
-### Evidence Quality Assessment (GRADE)
+- **GRADE evidence assessment** - Study design hierarchy, quality adjustments
+- **Logical fallacy identification** - Causation, generalization, statistical fallacies
+- **Claim evaluation** - 5-step systematic assessment
+- **Bias detection** - Cognitive, selection, measurement, analysis biases
 
-Evaluate the strength and quality of evidence systematically using the GRADE approach:
-
-**Study Design Hierarchy:**
-1. Systematic reviews/meta-analyses (highest for intervention effects)
-2. Randomized controlled trials
-3. Cohort studies
-4. Case-control studies
-5. Cross-sectional studies
-6. Case series/reports
-7. Expert opinion (lowest)
-
-**GRADE Considerations:**
-- Start with design type (RCT = high, observational = low)
-- **Downgrade for:** Risk of bias, inconsistency across studies, indirectness, imprecision, publication bias
-- **Upgrade for:** Large effect sizes, dose-response relationships, confounders would reduce effect
-
-**Convergence of Evidence:**
-- **Stronger:** Multiple independent replications, different methodologies converge, mechanistic alignment
-- **Weaker:** Single study, contradictory findings, no replication attempts, publication bias evident
-
-**Reference:** See `references/evidence_hierarchy.md` for detailed GRADE system and quality assessment tools.
-
-### Logical Fallacy Identification
-
-Detect logical errors in scientific arguments and claims:
-
-**Causation Fallacies:**
-- **Post hoc:** "B followed A, so A caused B"
-- **Correlation = causation:** Confusing association with causality
-- **Reverse causation:** Mistaking cause for effect
-
-**Generalization Fallacies:**
-- **Hasty generalization:** Broad conclusions from small samples
-- **Cherry-picking:** Selecting only supporting evidence
-- **Ecological fallacy:** Group patterns applied to individuals
-
-**Statistical Fallacies:**
-- **Base rate neglect:** Ignoring prior probability
-- **Texas sharpshooter:** Finding patterns in random data
-- **Prosecutor's fallacy:** Confusing P(E|H) with P(H|E)
-
-**Science-Specific Fallacies:**
-- **Galileo gambit:** "They laughed at Galileo, so my fringe idea is correct"
-- **Argument from ignorance:** "Not proven false, so true"
-- **Unfalsifiability:** Making untestable claims
-
-**When identifying fallacies:** Name the specific fallacy, explain why reasoning is flawed, identify what evidence would be needed for valid inference.
-
-**Reference:** See `references/logical_fallacies.md` for comprehensive fallacy catalog with examples.
-
-### Claim Evaluation
-
-Systematically evaluate scientific claims for validity and support:
-
-1. **Identify the Claim:** Causal, associational, or descriptive? How strong (proven, likely, suggested, possible)?
-2. **Assess the Evidence:** Direct or indirect? Sufficient for claim strength? Alternative explanations ruled out?
-3. **Check Logical Connection:** Do conclusions follow from data? Are there logical leaps?
-4. **Evaluate Proportionality:** Is confidence proportional to evidence? Are limitations downplayed?
-5. **Check for Overgeneralization:** Do claims extend beyond sample? Are caveats included?
-
-**Red Flags:**
-- Causal language from correlational studies
-- "Proves" or absolute certainty
-- Ignoring contradictory evidence
-- Extrapolation beyond data
-
-### Bias Detection
-
-Systematic review of potential bias sources:
-
-**Cognitive Biases (Researcher):**
-- **Confirmation bias:** Only supporting findings highlighted
-- **HARKing:** Hypotheses stated post-hoc
-- **Publication bias:** Negative results missing
-
-**Selection Biases:**
-- **Sampling bias:** Non-representative sample
-- **Attrition bias:** Differential dropout between groups
-- **Survivorship bias:** Only "survivors" visible
-
-**Measurement Biases:**
-- **Observer bias:** Expectations influence observations
-- **Recall bias:** Systematic retrospective inaccuracies
-- **Instrument bias:** Systematic measurement errors
-
-**Analysis Biases:**
-- **P-hacking:** Multiple analyses until significance
-- **Outcome switching:** Replacing non-significant outcomes
-- **Subgroup fishing:** Uncorrected subgroup analyses
-
-**Reference:** See `references/common_biases.md` for comprehensive bias taxonomy with detection and mitigation strategies.
+**Supporting references:**
+- `{baseDir}/references/evidence_hierarchy.md` - Detailed GRADE system
+- `{baseDir}/references/logical_fallacies.md` - Comprehensive fallacy catalog
+- `{baseDir}/references/common_biases.md` - Bias taxonomy with mitigation
 
 ### Additional Critical Analysis References
 
 The following reference materials support comprehensive critical evaluation:
 
-- **`references/scientific_method.md`** - Core principles, critical evaluation criteria, red flags in scientific claims
-- **`references/statistical_pitfalls.md`** - Common statistical errors: p-value misunderstandings, multiple comparisons, effect size mistakes
-- **`references/experimental_design.md`** - Comprehensive design checklist: hypotheses, sampling, blinding, validity threats
+- **`{baseDir}/references/scientific_method.md`** - Core principles, critical evaluation criteria, red flags in scientific claims
+- **`{baseDir}/references/statistical_pitfalls.md`** - Common statistical errors: p-value misunderstandings, multiple comparisons, effect size mistakes
+- **`{baseDir}/references/experimental_design.md`** - Comprehensive design checklist: hypotheses, sampling, blinding, validity threats
 
 ## Structuring Peer Review Reports
 
-> **Reference:** See `../QUANTIFICATION_THRESHOLDS.md` §4 (Issue Severity Classification) for shared severity criteria.
+> **Reference:** See `{baseDir}/../QUANTIFICATION_THRESHOLDS.md` §4 (Issue Severity Classification) for shared severity criteria.
 
 Organize feedback in a hierarchical structure that prioritizes issues and provides actionable guidance.
 
@@ -598,16 +441,15 @@ Maintain a constructive, professional, and collegial tone throughout the review.
 - **Be balanced:** Acknowledge strengths as well as weaknesses
 - **Be respectful:** Remember that authors have invested significant effort
 - **Be objective:** Focus on the science, not the scientists
-- **Be thorough:** Don't overlook issues, but prioritize appropriately
-- **Be clear:** Avoid ambiguous or vague criticism
+- **Be thorough:** Address all significant issues with appropriate prioritization
+- **Be clear:** Use precise, unambiguous language
 
-**Avoid:**
-- Personal attacks or dismissive language
-- Sarcasm or condescension
-- Vague criticism without specific examples
-- Requesting unnecessary experiments beyond the scope
-- Demanding adherence to personal preferences vs. best practices
-- Revealing your identity if reviewing is double-blind
+**Maintain professional standards:**
+- Use constructive language focused on the science
+- Provide specific examples for all criticisms
+- Keep requested revisions within the paper's scope
+- Distinguish best practices from personal preferences
+- Preserve anonymity in double-blind reviews
 
 ## Special Considerations by Manuscript Type
 
@@ -643,170 +485,32 @@ Maintain a constructive, professional, and collegial tone throughout the review.
 
 ### Presentations and Slide Decks
 
-**⚠️ CRITICAL: For presentations, NEVER read the PDF directly. ALWAYS convert to images first.**
+**Critical:** Convert presentation PDFs to images before reviewing. Direct PDF reading causes buffer overflow errors and misses visual formatting issues.
 
-When reviewing scientific presentations (PowerPoint, Beamer, slide decks):
-
-#### Mandatory Image-Based Review Workflow
-
-**NEVER attempt to read presentation PDFs directly** - this causes buffer overflow errors and doesn't show visual formatting issues.
-
-**Required Process:**
-1. Convert PDF to images using Python:
-   ```bash
-   python skills/scientific-slides/scripts/pdf_to_images.py presentation.pdf review/slide --dpi 150
-   # Creates: review/slide-001.jpg, review/slide-002.jpg, etc.
-   ```
-2. Read and inspect EACH slide image file sequentially
-3. Document issues with specific slide numbers
-4. Provide feedback on visual formatting and content
-
-**Print when starting review:**
-```
-[HH:MM:SS] PEER REVIEW: Presentation detected - converting to images for review
-[HH:MM:SS] PDF REVIEW: NEVER reading PDF directly - using image-based inspection
+**Quick start:**
+```bash
+python {baseDir}/scripts/pdf_to_images.py presentation.pdf review/slide --dpi 150
 ```
 
-#### Presentation-Specific Evaluation Criteria
-
-**Visual Design and Readability:**
-- [ ] Text is large enough (minimum 18pt, ideally 24pt+ for body text)
-- [ ] High contrast between text and background (4.5:1 minimum, 7:1 preferred)
-- [ ] Color scheme is professional and colorblind-accessible
-- [ ] Consistent visual design across all slides
-- [ ] White space is adequate (not cramped)
-- [ ] Fonts are clear and professional
-
-**Layout and Formatting (Check EVERY Slide Image):**
-- [ ] No text overflow or truncation at slide edges
-- [ ] No element overlaps (text over images, overlapping shapes)
-- [ ] Titles are consistently positioned
-- [ ] Content is properly aligned
-- [ ] Bullets and text are not cut off
-- [ ] Figures fit within slide boundaries
-- [ ] Captions and labels are visible and readable
-
-**Content Quality:**
-- [ ] One main idea per slide (not overloaded)
-- [ ] Minimal text (3-6 bullets per slide maximum)
-- [ ] Bullet points are concise (5-7 words each)
-- [ ] Figures are simplified and clear (not copy-pasted from papers)
-- [ ] Data visualizations have large, readable labels
-- [ ] Citations are present and properly formatted
-- [ ] Results/data slides dominate the presentation (40-50% of content)
-
-**Structure and Flow:**
-- [ ] Clear narrative arc (introduction → methods → results → discussion)
-- [ ] Logical progression between slides
-- [ ] Slide count appropriate for talk duration (~1 slide per minute)
-- [ ] Title slide includes authors, affiliation, date
-- [ ] Introduction cites relevant background literature (3-5 papers)
-- [ ] Discussion cites comparison papers (3-5 papers)
-- [ ] Conclusions slide summarizes key findings
-- [ ] Acknowledgments/funding slide at end
-
-**Scientific Content:**
-- [ ] Research question clearly stated
-- [ ] Methods adequately summarized (not excessive detail)
-- [ ] Results presented logically with clear visualizations
-- [ ] Statistical significance indicated appropriately
-- [ ] Conclusions supported by data shown
-- [ ] Limitations acknowledged where appropriate
-- [ ] Future directions or broader impact discussed
-
-**Common Presentation Issues to Flag:**
-
-**Critical Issues (Must Fix):**
-- Text overflow making content unreadable
-- Font sizes too small (<18pt)
-- Element overlaps obscuring data
-- Insufficient contrast (text hard to read)
-- Figures too complex or illegible
-- No citations (completely unsupported claims)
-- Slide count drastically mismatched to duration
-
-**Major Issues (Should Fix):**
-- Inconsistent design across slides
-- Too much text (walls of text, not bullets)
-- Poorly simplified figures (axis labels too small)
-- Cramped layout with insufficient white space
-- Missing key structural elements (no conclusion slide)
-- Poor color choices (not colorblind-safe)
-- Minimal results content (<30% of slides)
-
-**Minor Issues (Suggestions for Improvement):**
-- Could use more visuals/diagrams
-- Some slides slightly text-heavy
-- Minor alignment inconsistencies
-- Could benefit from more white space
-- Additional citations would strengthen claims
-- Color scheme could be more modern
-
-#### Review Report Format for Presentations
-
-**Summary Statement:**
-- Overall impression of presentation quality
-- Appropriateness for target audience and duration
-- Key strengths (visual design, content, clarity)
-- Key weaknesses (formatting issues, content gaps)
-- Recommendation (ready to present, minor revisions, major revisions)
-
-**Layout and Formatting Issues (By Slide Number):**
-```
-Slide 3: Text overflow - bullet point 4 extends beyond right margin
-Slide 7: Element overlap - figure overlaps with caption text
-Slide 12: Font size - axis labels too small to read from distance
-Slide 18: Alignment - title not centered
-```
-
-**Content and Structure Feedback:**
-- Adequacy of background context and citations
-- Clarity of research question and objectives
-- Quality of methods summary
-- Effectiveness of results presentation
-- Strength of conclusions and implications
-
-**Design and Accessibility:**
-- Overall visual appeal and professionalism
-- Color contrast and readability
-- Colorblind accessibility
-- Consistency across slides
-
-**Timing and Scope:**
-- Whether slide count matches intended duration
-- Appropriate level of detail for talk type
-- Balance between sections
-
-#### Example Image-Based Review Process
-
-```
-[14:30:00] PEER REVIEW: Starting review of presentation
-[14:30:05] PEER REVIEW: Presentation detected - converting to images
-[14:30:10] PDF REVIEW: Running pdf_to_images.py on presentation.pdf
-[14:30:15] PDF REVIEW: Converted 25 slides to images in review/ directory
-[14:30:20] PDF REVIEW: Inspecting slide 1/25 - title slide
-[14:30:25] PDF REVIEW: Inspecting slide 2/25 - introduction
-...
-[14:35:40] PDF REVIEW: Inspecting slide 25/25 - acknowledgments
-[14:35:45] PDF REVIEW: Completed image-based review
-[14:35:50] PEER REVIEW: Found 8 layout issues, 3 content issues
-[14:35:55] PEER REVIEW: Generating structured feedback by slide number
-```
-
-**Remember:** For presentations, the visual inspection via images is MANDATORY. Never attempt to read presentation PDFs as text - it will fail and miss all visual formatting issues.
+**Detailed guidance:** See `{baseDir}/references/presentation_review.md` for complete evaluation criteria covering:
+- Visual design and readability thresholds
+- Layout and formatting checklists
+- Content quality standards
+- Issue classification (critical/major/minor)
+- Report format templates
 
 ## Resources
 
 This skill includes reference materials to support comprehensive peer review:
 
-### references/expert_review_guide.md
-Core principles, decision frameworks, and failure modes that separate competent from excellent peer review. Covers expert patterns (claim-evidence audit, replication test, inverse review), anti-patterns to avoid, and quality signals. Start here for the expert mental model.
-
-### references/reporting_standards.md
-Guidelines for major reporting standards across disciplines (CONSORT, PRISMA, ARRIVE, MIAME, STROBE, etc.) to evaluate completeness of methods and results reporting.
-
-### references/common_issues.md
-Catalog of frequent methodological and statistical issues encountered in peer review, with guidance on identifying and addressing them.
+| Reference | Purpose |
+|-----------|---------|
+| `{baseDir}/references/expert_review_guide.md` | Core principles, decision frameworks, expert patterns (claim-evidence audit, replication test) |
+| `{baseDir}/references/reporting_standards.md` | CONSORT, PRISMA, ARRIVE, MIAME, STROBE guidelines |
+| `{baseDir}/references/common_issues.md` | Catalog of frequent methodological and statistical issues |
+| `{baseDir}/references/presentation_review.md` | Slide deck and presentation evaluation criteria |
+| `{baseDir}/references/critical_analysis.md` | GRADE, fallacy identification, bias detection |
+| `{baseDir}/references/workflow_transitions.md` | Stage exit criteria and progress indicators |
 
 ## Cross-References
 

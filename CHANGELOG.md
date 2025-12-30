@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **peer-review skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
+  - **Line count reduced**: 837 → 541 lines (35% reduction, approaching 500-line target)
+  - **Frontmatter `when_to_use`**: Added activation triggers for journal manuscript review, grant evaluation, methodology assessment, presentation feedback, and reporting guideline compliance
+  - **Prerequisites section added**: Declares required tools (Read, Write) and presentation review dependencies (PyMuPDF)
+  - **Progressive disclosure**: Created 3 new reference files:
+    - `references/presentation_review.md` - Complete slide deck evaluation criteria, image-based workflow, issue classification
+    - `references/critical_analysis.md` - GRADE evidence assessment, logical fallacy identification, claim evaluation, bias detection
+    - `references/workflow_transitions.md` - Stage exit criteria, progress indicators, quick transition checklist
+  - **Scripts directory added**: Copied `pdf_to_images.py` locally to eliminate cross-skill dependency
+  - **`{baseDir}` path resolution**: All 12 reference paths now use portable `{baseDir}/references/` format
+  - **Positive framing**: Converted "Avoid:" section to "Maintain professional standards:" with constructive language
+  - **Removed Progress Milestones**: Extracted 7 inline milestone sections to workflow_transitions.md reference
+  - **Resources table updated**: Consolidated 6 reference files with `{baseDir}` paths and purpose descriptions
+  - Audit compliance: All Section 5.2 checklist items now pass
+
 - **paper-2-web skill audit**: Applied best practices framework fixes (v2.0.0 → v2.1.0)
   - **Line count reduced**: 533 → 459 lines (14% reduction, now under 500-line limit)
   - **Frontmatter `when_to_use`**: Added activation triggers for better discoverability

@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **literature-review skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
+  - **Line count reduced**: 848 → 495 lines (41% reduction, now under 500-line limit)
+  - **Frontmatter `when_to_use`**: Added activation triggers for better discoverability
+  - **Prerequisites section added**: Dependencies declared (pandoc, Python packages: requests, beautifulsoup4, bibtexparser)
+  - **Scripts section added**: All 3 scripts documented with `{baseDir}` paths and usage examples
+  - **Progressive disclosure**: Created 5 new reference files:
+    - `references/quality_assessment_tools.md` (8.3KB) - RoB 2.0, ROBINS-I, NOS, QUADAS-2, CASP, AMSTAR 2 guidance
+    - `references/prisma_checklist.md` (11KB) - Full PRISMA 2020 checklist with extensions
+    - `references/decision_frameworks.md` (6.4KB) - Database selection, review types, thresholds
+    - `references/output_templates.md` (12KB) - PRISMA diagram, search docs, extraction forms
+    - `references/common_pitfalls.md` (7.8KB) - Best practices reframed from anti-patterns
+  - **Positive framing**: Replaced `<anti_patterns>` section with `<best_practices>` using constructive language
+  - **Reference table updated**: All 8 reference files documented with `{baseDir}` links
+  - **Removed Progress Milestones**: Retained Exit Criteria only to reduce verbosity
+  - Fixed 2 missing reference files that were documented but didn't exist
+  - Audit compliance: All Section 5.2 checklist items now pass
+
 - **markdown-to-pdf skill audit**: Applied best practices framework fixes (v1.0.0 → v1.1.0)
   - **Fixed invalid reference**: Replaced non-existent `docs/PHASE3_IMPLEMENTATION_PLAN.md` with valid `docs/template-project/brand/BRAND_COLORS_v4.md`
   - **`{baseDir}` path resolution**: All 3 reference paths now use portable `{baseDir}/references/component_map.md` format

@@ -1,7 +1,8 @@
 ---
 name: literature-review
-version: 2.1.0
+version: 2.2.0
 description: "Conduct systematic literature reviews using multiple academic databases with quantified coverage thresholds. Provides structured methodology for search, screening, synthesis, and citation verification with professional output in markdown and PDF formats."
+when_to_use: "Systematic, scoping, narrative, or rapid literature reviews requiring multi-database search strategies and PRISMA-compliant documentation"
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, WebFetch, WebSearch]
 shared-thresholds: "../QUANTIFICATION_THRESHOLDS.md"
 ---
@@ -13,6 +14,47 @@ shared-thresholds: "../QUANTIFICATION_THRESHOLDS.md"
 <overview>
 Conduct systematic literature reviews with quantified coverage requirements: ≥3 databases, 30-100+ papers depending on review type, and documented search strategies achieving <5% new papers in final iteration. This skill provides structured workflows for multi-database searching, screening, thematic synthesis, and citation verification with professional output generation in markdown and PDF formats.
 </overview>
+
+<prerequisites>
+## Prerequisites
+
+**Required Tools:**
+- **pandoc**: For PDF generation (`brew install pandoc` on macOS, `apt-get install pandoc` on Linux)
+- **Python 3.8+**: For running helper scripts
+
+**Python Dependencies:**
+```bash
+pip install requests beautifulsoup4 bibtexparser
+```
+
+**Optional:**
+- Reference manager (Zotero, Mendeley) for citation organization
+- LaTeX distribution for advanced PDF formatting
+</prerequisites>
+
+<scripts>
+## Helper Scripts
+
+This skill includes automation scripts in `{baseDir}/scripts/`:
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `search_databases.py` | Automated database querying | `python {baseDir}/scripts/search_databases.py --query "terms" --databases pubmed,scopus` |
+| `verify_citations.py` | DOI verification and metadata check | `python {baseDir}/scripts/verify_citations.py --input references.bib` |
+| `generate_pdf.py` | Convert markdown to formatted PDF | `python {baseDir}/scripts/generate_pdf.py --input review.md --style apa` |
+
+**Example Workflow:**
+```bash
+# 1. Run database searches
+python {baseDir}/scripts/search_databases.py --query "machine learning AND healthcare" --output results.json
+
+# 2. After writing review, verify all citations
+python {baseDir}/scripts/verify_citations.py --input my_review.md --output verification_report.txt
+
+# 3. Generate final PDF
+python {baseDir}/scripts/generate_pdf.py --input my_review.md --output my_review.pdf --toc
+```
+</scripts>
 
 <when_to_use>
 ## Trigger Conditions
@@ -33,108 +75,22 @@ Do NOT use this skill when:
 </when_to_use>
 
 <decision_framework>
-## Database Selection Matrix
+## Quick Reference: Key Thresholds
 
-```
-What is the primary research domain?
-│
-├─ Biomedical / Life Sciences
-│  │
-│  ├─ Clinical / Medical → PubMed + Cochrane + CINAHL + Embase
-│  │
-│  ├─ Basic Biology → PubMed + bioRxiv + Web of Science
-│  │
-│  └─ Genomics/Bioinformatics → PubMed + bioRxiv + GEO + UniProt
-│
-├─ Physical Sciences / Engineering
-│  │
-│  ├─ Physics / Math → arXiv + Web of Science + ADS
-│  │
-│  ├─ Chemistry → PubMed + SciFinder + Web of Science
-│  │
-│  └─ Engineering → IEEE Xplore + Scopus + Web of Science
-│
-├─ Computer Science / AI
-│  │
-│  ├─ ML/AI → arXiv + Semantic Scholar + ACM DL + IEEE
-│  │
-│  └─ General CS → ACM DL + IEEE Xplore + arXiv + DBLP
-│
-├─ Social Sciences
-│  │
-│  └─ Psychology / Sociology → PsycINFO + Scopus + SSRN
-│
-└─ Multidisciplinary
-   │
-   └─ Cross-field → Semantic Scholar + Web of Science + Scopus + Google Scholar
-```
+| Review Type | Min Databases | Min Papers | Timeline |
+|-------------|---------------|------------|----------|
+| Systematic | 3-5 | 30+ | 6-18 months |
+| Scoping | 2-4 | Variable | 3-6 months |
+| Narrative | 2-3 | Variable | 1-3 months |
+| Rapid | 2-3 | 10-30 | 2-5 weeks |
 
-## Minimum Database Requirements
-
-| Review Type | Minimum Databases | Recommended |
-|-------------|------------------|-------------|
-| Systematic review | 3 | 4-5 |
-| Scoping review | 2 | 3-4 |
-| Narrative review | 2 | 3 |
-| Rapid review | 2 | 2-3 |
-
-## Review Type Selection
-
-| Factor | Systematic | Scoping | Narrative | Rapid |
-|--------|-----------|---------|-----------|-------|
-| Timeline | 6-18 months | 3-6 months | 1-3 months | 2-5 weeks |
-| Question type | Focused, specific | Broad, exploratory | Broad overview | Urgent, focused |
-| Methodology | Rigorous protocol | Flexible framework | Expert synthesis | Streamlined |
-| Quality assessment | Required | Optional | Informal | Limited |
-| PRISMA required | Yes | PRISMA-ScR | No | Modified |
-| Output papers | ≥30 typical | Variable | Variable | 10-30 typical |
-
-## Quality Assessment Tool Selection
-
-| Study Design | Assessment Tool | Domains Evaluated |
-|-------------|----------------|-------------------|
-| Randomized trials | Cochrane RoB 2.0 | 5 domains, 7 items |
-| Non-randomized interventions | ROBINS-I | 7 domains |
-| Observational cohort | Newcastle-Ottawa Scale | 3 domains, 8 items |
-| Cross-sectional | JBI Checklist | 8 items |
-| Diagnostic accuracy | QUADAS-2 | 4 domains |
-| Qualitative studies | CASP Checklist | 10 items |
-| Systematic reviews | AMSTAR 2 | 16 items, 7 critical |
-| Animal studies | SYRCLE RoB | 10 items |
-
-## Literature Coverage Thresholds
-
-> Reference: [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §1
-
-| Review Type | Min Papers | Min Databases | Time Range | Citation Density |
-|-------------|------------|---------------|------------|------------------|
-| Original Research | 30 | 2 | 5-10 years | 2-4 per paragraph |
-| Review Article | 100 | 4 | 10+ years | 4-6 per paragraph |
-| Systematic Review | 50+ | 3 | Per PRISMA | All relevant |
-| Meta-Analysis | 10+ studies | 3 | 10+ years | All included |
-| Methods Paper | 20 | 2 | 5 years | Key comparisons |
-| Commentary/Letter | 10-15 | 1 | 2-3 years | Selective |
-
-**"Comprehensive" Defined:**
-
-A literature search is considered **comprehensive** when ALL criteria are met:
+**Comprehensive Search Criteria:**
 - [ ] ≥3 databases searched with documented strategy
 - [ ] Forward/backward citation search performed
-- [ ] Gray literature checked (preprints, theses, conference proceedings)
-- [ ] ≤5% new relevant papers found in final search iteration
-- [ ] Date range explicitly specified and justified
+- [ ] Gray literature checked (preprints, theses)
+- [ ] ≤5% new relevant papers in final iteration
 
-## Literature Recency Thresholds
-
-> Reference: [`QUANTIFICATION_THRESHOLDS.md`](../QUANTIFICATION_THRESHOLDS.md) §6
-
-| Field Type | "Recent" Means | "Current" Means |
-|------------|---------------|-----------------|
-| Fast-moving (ML, genomics) | ≤2 years | ≤6 months |
-| Standard biomedical | ≤5 years | ≤1 year |
-| Clinical guidelines | ≤3 years | ≤1 year |
-| Historical context | ≤10 years | ≤5 years |
-| Foundational work | Any age if seminal | N/A |
+> **Full decision frameworks:** See [`references/decision_frameworks.md`]({baseDir}/references/decision_frameworks.md) for database selection matrix, review type comparison, quality assessment tool selection, and literature recency thresholds.
 
 </decision_framework>
 
@@ -167,12 +123,6 @@ A literature search is considered **comprehensive** when ALL criteria are met:
 
 4. Select databases (minimum 3 for systematic reviews)
 5. Define search strategy with Boolean operators
-
-**Progress Milestones:**
-- 25%: Research question drafted in structured format
-- 50%: Inclusion/exclusion criteria table completed
-- 75%: Databases selected and justified
-- 100%: Search strategy drafted and ready for execution
 
 **Exit Criteria:**
 - [ ] Research question documented (PICO/PEO/SPIDER format)
@@ -216,12 +166,6 @@ A literature search is considered **comprehensive** when ALL criteria are met:
 - [ ] Citation chaining yields <5% new papers
 - [ ] Expert consultation confirms no major gaps
 
-**Progress Milestones:**
-- 25%: Search strings constructed for all databases
-- 50%: Primary database searches executed and documented
-- 75%: Citation network (forward/backward) searches completed
-- 100%: All results exported, combined, and initial dedup complete
-
 **Exit Criteria:**
 - [ ] All selected databases searched
 - [ ] Search strategy documented verbatim for each database
@@ -264,45 +208,7 @@ A literature search is considered **comprehensive** when ALL criteria are met:
    - Apply all criteria with detailed review
    - Record specific exclusion reasons
 
-5. Create PRISMA flow diagram:
-```
-Records identified (n = X)
-├── Database 1 (n = a)
-├── Database 2 (n = b)
-└── Other sources (n = c)
-│
-▼
-Records after duplicates removed (n = Y)
-│
-▼
-Records screened (n = Y)
-├── Excluded at title (n = d)
-│
-▼
-Abstracts assessed (n = Z)
-├── Excluded at abstract (n = e)
-│   ├── Reason 1 (n = e1)
-│   ├── Reason 2 (n = e2)
-│   └── Reason 3 (n = e3)
-│
-▼
-Full-text assessed (n = A)
-├── Excluded (n = f)
-│   ├── Reason 1 (n = f1)
-│   ├── Reason 2 (n = f2)
-│   └── Reason 3 (n = f3)
-│
-▼
-Studies included (n = B)
-├── In quantitative synthesis (n = B1)
-└── In qualitative synthesis (n = B2)
-```
-
-**Progress Milestones:**
-- 25%: Deduplication complete, screening list ready
-- 50%: Title screening complete, abstracts queued
-- 75%: Abstract screening complete, full texts queued
-- 100%: Full-text screening complete, PRISMA diagram drafted
+5. Create PRISMA flow diagram (see template in [`references/output_templates.md`]({baseDir}/references/output_templates.md))
 
 **Exit Criteria:**
 - [ ] Deduplication complete (documented count)
@@ -318,23 +224,7 @@ Studies included (n = B)
 
 **Objective:** Extract standardized data from included studies
 
-**Extraction Template:**
-
-| Field | Description |
-|-------|-------------|
-| Study ID | First author, year |
-| Country | Study location |
-| Design | RCT, cohort, case-control, etc. |
-| Sample size | N participants/samples |
-| Population | Demographics, inclusion criteria |
-| Intervention/Exposure | Details of what was studied |
-| Comparator | Control condition |
-| Outcomes | Primary and secondary outcomes |
-| Key findings | Main results with effect sizes |
-| Limitations | Author-reported limitations |
-| Quality score | From assessment tool |
-| Funding | Funding sources |
-| Conflicts | Declared conflicts of interest |
+**Extraction Fields:** Study ID, country, design, sample size, population, intervention/exposure, comparator, outcomes, key findings, limitations, quality score, funding, conflicts (see full template in [`references/output_templates.md`]({baseDir}/references/output_templates.md))
 
 **Steps:**
 1. Create extraction spreadsheet with all fields
@@ -342,12 +232,6 @@ Studies included (n = B)
 3. Refine extraction form based on pilot
 4. Extract data from all included studies
 5. Verify extraction accuracy (dual extraction for ≥20%)
-
-**Progress Milestones:**
-- 25%: Extraction form created and piloted on 3-5 papers
-- 50%: 50% of included studies extracted
-- 75%: 100% of studies extracted, verification in progress
-- 100%: Dual extraction verified, missing data documented
 
 **Exit Criteria:**
 - [ ] Extraction form finalized after pilot
@@ -363,33 +247,13 @@ Studies included (n = B)
 **Objective:** Evaluate risk of bias and study quality
 
 **Steps:**
-1. Select appropriate tool (see Quality Assessment Tool Selection matrix)
+1. Select tool from [`references/quality_assessment_tools.md`]({baseDir}/references/quality_assessment_tools.md)
 2. Assess each study independently
-3. Create summary table:
-
-| Study | Domain 1 | Domain 2 | Domain 3 | Overall |
-|-------|---------|---------|---------|---------|
-| Smith 2020 | Low | Low | High | Moderate |
-| Jones 2021 | Low | Low | Low | Low |
-| ... | ... | ... | ... | ... |
-
+3. Create summary table with domain-level and overall ratings
 4. Create risk of bias visualization (traffic light plot)
 5. Consider excluding very low quality studies
 
-**Quality Rating Thresholds:**
-
-| Overall Rating | Criteria |
-|---------------|----------|
-| High quality (Low RoB) | All domains low or some concerns |
-| Moderate quality | One high-risk domain, others low |
-| Low quality (High RoB) | ≥2 high-risk domains |
-| Very low quality | ≥3 high-risk or critical flaw |
-
-**Progress Milestones:**
-- 25%: Assessment tool selected and calibrated
-- 50%: 50% of studies assessed independently
-- 75%: All studies assessed, summary table drafted
-- 100%: Risk of bias plot generated, exclusion decisions made
+**Ratings:** High (all low RoB) → Moderate (1 high) → Low (≥2 high) → Very Low (≥3 high)
 
 **Exit Criteria:**
 - [ ] All studies assessed with selected tool
@@ -421,29 +285,9 @@ Studies included (n = B)
    - Conflicting findings (document discrepancies)
    - Gaps (what's not studied)
 
-4. Write thematic synthesis (NOT study-by-study):
-   ```markdown
-   #### Theme 1: [Theme Name]
-
-   [Synthesis paragraph integrating findings from multiple studies]
-   Multiple studies (n=X) found that... [citations].
-   However, conflicting evidence exists regarding...
-   [citations]. A notable gap is...
-   ```
-
-   **Citation Density Requirements** (see Literature Coverage Thresholds):
-   - Review articles: 4-6 citations per paragraph
-   - Systematic reviews: All relevant studies cited per theme
-   - Original research: 2-4 citations per paragraph
-
-5. Create summary tables per theme
+4. Write thematic synthesis (NOT study-by-study) with 4-6 citations per paragraph
+5. Create summary tables per theme (see template in [`references/output_templates.md`]({baseDir}/references/output_templates.md))
 6. If meta-analysis: calculate pooled effects, heterogeneity (I²)
-
-**Progress Milestones:**
-- 25%: Major themes (3-7) identified from extracted data
-- 50%: Studies grouped by theme, mapping complete
-- 75%: Thematic synthesis drafted for all themes
-- 100%: Summary tables created, meta-analysis complete (if applicable)
 
 **Exit Criteria:**
 - [ ] 3-7 themes identified and documented
@@ -474,20 +318,7 @@ Studies included (n = B)
 - [ ] Page numbers/article IDs correct
 - [ ] In-text citations match reference list
 
-**Citation Style Quick Reference:**
-
-| Style | In-text | Reference Format |
-|-------|---------|------------------|
-| APA 7 | (Smith et al., 2023) | Smith, J. D., Johnson, M. L., & Williams, K. (2023). Title. *Journal*, *22*(4), 301-318. |
-| Nature | Superscript^1,2^ | 1. Smith, J. D. et al. Title. *J. Name* **22**, 301-318 (2023). |
-| Vancouver | Superscript^1,2^ | 1. Smith JD, Johnson ML. Title. J Name. 2023;22(4):301-18. |
-| IEEE | Bracketed [1], [2] | [1] J. D. Smith et al., "Title," *J. Name*, vol. 22, no. 4, pp. 301-318, 2023. |
-
-**Progress Milestones:**
-- 25%: All DOIs and citations extracted from document
-- 50%: 50% of DOIs verified and resolving
-- 75%: 100% DOIs verified, metadata cross-check in progress
-- 100%: All citations verified, style consistent throughout
+**Citation Styles:** See [`references/citation_styles.md`]({baseDir}/references/citation_styles.md) for APA, Nature, Vancouver, IEEE formats.
 
 **Exit Criteria:**
 - [ ] 100% of DOIs verified
@@ -524,12 +355,6 @@ Studies included (n = B)
 - [ ] Limitations section included
 - [ ] All references verified
 - [ ] PDF generates without errors
-
-**Progress Milestones:**
-- 25%: Document structure created from template
-- 50%: All sections drafted (Introduction through Discussion)
-- 75%: PRISMA diagram integrated, citations formatted
-- 100%: PDF generated, proofread complete
 
 **Exit Criteria:**
 - [ ] All sections complete
@@ -588,221 +413,39 @@ Studies included (n = B)
 
 </scope>
 
-<anti_patterns>
-## Common Pitfalls
+<best_practices>
+## Best Practices Summary
 
-### 1. Single Database Search
+| Practice | Requirement |
+|----------|-------------|
+| Multi-database coverage | ≥3 databases, domain-appropriate |
+| Thematic synthesis | Organize by themes, not study-by-study |
+| Reproducible documentation | Verbatim search strings with dates |
+| Quality assessment | Use validated tools (RoB 2.0, NOS, AMSTAR 2) |
+| Citation verification | 100% DOIs verified before submission |
+| Exclusion tracking | Reasons documented at each stage |
 
-**Anti-pattern:**
-```
-Searched only PubMed for a systematic review.
-Missed 40% of relevant papers indexed only
-in Scopus, Web of Science, or preprint servers.
-```
+> **Detailed guidance:** See [`references/common_pitfalls.md`]({baseDir}/references/common_pitfalls.md) for expanded best practices and solutions.
 
-**Solution:**
-```
-Minimum 3 databases for systematic reviews.
-Select based on domain (see Database Selection Matrix).
-Include preprint servers for recent findings.
-Document all searches for reproducibility.
-```
-
----
-
-### 2. Study-by-Study Summaries
-
-**Anti-pattern:**
-```
-Results section:
-"Smith (2020) found X. Jones (2021) found Y.
-Brown (2022) found Z..."
-No synthesis, just serial summaries.
-```
-
-**Solution:**
-```
-Organize by themes, synthesize across studies:
-"Multiple studies (n=8) found consistent evidence
-that [finding], though effect sizes varied (d=0.3-0.8).
-Conflicting results emerged regarding [topic]..."
-```
-
----
-
-### 3. Undocumented Search Strategy
-
-**Anti-pattern:**
-```
-Methods: "We searched PubMed and Google Scholar
-for relevant articles."
-Not reproducible. No dates, no search terms.
-```
-
-**Solution:**
-```
-Document verbatim for each database:
-- Database name
-- Date searched
-- Exact search string used
-- Number of results
-- Filters applied (date range, language, etc.)
-```
-
----
-
-### 4. No Quality Assessment
-
-**Anti-pattern:**
-```
-Included all studies regardless of quality.
-Weighted a flawed pilot study equally with
-a rigorous multi-center RCT.
-```
-
-**Solution:**
-```
-Use standardized quality assessment tool:
-- RCTs: Cochrane RoB 2.0
-- Observational: Newcastle-Ottawa Scale
-- Systematic reviews: AMSTAR 2
-Report quality in results, consider in synthesis.
-```
-
----
-
-### 5. Unverified Citations
-
-**Anti-pattern:**
-```
-Copy-pasted citations from Google Scholar
-without verification. Final document has
-3 broken DOIs and 2 wrong publication years.
-```
-
-**Solution:**
-```
-Verify 100% of citations:
-1. Test all DOIs resolve
-2. Cross-check author names, titles, years
-3. Use reference manager for consistency
-4. Run verification script before submission
-```
-
----
-
-### 6. Missing Exclusion Reasons
-
-**Anti-pattern:**
-```
-PRISMA diagram shows "312 excluded" at
-abstract screening with no breakdown.
-Not reproducible or auditable.
-```
-
-**Solution:**
-```
-Track exclusion reasons at each stage:
-- Wrong population (n=45)
-- Wrong study design (n=82)
-- Wrong outcome (n=31)
-- Not English (n=12)
-- Conference abstract only (n=142)
-```
-
-</anti_patterns>
+</best_practices>
 
 <templates>
 ## Output Templates
 
-### PRISMA Flow Diagram Template
+Available templates in [`references/output_templates.md`]({baseDir}/references/output_templates.md):
 
+| Template | Purpose |
+|----------|---------|
+| PRISMA Flow Diagram | Complete flow with all PRISMA 2020 sections |
+| Search Documentation | Database-by-database search recording |
+| Data Extraction Form | Comprehensive study data capture |
+| Characteristics Table | Summary of included studies |
+| Summary of Findings | GRADE evidence quality summaries |
+| Thematic Synthesis | Theme-based results structure |
+
+**Quick PRISMA Structure:**
 ```
-┌─────────────────────────────────────────────────────────┐
-│                     IDENTIFICATION                       │
-├─────────────────────────────────────────────────────────┤
-│  Records identified through          Additional records  │
-│  database searching                  from other sources  │
-│  (n = {{db_total}})                  (n = {{other}})     │
-└─────────────────────────────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────┐
-│                      SCREENING                           │
-├─────────────────────────────────────────────────────────┤
-│  Records after duplicates removed                        │
-│  (n = {{after_dedup}})                                   │
-│                           │                              │
-│                           ▼                              │
-│  Records screened ──────────────► Records excluded       │
-│  (n = {{screened}})                (n = {{title_excl}})  │
-│                           │                              │
-│                           ▼                              │
-│  Full-text assessed ────────────► Excluded with reasons  │
-│  (n = {{ft_assessed}})            (n = {{ft_excl}})      │
-│                                   • Reason 1 (n = )      │
-│                                   • Reason 2 (n = )      │
-│                                   • Reason 3 (n = )      │
-└─────────────────────────────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────┐
-│                       INCLUDED                           │
-├─────────────────────────────────────────────────────────┤
-│  Studies included in synthesis                           │
-│  (n = {{included}})                                      │
-│  • Quantitative synthesis (n = {{quant}})                │
-│  • Qualitative synthesis (n = {{qual}})                  │
-└─────────────────────────────────────────────────────────┘
-```
-
-### Search Documentation Template
-
-```markdown
-## Search Strategy
-
-### Database: {{database_name}}
-
-**Date searched:** {{YYYY-MM-DD}}
-
-**Search query:**
-```
-{{full_search_string}}
-```
-
-**Filters applied:**
-- Date range: {{start}} to {{end}}
-- Language: {{language}}
-- Publication type: {{types}}
-
-**Results:** {{N}} records
-
----
-
-### Database: {{database_name_2}}
-
-[Repeat for each database]
-```
-
-### Data Extraction Template
-
-```markdown
-## Study: {{First Author}} {{Year}}
-
-| Field | Value |
-|-------|-------|
-| Full citation | {{citation}} |
-| Country | {{country}} |
-| Study design | {{design}} |
-| Sample size | n = {{N}} |
-| Population | {{demographics}} |
-| Intervention | {{intervention}} |
-| Comparator | {{comparator}} |
-| Primary outcome | {{outcome}} |
-| Key finding | {{finding with effect size}} |
-| Quality rating | {{High/Moderate/Low}} |
-| Limitations | {{limitations}} |
-| Funding | {{funding}} |
+Identification → Screening → Eligibility → Included
 ```
 
 </templates>
@@ -830,10 +473,14 @@ See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
 | Document | Purpose |
 |----------|---------|
-| `references/citation_styles.md` | Detailed formatting for APA, Nature, Vancouver, IEEE |
-| `references/database_strategies.md` | Database-specific search optimization |
-| `references/quality_assessment_tools.md` | Tool selection and scoring guidance |
-| `references/prisma_checklist.md` | Full PRISMA 2020 checklist |
+| [`references/decision_frameworks.md`]({baseDir}/references/decision_frameworks.md) | Database selection, review types, quality tools, thresholds |
+| [`references/output_templates.md`]({baseDir}/references/output_templates.md) | PRISMA, search docs, extraction, synthesis templates |
+| [`references/common_pitfalls.md`]({baseDir}/references/common_pitfalls.md) | Best practices and solutions for common mistakes |
+| [`references/quality_assessment_tools.md`]({baseDir}/references/quality_assessment_tools.md) | RoB 2.0, NOS, QUADAS-2, CASP, AMSTAR 2 guidance |
+| [`references/prisma_checklist.md`]({baseDir}/references/prisma_checklist.md) | Full PRISMA 2020 checklist with extensions |
+| [`references/citation_styles.md`]({baseDir}/references/citation_styles.md) | APA, Nature, Vancouver, IEEE formatting |
+| [`references/database_strategies.md`]({baseDir}/references/database_strategies.md) | Database-specific search optimization |
+| [`references/expert_guide.md`]({baseDir}/references/expert_guide.md) | Expert synthesis and advanced patterns |
 
 ## External Resources
 

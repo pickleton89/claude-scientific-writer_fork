@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Skills Dependency Audit Phase 2 - COMPLETE**: Strengthen Cross-References
+  - **scientific-writing cross-references overhauled**:
+    - Reorganized into 4 categories: Uses (Input From), Feeds (Output To), Related, Workflow Guidance
+    - Added 8 missing connections: `hypothesis-generation`, `literature-review`, `citation-management`, `markdown-to-pdf`, `peer-review`, `scholar-evaluation`, `paper-2-web`, `plotting-libraries`
+    - Now documents all 12+ expected connections from dependency audit
+  - **research-lookup cross-references expanded**:
+    - Reorganized into Feeds (Output To) and Related categories
+    - Added 3 missing connections: `hypothesis-generation`, `literature-review`, `scientific-slides`
+    - Now documents all 6+ expected connections from dependency audit
+  - **SKILL_TEMPLATE.md standardized cross-reference format**:
+    - Added 4-category structure: Extends, Uses (Input From), Feeds (Output To), Related
+    - Each category includes table format with Skill and Relationship columns
+    - Added "Skill Integration Checklist" for new skill creation with 6 verification items
+  - **Verified complete**: `visual-design`, `plotting-libraries`, `scientific-schematics` already have comprehensive cross-references
+  - All Phase 2 acceptance criteria from `docs/SKILLS_DEPENDENCY_AUDIT.md` met
+
 - **Skills Dependency Audit Phase 1 - COMPLETE**: Addressed identified gaps in skill cross-references
   - **Gap 1.1 - statistical-analysis → plotting-libraries**:
     - Added `<visualization_guidance>` section to `statistical-analysis/SKILL.md` with test-specific plot recommendations

@@ -276,23 +276,49 @@ Run three tests before submission:
 
 ---
 
-## Integration with Other Skills
+## Cross-References
 
 **Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
-**Related skills:**
-- **research-lookup**: Literature search and citation finding
-- **scientific-schematics/generate-image**: Figure creation and visual elements
-- **venue-templates**: Journal-specific styles and formatting requirements
-- **statistical-analysis**: Test selection, statistical reporting in Methods, interpreting results
-- **reproducible-research**: Data Availability statements, environment documentation, FAIR compliance
-- **code-documentation**: Documenting analysis code referenced in Methods sections
-- **document-skills/docx**: Export manuscript to Word format for journal submission
-- **document-skills/pdf**: PDF output for preprints or supplementary materials
+### Uses (Input From)
 
-**Workflow**: Use this skill for general principles (IMRAD, citations, clarity), then consult `venue-templates` for venue-specific style adaptation (Nature/Science, Cell Press, medical journals, ML/CS conferences). For quantitative Methods sections, reference `statistical-analysis` for proper test selection and reporting. For Data Availability statements, use `reproducible-research` guidance.
+| Skill | Relationship |
+|-------|-------------|
+| `research-lookup` | Literature search and citation finding |
+| `hypothesis-generation` | Research hypotheses that drive narrative |
+| `literature-review` | Synthesized background for Introduction and Discussion |
+| `statistical-analysis` | Test selection, statistical reporting in Methods, interpreting results |
+| `plotting-libraries` | Data visualizations for Results section |
+| `scientific-schematics` | Methodology diagrams, CONSORT/PRISMA flowcharts |
+| `generate-image` | Photorealistic figures and cover images |
 
-**Output Workflow**: After drafting content with this skill, use `venue-templates` for journal-specific formatting, then export via `document-skills/docx` for Word submissions or `markdown-to-pdf` for branded PDF output.
+### Feeds (Output To)
+
+| Skill | Relationship |
+|-------|-------------|
+| `citation-management` | Organize and format manuscript references |
+| `peer-review` | Structured feedback and revision guidance |
+| `scholar-evaluation` | Publication readiness assessment (8 dimensions) |
+| `venue-templates` | Journal-specific formatting and requirements |
+| `markdown-to-pdf` | Branded PDF output with Oligon styling |
+| `paper-2-web` | Web-optimized HTML version |
+| `document-skills/docx` | Word format for journal submission |
+| `document-skills/pdf` | PDF for preprints or supplementary materials |
+
+### Related
+
+| Skill | Relationship |
+|-------|-------------|
+| `reproducible-research` | Data Availability statements, environment documentation, FAIR compliance |
+| `code-documentation` | Documenting analysis code referenced in Methods sections |
+
+### Workflow Guidance
+
+**Drafting**: Use this skill for general principles (IMRAD, citations, clarity). For quantitative Methods sections, reference `statistical-analysis` for proper test selection and reporting. For Data Availability statements, use `reproducible-research` guidance.
+
+**Figures**: Coordinate with `plotting-libraries` for data plots, `scientific-schematics` for diagrams, and `generate-image` for photorealistic visuals.
+
+**Output**: After drafting, use `venue-templates` for journal-specific formatting, then export via `document-skills/docx` for Word submissions or `markdown-to-pdf` for branded PDF output.
 
 ## References
 

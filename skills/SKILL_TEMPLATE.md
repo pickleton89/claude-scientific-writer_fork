@@ -224,16 +224,38 @@ Do NOT use this skill when:
 </templates>
 
 <cross_references>
-## Related Skills
+## Cross-References
+
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
+### Extends
+[OPTIONAL - Use if this skill inherits from a foundational skill]
+
+- `{{parent-skill}}` - inherits {{specific principles or patterns}}
+
+### Uses (Input From)
+[List skills that provide input to this skill]
 
 | Skill | Relationship |
 |-------|-------------|
-| `{{skill-name}}` | {{How they relate - e.g., "Use for X after completing Y"}} |
-| `{{skill-name}}` | {{Relationship}} |
+| `{{skill-name}}` | {{What this skill receives from it}} |
 | `{{skill-name}}` | {{Relationship}} |
 
-**Skill Selection:**
-See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+### Feeds (Output To)
+[List skills that receive output from this skill]
+
+| Skill | Relationship |
+|-------|-------------|
+| `{{skill-name}}` | {{What this skill provides to it}} |
+| `{{skill-name}}` | {{Relationship}} |
+
+### Related
+[List skills with non-directional relationships]
+
+| Skill | Relationship |
+|-------|-------------|
+| `{{skill-name}}` | {{How they relate - e.g., "Alternative for X", "Shared framework"}} |
+| `{{skill-name}}` | {{Relationship}} |
 
 </cross_references>
 
@@ -254,6 +276,8 @@ See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
 ## Checklist for Skill Authors
 
+### Structure & Content Checklist
+
 Before finalizing a skill, verify:
 
 - [ ] **XML Tags**: All major sections wrapped in semantic tags
@@ -264,6 +288,17 @@ Before finalizing a skill, verify:
 - [ ] **Anti-patterns**: At least 3 common pitfalls with solutions
 - [ ] **Cross-references**: Links to related skills
 - [ ] **Templates**: Output formats defined (if applicable)
+
+### Skill Integration Checklist
+
+When creating a new skill, verify ecosystem integration:
+
+- [ ] **Extends visual-design?** Any visual/presentation skill should extend `visual-design`
+- [ ] **Input skills identified**: What skills provide data or context to this skill?
+- [ ] **Output skills identified**: What skills consume output from this skill?
+- [ ] **Bidirectional cross-references**: Related skills updated to reference this skill
+- [ ] **Added to SKILL_ROUTER.md**: Decision tree updated for skill selection
+- [ ] **QUANTIFICATION_THRESHOLDS.md**: Quality metrics added if skill produces measurable outputs
 
 ---
 

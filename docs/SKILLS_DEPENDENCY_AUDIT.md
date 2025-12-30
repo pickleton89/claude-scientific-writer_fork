@@ -540,8 +540,8 @@ Master routing document that defines:
 | 5 | scientific-schematics | 4 dependencies |
 
 **Acceptance criteria**:
-- [ ] All hub skills (scientific-writing, research-lookup, visual-design) have complete cross-references
-- [ ] Extension relationships documented in both parent and child skills
+- [x] All hub skills (scientific-writing, research-lookup, visual-design) have complete cross-references
+- [x] Extension relationships documented in both parent and child skills
 
 #### 2.2 Standardize cross-reference format
 
@@ -570,8 +570,8 @@ Master routing document that defines:
 3. Validate format consistency across all skills
 
 **Acceptance criteria**:
-- [ ] SKILL_TEMPLATE.md includes cross-reference format
-- [ ] Top 5 connected skills use standardized format
+- [x] SKILL_TEMPLATE.md includes cross-reference format
+- [x] Top 5 connected skills use standardized format
 
 ---
 

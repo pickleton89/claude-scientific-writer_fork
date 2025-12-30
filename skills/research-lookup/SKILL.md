@@ -525,8 +525,19 @@ For bioinformatics-specific data retrieval, see `references/bioinformatics_datab
 
 **Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
-**Related skills:**
-- **scientific-writing**: Using research findings in manuscripts
-- **statistical-analysis**: Finding appropriate statistical methods and benchmarks
-- **citation-management**: Organizing and formatting discovered citations
-- **reproducible-research**: Data deposition and retrieval best practices
+### Feeds (Output To)
+
+| Skill | Relationship |
+|-------|-------------|
+| `scientific-writing` | Literature for Introduction, Discussion, and citations |
+| `literature-review` | Papers for systematic synthesis and analysis |
+| `hypothesis-generation` | Evidence to ground research hypotheses |
+| `scientific-slides` | Citations and background for presentations |
+| `citation-management` | Discovered citations for organization and formatting |
+
+### Related
+
+| Skill | Relationship |
+|-------|-------------|
+| `statistical-analysis` | Finding appropriate statistical methods and benchmarks |
+| `reproducible-research` | Data deposition standards and repository discovery |

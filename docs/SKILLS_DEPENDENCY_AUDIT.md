@@ -444,6 +444,161 @@ Master routing document that defines:
 
 ---
 
+## Dependency Visualization
+
+### Complete Skill Relationship Map
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '14px'}}}%%
+flowchart TB
+    subgraph Foundation["🏛️ Foundation Layer"]
+        direction LR
+        VD[visual-design]
+        RL[research-lookup]
+    end
+
+    subgraph Hub["⭐ Central Hub"]
+        SW[scientific-writing]
+    end
+
+    subgraph Input["📥 Input Skills"]
+        PL[plotting-libraries]
+        SS[scientific-schematics]
+        GI[generate-image]
+        HG[hypothesis-generation]
+    end
+
+    subgraph Processing["⚙️ Processing Skills"]
+        PR[peer-review]
+        SE[scholar-evaluation]
+        LR[literature-review]
+    end
+
+    subgraph Output["📤 Output Skills"]
+        SL[scientific-slides]
+        LP[latex-posters]
+        PP[pptx-posters]
+        MP[markdown-to-pdf]
+        VT[venue-templates]
+        PW[paper-2-web]
+        subgraph DocSkills["document-skills"]
+            DOCX[docx]
+            PDF[pdf]
+            PPTX[pptx]
+            XLSX[xlsx]
+        end
+    end
+
+    subgraph Support["🔧 Support Skills"]
+        CM[citation-management]
+        SA[statistical-analysis]
+        RR[reproducible-research]
+        CD[code-documentation]
+    end
+
+    subgraph Standalone["📦 Standalone"]
+        MD[markitdown]
+    end
+
+    %% Foundation extensions (visual-design)
+    VD -.->|extends| PL
+    VD -.->|extends| SS
+    VD -.->|extends| SL
+    VD -.->|extends| LP
+    VD -.->|extends| PP
+
+    %% Research-lookup feeds
+    RL -->|feeds| LR
+    RL -->|feeds| SW
+    RL -->|feeds| HG
+    RL -->|feeds| SL
+    RL -->|feeds| RR
+
+    %% Input skills to scientific-writing
+    PL -->|figures| SW
+    SS -->|diagrams| SW
+    GI -->|images| SW
+    HG -->|hypothesis| SW
+    SA -->|methods/results| SW
+    CM -->|citations| SW
+
+    %% Scientific-writing outputs
+    SW -->|manuscript| PR
+    SW -->|manuscript| SE
+    SW -->|format| VT
+    SW -->|convert| MP
+    SW -->|web| PW
+    SW -->|methods| RR
+
+    %% Processing skill relationships
+    PR -->|feedback| SW
+    SE -->|assessment| SW
+    LR -->|synthesis| SW
+    PR -.->|Critical Analysis Framework| LR
+
+    %% Support skill relationships
+    SA -->|documentation| RR
+    CD -->|patterns| RR
+    RL -->|sources| CM
+    SA -->|visualize| PL
+    CD -->|document| PL
+
+    %% Presentation integrations
+    SS -->|figures| SL
+    PL -->|figures| SL
+    SS -->|figures| LP
+    PL -->|figures| LP
+    SS -->|figures| PP
+    PL -->|figures| PP
+
+    %% Markitdown connections
+    MD -->|converts to| SW
+    MD -->|converts to| CM
+
+    %% Styling
+    classDef foundation fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef hub fill:#fff9c4,stroke:#f57f17,stroke-width:3px
+    classDef input fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef processing fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef output fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef support fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef standalone fill:#eceff1,stroke:#546e6a,stroke-width:2px
+
+    class VD,RL foundation
+    class SW hub
+    class PL,SS,GI,HG input
+    class PR,SE,LR processing
+    class SL,LP,PP,MP,VT,PW,DOCX,PDF,PPTX,XLSX output
+    class CM,SA,RR,CD support
+    class MD standalone
+```
+
+### Diagram Legend
+
+| Color | Type | Count | Description |
+|-------|------|-------|-------------|
+| 🔵 Light Blue | Foundation | 2 | Core skills extended by others |
+| 🟡 Yellow | Hub | 1 | Central integration point |
+| 🟢 Green | Input | 4 | Generate content for manuscripts |
+| 🟠 Orange | Processing | 3 | Transform or evaluate content |
+| 🟣 Purple | Output | 10 | Produce final deliverables |
+| 🔷 Blue | Support | 4 | Auxiliary capabilities |
+| ⬜ Gray | Standalone | 1 | Minimal dependencies |
+
+### Key Relationships
+
+**Extension Hierarchy (dotted lines):**
+- `visual-design` → 5 visual/presentation skills
+
+**Primary Data Flow (solid lines):**
+- `research-lookup` → 5 downstream skills
+- `scientific-writing` ↔ 12 connected skills (6 inbound, 6 outbound)
+
+**Framework Sharing:**
+- `peer-review` shares Critical Analysis Framework with `literature-review`
+
+---
+
 ## Recommendations
 
 ### For New Skill Development
@@ -653,38 +808,46 @@ Master routing document that defines:
 
 ---
 
-### Phase 5: Documentation & Validation (Priority: Low)
+### Phase 5: Documentation & Validation (Priority: Low) ✅ COMPLETE
 
 #### 5.1 Update SKILL_TEMPLATE.md
 
 **Goal**: Template reflects best practices from this audit
 
-**Steps**:
-1. Add cross-reference section template
-2. Add "extends" relationship documentation
-3. Add checklist for new skill creation:
-   - [ ] Checked if should extend visual-design
-   - [ ] Identified input skills (what feeds this skill)
-   - [ ] Identified output skills (what this skill feeds)
-   - [ ] Added to SKILL_ROUTER.md decision tree
-   - [ ] Considered QUANTIFICATION_THRESHOLDS.md metrics
+**Completed in Phase 2.2**: SKILL_TEMPLATE.md already includes:
+- Cross-reference section template (lines 226-260) with Extends/Uses/Feeds/Related structure
+- Skill Integration Checklist (lines 294-301) covering all integration requirements
+
+**Steps** (verified complete):
+1. ✅ Cross-reference section template exists
+2. ✅ "Extends" relationship documentation included
+3. ✅ Checklist for new skill creation added:
+   - ✅ Checked if should extend visual-design
+   - ✅ Identified input skills (what feeds this skill)
+   - ✅ Identified output skills (what this skill feeds)
+   - ✅ Added to SKILL_ROUTER.md decision tree
+   - ✅ Considered QUANTIFICATION_THRESHOLDS.md metrics
 
 **Acceptance criteria**:
-- [ ] SKILL_TEMPLATE.md updated with relationship documentation
-- [ ] New skill checklist added
+- [x] SKILL_TEMPLATE.md updated with relationship documentation
+- [x] New skill checklist added
 
 #### 5.2 Create dependency visualization
 
 **Goal**: Visual diagram of skill relationships
 
-**Steps**:
-1. Create Mermaid diagram in this audit document
-2. Show: foundation layer, hub connections, extension hierarchy
-3. Color-code by skill type (Foundation, Input, Processing, Output, Support)
+**Completed**: Mermaid diagram added to "Dependency Visualization" section (above Recommendations)
+
+**Implementation**:
+- Flowchart showing all 26 skills organized by type
+- Subgraphs for: Foundation, Hub, Input, Processing, Output, Support, Standalone
+- Color-coded by skill type with class definitions
+- Shows extension hierarchy (dotted lines) and data flow (solid lines)
+- Includes legend table and key relationship summary
 
 **Acceptance criteria**:
-- [ ] Mermaid diagram added to audit document
-- [ ] All 26 skills represented
+- [x] Mermaid diagram added to audit document
+- [x] All 26 skills represented (22 top-level + 4 document-skills sub-skills)
 
 ---
 

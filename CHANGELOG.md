@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **pptx-posters skill audit**: Applied best practices framework fixes (v2.1.0 → v2.2.0)
+  - **Line count reduced**: 635 → 558 lines (12% reduction)
+  - **Frontmatter `when_to_use`**: Added activation triggers for tight deadlines, collaborative editing, PPTX templates, image manipulation
+  - **Prerequisites section added**: New `<prerequisites>` with software requirements (PowerPoint/Impress) and pre-start checklist
+  - **Progressive disclosure**: Extracted templates section to new reference file:
+    - `references/poster_templates.md` - 4 layout templates (A0 portrait, landscape, US standard, review/survey) with ASCII diagrams and spacing specs
+  - **Removed Progress Milestones**: Removed 7 redundant milestone sections from workflow stages (retained Exit Criteria only)
+  - **Fixed broken references**: Removed 2 non-existent files, added 3 existing files that were undocumented
+  - **`{baseDir}` path resolution**: All 5 reference paths now use portable `{baseDir}/references/` format
+  - Audit compliance: All Section 5.2 checklist items now pass
+
 - **plotting-libraries skill audit**: Applied best practices framework fixes (v1.2.0 → v1.3.0)
   - **Line count reduced**: 440 → 342 lines (22% reduction, well under 500-line limit)
   - **Frontmatter `when_to_use`**: Added comprehensive activation triggers for plots, charts, figures, visualizations, heatmaps, volcano plots, survival curves, genome tracks, PCA/UMAP, correlation matrices, forest plots

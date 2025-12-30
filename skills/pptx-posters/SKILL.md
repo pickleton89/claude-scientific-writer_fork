@@ -1,8 +1,9 @@
 ---
 name: pptx-posters
-version: 2.1.0
+version: 2.2.0
 extends: visual-design
 description: "Create professional research posters in PowerPoint/PPTX format with structured layouts, brand-compliant styling, and print-ready export. Optimized for quick turnaround and collaborative editing."
+when_to_use: "Conference posters with tight deadlines (<48h), collaborative PowerPoint editing, PPTX templates provided, extensive image manipulation needed"
 allowed-tools: [Read, Write, Edit, Bash, Glob]
 ---
 
@@ -90,16 +91,25 @@ Need research poster?
 
 </decision_framework>
 
+<prerequisites>
+## Prerequisites
+
+**Software Required:**
+- Microsoft PowerPoint 2016+ OR LibreOffice Impress 7.0+
+- PDF export capability (built into PowerPoint/Impress)
+
+**No Python dependencies required** - this skill uses native PowerPoint functionality.
+
+**Before Starting:**
+1. Confirm conference poster requirements (dimensions, format)
+2. Collect institutional logos (≥300 DPI, PNG/SVG preferred)
+3. Prepare figures at publication quality (≥300 DPI at print size)
+</prerequisites>
+
 <workflow>
 ## Workflow
 
 ### Stage 1: Requirements Gathering
-
-**Progress Milestones:**
-- 25%: Poster dimensions confirmed from conference
-- 50%: Orientation and deadline established
-- 75%: Logos collected (≥300 DPI)
-- 100%: Color palette defined, all specs documented
 
 **Objective:** Establish poster specifications and constraints
 
@@ -119,12 +129,6 @@ Need research poster?
 ---
 
 ### Stage 2: Content Preparation
-
-**Progress Milestones:**
-- 25%: Title and author block drafted
-- 50%: Section text drafted (Intro, Methods, Results, Conclusions)
-- 75%: Figures prepared at ≥300 DPI
-- 100%: References compiled, content within budget
 
 **Objective:** Prepare and organize all poster content
 
@@ -159,12 +163,6 @@ Need research poster?
 ---
 
 ### Stage 3: Layout Construction
-
-**Progress Milestones:**
-- 25%: Presentation created with exact dimensions
-- 50%: Grid guides and margins set up
-- 75%: Master slide created with header/footer bands
-- 100%: Content placeholders added for all sections
 
 **Objective:** Build poster structure in PowerPoint
 
@@ -214,12 +212,6 @@ Need research poster?
 
 ### Stage 4: Content Population
 
-**Progress Milestones:**
-- 25%: Title and author block added with proper sizing
-- 50%: Section headers and body text placed
-- 75%: Figures inserted with captions
-- 100%: References and QR code added, styling consistent
-
 **Objective:** Add content following visual hierarchy
 
 **Steps:**
@@ -254,12 +246,6 @@ Need research poster?
 ---
 
 ### Stage 5: Visual Refinement
-
-**Progress Milestones:**
-- 25%: Color scheme applied consistently
-- 50%: All elements aligned to grid
-- 75%: Visual interest elements added (dividers, accents)
-- 100%: Accessibility verified, white space optimized
 
 **Objective:** Polish design for maximum impact
 
@@ -298,12 +284,6 @@ Need research poster?
 
 ### Stage 6: Quality Validation
 
-**Progress Milestones:**
-- 25%: 100% zoom visual inspection completed
-- 50%: 25% scale print test done
-- 75%: Spell-check and name verification complete
-- 100%: QR codes tested, all checklist items verified
-
 **Objective:** Ensure poster meets print and presentation standards
 
 **Steps:**
@@ -338,12 +318,6 @@ Need research poster?
 ---
 
 ### Stage 7: Export and Delivery
-
-**Progress Milestones:**
-- 25%: Native PPTX file saved (backup)
-- 50%: PDF exported with embedded fonts
-- 75%: PDF dimensions and file size verified
-- 100%: Supplementary formats prepared, delivery confirmed
 
 **Objective:** Generate print-ready files
 
@@ -545,64 +519,12 @@ Test with grayscale preview.
 <templates>
 ## Output Templates
 
-### Template 1: 3-Column A0 Portrait
-
-```
-Dimensions: 33.11" × 46.81" (841 × 1189 mm)
-
-LAYOUT:
-┌─────────────────────────────────────┐
-│ [LOGO]     TITLE (72-120pt)  [LOGO] │
-│        Authors (48-60pt)            │
-│     Affiliations (36-48pt)          │
-├───────────┬───────────┬─────────────┤
-│           │           │             │
-│ INTRO     │ RESULTS-1 │ RESULTS-3   │
-│ ~100w     │           │             │
-│           │ [FIGURE]  │ [FIGURE]    │
-│           │           │             │
-├───────────┤           ├─────────────┤
-│           │           │             │
-│ METHODS   │ RESULTS-2 │ CONCLUSIONS │
-│ ~150w     │           │ ~100w       │
-│           │ [FIGURE]  │             │
-│ [DIAGRAM] │           │ REFERENCES  │
-│           │           │ (5-10)      │
-├───────────┴───────────┴─────────────┤
-│  Contact: email@example.com  [QR]   │
-│        Acknowledgments              │
-└─────────────────────────────────────┘
-
-SPACING:
-- Margins: 0.75" all sides
-- Column gap: 0.5"
-- Row gap: 0.4"
-```
-
-### Template 2: 48×36" Landscape
-
-```
-Dimensions: 48" × 36" (1219 × 914 mm)
-
-LAYOUT:
-┌─────────────────────────────────────────────────────┐
-│ [LOGO]  TITLE / AUTHORS / AFFILIATIONS       [LOGO] │
-├────────────┬────────────┬────────────┬──────────────┤
-│            │            │            │              │
-│  INTRO     │  METHODS   │  RESULTS   │  CONCLUSIONS │
-│            │            │            │              │
-│            │ [DIAGRAM]  │ [FIGURES]  │  [QR CODE]   │
-│            │            │            │              │
-├────────────┴────────────┴────────────┴──────────────┤
-│              REFERENCES / CONTACT / ACKNOWLEDGMENTS  │
-└─────────────────────────────────────────────────────┘
-
-SPACING:
-- Margins: 0.75" all sides
-- Column gap: 0.4"
-- Header: 12% of height
-- Footer: 8% of height
-```
+See `{baseDir}/references/poster_templates.md` for complete layout templates including:
+- 3-Column A0 Portrait (experimental studies)
+- 48×36" Landscape (results-heavy)
+- 36×48" Portrait (US standard)
+- 2-Column Review/Survey layout
+- Size quick reference table
 
 </templates>
 
@@ -627,8 +549,10 @@ See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
 | Document | Purpose |
 |----------|---------|
-| `references/poster_design_principles.md` | Typography, color, visual hierarchy |
-| `references/accessibility_checklist.md` | WCAG compliance for posters |
-| `references/print_specifications.md` | Print service requirements by vendor |
+| `{baseDir}/references/poster_design_principles.md` | Typography, color, visual hierarchy |
+| `{baseDir}/references/poster_content_guide.md` | Content strategy and word budgets |
+| `{baseDir}/references/poster_layout_design.md` | Grid systems and layout patterns |
+| `{baseDir}/references/poster_templates.md` | Ready-to-use layout templates |
+| `{baseDir}/assets/poster_quality_checklist.md` | Pre-print validation checklist |
 
 </references>

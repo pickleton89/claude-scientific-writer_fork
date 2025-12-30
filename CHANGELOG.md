@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **code-documentation skill audit**: Applied best practices framework fixes
+  - **Setup section added**: Dependencies declared for Python (sphinx, pydocstyle), R (roxygen2, devtools), and notebooks (watermark, Quarto)
+  - **Validation section added**: Verification checklists for docstrings (`doctest`, `pydocstyle`), READMEs (7-point checklist), notebooks (6-point checklist), and R (`devtools::check()`)
+  - **Positive framing**: Replaced "Anti-Patterns" section with "Quality Standards" using constructive language
+  - **Enhanced cross-references**: Added handoff patterns table and workflow integration diagram showing skill sequencing
+  - **Line count**: 338 → 444 lines (still well under 500-line recommendation)
+
 - **citation-management skill audit**: Applied best practices framework fixes
   - **Setup section added**: Dependencies declared (`pip install requests`), all 6 scripts documented with `{baseDir}` paths
   - **Positive framing**: Replaced negative "Do NOT use" with skill routing table

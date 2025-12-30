@@ -21,6 +21,36 @@ Generate clear, consistent documentation for scientific code that serves both hu
 - Documentation translation or localization
 </scope>
 
+<setup>
+## Dependencies
+
+**Python Documentation:**
+- `sphinx.ext.napoleon` - Renders NumPy/Google style docstrings in Sphinx
+- `doctest` (stdlib) - Validates docstring examples execute correctly
+- `pydocstyle` - Lints docstring format compliance
+
+**R Documentation:**
+- `roxygen2` - Standard R package documentation generator
+- `devtools` - Package development workflow including doc generation
+
+**Notebooks:**
+- Jupyter with `nbconvert` for notebook export
+- Quarto for multi-format notebook publishing
+- `watermark` extension for environment versioning
+
+**Installation:**
+```bash
+# Python
+pip install sphinx sphinx-rtd-theme pydocstyle
+
+# R
+install.packages(c("roxygen2", "devtools"))
+
+# Jupyter extension
+pip install watermark
+```
+</setup>
+
 <documentation_hierarchy>
 ## Levels of Documentation
 
@@ -306,33 +336,109 @@ def make_plot(data, x, y):
 - When preparing Methods sections with `scientific-writing`
 </usage_patterns>
 
-<common_pitfalls>
-## Documentation Anti-Patterns
+<validation>
+## Verification Steps
 
-1. **Over-commenting**: Explaining what the code does line-by-line
-2. **Under-documenting**: No docstrings on public functions
-3. **Stale documentation**: Docs that don't match current behavior
-4. **Missing examples**: Docstrings without usage examples
-5. **Assumed knowledge**: Not defining domain-specific terms
-6. **Inconsistent style**: Mixing Google and NumPy styles in one project
+### After Generating Docstrings
 
-## Quality Signals
+1. **Validate examples execute:**
+   ```bash
+   python -m doctest -v <module.py>
+   ```
 
-Good documentation:
+2. **Check format compliance:**
+   ```bash
+   pydocstyle --convention=numpy <module.py>
+   # or for Google style:
+   pydocstyle --convention=google <module.py>
+   ```
+
+3. **Test Sphinx rendering** (if applicable):
+   ```bash
+   cd docs && make html
+   # Review _build/html/index.html
+   ```
+
+### After Generating README
+
+Verify all essential sections are present:
+
+- [ ] Title clearly describes the project
+- [ ] Purpose/description is concise (one paragraph)
+- [ ] Installation instructions are copy-pasteable
+- [ ] Quick start example actually runs
+- [ ] All external links resolve
+- [ ] Citation information included (if academic)
+- [ ] License specified
+
+### After Documenting Notebooks
+
+- [ ] Kernel can "Restart and Run All" without errors
+- [ ] Random seeds set for reproducibility
+- [ ] Package versions documented (watermark or requirements)
+- [ ] All markdown cells render correctly
+- [ ] Outputs are appropriate (not truncated, not excessive)
+- [ ] Relative paths work from repo root
+
+### R Documentation Validation
+
+```r
+# Generate and check documentation
+devtools::document()
+devtools::check()  # Includes documentation checks
+```
+</validation>
+
+<quality_standards>
+## Documentation Quality Standards
+
+### Density and Focus
+- **Appropriate commenting**: Explain "why" not "what"—code should be self-documenting for mechanics
+- **Complete public API**: Every public function, class, and module has a docstring
+- **Current and accurate**: Documentation reflects actual behavior (update docs with code changes)
+
+### Clarity and Accessibility
+- **Include working examples**: Every function docstring contains a runnable example
+- **Define domain terms**: Explain scientific terminology that may be unfamiliar
+- **Consistent style**: Use one docstring style (NumPy or Google) throughout a project
+
+### Quality Signals
+
+Well-documented code:
 - Can be understood without reading the implementation
 - Includes examples that actually run
 - Explains *why*, not just *what*
 - Is updated when code changes
 - Uses consistent formatting throughout
-</common_pitfalls>
+
+### Quick Self-Check
+
+Before finalizing documentation, verify:
+1. Would a new team member understand this without asking questions?
+2. Do examples copy-paste and run successfully?
+3. Are scientific terms defined or linked to definitions?
+4. Does the style match the rest of the codebase?
+</quality_standards>
 
 <cross_references>
 ## Related Skills
 
 **Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
-- **reproducible-research**: Project structure and environment documentation
-- **scientific-writing**: Methods section describing analysis
-- **statistical-analysis**: Documenting statistical choices and parameters
-- **plotting-libraries**: Documenting figure generation code—see `<visualization_documentation>` above for docstring patterns
+| Skill | When to Use Together | Handoff Pattern |
+|-------|---------------------|-----------------|
+| **reproducible-research** | Setting up project structure | Use reproducible-research for directory layout and environment files, then code-documentation for README and docstrings |
+| **scientific-writing** | Preparing Methods sections | Document code first, then use scientific-writing to translate implementation details into prose |
+| **statistical-analysis** | Documenting analysis choices | Reference statistical-analysis for method selection rationale to include in docstrings |
+| **plotting-libraries** | Figure-generating functions | See `<visualization_documentation>` section above for docstring patterns specific to plotting code |
+
+### Workflow Integration
+
+```
+[Write Code] → code-documentation → [Docstrings, README]
+                     ↓
+              reproducible-research → [Environment, Structure]
+                     ↓
+              scientific-writing → [Methods Section]
+```
 </cross_references>

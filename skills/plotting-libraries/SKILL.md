@@ -1,6 +1,6 @@
 ---
 name: plotting-libraries
-version: 1.3.0
+version: 1.4.0
 description: "Data visualization for scientific research using Python (matplotlib, seaborn) or R (ggplot2, Bioconductor)"
 when_to_use: "Creating plots, charts, figures, visualizations, heatmaps, volcano plots, survival curves, genome tracks, PCA/UMAP, correlation matrices, forest plots, or any scientific figure for publication"
 extends: visual-design
@@ -227,24 +227,84 @@ ggsave("figure.png", width = 7, height = 5, dpi = 300)
 </common_patterns>
 
 <styling_integration>
-For scientific figures, coordinate with:
+## Brand Integration
 
-- **[visual-design](../visual-design/SKILL.md)**: Design principles, publication requirements, brand colors
+For scientific figures requiring organizational brand compliance, load brand tokens before plotting.
 
-**Apply consistent styling:**
+### Oligon Brand (recommended)
 
-Python:
+**Python (matplotlib/seaborn):**
 ```python
-from your_brand_module import COLORS  # See visual-design skill
+# Option 1: Use the adapter (recommended)
+import sys
+sys.path.insert(0, 'skills/oligon-brand')
+from adapters.matplotlib_adapter import set_brand_style, BRAND_COLORS, get_cycle
 
-# matplotlib
-ax.plot(x, y, color=COLORS['primary'])
+# Apply brand defaults
+set_brand_style('treatment_control')
 
-# seaborn
-sns.set_palette([COLORS['primary'], COLORS['secondary'], COLORS['accent']])
+# Access specific colors
+highlight_color = BRAND_COLORS['brand_blue']  # #2DB2E8
+
+# Or use specific cycle
+colors = get_cycle('opposing')  # ['#2DB2E8', '#E8622D', '#222222']
 ```
 
-R:
+**Option 2: Load tokens directly:**
+```python
+import json
+from pathlib import Path
+
+tokens_path = Path('skills/oligon-brand/tokens/brand-tokens.json')
+with open(tokens_path) as f:
+    brand = json.load(f)
+
+# Access colors
+brand_blue = brand['colors']['primary']['brand_blue']['hex']  # #2DB2E8
+cycle = brand['color_cycles']['treatment_control']['colors']
+```
+
+**Option 3: Use mplstyle file:**
+```python
+import matplotlib.pyplot as plt
+
+# If installed to matplotlib config
+plt.style.use('oligon_color_brand')
+
+# Or load directly
+plt.style.use('skills/oligon-brand/assets/oligon_color_brand.mplstyle')
+```
+
+**R (ggplot2):**
+```r
+source('skills/oligon-brand/adapters/ggplot2_adapter.R')
+
+# Apply brand theme
+ggplot(df, aes(x, y, color = group)) +
+  geom_point() +
+  scale_color_oligon('treatment_control') +
+  theme_oligon()
+```
+
+### Generic Brand Integration
+
+For non-Oligon projects or custom brands:
+
+```python
+# Define your own brand colors
+BRAND_COLORS = {
+    'primary': '#YOUR_COLOR',
+    'secondary': '#YOUR_COLOR',
+    'accent': '#YOUR_COLOR',
+}
+
+# Apply to seaborn
+import seaborn as sns
+sns.set_palette(list(BRAND_COLORS.values()))
+```
+
+### Journal Palettes (R)
+
 ```r
 # ggsci for journal palettes
 library(ggsci)
@@ -252,8 +312,10 @@ ggplot(...) + scale_color_npg()  # Nature Publishing Group
 ggplot(...) + scale_color_lancet()  # Lancet
 
 # Manual colors
-scale_fill_manual(values = c("Control" = "#377EB8", "Treatment" = "#E41A1C"))
+scale_fill_manual(values = c("Control" = "#222222", "Treatment" = "#2DB2E8"))
 ```
+
+See `oligon-brand` skill for complete brand implementation patterns.
 </styling_integration>
 
 <reference_guides>
@@ -279,6 +341,7 @@ scale_fill_manual(values = c("Control" = "#377EB8", "Treatment" = "#E41A1C"))
 
 **Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
+- **[oligon-brand](../oligon-brand/SKILL.md)**: Brand colors and tokens—load before plotting for Oligon-branded figures. See `<styling_integration>` above for usage patterns.
 - **[visual-design](../visual-design/SKILL.md)**: Design principles and publication specifications
 - **[statistical-analysis](../statistical-analysis/SKILL.md)**: Statistics underlying visualizations—see `<statistical_visualization>` above for implementation patterns
 - **[scientific-writing](../scientific-writing/SKILL.md)**: Figure legends and methods descriptions

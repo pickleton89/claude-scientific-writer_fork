@@ -47,6 +47,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Added Brand category to Task → Skill Mapping (3 tasks)
     - Updated skill count from 23 to 24 (19→20 top-level skills)
     - Fixed: Restructured decision tree to nest format selection under Oligon branch (was confusing parallel structure)
+  - **Phase 3 complete**: Cross-reference updates across skill library
+    - visual-design (v2.2.0 → v2.3.0): Enhanced cross_references with oligon-brand workflow, updated references to point to oligon-brand paths
+    - plotting-libraries (v1.3.0 → v1.4.0): Added concrete oligon-brand examples to styling_integration section (3 Python options + R ggplot2)
+    - markdown-to-pdf: Added oligon-brand to cross_references, updated references section
+    - pptx-posters: Added oligon-brand to cross_references with pptx_adapter reference
 
 - **research-paper-summarizer skill** (new): Multi-format paper summarization migrated from global `~/.claude/skills/`
   - Summarizes scientific papers into markdown, HTML, PDF, and SVG infographic formats

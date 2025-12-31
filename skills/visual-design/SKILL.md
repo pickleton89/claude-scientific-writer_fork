@@ -1,6 +1,6 @@
 ---
 name: visual-design
-version: 2.2.0
+version: 2.3.0
 description: "Design philosophy and publication specifications for scientific visuals. Provides guidance on typography, color, layout, accessibility, and journal requirements. Delegates implementation to specialized skills."
 allowed-tools: [Read, Glob, Write]
 quantification-reference: "../QUANTIFICATION_THRESHOLDS.md"
@@ -36,7 +36,7 @@ Do NOT use this skill when:
 Before using this skill, ensure:
 - [ ] Target publication venue identified (journal, conference, or internal)
 - [ ] Source data or figures ready for design planning
-- [ ] Access to brand guidelines if organizational standards apply (see `references/BRAND_COLORS_v4.md`)
+- [ ] Access to brand guidelines if organizational standards apply (see `../oligon-brand/` for Oligon brand)
 - [ ] Knowledge of target audience (reviewers, conference attendees, general public)
 
 **Environment:**
@@ -550,15 +550,22 @@ See `references/output_templates.md` for:
 | `generate-image` | Use for photorealistic images; visual-design provides aesthetics guidance |
 | `scientific-slides` | Visual-design principles apply to presentation design |
 | `latex-posters` / `pptx-posters` | Visual-design principles apply to poster design |
-| `oligon-brand` | Brand-specific color and typography standards |
+| `oligon-brand` | **Brand implementation** — provides Oligon-specific colors, typography, and logos. For programmatic access, load `oligon-brand/tokens/brand-tokens.json`. For matplotlib, use `oligon-brand/adapters/matplotlib_adapter.py`. |
 
 **Skill Selection:**
 See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
+**Brand Integration:**
+When Oligon brand standards apply:
+1. Load `oligon-brand` tokens first
+2. Apply `visual-design` principles
+3. Implement with `plotting-libraries` or format-specific skill
+
 **Typical Workflow:**
 1. `visual-design` → establish design direction and specifications
-2. `plotting-libraries` or `scientific-schematics` → implement visuals
-3. `visual-design` → review quality before submission
+2. `oligon-brand` → load brand colors and apply style (if applicable)
+3. `plotting-libraries` or `scientific-schematics` → implement visuals
+4. `visual-design` → review quality before submission
 
 </cross_references>
 
@@ -567,7 +574,8 @@ See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 
 | Document | Purpose |
 |----------|---------|
-| `references/BRAND_COLORS_v4.md` | Oligon brand color palette definitions |
+| `../oligon-brand/references/brand-colors-full.md` | Oligon brand color palette definitions (V4) |
+| `../oligon-brand/tokens/brand-tokens.json` | Machine-readable brand tokens for programmatic access |
 | `references/OUTPUT_FORMATS.md` | Format-specific guidance for figures, reports, presentations |
 | `references/publication_specs.md` | Journal-specific requirements and export settings |
 | `references/output_templates.md` | Reusable templates for specifications and checklists |

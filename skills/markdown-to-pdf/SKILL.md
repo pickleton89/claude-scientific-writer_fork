@@ -444,6 +444,7 @@ The skill automatically creates `output/` and adds it to `.gitignore`.
 
 | Skill | Relationship |
 |-------|-------------|
+| `oligon-brand` | Brand colors and tokens—`oligon_reports` uses these for PDF styling |
 | `markitdown` | Convert documents TO markdown (reverse direction) |
 | `document-skills/pdf` | Low-level PDF manipulation (forms, extraction) |
 | `scientific-writing` | Create academic manuscripts (different output format) |
@@ -463,7 +464,8 @@ See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
 | `{baseDir}/references/component_map.md` | Complete element → component mapping |
 | `src/oligon_reports/templates/` | Template schemas and markdown files |
 | `src/oligon_reports/components.py` | PDF component implementations |
-| `docs/template-project/brand/BRAND_COLORS_v4.md` | Brand colors and visual identity |
+| `../oligon-brand/references/brand-colors-full.md` | Brand colors and visual identity (V4) |
+| `../oligon-brand/tokens/brand-tokens.json` | Machine-readable brand tokens |
 
 ## API Reference
 

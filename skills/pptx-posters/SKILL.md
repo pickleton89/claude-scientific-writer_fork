@@ -533,6 +533,7 @@ See `{baseDir}/references/poster_templates.md` for complete layout templates inc
 
 | Skill | Relationship |
 |-------|-------------|
+| `oligon-brand` | Brand colors and tokens—use `pptx_adapter.py` for Oligon-styled posters |
 | `latex-posters` | Alternative for complex equations, reproducible posters |
 | `scientific-schematics` | Use to generate AI-powered figures for poster |
 | `visual-design` | Reference for design principles and color theory |

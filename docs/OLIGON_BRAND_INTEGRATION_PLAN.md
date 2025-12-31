@@ -2,7 +2,7 @@
 
 > Implementation plan for integrating the `oligon-brand` skill into the claude-scientific-writer skill library
 > Created: 2025-12-30
-> Status: **In Progress** (Phase 2 Complete)
+> Status: **In Progress** (Phase 3 Complete)
 
 ---
 
@@ -103,10 +103,24 @@ skills/oligon-brand/
 - Added "Brand" category to Task → Skill Mapping with 3 task entries
 - Updated skill count from 23 to 24 (19→20 top-level + 4 sub-skills)
 
-### Phase 3: Cross-Reference Updates
-- [ ] Step 3.1: Update visual-design/SKILL.md cross-references
-- [ ] Step 3.2: Update plotting-libraries/SKILL.md with concrete examples
-- [ ] Step 3.3: Update any other skills that reference brand colors
+### Phase 3: Cross-Reference Updates ✅ COMPLETE
+- [x] Step 3.1: Update visual-design/SKILL.md cross-references
+- [x] Step 3.2: Update plotting-libraries/SKILL.md with concrete examples
+- [x] Step 3.3: Update any other skills that reference brand colors
+
+**Phase 3 Results:**
+- **visual-design/SKILL.md** (v2.2.0 → v2.3.0):
+  - Updated prerequisites to reference `../oligon-brand/`
+  - Enhanced `<cross_references>` with detailed oligon-brand relationship and "Brand Integration" workflow
+  - Updated `<references>` to point to `../oligon-brand/references/brand-colors-full.md` and `../oligon-brand/tokens/brand-tokens.json`
+- **plotting-libraries/SKILL.md** (v1.3.0 → v1.4.0):
+  - Replaced generic `<styling_integration>` with concrete oligon-brand examples (3 Python options + R ggplot2)
+  - Added oligon-brand to `<cross_references>` as first entry
+- **markdown-to-pdf/SKILL.md**:
+  - Added oligon-brand to `<cross_references>`
+  - Updated `<references>` to point to oligon-brand paths
+- **pptx-posters/SKILL.md**:
+  - Added oligon-brand to `<cross_references>` with pptx_adapter reference
 
 ### Phase 4: Future-Proofing
 - [ ] Step 4.1: Document brand skill interface contract

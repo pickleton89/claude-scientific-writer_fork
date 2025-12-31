@@ -23,6 +23,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **CLAUDE.md updated**: Added "Scientific Writing Execution Policies" section with completion policy, autonomous decision making guidance, and default output format
 
+- **oligon-brand skill** (v4.0.0 → v4.0.1): Audit fixes for best practices compliance
+  - Removed non-standard frontmatter fields (`brand-type`, `tokens-file`)
+  - Updated all 6 hardcoded paths to use portable `{baseDir}` variable
+  - Added Stage 5: Verification (Required) to workflow with generate-then-verify pattern
+  - Added `pillow` dependency for grayscale accessibility testing
+  - Explicit instruction: "Do not mark task complete until verification passes"
+
 ### Added
 
 - **oligon-brand skill** (new): Standalone brand identity skill migrated from global `~/.claude/skills/`

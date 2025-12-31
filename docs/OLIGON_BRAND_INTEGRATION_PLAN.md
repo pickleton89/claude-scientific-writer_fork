@@ -2,7 +2,7 @@
 
 > Implementation plan for integrating the `oligon-brand` skill into the claude-scientific-writer skill library
 > Created: 2025-12-30
-> Status: **In Progress** (Phase 3 Complete)
+> Status: **In Progress** (Phase 4 Complete)
 
 ---
 
@@ -122,9 +122,23 @@ skills/oligon-brand/
 - **pptx-posters/SKILL.md**:
   - Added oligon-brand to `<cross_references>` with pptx_adapter reference
 
-### Phase 4: Future-Proofing
-- [ ] Step 4.1: Document brand skill interface contract
-- [ ] Step 4.2: Add brand selection to SKILL_ROUTER.md
+### Phase 4: Future-Proofing ✅ COMPLETE
+- [x] Step 4.1: Document brand skill interface contract
+- [x] Step 4.2: Verify brand selection in SKILL_ROUTER.md
+
+**Phase 4 Results:**
+- Created `skills/BRAND_SKILL_INTERFACE.md` (~275 lines):
+  - Defines required directory structure for brand skills
+  - Documents `brand-tokens.json` schema (required + optional fields)
+  - Specifies matplotlib adapter API (BRAND_COLORS, set_brand_style, get_cycle, get_color)
+  - Specifies ggplot2 adapter API (theme_<brand>, scale_color_<brand>, scale_fill_<brand>)
+  - Documents required SKILL.md frontmatter and XML sections
+  - Provides integration checklist for new brand skills
+  - Includes minimal brand skill example
+- Verified SKILL_ROUTER.md extensibility:
+  - Decision tree has "Other/None?" fallback (line 118-119)
+  - New brands can be inserted between "Oligon brand?" and "Other/None?"
+  - Quick Selection table easily extensible
 
 ### Phase 5: Validation & Documentation
 - [ ] Step 5.1: Test adapter imports

@@ -53,6 +53,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - markdown-to-pdf: Added oligon-brand to cross_references, updated references section
     - pptx-posters: Added oligon-brand to cross_references with pptx_adapter reference
     - Removed orphaned `visual-design/references/BRAND_COLORS_v4.md` (superseded by `oligon-brand/references/brand-colors-full.md`)
+  - **Phase 4 complete**: Future-proofing for alternative brand skills
+    - Created `skills/BRAND_SKILL_INTERFACE.md`: Interface contract for brand skills
+    - Documents required directory structure, brand-tokens.json schema, adapter APIs
+    - Provides integration checklist and minimal brand skill example
+    - Verified SKILL_ROUTER.md supports extensibility (Other/None fallback branch)
 
 - **research-paper-summarizer skill** (new): Multi-format paper summarization migrated from global `~/.claude/skills/`
   - Summarizes scientific papers into markdown, HTML, PDF, and SVG infographic formats

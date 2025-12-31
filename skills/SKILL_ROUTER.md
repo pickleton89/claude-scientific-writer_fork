@@ -81,6 +81,59 @@ User wants to create a visual
 
 ---
 
+## Decision Tree: Brand Application
+
+```
+User needs to apply organizational brand standards
+│
+├─ Which brand?
+│  │
+│  ├─ Oligon brand?
+│  │  └─ YES → oligon-brand
+│  │            │
+│  │            ├─ Load brand tokens
+│  │            ├─ Select appropriate color cycle
+│  │            └─ Then proceed to format-specific skill:
+│  │               ├─ Figures → plotting-libraries
+│  │               ├─ Slides → scientific-slides
+│  │               ├─ Posters → latex-posters / pptx-posters
+│  │               ├─ Documents → document-skills/docx
+│  │               └─ PDFs → markdown-to-pdf
+│  │
+│  └─ Other/None?
+│     └─ Use visual-design defaults
+│
+├─ What output format?
+│  │
+│  ├─ matplotlib/seaborn figure?
+│  │  └─ oligon-brand (matplotlib_adapter) → plotting-libraries
+│  │
+│  ├─ ggplot2 figure?
+│  │  └─ oligon-brand (ggplot2_adapter) → plotting-libraries
+│  │
+│  ├─ PowerPoint presentation?
+│  │  └─ oligon-brand (pptx_adapter) → scientific-slides → document-skills/pptx
+│  │
+│  ├─ Word document?
+│  │  └─ oligon-brand (docx_adapter) → document-skills/docx
+│  │
+│  └─ PDF report?
+│     └─ oligon-brand (reportlab_adapter) → markdown-to-pdf
+```
+
+### Brand Application: Quick Selection
+
+| Output | Brand Skill | Implementation Skill |
+|--------|-------------|---------------------|
+| Publication figure (Python) | oligon-brand | plotting-libraries |
+| Publication figure (R) | oligon-brand | plotting-libraries |
+| Conference poster | oligon-brand | latex-posters / pptx-posters |
+| Presentation slides | oligon-brand | scientific-slides |
+| Word document | oligon-brand | document-skills/docx |
+| PDF report | oligon-brand | markdown-to-pdf |
+
+---
+
 ## Decision Tree: Document Creation
 
 ```
@@ -495,6 +548,10 @@ User has content ready for final document format
 | Schematic/diagram | scientific-schematics | + visual-design |
 | AI-generated image | generate-image | + visual-design |
 | Design guidance | visual-design | (supporting role) |
+| **Brand** | | |
+| Apply Oligon brand colors | oligon-brand | + plotting-libraries, document-skills |
+| Get brand color hex codes | oligon-brand | — |
+| Style matplotlib for brand | oligon-brand | + plotting-libraries |
 | **Research** | | |
 | Quick lookup | research-lookup | — |
 | Systematic review | literature-review | + citation-management |
@@ -713,4 +770,4 @@ Each skill's `<cross_references>` section should include:
 
 ---
 
-*This router provides deterministic skill selection for the 23-skill scientific writing library (19 top-level + 4 document-skills sub-skills). For threshold values and quality criteria, see `QUANTIFICATION_THRESHOLDS.md`.*
+*This router provides deterministic skill selection for the 24-skill scientific writing library (20 top-level + 4 document-skills sub-skills). For threshold values and quality criteria, see `QUANTIFICATION_THRESHOLDS.md`.*

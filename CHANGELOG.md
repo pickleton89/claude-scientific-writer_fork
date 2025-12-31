@@ -40,6 +40,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Migrated color cycle decision tree to `<decision_framework>`
     - Migrated preflight checklist to `<success_criteria>`
     - All reference paths verified
+  - **Phase 2 complete**: Integrated oligon-brand into SKILL_ROUTER.md
+    - Added "Brand Application" decision tree section with routing for Oligon vs other/none
+    - Added format-specific routing (matplotlib, ggplot2, PowerPoint, Word, PDF)
+    - Added Brand Application Quick Selection table (6 output types)
+    - Added Brand category to Task → Skill Mapping (3 tasks)
+    - Updated skill count from 23 to 24 (19→20 top-level skills)
 
 - **research-paper-summarizer skill** (new): Multi-format paper summarization migrated from global `~/.claude/skills/`
   - Summarizes scientific papers into markdown, HTML, PDF, and SVG infographic formats

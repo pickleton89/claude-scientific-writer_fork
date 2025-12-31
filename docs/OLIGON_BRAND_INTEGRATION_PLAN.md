@@ -2,7 +2,7 @@
 
 > Implementation plan for integrating the `oligon-brand` skill into the claude-scientific-writer skill library
 > Created: 2025-12-30
-> Status: **In Progress** (Phase 1 Complete)
+> Status: **In Progress** (Phase 2 Complete)
 
 ---
 
@@ -90,10 +90,18 @@ skills/oligon-brand/
 - Typography tables moved to `<references>` quick reference
 - All reference paths verified: `references/brand-colors-full.md`, `tokens/brand-tokens.json`, `assets/oligon_color_brand.mplstyle`
 
-### Phase 2: SKILL_ROUTER.md Integration
-- [ ] Step 2.1: Add "Brand Application" decision tree
-- [ ] Step 2.2: Update skill count
-- [ ] Step 2.3: Add oligon-brand to Quick Reference Matrix
+### Phase 2: SKILL_ROUTER.md Integration ✅ COMPLETE
+- [x] Step 2.1: Add "Brand Application" decision tree
+- [x] Step 2.2: Update skill count
+- [x] Step 2.3: Add oligon-brand to Quick Reference Matrix
+
+**Phase 2 Results:**
+- Added "Brand Application" decision tree after "Figure & Visual Creation" section
+- Decision tree routes: Oligon brand → oligon-brand skill, Other/None → visual-design defaults
+- Added format-specific routing for matplotlib, ggplot2, PowerPoint, Word, PDF
+- Added "Brand Application: Quick Selection" table (6 output types mapped to skills)
+- Added "Brand" category to Task → Skill Mapping with 3 task entries
+- Updated skill count from 23 to 24 (19→20 top-level + 4 sub-skills)
 
 ### Phase 3: Cross-Reference Updates
 - [ ] Step 3.1: Update visual-design/SKILL.md cross-references

@@ -34,6 +34,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Complements `visual-design` skill (design philosophy) with brand-specific implementation
   - **Integration plan created** (`docs/OLIGON_BRAND_INTEGRATION_PLAN.md`): 5-phase plan to restructure skill for library conventions
   - **Phase 0 complete**: Verified 6 adapters functional, created SKILL.md backup
+  - **Phase 1 complete**: Restructured SKILL.md to standard Claude skill format
+    - Added full frontmatter: `version: 4.0.0`, `allowed-tools`, `brand-type`, `tokens-file`
+    - Added 12 XML sections: overview, when_to_use, prerequisites, decision_framework, workflow, success_criteria, scope, anti_patterns, error_handling, adapters, cross_references, references
+    - Migrated color cycle decision tree to `<decision_framework>`
+    - Migrated preflight checklist to `<success_criteria>`
+    - All reference paths verified
 
 - **research-paper-summarizer skill** (new): Multi-format paper summarization migrated from global `~/.claude/skills/`
   - Summarizes scientific papers into markdown, HTML, PDF, and SVG infographic formats

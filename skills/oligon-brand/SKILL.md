@@ -1,118 +1,72 @@
 ---
 name: oligon-brand
-description: Scientific brand visual identity for figures, charts, presentations, and documents. Apply when creating or styling matplotlib/ggplot2 plots, scientific figures (volcano, Kaplan-Meier, heatmaps, bar charts), PowerPoint presentations, Word documents, grants, manuscripts, or any visualization requiring brand colors. Triggers on requests for figures, plots, charts, graphs, slides, presentations, documents, brand styling, or scientific visualizations.
+version: 4.0.0
+description: "Oligon scientific brand implementation for figures, presentations, and documents. Provides color palettes, typography standards, and format-specific adapters for matplotlib, ggplot2, ReportLab, python-docx, python-pptx, and HTML/CSS."
+allowed-tools: [Read, Glob]
+brand-type: organizational
+tokens-file: tokens/brand-tokens.json
 ---
 
-# Oligon Scientific Brand Guidelines
+# Oligon Scientific Brand
 
-## Core Principle
+<overview>
+Brand implementation skill providing Oligon-specific colors, typography, and styling for scientific visualizations and documents.
 
-**Neutrals are default; Brand Colors are for highlights; Contrast colors show opposition.**
+**Core Principle:** Neutrals are default; Brand Colors are for highlights; Contrast colors show opposition.
 
-Most data should be grayscale. Brand Blue highlights the most important element (1-2 per panel max).
+Most data should be grayscale. Brand Blue (`#2DB2E8`) highlights the most important element (1-2 per panel max).
+</overview>
 
----
+<when_to_use>
+## Trigger Conditions
 
-## 1. Color Palette (Quick Reference)
+**Use this skill when:**
+- Creating figures for Oligon-branded publications
+- Applying consistent brand colors to matplotlib/seaborn/ggplot2 plots
+- Styling presentations or documents with Oligon identity
+- Need to access brand color hex codes programmatically
+- Creating branded PDFs, Word documents, or PowerPoint presentations
 
-### Primary & Accent Colors
+**Do NOT use this skill when:**
+- Working on non-Oligon projects → use `visual-design` defaults
+- Need general design philosophy → use `visual-design`
+- Writing plotting code → use `plotting-libraries` (which references this skill)
+- Need journal-specific formatting → use `venue-templates`
+</when_to_use>
 
-| Role | Color | HEX |
-|------|-------|-----|
-| **Brand Blue** (hero highlight) | Bright Blue | `#2DB2E8` |
-| **Contrast** (opposing effects) | Vermilion/Orange | `#E8622D` |
+<prerequisites>
+## Prerequisites
 
-### Neutral Data Colors (Default)
-
-| Role | Color | HEX |
-|------|-------|-----|
-| Primary data | Very Dark Gray | `#222222` |
-| Secondary data | Medium Gray | `#666666` |
-| Tertiary data | Muted Gray | `#999999` |
-| Annotations only | Light Gray | `#BDBDBD` |
-
-> **Note:** `#BDBDBD` lacks contrast for data points—use only for gridlines, annotations, or non-significant points.
-
-### Supporting Colors (Limited Use)
-
-| Role | Color | HEX |
-|------|-------|-----|
-| Additional categorical | Medium Blue | `#158BBB` |
-| Heatmap negative extreme | Dark Teal | `#0F5D7D` |
-| Heatmap positive extreme | Dark Warm | `#7D250F` |
-
-### Structure
-
-| Element | Color | HEX |
-|---------|-------|-----|
-| Backgrounds | White only | `#FFFFFF` |
-| Axes, text, labels | Black | `#000000` |
-| Gridlines (if needed) | Light | `#E5E5E5` |
-
-### Logo
-
-| Variant | Color | HEX | Use On | File |
-|---------|-------|-----|--------|------|
-| Full Logo | Brand Blue | `#2DB2E8` | White/light backgrounds | `assets/Oligon_Logo_BrandBlue.svg` |
-| Full Logo | White | `#FFFFFF` | Dark backgrounds | `assets/Oligon_Logo_White.svg` |
-| Icon | Brand Blue | `#2DB2E8` | White/light backgrounds | `assets/Oligon_Icon_BrandBlue.svg` |
-| Icon | White | `#FFFFFF` | Dark backgrounds | `assets/Oligon_Icon_White.svg` |
-
-> **Do NOT place logos on publication figures** — journals prohibit branding. Use on presentations, posters, and internal documents only.
-
-> **Historical note:** Original logo files used `#00A3DA`. Updated versions use canonical brand blue `#2DB2E8` for palette consistency.
-
----
-
-## 2. Color Cycle Selection
-
-**Do not use library defaults.** Select based on scientific context:
-
-### Cycle 1: Control vs. Treatment (Most Common)
-
-```python
-CYCLE_TREATMENT_CONTROL = ["#222222", "#2DB2E8", "#666666"]
+**For Python (matplotlib/seaborn):**
+```bash
+pip install matplotlib numpy
 ```
 
-| Order | HEX | Use For |
-|-------|-----|---------|
-| 1 | `#222222` | Control / Baseline |
-| 2 | `#2DB2E8` | Treatment / Experimental |
-| 3 | `#666666` | Secondary comparison |
-
-### Cycle 2: Neutrals Only (No Highlight)
-
-```python
-CYCLE_NEUTRALS_ONLY = ["#222222", "#666666", "#999999"]
+**For R (ggplot2):**
+```r
+install.packages("ggplot2")
 ```
 
-Use when all groups are equal weight—no single condition deserves emphasis.
+**Setup (one-time):**
+```bash
+# Install mplstyle to matplotlib config
+python skills/oligon-brand/scripts/matplotlib_brand_setup.py
 
-### Cycle 3: Opposing Effects (Up vs. Down)
-
-```python
-CYCLE_OPPOSING = ["#2DB2E8", "#E8622D", "#222222"]
+# Or for R
+Rscript skills/oligon-brand/scripts/ggplot2_brand_setup.R
 ```
 
-| Order | HEX | Use For |
-|-------|-----|---------|
-| 1 | `#2DB2E8` | Direction A (e.g., Down-regulated) |
-| 2 | `#E8622D` | Direction B (e.g., Up-regulated) |
-| 3 | `#222222` | Neutral / Unchanged |
-
-### Cycle 4: Multiple Categories (≤4 groups, use sparingly)
-
+**Alternative: Load mplstyle directly:**
 ```python
-CYCLE_MULTI_CATEGORY = ["#222222", "#2DB2E8", "#666666", "#158BBB"]
+import matplotlib.pyplot as plt
+plt.style.use('skills/oligon-brand/assets/oligon_color_brand.mplstyle')
 ```
+</prerequisites>
 
-**Mandatory:** Combine with marker shapes (circle, square, triangle, diamond) for accessibility.
+<decision_framework>
+## Color Cycle Selection
 
-> **5+ categories:** Redesign the figure using faceting or small multiples.
-
----
-
-## 3. Decision Tree
+**Do not use library defaults.** Select cycle based on scientific context:
 
 ```
 How many data series?
@@ -120,135 +74,270 @@ How many data series?
 ├─► 1 series → Use #222222 (no highlight needed)
 │
 ├─► 2 series
-│   ├─► Treatment vs. Control? → Cycle 1
-│   └─► Opposing effects? → Cycle 3
+│   ├─► Treatment vs. Control? → Cycle 1 (treatment_control)
+│   └─► Opposing effects? → Cycle 3 (opposing)
 │
 ├─► 3 series
-│   ├─► One highlighted? → Cycle 1
-│   ├─► All equal weight? → Cycle 2
-│   └─► Two opposing + neutral? → Cycle 3
+│   ├─► One highlighted? → Cycle 1 (treatment_control)
+│   ├─► All equal weight? → Cycle 2 (neutrals_only)
+│   └─► Two opposing + neutral? → Cycle 3 (opposing)
 │
-├─► 4 series → Cycle 4 + marker shapes
+├─► 4 series → Cycle 4 (multi_category) + marker shapes
 │
 └─► 5+ series → REDESIGN (facet/small multiples)
 ```
 
----
+### Quick Selection Table
 
-## 4. Figure Standards
-
-### Layout ("Despined")
-
-- Keep **left and bottom** spines only—remove top and right
-- Axis lines: thin black (0.8 pt)
-- Gridlines: off by default; if needed, thin light gray `#E5E5E5`
-
-### Typography (Figures)
-
-| Element | Font | Size |
-|---------|------|------|
-| Panel labels (A, B, C) | Arial Bold | 9–10 pt |
-| Axis labels | Arial | 8 pt |
-| Tick labels | Arial | 7–8 pt |
-| Legend text | Arial | 7–8 pt |
-| Annotations | Arial | 7 pt |
-
-### Error Bars
-
-Always state in legend: "Error bars represent [SEM/SD/95% CI], n = X"
-
-- Discrete data: thin error bars (0.75 pt)
-- Continuous data: semi-transparent fill bands (20–30% opacity)
-
-### Resolution
-
-| Context | Resolution | Format |
+| Context | Cycle Name | Colors |
 |---------|------------|--------|
-| Print/Publication | 300+ DPI | TIFF, PDF, EPS |
-| Screen/Presentation | 150 DPI | PNG, PDF |
+| Control vs Treatment | `treatment_control` | `#222222` → `#2DB2E8` → `#666666` |
+| All equal weight | `neutrals_only` | `#222222` → `#666666` → `#999999` |
+| Up vs Down regulation | `opposing` | `#2DB2E8` → `#E8622D` → `#222222` |
+| 4 categories (+shapes!) | `multi_category` | `#222222` → `#2DB2E8` → `#666666` → `#158BBB` |
+</decision_framework>
 
----
+<workflow>
+## Workflow
 
-## 5. Document Standards
+### Stage 1: Load Brand Tokens
 
-### Typography (Word Documents)
+**Python (recommended - using adapter):**
+```python
+import sys
+sys.path.insert(0, 'skills/oligon-brand')
+from adapters.matplotlib_adapter import (
+    set_brand_style,
+    BRAND_COLORS,
+    get_cycle,
+    get_color
+)
+```
 
-| Element | Font | Size | Style |
-|---------|------|------|-------|
-| Body text | Arial | 11 pt | Regular |
-| Heading 1 | Arial | 14 pt | Bold |
-| Heading 2 | Arial | 12 pt | Bold |
-| Heading 3 | Arial | 11 pt | Bold |
-| Figure captions | Arial | 10 pt | Italic |
+**Python (alternative - direct JSON loading):**
+```python
+import json
+from pathlib import Path
 
----
+tokens_path = Path("skills/oligon-brand/tokens/brand-tokens.json")
+with open(tokens_path) as f:
+    brand = json.load(f)
 
-## 6. Presentation Standards
+# Access colors
+brand_blue = brand['colors']['primary']['brand_blue']['hex']  # #2DB2E8
+cycle = brand['color_cycles']['treatment_control']['colors']
+```
 
-Apply brand colors to slides:
+### Stage 2: Apply Style
 
-- Background: White (`#FFFFFF`)
-- Title text: Black (`#000000`) or Dark Gray (`#222222`)
-- Accent elements: Brand Blue (`#2DB2E8`)
-- Contrast/highlights: Use sparingly per figure rules
-- Logo placement: Header or footer only, not on data panels
+```python
+# Option A: Set matplotlib defaults with specific cycle
+set_brand_style('treatment_control')
 
----
+# Option B: Apply mplstyle file
+import matplotlib.pyplot as plt
+plt.style.use('oligon_color_brand')  # If installed
+# OR
+plt.style.use('skills/oligon-brand/assets/oligon_color_brand.mplstyle')
+```
 
-## 7. Accessibility Requirements
+### Stage 3: Create Figure
 
-1. **All figures must work in grayscale**—test before finalizing
-2. **Never rely on color alone**—use line styles, marker shapes, or labels
-3. **Blue-orange pair is colorblind-safe** (`#2DB2E8` + `#E8622D`)
-4. Do not use `#2DB2E8` vs `#158BBB` as primary differentiator (too similar)
+```python
+import matplotlib.pyplot as plt
 
----
+# Brand colors are now the default cycle
+fig, ax = plt.subplots()
+# Your plotting code here...
+```
 
-## 8. Pre-Flight Checklist
+### Stage 4: Preflight Check
 
-Before finalizing any figure:
+Before finalizing, verify:
+- [ ] White background
+- [ ] Black axes and text
+- [ ] Top/right spines removed
+- [ ] Brand Blue limited to 1-2 elements
+- [ ] Tested in grayscale
+</workflow>
+
+<success_criteria>
+## Success Criteria
+
+### Visual Compliance Checklist
 
 - [ ] White background (`#FFFFFF`)
 - [ ] Black text and axes (`#000000`)
 - [ ] Top and right spines removed
-- [ ] Correct color cycle for context
-- [ ] Brand Blue limited to 1–2 elements per panel
+- [ ] Correct color cycle for scientific context
+- [ ] Brand Blue (`#2DB2E8`) limited to 1-2 elements per panel
 - [ ] No library default colors
-- [ ] Redundant encoding (shapes/styles with color)
+- [ ] Use redundant encoding (shapes/styles with color)
 - [ ] Tested in grayscale
-- [ ] Error bars labeled in legend
-- [ ] Arial font, 7–9 pt range
+- [ ] Error bars labeled (SEM/SD/95% CI, n=?)
+- [ ] Arial font, 7-10 pt range
 - [ ] Resolution ≥300 DPI for print
 - [ ] Logo excluded from publication figures
+</success_criteria>
 
----
+<scope>
+## Scope
 
-## 9. Bundled Resources
+**In Scope:**
+- Color palette definitions and usage guidance
+- Format-specific adapters (matplotlib, ggplot2, ReportLab, etc.)
+- Typography standards for figures and documents
+- Logo usage guidelines
+- Preflight verification checklist
 
-### Assets
+**Out of Scope:**
+- Design philosophy and principles → use `visual-design`
+- Writing plotting code → use `plotting-libraries`
+- Journal-specific requirements → use `venue-templates`
+- Diagram creation → use `scientific-schematics`
+</scope>
 
-- `assets/oligon_color_brand.mplstyle` — Matplotlib style file (apply with `plt.style.use()`)
-- `assets/Oligon_Logo_BrandBlue.svg` — Full wordmark logo for light backgrounds
-- `assets/Oligon_Logo_White.svg` — Full wordmark logo for dark backgrounds
-- `assets/Oligon_Icon_BrandBlue.svg` — Icon only for light backgrounds
-- `assets/Oligon_Icon_White.svg` — Icon only for dark backgrounds
+<anti_patterns>
+## Common Pitfalls
 
-To install the mplstyle permanently, copy to matplotlib's stylelib folder:
+### 1. Using Library Defaults
+**Problem:** Matplotlib/seaborn default colors instead of brand palette.
+**Solution:** Always call `set_brand_style()` or load mplstyle before plotting.
 
+### 2. Overusing Brand Blue
+**Problem:** Too many elements highlighted, diluting emphasis.
+**Solution:** Limit Brand Blue to 1-2 focal elements per panel. Use neutrals for everything else.
+
+### 3. Color-Only Encoding
+**Problem:** Relying solely on color to distinguish groups.
+**Solution:** Combine color with marker shapes, line styles, or direct labels.
+
+### 4. Ignoring Grayscale Test
+**Problem:** Figure unreadable when printed in black and white.
+**Solution:** Always test in grayscale before finalizing.
+
+### 5. Brand Blue vs Medium Blue Confusion
+**Problem:** Using `#2DB2E8` and `#158BBB` as primary differentiators (too similar).
+**Solution:** Pair Brand Blue with neutrals or Contrast Orange, not Medium Blue.
+
+### 6. Logo on Publication Figures
+**Problem:** Including Oligon logo on journal figures.
+**Solution:** Journals prohibit branding. Use logos only on presentations, posters, and internal documents.
+</anti_patterns>
+
+<error_handling>
+## Error Handling
+
+### Font Not Found
+**Symptom:** Matplotlib warning about Arial font.
+**Solution:**
 ```python
-import matplotlib
-print(matplotlib.get_configdir())  # Copy .mplstyle to stylelib/ subfolder
+import matplotlib.pyplot as plt
+plt.rcParams['font.family'] = 'sans-serif'
+plt.rcParams['font.sans-serif'] = ['Arial', 'Helvetica', 'DejaVu Sans']
 ```
 
-### Scripts
+### Token File Not Found
+**Symptom:** `FileNotFoundError` when loading brand-tokens.json
+**Solution:** The matplotlib_adapter has embedded fallback values. For direct JSON loading, verify path:
+```python
+from pathlib import Path
+tokens_path = Path(__file__).parent / "tokens" / "brand-tokens.json"
+assert tokens_path.exists(), f"Tokens not found at {tokens_path}"
+```
 
-Companion modules with color constants and helper functions:
+### Color Cycle Not Applying
+**Symptom:** Default matplotlib colors appearing despite `set_brand_style()`.
+**Solution:** Call `set_brand_style()` BEFORE creating any figures:
+```python
+set_brand_style('treatment_control')  # Must be first!
+fig, ax = plt.subplots()
+```
+</error_handling>
 
-- `scripts/matplotlib_brand_setup.py` — Color constants, cycles, divergent colormap, panel labels
-- `scripts/ggplot2_brand_setup.R` — Complete R/ggplot2 configuration
+<adapters>
+## Format Adapters
 
-### References
+| Format | Adapter | Usage |
+|--------|---------|-------|
+| matplotlib/seaborn | `adapters/matplotlib_adapter.py` | `from adapters.matplotlib_adapter import set_brand_style` |
+| ggplot2 | `adapters/ggplot2_adapter.R` | `source("adapters/ggplot2_adapter.R")` |
+| ReportLab (PDF) | `adapters/reportlab_adapter.py` | `from adapters.reportlab_adapter import get_brand_colors` |
+| python-docx | `adapters/docx_adapter.py` | `from adapters.docx_adapter import apply_brand_styles` |
+| python-pptx | `adapters/pptx_adapter.py` | `from adapters.pptx_adapter import get_brand_theme` |
+| HTML/CSS | `adapters/html_adapter.css` | `<link rel="stylesheet" href="html_adapter.css">` |
 
-For detailed guidance on specific plot types (Kaplan-Meier, volcano, heatmaps, etc.):
+See individual adapter files for detailed API documentation.
+</adapters>
 
-- `references/brand-colors-full.md` — Complete v4 specification with all templates and embedded logo SVGs
+<cross_references>
+## Related Skills
+
+| Skill | Relationship |
+|-------|-------------|
+| `visual-design` | **Design philosophy** — provides universal principles; oligon-brand provides Oligon-specific implementation |
+| `plotting-libraries` | **Code implementation** — use plotting-libraries for matplotlib/ggplot2 code patterns; load oligon-brand first for brand colors |
+| `scientific-slides` | **Presentations** — apply oligon-brand colors to slide designs |
+| `latex-posters` / `pptx-posters` | **Posters** — apply oligon-brand colors and logo placement |
+| `markdown-to-pdf` | **PDF reports** — uses brand colors for styled output |
+| `document-skills/docx` | **Word documents** — use docx_adapter for branded styling |
+
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
+**Typical Workflow:**
+1. `oligon-brand` → load tokens and set style
+2. `plotting-libraries` → implement figure code
+3. `visual-design` → review for design quality
+</cross_references>
+
+<references>
+## Reference Documents
+
+| Document | Purpose |
+|----------|---------|
+| `references/brand-colors-full.md` | Complete V4 brand specification with all color codes, typography, and embedded logo SVGs |
+| `tokens/brand-tokens.json` | Machine-readable brand tokens for programmatic access |
+| `assets/oligon_color_brand.mplstyle` | Matplotlib style file for one-line brand application |
+
+### Color Quick Reference
+
+| Name | Role | HEX |
+|------|------|-----|
+| Brand Blue | Hero highlight | `#2DB2E8` |
+| Contrast Orange | Opposing effects | `#E8622D` |
+| Dark Gray | Primary data / control | `#222222` |
+| Medium Gray | Secondary data | `#666666` |
+| Muted Gray | Tertiary data | `#999999` |
+| Light Gray | Annotations only | `#BDBDBD` |
+| Medium Blue | Additional categorical | `#158BBB` |
+
+### Typography Quick Reference
+
+**Figures:**
+| Element | Font | Size |
+|---------|------|------|
+| Panel labels (A, B, C) | Arial Bold | 9-10 pt |
+| Axis labels | Arial | 8 pt |
+| Tick labels | Arial | 7-8 pt |
+| Legend text | Arial | 7-8 pt |
+
+**Documents:**
+| Element | Font | Size |
+|---------|------|------|
+| Body text | Arial | 11 pt |
+| Heading 1 | Arial Bold | 14 pt |
+| Heading 2 | Arial Bold | 12 pt |
+
+### Logo Assets
+
+| Variant | File | Use On |
+|---------|------|--------|
+| Full Logo (Brand Blue) | `assets/Oligon_Logo_BrandBlue.svg` | Light backgrounds |
+| Full Logo (White) | `assets/Oligon_Logo_White.svg` | Dark backgrounds |
+| Icon (Brand Blue) | `assets/Oligon_Icon_BrandBlue.svg` | Light backgrounds |
+| Icon (White) | `assets/Oligon_Icon_White.svg` | Dark backgrounds |
+
+> **Do NOT place logos on publication figures** — journals prohibit branding. Use on presentations, posters, and internal documents only.
+
+For complete color tables and detailed specifications, see `references/brand-colors-full.md`.
+</references>

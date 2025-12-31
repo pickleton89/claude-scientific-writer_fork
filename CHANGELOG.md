@@ -52,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - plotting-libraries (v1.3.0 → v1.4.0): Added concrete oligon-brand examples to styling_integration section (3 Python options + R ggplot2)
     - markdown-to-pdf: Added oligon-brand to cross_references, updated references section
     - pptx-posters: Added oligon-brand to cross_references with pptx_adapter reference
+    - Removed orphaned `visual-design/references/BRAND_COLORS_v4.md` (superseded by `oligon-brand/references/brand-colors-full.md`)
 
 - **research-paper-summarizer skill** (new): Multi-format paper summarization migrated from global `~/.claude/skills/`
   - Summarizes scientific papers into markdown, HTML, PDF, and SVG infographic formats

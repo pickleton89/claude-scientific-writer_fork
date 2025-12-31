@@ -153,7 +153,15 @@ User wants to create a document
 │  │         └─ Need statistical analysis guidance?
 │  │            └─ YES → statistical-analysis
 │  │
-│  └─ NO → Is it a PRESENTATION?
+│  └─ NO → Is it an EXECUTIVE SUMMARY?
+│          │
+│          ├─ YES → executive-summary
+│          │         │
+│          │         ├─ From research paper? → Pyramid Principle structure
+│          │         ├─ Need visual summary? → + visual-design, plotting-libraries
+│          │         └─ PDF output needed? → + markdown-to-pdf
+│          │
+│          └─ NO → Is it a PRESENTATION?
 │          │
 │          ├─ YES → scientific-slides
 │          │         │
@@ -203,6 +211,8 @@ User wants to create a document
 | Data paper | scientific-writing + code-documentation | Focus on data description |
 | Review article | literature-review → scientific-writing | Narrative synthesis |
 | Grant proposal | scientific-writing | Adapt for proposal format |
+| Executive summary | executive-summary | Pyramid Principle, action-oriented |
+| Board/stakeholder summary | executive-summary + visual-design | Include visual summary |
 | Thesis chapter | scientific-writing + venue-templates | Institution-specific |
 
 ---
@@ -583,6 +593,7 @@ User has content ready for final document format
 | **Writing** | | |
 | Write research paper | scientific-writing | + venue-templates, literature-review |
 | Write literature review | literature-review | + scientific-writing, citation-management |
+| Write executive summary | executive-summary | + visual-design, markdown-to-pdf |
 | Generate hypotheses | hypothesis-generation | + literature-review, statistical-analysis |
 | **Presentations** | | |
 | Create slides | scientific-slides | + visual-design, plotting-libraries |
@@ -819,4 +830,4 @@ Each skill's `<cross_references>` section should include:
 
 ---
 
-*This router provides deterministic skill selection for the 25-skill scientific writing library (21 top-level + 4 document-skills sub-skills). For threshold values and quality criteria, see `QUANTIFICATION_THRESHOLDS.md`.*
+*This router provides deterministic skill selection for the 26-skill scientific writing library (22 top-level + 4 document-skills sub-skills). For threshold values and quality criteria, see `QUANTIFICATION_THRESHOLDS.md`.*

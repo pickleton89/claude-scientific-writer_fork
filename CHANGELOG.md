@@ -55,6 +55,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **executive-summary skill** (v2.0.0): New skill for generating action-oriented executive summaries
+  - **Pyramid Principle structure**: Hook → Solution → Findings → Value → Call to Action
+  - **Directive language**: All instructions use imperative verbs for clear agent behavior
+  - **Complete example**: Fully worked remote-work productivity summary with annotations
+  - **Validation script** (`scripts/validate_summary.py`): Automated quality checks
+    - Word count and 10% length ratio validation
+    - Passive voice percentage (target ≤25%)
+    - Component presence detection (all 5 required)
+    - Quantification check (requires 3+ metrics in findings)
+    - Section reference detection (summary must stand alone)
+    - CTA specificity (WHAT + WHO + WHEN)
+    - Sentence length analysis (target 15-20 words avg)
+  - **Error handling section**: 9 documented scenarios with detection and response patterns
+  - **Feedback loop**: 7-step workflow with validate → revise → repeat cycle
+  - **Visualization integration**: Guidelines for graphical abstracts with accessibility standards
+  - **Reference file**: `references/visualization_guidelines.md` for detailed visual design
+  - **Cross-references**: Integrates with scientific-writing, visual-design, plotting-libraries, markdown-to-pdf
+  - **SKILL_ROUTER.md updated**: Added decision tree branch and quick reference entries
+  - **Skill count**: 26 skills (22 top-level + 4 document sub-skills)
+
 - **oligon-brand skill** (new): Standalone brand identity skill migrated from global `~/.claude/skills/`
   - Scientific brand visual identity for figures, charts, presentations, and documents
   - Color palette with scenario-specific cycles (treatment/control, opposing effects, neutrals)

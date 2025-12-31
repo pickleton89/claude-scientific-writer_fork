@@ -150,7 +150,7 @@ For detailed IMRAD section guidance, refer to `references/imrad_structure.md`.
 
 **Abstract**: 150-300 words as flowing paragraphs (never labeled sections unless journal requires). Cover: context, methods, key findings with numbers, significance.
 
-**Executive Summary vs. Abstract**: Abstracts are neutral paper summaries for academic indexing. Executive summaries lead with conclusions/recommendations for decision-makers.
+**Executive Summary vs. Abstract**: Abstracts are neutral paper summaries for academic indexing. Executive summaries lead with conclusions/recommendations for decision-makers. For executive summaries, use `executive-summary` skill instead.
 
 **Introduction (Funnel Approach)**: Broad context → Specific problem → Knowledge gap → Your study objectives.
 
@@ -358,6 +358,7 @@ Run three tests before submission:
 | `citation-management` | Organize and format manuscript references |
 | `peer-review` | Structured feedback and revision guidance |
 | `scholar-evaluation` | Publication readiness assessment (8 dimensions) |
+| `executive-summary` | Action-oriented summaries for decision-makers |
 | `venue-templates` | Journal-specific formatting and requirements |
 | `markdown-to-pdf` | Branded PDF output with Oligon styling |
 | `paper-2-web` | Web-optimized HTML version |

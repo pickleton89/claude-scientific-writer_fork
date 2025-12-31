@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Added Brand Application Quick Selection table (6 output types)
     - Added Brand category to Task → Skill Mapping (3 tasks)
     - Updated skill count from 23 to 24 (19→20 top-level skills)
+    - Fixed: Restructured decision tree to nest format selection under Oligon branch (was confusing parallel structure)
 
 - **research-paper-summarizer skill** (new): Multi-format paper summarization migrated from global `~/.claude/skills/`
   - Summarizes scientific papers into markdown, HTML, PDF, and SVG infographic formats

@@ -58,6 +58,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Documents required directory structure, brand-tokens.json schema, adapter APIs
     - Provides integration checklist and minimal brand skill example
     - Verified SKILL_ROUTER.md supports extensibility (Other/None fallback branch)
+  - **Phase 5 complete**: Validation & Documentation
+    - Created `scripts/test_oligon_brand_integration.py` with 5 test functions
+    - Added matplotlib as dev dependency for adapter testing
+    - All adapter imports and token loading tests pass
+    - All cross-reference paths verified (6 skills → oligon-brand)
+  - **✅ Integration complete**: All 5 phases finished, skill fully integrated into library
 
 - **research-paper-summarizer skill** (new): Multi-format paper summarization migrated from global `~/.claude/skills/`
   - Summarizes scientific papers into markdown, HTML, PDF, and SVG infographic formats

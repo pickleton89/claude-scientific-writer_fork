@@ -48,6 +48,7 @@ packages = ["scientific_writer", "src/oligon_reports"]
 
 [tool.uv]
 dev-dependencies = [
+    "matplotlib>=3.10.8",
     "pytest>=9.0.2",
 ]
 

@@ -89,36 +89,34 @@ User needs to apply organizational brand standards
 ├─ Which brand?
 │  │
 │  ├─ Oligon brand?
+│  │  │
 │  │  └─ YES → oligon-brand
 │  │            │
 │  │            ├─ Load brand tokens
 │  │            ├─ Select appropriate color cycle
-│  │            └─ Then proceed to format-specific skill:
-│  │               ├─ Figures → plotting-libraries
-│  │               ├─ Slides → scientific-slides
-│  │               ├─ Posters → latex-posters / pptx-posters
-│  │               ├─ Documents → document-skills/docx
-│  │               └─ PDFs → markdown-to-pdf
+│  │            │
+│  │            └─ Which output format? (select adapter)
+│  │               │
+│  │               ├─ matplotlib/seaborn figure?
+│  │               │  └─ matplotlib_adapter → plotting-libraries
+│  │               │
+│  │               ├─ ggplot2 figure?
+│  │               │  └─ ggplot2_adapter → plotting-libraries
+│  │               │
+│  │               ├─ PowerPoint presentation?
+│  │               │  └─ pptx_adapter → scientific-slides
+│  │               │
+│  │               ├─ Word document?
+│  │               │  └─ docx_adapter → document-skills/docx
+│  │               │
+│  │               ├─ PDF report?
+│  │               │  └─ reportlab_adapter → markdown-to-pdf
+│  │               │
+│  │               └─ LaTeX poster?
+│  │                  └─ (manual colors) → latex-posters
 │  │
 │  └─ Other/None?
-│     └─ Use visual-design defaults
-│
-├─ What output format?
-│  │
-│  ├─ matplotlib/seaborn figure?
-│  │  └─ oligon-brand (matplotlib_adapter) → plotting-libraries
-│  │
-│  ├─ ggplot2 figure?
-│  │  └─ oligon-brand (ggplot2_adapter) → plotting-libraries
-│  │
-│  ├─ PowerPoint presentation?
-│  │  └─ oligon-brand (pptx_adapter) → scientific-slides → document-skills/pptx
-│  │
-│  ├─ Word document?
-│  │  └─ oligon-brand (docx_adapter) → document-skills/docx
-│  │
-│  └─ PDF report?
-│     └─ oligon-brand (reportlab_adapter) → markdown-to-pdf
+│     └─ Use visual-design defaults (no brand skill needed)
 ```
 
 ### Brand Application: Quick Selection

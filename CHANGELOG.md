@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **executive-summary skill** (v2.0.0 → v2.0.1): Context efficiency audit improvements
+  - Created `references/examples.md` with comprehensive examples (remote work analysis, market expansion, anti-example)
+  - Condensed SKILL.md by moving 35-line example to reference file
+  - Added `scripts/test_summary.md` for validation script testing (passes all 7 checks)
+  - Token reduction: ~3,800 → ~3,466 tokens (9% improvement)
+  - Health score: 85% → 90% (4★ → 5★)
+
 - **DOCUMENT_TEMPLATING_SYSTEM.md** (v2.1 → v3.0): Marked implementation complete
   - Updated status from "Design Phase" to "✅ Implementation Complete"
   - Documented design decision: No user-facing template copies at project root (single source of truth in `src/oligon_reports/templates/markdown/`)

@@ -1,6 +1,6 @@
 ---
 name: executive-summary
-version: 2.0.0
+version: 2.0.1
 description: "Generates concise, action-oriented executive summaries for decision-makers from reports, proposals, or project plans. Use when creating summaries for stakeholders, board presentations, grant applications, or any document requiring a persuasive standalone overview with optional visual summary."
 allowed-tools: Read, Write, Edit, Bash
 when_to_use: |
@@ -88,43 +88,15 @@ Use this exact structure for every executive summary:
 
 ---
 
-## Complete Example
+## Complete Examples
 
-### Input Context
-A 15-page research report on employee productivity after implementing remote work policies.
+For complete examples demonstrating the five-component structure, including:
+- Remote Work Productivity Analysis (detailed walkthrough)
+- Market Expansion Proposal
+- Anti-example showing common mistakes
+- Reusable template
 
-### Generated Executive Summary
-
-```markdown
-## Executive Summary
-
-Remote work implementation has increased employee productivity by 23% while reducing
-operational costs by $1.2M annually—but sustaining these gains requires immediate
-investment in collaboration infrastructure.
-
-This analysis examined productivity metrics, employee satisfaction, and operational
-costs across 847 employees over 18 months following our March 2024 remote work policy.
-
-**Key Findings:**
-1. **Productivity increased 23%**: Average task completion rose from 34 to 42 tasks/week
-2. **Attrition dropped 31%**: Voluntary departures fell from 18% to 12.4% annually
-3. **Collaboration declined 15%**: Cross-team project velocity decreased significantly
-4. **Cost savings reached $1.2M**: Reduced facility and commuting subsidies
-
-These results position the company to reinvest savings into growth initiatives while
-maintaining the flexibility that drives retention. However, declining collaboration
-threatens long-term innovation capacity.
-
-**Recommendation:** Approve $400K for collaboration tool upgrades and quarterly
-in-person team events by Q2 2025. VP of Operations to present implementation plan
-by January 15.
-```
-
-**Why this example works:**
-- Opens with conclusion (productivity up, costs down) + tension (collaboration declining)
-- Exactly 4 findings, all quantified with specific numbers
-- Value statement connects to strategic goals
-- Call to action specifies: amount, purpose, timeline, and owner
+See `references/examples.md`.
 
 ---
 

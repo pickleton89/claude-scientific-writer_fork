@@ -1,10 +1,8 @@
 ---
 name: oligon-brand
-version: 4.0.0
+version: 4.0.1
 description: "Oligon scientific brand implementation for figures, presentations, and documents. Provides color palettes, typography standards, and format-specific adapters for matplotlib, ggplot2, ReportLab, python-docx, python-pptx, and HTML/CSS."
 allowed-tools: [Read, Glob]
-brand-type: organizational
-tokens-file: tokens/brand-tokens.json
 ---
 
 # Oligon Scientific Brand
@@ -39,7 +37,7 @@ Most data should be grayscale. Brand Blue (`#2DB2E8`) highlights the most import
 
 **For Python (matplotlib/seaborn):**
 ```bash
-pip install matplotlib numpy
+pip install matplotlib numpy pillow  # pillow required for verification step
 ```
 
 **For R (ggplot2):**
@@ -50,16 +48,16 @@ install.packages("ggplot2")
 **Setup (one-time):**
 ```bash
 # Install mplstyle to matplotlib config
-python skills/oligon-brand/scripts/matplotlib_brand_setup.py
+python {baseDir}/scripts/matplotlib_brand_setup.py
 
 # Or for R
-Rscript skills/oligon-brand/scripts/ggplot2_brand_setup.R
+Rscript {baseDir}/scripts/ggplot2_brand_setup.R
 ```
 
 **Alternative: Load mplstyle directly:**
 ```python
 import matplotlib.pyplot as plt
-plt.style.use('skills/oligon-brand/assets/oligon_color_brand.mplstyle')
+plt.style.use('{baseDir}/assets/oligon_color_brand.mplstyle')
 ```
 </prerequisites>
 
@@ -105,7 +103,7 @@ How many data series?
 **Python (recommended - using adapter):**
 ```python
 import sys
-sys.path.insert(0, 'skills/oligon-brand')
+sys.path.insert(0, '{baseDir}')
 from adapters.matplotlib_adapter import (
     set_brand_style,
     BRAND_COLORS,
@@ -119,7 +117,7 @@ from adapters.matplotlib_adapter import (
 import json
 from pathlib import Path
 
-tokens_path = Path("skills/oligon-brand/tokens/brand-tokens.json")
+tokens_path = Path("{baseDir}/tokens/brand-tokens.json")
 with open(tokens_path) as f:
     brand = json.load(f)
 
@@ -136,9 +134,9 @@ set_brand_style('treatment_control')
 
 # Option B: Apply mplstyle file
 import matplotlib.pyplot as plt
-plt.style.use('oligon_color_brand')  # If installed
+plt.style.use('oligon_color_brand')  # If installed via setup script
 # OR
-plt.style.use('skills/oligon-brand/assets/oligon_color_brand.mplstyle')
+plt.style.use('{baseDir}/assets/oligon_color_brand.mplstyle')
 ```
 
 ### Stage 3: Create Figure
@@ -159,6 +157,34 @@ Before finalizing, verify:
 - [ ] Top/right spines removed
 - [ ] Brand Blue limited to 1-2 elements
 - [ ] Tested in grayscale
+
+### Stage 5: Verification (Required)
+
+**After saving the figure, Claude MUST verify compliance:**
+
+1. **Visual inspection**: Open or display the saved figure
+2. **Checklist validation**: Confirm each preflight item passes
+3. **Grayscale test**: Convert to grayscale and verify readability
+4. **Report findings**: State which checks passed/failed
+
+```python
+# Example verification pattern
+from PIL import Image
+
+# Load saved figure
+img = Image.open('output_figure.png')
+
+# Convert to grayscale for accessibility check
+grayscale = img.convert('L')
+grayscale.save('output_figure_grayscale.png')
+
+# Claude should visually confirm:
+# ✓ Data series distinguishable in grayscale
+# ✓ Brand Blue used sparingly (1-2 elements)
+# ✓ No library default colors present
+```
+
+> **Do not mark task complete until verification passes.** If any check fails, return to the appropriate stage and fix before re-verifying.
 </workflow>
 
 <success_criteria>

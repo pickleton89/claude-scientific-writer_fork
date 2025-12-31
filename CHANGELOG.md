@@ -32,6 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Setup scripts for matplotlib and ggplot2
   - Logo assets (SVG) in Brand Blue and White variants
   - Complements `visual-design` skill (design philosophy) with brand-specific implementation
+  - **Integration plan created** (`docs/OLIGON_BRAND_INTEGRATION_PLAN.md`): 5-phase plan to restructure skill for library conventions
+  - **Phase 0 complete**: Verified 6 adapters functional, created SKILL.md backup
 
 - **research-paper-summarizer skill** (new): Multi-format paper summarization migrated from global `~/.claude/skills/`
   - Summarizes scientific papers into markdown, HTML, PDF, and SVG infographic formats

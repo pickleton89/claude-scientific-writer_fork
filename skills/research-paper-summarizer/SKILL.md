@@ -1,13 +1,17 @@
 ---
 name: research-paper-summarizer
-description: Summarize scientific research papers into multiple output formats including structured markdown, interactive HTML presentations, brand-compliant PDF summaries, and visual SVG infographics. Use when the user provides a research paper (PDF, text, DOI, or URL) and wants it summarized, analyzed, or visualized.
+version: 1.0.0
+description: "Summarize scientific research papers into multiple output formats including structured markdown, interactive HTML presentations, brand-compliant PDF summaries, and visual SVG infographics. Use when the user provides a research paper (PDF, text, DOI, or URL) and wants it summarized, analyzed, or visualized."
+when_to_use: "When user uploads a research paper (PDF, text, abstract) or provides a DOI/URL and wants comprehensive summarization with optional visual outputs"
+allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, AskUserQuestion, Task]
+brand-reference: "../oligon-brand/"
 ---
 
 # Research Paper Summarizer
 
-Create rigorous, quantitative summaries of scientific research papers in multiple output formats while preserving all numerical data, statistical details, and domain terminology.
+<overview>
 
----
+Create rigorous, quantitative summaries of scientific research papers in multiple output formats while preserving all numerical data, statistical details, and domain terminology.
 
 ## Quick Start
 
@@ -61,7 +65,11 @@ Claude: ✓ HTML report generated: smith2024_cancer_report.html
 - **Long papers** (>12 pages): ~5-8 minutes (chunked processing)
 - Visual output generation: ~1-2 minutes per format
 
+</overview>
+
 ---
+
+<when_to_use>
 
 ## When to Use This Skill
 
@@ -71,7 +79,11 @@ Activate when the user:
 - Asks to "summarize this paper", "create a summary", or "analyze this research"
 - Requests specific outputs: "make an infographic", "create HTML report", "generate PDF summary"
 
+</when_to_use>
+
 ---
+
+<decision_framework>
 
 ## Processing Modes
 
@@ -97,7 +109,28 @@ When a PDF is provided:
    - If pages > 12: Use Chunked Mode (subagent pipeline)
 3. **Inform user**: "This paper has X pages. Using [Standard/Chunked] processing mode."
 
+## Phase 1: Article Type Selection
+
+**ALWAYS ask the user which type of article they are summarizing:**
+
+| Article Type | Best For | Prompt File |
+|--------------|----------|-------------|
+| **General Research** | Standard primary research papers | `prompts/general_researcher_summarizer.md` |
+| **Review Article** | Review papers, meta-analyses, systematic reviews | `prompts/review_article_summarizer.md` |
+| **Computational/Bioinformatics** | Genomics, methods, pipelines, algorithms | `prompts/compbio_bioinformatic_summarizer.md` |
+| **Cell & Molecular Biology** | Mechanistic, wet-lab, cancer biology papers | `prompts/cellmolbio_summarizer.md` |
+
+Ask: "What type of article is this?"
+1. General research paper
+2. Review article / meta-analysis
+3. Computational biology / bioinformatics
+4. Cell & molecular biology
+
+</decision_framework>
+
 ---
+
+<workflow>
 
 ## Workflow Overview
 
@@ -122,25 +155,6 @@ This skill follows a multi-phase workflow with mode-dependent processing:
 ### Phase 2: Visual Output Generation
 - Ask user which visual format(s) they want
 - Generate visuals using the saved markdown summary as the source
-
----
-
-## Phase 1: Article Type Selection
-
-**ALWAYS ask the user which type of article they are summarizing:**
-
-| Article Type | Best For | Prompt File |
-|--------------|----------|-------------|
-| **General Research** | Standard primary research papers | `prompts/general_researcher_summarizer.md` |
-| **Review Article** | Review papers, meta-analyses, systematic reviews | `prompts/review_article_summarizer.md` |
-| **Computational/Bioinformatics** | Genomics, methods, pipelines, algorithms | `prompts/compbio_bioinformatic_summarizer.md` |
-| **Cell & Molecular Biology** | Mechanistic, wet-lab, cancer biology papers | `prompts/cellmolbio_summarizer.md` |
-
-Ask: "What type of article is this?"
-1. General research paper
-2. Review article / meta-analysis
-3. Computational biology / bioinformatics
-4. Cell & molecular biology
 
 ### Generating the Markdown Summary (Standard Mode)
 
@@ -228,14 +242,6 @@ overview → models → mechanisms → results → critique → translational �
 overview → data → methods → validation → critique → reproducibility → synthesis
 ```
 
-### Error Handling
-
-| Scenario | Recovery |
-|----------|----------|
-| Subagent fails to write section | Retry once, then fall back to Standard Mode |
-| Section detection fails | Use page-ratio fallback estimates |
-| Context exceeded in subagent | Reduce page range, retry |
-
 ### Progress Reporting
 
 Keep user informed during chunked processing:
@@ -272,46 +278,11 @@ Ask: "Which visual output format(s) would you like?"
 - Multiple formats
 - None (markdown summary only)
 
-## Core Principles (All Formats)
+</workflow>
 
-### Quantitative Preservation (Non-Negotiable)
+---
 
-NEVER summarize away numerical data. Always preserve:
-- **P-values**: p < 0.05, p = 0.003 (with significance context)
-- **Sample sizes**: n = 24/group, N = 156 total
-- **Effect sizes**: Cohen's d = 0.8, HR = 0.45, OR = 2.3
-- **Confidence intervals**: 95% CI: 1.2–3.4
-- **Fold changes**: 2.3-fold increase
-- **Concentrations/doses**: 1 mM DFMO, 5 mg/kg
-- **Timepoints**: 24h, 4 weeks post-treatment
-
-### Scientific Rigor
-
-- Distinguish novel findings from confirmatory/background
-- Preserve conditional language (authors' hedging)
-- Include negative/null results
-- Note controls and comparators
-- Flag limitations (both author-stated and obvious)
-- Use exact technical terminology (no paraphrasing jargon)
-
-### Brand Visual Identity
-
-All visual outputs follow the **Oligon Scientific Brand** (see `oligon-brand` skill).
-
-**Quick Reference:**
-
-| Role | Color | HEX |
-|------|-------|-----|
-| Primary Highlight | Brand Blue | `#2DB2E8` |
-| Contrast/Alert | Orange | `#E8622D` |
-| Primary Data | Dark Gray | `#222222` |
-| Secondary Data | Medium Gray | `#666666` |
-| Tertiary Data | Muted Gray | `#999999` |
-| Background | White | `#FFFFFF` |
-
-For complete brand specification, color cycles, and accessibility guidelines, see:
-- `skills/oligon-brand/SKILL.md`
-- `skills/oligon-brand/references/brand-colors-full.md`
+<output_formats>
 
 ## Format-Specific Instructions
 
@@ -355,24 +326,52 @@ Single-page visual summary using component library:
 - Brand-compliant colors only
 - White background, flat design, no gradients
 
-## Article Type Details
+</output_formats>
 
-Each summarizer prompt is optimized for its article type:
+---
 
-| Article Type | Summarizer | Key Focus Areas |
-|--------------|------------|-----------------|
-| **General Research** | `general_researcher_summarizer.md` | Hypothesis, experimental approach, findings, critical analysis, actionable takeaways |
-| **Review Article** | `review_article_summarizer.md` | Scope/framing, field landscape, evidence synthesis, knowledge gaps, reference mining |
-| **Comp Bio / Bioinformatics** | `compbio_bioinformatic_summarizer.md` | Data foundation, computational approach, validation strategy, reproducibility assessment |
-| **Cell & Molecular Biology** | `cellmolbio_summarizer.md` | Model systems, experimental design, mechanistic depth, cancer biology specifics, translational assessment |
+<core_principles>
 
-### Special Handling Notes
-| Condition | Handling |
-|-----------|----------|
-| **Preprint** | Add prominent "Not Peer-Reviewed" warning in all outputs |
-| **Meta-analysis** | Use Review Article summarizer; include forest plot data, heterogeneity stats (I², Q) |
-| **Clinical Trial** | Use General Research summarizer; emphasize CONSORT flow, primary/secondary endpoints, adverse events |
-| **Methods Paper** | Use Comp Bio summarizer; prioritize protocol details, validation, benchmarks |
+## Core Principles (All Formats)
+
+### Quantitative Preservation (Non-Negotiable)
+
+NEVER summarize away numerical data. Always preserve:
+- **P-values**: p < 0.05, p = 0.003 (with significance context)
+- **Sample sizes**: n = 24/group, N = 156 total
+- **Effect sizes**: Cohen's d = 0.8, HR = 0.45, OR = 2.3
+- **Confidence intervals**: 95% CI: 1.2–3.4
+- **Fold changes**: 2.3-fold increase
+- **Concentrations/doses**: 1 mM DFMO, 5 mg/kg
+- **Timepoints**: 24h, 4 weeks post-treatment
+
+### Scientific Rigor
+
+- Distinguish novel findings from confirmatory/background
+- Preserve conditional language (authors' hedging)
+- Include negative/null results
+- Note controls and comparators
+- Flag limitations (both author-stated and obvious)
+- Use exact technical terminology (no paraphrasing jargon)
+
+### Brand Visual Identity
+
+All visual outputs follow the **Oligon Scientific Brand** (see `oligon-brand` skill).
+
+**Quick Reference:**
+
+| Role | Color | HEX |
+|------|-------|-----|
+| Primary Highlight | Brand Blue | `#2DB2E8` |
+| Contrast/Alert | Orange | `#E8622D` |
+| Primary Data | Dark Gray | `#222222` |
+| Secondary Data | Medium Gray | `#666666` |
+| Tertiary Data | Muted Gray | `#999999` |
+| Background | White | `#FFFFFF` |
+
+For complete brand specification, color cycles, and accessibility guidelines, see:
+- `skills/oligon-brand/SKILL.md`
+- `skills/oligon-brand/references/brand-colors-full.md`
 
 ## Quick Reference
 
@@ -393,7 +392,37 @@ Adverse/Opposing effect → Orange (#E8622D)
 Secondary comparison → Medium Gray (#666666)
 ```
 
+</core_principles>
+
 ---
+
+<article_types>
+
+## Article Type Details
+
+Each summarizer prompt is optimized for its article type:
+
+| Article Type | Summarizer | Key Focus Areas |
+|--------------|------------|-----------------|
+| **General Research** | `general_researcher_summarizer.md` | Hypothesis, experimental approach, findings, critical analysis, actionable takeaways |
+| **Review Article** | `review_article_summarizer.md` | Scope/framing, field landscape, evidence synthesis, knowledge gaps, reference mining |
+| **Comp Bio / Bioinformatics** | `compbio_bioinformatic_summarizer.md` | Data foundation, computational approach, validation strategy, reproducibility assessment |
+| **Cell & Molecular Biology** | `cellmolbio_summarizer.md` | Model systems, experimental design, mechanistic depth, cancer biology specifics, translational assessment |
+
+### Special Handling Notes
+
+| Condition | Handling |
+|-----------|----------|
+| **Preprint** | Add prominent "Not Peer-Reviewed" warning in all outputs |
+| **Meta-analysis** | Use Review Article summarizer; include forest plot data, heterogeneity stats (I², Q) |
+| **Clinical Trial** | Use General Research summarizer; emphasize CONSORT flow, primary/secondary endpoints, adverse events |
+| **Methods Paper** | Use Comp Bio summarizer; prioritize protocol details, validation, benchmarks |
+
+</article_types>
+
+---
+
+<error_handling>
 
 ## Troubleshooting & Error Recovery
 
@@ -439,6 +468,14 @@ User: Continue summarizing this paper - some sections are still PENDING
 Claude: [Reads existing summary file]
         Found 3 sections marked PENDING. Resuming from critique agent...
 ```
+
+### Subagent Error Handling
+
+| Scenario | Recovery |
+|----------|----------|
+| Subagent fails to write section | Retry once, then fall back to Standard Mode |
+| Section detection fails | Use page-ratio fallback estimates |
+| Context exceeded in subagent | Reduce page range, retry |
 
 ### PDF Reading Issues
 
@@ -488,7 +525,115 @@ If issues persist:
 3. Try with a different paper to isolate the issue
 4. Report issues at https://github.com/anthropics/claude-code/issues
 
+</error_handling>
+
 ---
+
+<anti_patterns>
+
+## Common Pitfalls
+
+### 1. Skipping Article Type Selection
+**Problem:** Using general summarizer for specialized content (compbio, cellmolbio).
+**Solution:** Always ask user to confirm article type before processing.
+
+### 2. Ignoring Page Count Threshold
+**Problem:** Using Standard Mode for papers >12 pages, causing context exhaustion.
+**Solution:** Let the skill auto-detect; trust the 12-page threshold.
+
+### 3. Summarizing Away Statistics
+**Problem:** Replacing "p = 0.003" with "statistically significant."
+**Solution:** Preserve ALL numerical data exactly as reported.
+
+### 4. Missing Figure References
+**Problem:** Summary mentions findings without linking to source figures.
+**Solution:** Include figure_ref for every finding with supporting data.
+
+### 5. Incomplete Chunked Processing
+**Problem:** Stopping when one subagent fails.
+**Solution:** Use recovery workflow; check for PENDING markers and resume.
+
+### 6. Paraphrasing Technical Terminology
+**Problem:** Replacing "CRISPR-Cas9 knockout" with "gene editing technique."
+**Solution:** Use exact technical terminology from the paper.
+
+### 7. Omitting Negative Results
+**Problem:** Only highlighting positive findings.
+**Solution:** Include all results, especially null/negative findings with statistical context.
+
+### 8. Ignoring Author Hedging
+**Problem:** Converting "may suggest" to "demonstrates."
+**Solution:** Preserve conditional language exactly as authors stated.
+
+</anti_patterns>
+
+---
+
+<success_criteria>
+
+## Success Criteria
+
+### Markdown Summary Quality
+- [ ] All statistics preserved with exact values
+- [ ] Every finding linked to figure/table reference
+- [ ] Limitations section includes both author-stated and additional
+- [ ] Technical terminology preserved (no paraphrasing jargon)
+- [ ] Conditional language preserved (authors' hedging)
+- [ ] Negative/null results included with statistical context
+- [ ] Sample sizes specified for all experiments
+
+### Visual Output Quality
+- [ ] Brand colors applied correctly (Oligon brand)
+- [ ] White background, black text
+- [ ] Statistics formatted consistently (p = X.XX, 95% CI: X–X)
+- [ ] Figures extracted and matched to references (PDF output)
+- [ ] No gradients or 3D effects (flat design)
+
+### Chunked Mode Quality
+- [ ] All sections marked COMPLETE (no PENDING markers)
+- [ ] Subagent outputs are coherent and non-redundant
+- [ ] Synthesis section integrates content from all prior sections
+- [ ] Progress was reported to user during processing
+
+### Process Compliance
+- [ ] User was asked to confirm article type
+- [ ] Processing mode was announced to user
+- [ ] Output file was saved to source document directory
+- [ ] Visual format options were offered after summary completion
+
+</success_criteria>
+
+---
+
+<cross_references>
+
+## Related Skills
+
+| Skill | Relationship |
+|-------|-------------|
+| `oligon-brand` | **Brand colors** — all visual outputs (HTML, PDF, SVG) use Oligon brand styling |
+| `literature-review` | **Finding papers** — use literature-review to find papers, then summarize key ones |
+| `research-lookup` | **Quick lookup** — for simple queries; use research-paper-summarizer for deep analysis |
+| `peer-review` | **Evaluation vs summary** — peer-review assesses quality; this skill extracts content |
+| `markdown-to-pdf` | **Alternative PDF** — for template-based documents; this skill has specialized figure extraction |
+| `scientific-critical-thinking` | **Analysis framework** — provides structure for the critical analysis sections |
+| `plotting-libraries` | **Figure creation** — if creating new figures from extracted data |
+| `visual-design` | **Design principles** — for infographic composition guidance |
+| `markitdown` | **PDF conversion** — convert paper PDFs to markdown before summarizing (optional) |
+
+**Skill Selection:** See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.
+
+**Typical Workflow:**
+1. Receive paper PDF from user
+2. `research-paper-summarizer` → generate markdown summary
+3. (Optional) `oligon-brand` colors applied → visual output
+4. (Optional) `scientific-critical-thinking` → deeper analysis
+
+</cross_references>
+
+---
+
+<references>
 
 ## Supporting Files
 
@@ -537,3 +682,5 @@ Article-type-specific prompts in:
 - `examples/example_chunked_summary.md` - Complete markdown summary from chunked mode
 - `examples/example_workflow_general.md` - Step-by-step general research workflow
 - `examples/example_workflow_review.md` - Step-by-step review article workflow
+
+</references>

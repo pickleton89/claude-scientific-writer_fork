@@ -110,7 +110,18 @@
       "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork show 6c4ad18 --stat -- skills/visual-design/)",
       "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork show 6c4ad18 --stat -- CHANGELOG.md)",
       "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork show 6c4ad18:CHANGELOG.md)",
-      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork status --short skills/oligon-brand skills/research-paper-summarizer)"
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork status --short skills/oligon-brand skills/research-paper-summarizer)",
+      "Bash(test:*)",
+      "Bash(test -f:*)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork show HEAD --stat)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork diff skills/literature-review/SKILL.md skills/peer-review/SKILL.md skills/research-lookup/SKILL.md)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork status --short skills/research-paper-summarizer/)",
+      "Bash(Minimalist\" brand that contradicted actual Oligon implementation\\)\n- Remove empty brand/ directory\n- Update SKILL.md brand references to point to oligon-brand skill\n- Update PDF generator comments \\(Scientific → Oligon brand v4.0\\)\n- Fix example workflow brand reference\n\nPhase 1 of 4 in research-paper-summarizer integration plan.\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork show HEAD -- skills/research-paper-summarizer/SKILL.md)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork show HEAD -- skills/research-paper-summarizer/scripts/generate_summary_pdf.py)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork show HEAD -- skills/research-paper-summarizer/examples/example_workflow_general.md)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork show:*)",
+      "Bash(git -C /Users/jeffkiefer/Documents/projects/claude-scientific-writer_fork log --oneline -10)"
     ]
   },
   "outputStyle": "default"

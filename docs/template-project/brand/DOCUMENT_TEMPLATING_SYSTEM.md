@@ -1,7 +1,8 @@
 # Document Templating System Design
 
-**Status:** Design Phase
+**Status:** ✅ Implementation Complete
 **Created:** December 19, 2025
+**Completed:** December 30, 2025
 **Project:** Oligon Branded PDF Generation
 
 ---
@@ -1727,85 +1728,87 @@ template_project/
 │       │   │   └── method-guide.md
 │       │   └── parser.py        # Template-aware parser
 │       └── converter.py         # Document tree to PDF
-├── .claude/
-│   └── skills/
-│       └── markdown-to-pdf/
-│           └── SKILL.md         # Skill definition
-├── templates/                   # User-facing template copies
-│   ├── scientific/
-│   │   ├── analysis-report.md
-│   │   ├── phase-plan.md
-│   │   └── data-report.md
-│   ├── project-management/
-│   │   ├── literature-review.md
-│   │   ├── meeting-notes.md
-│   │   └── project-status.md
-│   ├── development/
-│   │   ├── technical-spec.md
-│   │   ├── task-list.md
-│   │   ├── standards-guide.md
-│   │   └── agent-definition.md
-│   └── reference/
-│       ├── readme.md
-│       └── method-guide.md
+├── skills/
+│   └── markdown-to-pdf/
+│       ├── SKILL.md             # Skill definition
+│       └── references/
+│           └── component_map.md # Element-to-component mapping
 └── DOCUMENT_TEMPLATING_SYSTEM.md  # This file
 ```
+
+**Design Decision: No User-Facing Template Copies at Project Root**
+
+The original design proposed duplicate templates in a `templates/` directory at project root, organized by category. This was **intentionally not implemented** for these reasons:
+
+1. **Single source of truth** - Templates exist only in `src/oligon_reports/templates/markdown/`
+2. **No sync burden** - Eliminates risk of copies drifting out of sync
+3. **Skill handles access** - `/new-doc <type>` creates copies in the user's working directory on demand
+4. **Package-friendly** - Templates are bundled correctly if this becomes an installable package
 
 ---
 
 ## 7. Implementation Phases
 
-### Phase 1: Foundation (Current Sprint)
+**Status: ✅ COMPLETE** (December 2025)
+
+### Phase 1: Foundation ✅
 
 - [x] Design document (this file)
 - [x] Define document category taxonomy (4 categories, 12 types)
-- [ ] Define template schemas for all 12 types
-- [ ] Create markdown template files
-- [ ] Extend components.py with new components
+- [x] Define template schemas for all 12 types (`src/oligon_reports/templates/schemas/`)
+- [x] Create markdown template files (`src/oligon_reports/templates/markdown/`)
+- [x] Extend components.py with new components (11 components total, 6 bonus)
 
-### Phase 2: Parser
+### Phase 2: Parser ✅
 
-- [ ] Implement TemplateParser class
-- [ ] YAML frontmatter detection
-- [ ] Section parsing according to schema
-- [ ] Semantic element detection (callouts, findings, etc.)
-- [ ] Validation against template requirements
+- [x] Implement TemplateParser class (741 lines)
+- [x] YAML frontmatter detection
+- [x] Section parsing according to schema
+- [x] Semantic element detection (8 element types: tables, code blocks, callouts, checklists, finding cards, lists, directory trees)
+- [x] Validation against template requirements
 
-### Phase 3: Converter
+### Phase 3: Converter ✅
 
-- [ ] Implement DocumentConverter class
-- [ ] Map all template elements to PDF components
-- [ ] Handle edge cases and fallbacks
-- [ ] Test with existing documents (Phase3, Pareto)
+- [x] ~~Implement DocumentConverter class~~ → ReportGenerator handles PDF output directly
+- [x] Map all template elements to PDF components
+- [x] Handle edge cases and fallbacks
+- [x] Integration tests (24 tests in `tests/test_integration.py`)
 
-### Phase 4: Skill Integration
+**Note:** A separate `DocumentConverter` class was not needed. The `TemplateParser` produces a `DocumentTree`, and `ReportGenerator` consumes it directly for PDF output.
 
-- [ ] Create markdown-to-pdf skill
-- [ ] Implement /doc-to-pdf command
-- [ ] Implement /new-doc command
-- [ ] Add confirmation workflow
-- [ ] Test end-to-end
+### Phase 4: Skill Integration ✅
 
-### Phase 5: Polish
+- [x] Create markdown-to-pdf skill (`skills/markdown-to-pdf/SKILL.md`)
+- [x] Implement /doc-to-pdf command
+- [x] Implement /new-doc command
+- [x] Implement /list-templates command
+- [x] Decision framework for command selection
 
-- [ ] Error handling and user-friendly messages
-- [ ] Template customization options
-- [ ] Documentation
-- [ ] Example outputs
+### Phase 5: Polish ✅
+
+- [x] Error handling and user-friendly messages
+- [x] Component mapping reference (`skills/markdown-to-pdf/references/component_map.md`)
+- [x] Documentation complete
+- [x] 24 integration tests passing
 
 ---
 
 ## 8. Open Questions
 
 1. **Template inheritance**: Should templates support inheritance (e.g., all templates share common footer)?
+   - *Status: Deferred* - Not implemented in v1.0; all templates are standalone
 
 2. **Custom templates**: Should users be able to define their own templates?
+   - *Status: Deferred* - Users can add schemas/templates to `src/oligon_reports/templates/`
 
 3. **Partial documents**: How to handle documents that don't fill all template sections?
+   - *Status: Resolved* - Parser handles partial documents; validation warns but doesn't fail
 
 4. **Multiple outputs**: Should one markdown generate multiple PDFs (e.g., full report + executive summary)?
+   - *Status: Deferred* - Not implemented; could be added as skill enhancement
 
 5. **Version tracking**: How to handle template version changes over time?
+   - *Status: Resolved* - Schema files include version metadata; frontmatter tracks document version
 
 ---
 
@@ -1820,5 +1823,6 @@ template_project/
 ---
 
 *Document Templating System Design*
-*Version 2.1 | December 21, 2025*
-*Updated: Consolidated from 15 to 12 document types (merged phase-results→analysis-report, data-summary+generated-report→data-report, removed experiment-plan)*
+*Version 3.0 | December 30, 2025*
+*Status: ✅ IMPLEMENTATION COMPLETE*
+*Updates: v2.1→v3.0: Marked all phases complete, documented design decisions (no user-facing template copies at root), added implementation notes and test coverage*

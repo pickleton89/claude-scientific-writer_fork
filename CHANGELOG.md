@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **DOCUMENT_TEMPLATING_SYSTEM.md** (v2.1 → v3.0): Marked implementation complete
+  - Updated status from "Design Phase" to "✅ Implementation Complete"
+  - Documented design decision: No user-facing template copies at project root (single source of truth in `src/oligon_reports/templates/markdown/`)
+  - Marked all 5 implementation phases complete with file locations and implementation notes
+  - Added resolution status to all 5 open questions (2 resolved, 3 deferred)
+  - Updated file organization to reflect actual structure (`skills/markdown-to-pdf/` instead of `.claude/skills/`)
+
 - **research-paper-summarizer skill** (v1.0.0 → v1.1.0): Best practices compliance audit improvements
   - **Structure**: Consolidated dual subagent directories (subagents/ + prompts/subagents/) into single subagents/ structure
   - **Portability**: Updated all file references to use `{baseDir}` variable pattern

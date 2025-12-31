@@ -3,6 +3,8 @@ name: oligon-brand
 version: 4.0.1
 description: "Oligon scientific brand implementation for figures, presentations, and documents. Provides color palettes, typography standards, and format-specific adapters for matplotlib, ggplot2, ReportLab, python-docx, python-pptx, and HTML/CSS."
 allowed-tools: [Read, Glob]
+brand-type: organizational
+tokens-file: tokens/brand-tokens.json
 ---
 
 # Oligon Scientific Brand

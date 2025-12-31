@@ -77,7 +77,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
       - Added "Paper Analysis" category to Quick Reference Matrix
       - Updated skill count from 24 to 25 (20→21 top-level)
       - Added cross-references to `literature-review`, `peer-review`, `research-lookup`
-    - Phase 1: Brand alignment—delete conflicting `brand/BRAND_COLORS.md`, use Oligon brand
+    - **Phase 1 complete**: Brand alignment
+      - Deleted conflicting `brand/BRAND_COLORS.md` (1022 lines "Scientific Minimalist" brand that contradicted Oligon implementation)
+      - Removed empty `brand/` directory
+      - Updated SKILL.md brand references to point to `oligon-brand` skill
+      - Updated PDF generator comments (Scientific → Oligon brand)
+      - Fixed example workflow brand reference
+      - Updated IMPLEMENTATION_PLAN.md directory structure to reflect brand removal
     - Phase 2: Full XML restructure with all standard sections (anti_patterns, success_criteria, cross_references)
     - Phase 3: Create `references/subagent_architecture.md` documenting chunked pipeline
 

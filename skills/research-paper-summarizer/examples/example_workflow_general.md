@@ -216,7 +216,7 @@ Claude: Generating Interactive HTML report...
 
 Reading: chen2024_aptamer_sirna_chimeras_summary.md
 Applying: prompts/html-report.md template
-Using: Brand colors from brand/BRAND_COLORS.md
+Using: Oligon brand colors (see oligon-brand skill)
 
 ✓ HTML report generated!
 Saved to: chen2024_aptamer_sirna_chimeras_report.html

@@ -296,18 +296,22 @@ NEVER summarize away numerical data. Always preserve:
 
 ### Brand Visual Identity
 
-All visual outputs follow Scientific Brand Visual Identity v4.0:
+All visual outputs follow the **Oligon Scientific Brand** (see `oligon-brand` skill).
 
-```
-Primary Highlight:  #2DB2E8 (Brand Blue) - Use sparingly for PRIMARY finding only
-Contrast/Alert:     #E8622D (Orange) - Opposing effects, warnings, limitations
-Neutral Data:       #222222 (Dark Gray) - Controls, baseline, most data
-Secondary:          #666666 (Medium Gray) - Secondary comparisons
-Tertiary:           #999999 (Muted Gray) - Tertiary data
-Annotations:        #BDBDBD (Light Gray) - NOT for data, only gridlines/annotations
-Background:         #FFFFFF (White only)
-Text:               #000000 (Black)
-```
+**Quick Reference:**
+
+| Role | Color | HEX |
+|------|-------|-----|
+| Primary Highlight | Brand Blue | `#2DB2E8` |
+| Contrast/Alert | Orange | `#E8622D` |
+| Primary Data | Dark Gray | `#222222` |
+| Secondary Data | Medium Gray | `#666666` |
+| Tertiary Data | Muted Gray | `#999999` |
+| Background | White | `#FFFFFF` |
+
+For complete brand specification, color cycles, and accessibility guidelines, see:
+- `skills/oligon-brand/SKILL.md`
+- `skills/oligon-brand/references/brand-colors-full.md`
 
 ## Format-Specific Instructions
 
@@ -449,7 +453,7 @@ Claude: [Reads existing summary file]
 
 **HTML report not styling correctly:**
 - Check browser console for errors
-- Verify brand colors applied from `brand/BRAND_COLORS.md`
+- Verify brand colors applied from Oligon brand (see `oligon-brand` skill)
 - Single-file HTML should work offline
 
 **PDF generation fails:**
@@ -523,7 +527,7 @@ Article-type-specific prompts in:
 - `prompts/svg-infographic.md` - Infographic prompt with component library
 
 ### Brand Guidelines
-- `brand/BRAND_COLORS.md` - Complete brand color palette and usage rules
+- See `skills/oligon-brand/` - Complete Oligon brand palette and usage rules
 
 ### Scripts
 - `scripts/generate_summary_pdf.py` - PDF generator script (requires weasyprint)

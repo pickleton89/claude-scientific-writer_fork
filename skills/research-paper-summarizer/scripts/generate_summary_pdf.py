@@ -4,7 +4,7 @@ Research Paper Summary PDF Generator v2.0
 
 Features:
 - Automatic figure detection and extraction from source PDFs
-- Brand-compliant styling (Scientific Brand Visual Identity v4.0)
+- Brand-compliant styling (Oligon Scientific Brand v4.0)
 - Professional layout matching publication standards
 
 Usage:
@@ -58,7 +58,7 @@ except ImportError:
 
 
 # =============================================================================
-# BRAND COLOR PALETTE (Scientific Brand Visual Identity v4.0)
+# BRAND COLOR PALETTE (Oligon Scientific Brand v4.0)
 # =============================================================================
 BRAND_COLORS = {
     # Primary Brand Color

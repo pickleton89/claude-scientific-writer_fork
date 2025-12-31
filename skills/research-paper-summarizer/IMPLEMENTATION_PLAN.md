@@ -154,11 +154,10 @@ research-paper-summarizer/
 │   ├── summary-skeleton.md           # NEW: Initial file structure
 │   └── report-template.html          # Existing HTML template
 │
-├── brand/
-│   └── BRAND_COLORS.md               # Unchanged
-│
 └── scripts/
     └── generate_summary_pdf.py       # Unchanged
+
+# Note: Brand colors are defined in skills/oligon-brand/ (project-wide brand skill)
 ```
 
 ---

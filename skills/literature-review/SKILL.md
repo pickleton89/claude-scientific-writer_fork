@@ -462,6 +462,7 @@ Identification → Screening → Eligibility → Included
 | `statistical-analysis` | Perform meta-analysis calculations |
 | `scientific-writing` | Write manuscript sections from review |
 | `venue-templates` | Format for specific journal requirements |
+| `research-paper-summarizer` | Summarize individual papers found during review; use for key papers requiring deep analysis |
 
 **Skill Selection:**
 See `SKILL_ROUTER.md` for decision trees when multiple skills may apply.

@@ -2,13 +2,13 @@
 name: skill-router
 description: Decision trees for selecting the correct skill when multiple options apply. Consult when task scope is ambiguous or spans multiple scientific writing domains.
 when_to_use: When a user request could be handled by 2+ skills, when unclear which skill is primary vs. supporting, or when planning multi-skill workflows.
-version: 1.1.0
+version: 1.2.0
 ---
 
 # Skill Router
 
 > Decision trees and routing logic for selecting the right skill(s) for scientific writing tasks
-> Version: 1.1.0 | Updated: 2025-12-30
+> Version: 1.2.0 | Updated: 2025-12-30
 
 ---
 
@@ -262,6 +262,53 @@ User needs research/information support
 | "Is this paper reliable?" | peer-review | Manuscript evaluation |
 | "Evaluate this researcher" | scholar-evaluation | Scholar assessment |
 | "Analyze this argument" | peer-review | Logic/evidence analysis (Critical Analysis Framework) |
+
+---
+
+## Decision Tree: Paper Summarization
+
+```
+User wants to summarize or analyze a research paper
+│
+├─ Is it a SINGLE paper needing comprehensive summary?
+│  │
+│  └─ YES → research-paper-summarizer
+│            │
+│            ├─ What article type?
+│            │  ├─ General research → general_researcher_summarizer
+│            │  ├─ Review/meta-analysis → review_article_summarizer
+│            │  ├─ Computational/bioinformatics → compbio_bioinformatic_summarizer
+│            │  └─ Cell & molecular biology → cellmolbio_summarizer
+│            │
+│            └─ What output format?
+│               ├─ Markdown only → _summary.md
+│               ├─ Interactive HTML → html-report
+│               ├─ PDF summary → yaml-for-pdf → generate_summary_pdf.py
+│               └─ SVG infographic → svg-infographic
+│
+├─ Is it a COLLECTION of papers for systematic review?
+│  │
+│  └─ YES → literature-review
+│            └─ Then optionally → research-paper-summarizer (for each key paper)
+│
+├─ Is it a quick lookup for citation/abstract only?
+│  │
+│  └─ YES → research-lookup
+│
+└─ Is it evaluating paper QUALITY (not summarizing)?
+   │
+   └─ YES → peer-review
+```
+
+### Paper Summarization: Quick Selection
+
+| Task | Primary Skill | Output |
+|------|---------------|--------|
+| Deep analysis of single paper | research-paper-summarizer | Markdown + optional visual |
+| Quick abstract/citation lookup | research-lookup | Text response |
+| Systematic review of many papers | literature-review | Review document |
+| Evaluate paper methodology | peer-review | Evaluation report |
+| Summarize paper for presentation | research-paper-summarizer → scientific-slides | Slides |
 
 ---
 
@@ -554,6 +601,10 @@ User has content ready for final document format
 | Quick lookup | research-lookup | — |
 | Systematic review | literature-review | + citation-management |
 | Manage citations | citation-management | — |
+| **Paper Analysis** | | |
+| Summarize single paper | research-paper-summarizer | + oligon-brand (for visual outputs) |
+| Quick paper lookup | research-lookup | — |
+| Systematic literature review | literature-review | + citation-management |
 | **Evaluation** | | |
 | Review manuscript | peer-review | (includes critical analysis) |
 | Evaluate scholar | scholar-evaluation | — |
@@ -768,4 +819,4 @@ Each skill's `<cross_references>` section should include:
 
 ---
 
-*This router provides deterministic skill selection for the 24-skill scientific writing library (20 top-level + 4 document-skills sub-skills). For threshold values and quality criteria, see `QUANTIFICATION_THRESHOLDS.md`.*
+*This router provides deterministic skill selection for the 25-skill scientific writing library (21 top-level + 4 document-skills sub-skills). For threshold values and quality criteria, see `QUANTIFICATION_THRESHOLDS.md`.*

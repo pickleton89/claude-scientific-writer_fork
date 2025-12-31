@@ -522,6 +522,7 @@ This skill includes reference materials to support comprehensive peer review:
 - **venue-templates**: `reviewer_expectations.md` for venue-specific review standards
 - **reproducible-research**: Assess data availability, code sharing, and reproducibility standards
 - **scholar-evaluation**: 8-dimension scholarly work assessment for structured quality scoring
+- **research-paper-summarizer**: Summarization (extracting content) vs evaluation (assessing quality); use peer-review for critical assessment
 
 ## Final Checklist
 

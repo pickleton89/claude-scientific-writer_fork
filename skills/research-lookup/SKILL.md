@@ -294,6 +294,7 @@ All responses include:
 | `hypothesis-generation` | Evidence to ground research hypotheses |
 | `scientific-slides` | Citations and background for presentations |
 | `citation-management` | Discovered citations for organization and formatting |
+| `research-paper-summarizer` | For comprehensive paper analysis beyond quick lookup |
 
 ### Related
 

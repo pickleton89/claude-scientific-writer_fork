@@ -71,8 +71,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Article-type-specific prompts: General, Review, CompBio, Cell/Molecular Biology
   - 6-agent chunked pipeline: overview → methods → results → critique → context → synthesis
   - Complements `literature-review` skill (multi-paper synthesis) with single-paper analysis
-  - **Integration plan** (`docs/RESEARCH_PAPER_SUMMARIZER_INTEGRATION_PLAN.md`): 4-phase plan pending implementation
-    - Phase 0: Add to SKILL_ROUTER.md, update cross-references in related skills
+  - **Integration plan** (`docs/RESEARCH_PAPER_SUMMARIZER_INTEGRATION_PLAN.md`): 4-phase plan
+    - **Phase 0 complete**: Router integration and cross-references
+      - Added "Paper Summarization" decision tree to `SKILL_ROUTER.md` (v1.1.0 → v1.2.0)
+      - Added "Paper Analysis" category to Quick Reference Matrix
+      - Updated skill count from 24 to 25 (20→21 top-level)
+      - Added cross-references to `literature-review`, `peer-review`, `research-lookup`
     - Phase 1: Brand alignment—delete conflicting `brand/BRAND_COLORS.md`, use Oligon brand
     - Phase 2: Full XML restructure with all standard sections (anti_patterns, success_criteria, cross_references)
     - Phase 3: Create `references/subagent_architecture.md` documenting chunked pipeline

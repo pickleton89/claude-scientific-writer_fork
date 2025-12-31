@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **research-paper-summarizer skill** (v1.0.0 → v1.1.0): Best practices compliance audit improvements
+  - **Structure**: Consolidated dual subagent directories (subagents/ + prompts/subagents/) into single subagents/ structure
+  - **Portability**: Updated all file references to use `{baseDir}` variable pattern
+  - **Context efficiency**: Moved verbose sections to references/ (error_handling → troubleshooting.md, anti_patterns → common-pitfalls.md)
+  - **Discovery**: Enriched frontmatter description with trigger terms (PDF, DOI, PubMed, statistics, infographic)
+  - **Robustness**: Added prerequisites section for weasyprint/pyyaml dependencies
+  - **Validation**: Added summary validation step (check PENDING markers, verify statistics, confirm figure refs)
+  - **New references**: Created 6 reference files:
+    - `references/troubleshooting.md` - Error recovery workflows
+    - `references/common-pitfalls.md` - Anti-patterns with examples
+    - `references/placeholder-guide.md` - Template variable substitution
+    - `references/statistics-formatting.md` - P-value, CI, sample size standards
+    - `references/brand-quick-reference.md` - Quick color codes for visuals
+    - `references/svg-component-library.md` - SVG infographic components
+  - **File reduction**: SKILL.md reduced from 687 to 606 lines (~12% reduction)
+
 - **WRITER.md deprecated**: Modularized monolithic agent instructions into authoritative locations
   - **Agent behavior policies** (completion policy, decision making) → `CLAUDE.md` §Scientific Writing Execution Policies
   - **Workflow standards** (file organization, progress logging, PDF review, version management) → `docs/EXECUTION_STANDARDS.md` (new)

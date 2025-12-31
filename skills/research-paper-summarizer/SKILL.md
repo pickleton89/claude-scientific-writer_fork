@@ -1,8 +1,8 @@
 ---
 name: research-paper-summarizer
-version: 1.0.0
-description: "Summarize scientific research papers into multiple output formats including structured markdown, interactive HTML presentations, brand-compliant PDF summaries, and visual SVG infographics. Use when the user provides a research paper (PDF, text, DOI, or URL) and wants it summarized, analyzed, or visualized."
-when_to_use: "When user uploads a research paper (PDF, text, abstract) or provides a DOI/URL and wants comprehensive summarization with optional visual outputs"
+version: 1.1.0
+description: "Analyze and summarize research papers (PDF, DOI, PubMed, or text) into structured markdown, HTML reports, branded PDFs, or SVG infographics. Extracts statistics, figures, critical analysis, and key findings from scientific publications with full quantitative preservation."
+when_to_use: "When user uploads/provides a research paper (PDF, text, abstract, DOI, PubMed ID, or URL) and wants paper analysis, summarization, figure extraction, infographic creation, or visual output generation"
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, AskUserQuestion, Task]
 brand-reference: "../oligon-brand/"
 ---
@@ -115,10 +115,10 @@ When a PDF is provided:
 
 | Article Type | Best For | Prompt File |
 |--------------|----------|-------------|
-| **General Research** | Standard primary research papers | `prompts/general_researcher_summarizer.md` |
-| **Review Article** | Review papers, meta-analyses, systematic reviews | `prompts/review_article_summarizer.md` |
-| **Computational/Bioinformatics** | Genomics, methods, pipelines, algorithms | `prompts/compbio_bioinformatic_summarizer.md` |
-| **Cell & Molecular Biology** | Mechanistic, wet-lab, cancer biology papers | `prompts/cellmolbio_summarizer.md` |
+| **General Research** | Standard primary research papers | `{baseDir}/prompts/general_researcher_summarizer.md` |
+| **Review Article** | Review papers, meta-analyses, systematic reviews | `{baseDir}/prompts/review_article_summarizer.md` |
+| **Computational/Bioinformatics** | Genomics, methods, pipelines, algorithms | `{baseDir}/prompts/compbio_bioinformatic_summarizer.md` |
+| **Cell & Molecular Biology** | Mechanistic, wet-lab, cancer biology papers | `{baseDir}/prompts/cellmolbio_summarizer.md` |
 
 Ask: "What type of article is this?"
 1. General research paper
@@ -135,6 +135,13 @@ Ask: "What type of article is this?"
 ## Workflow Overview
 
 This skill follows a multi-phase workflow with mode-dependent processing:
+
+### Prerequisites (PDF Generation)
+
+Before generating PDF output, ensure dependencies are installed:
+```bash
+pip install weasyprint pyyaml
+```
 
 ### Phase 0: Initialization (All Papers)
 1. Receive PDF from user
@@ -167,6 +174,11 @@ For papers ≤12 pages, use the standard approach:
    - Filename format: `{original_filename}_summary.md`
    - Example: `smith2024_cancer_cells.pdf` → `smith2024_cancer_cells_summary.md`
 
+5. **Validate the summary** before proceeding:
+   - Check for any `<!-- SECTION: xxx PENDING -->` markers (should be none)
+   - Verify statistics section contains at least 3 numerical values
+   - Confirm figure references match actual figures in PDF
+
 ---
 
 ## Chunked Mode Workflow (Papers >12 Pages)
@@ -175,14 +187,14 @@ For longer papers, use the chunked subagent pipeline to avoid context exhaustion
 
 ### Setup Phase
 
-1. **Detect PDF sections** using `prompts/subagents/_shared/section-detection.md`
+1. **Detect PDF sections** using `{baseDir}/subagents/overview-agent.md` section detection logic
    - Read first 5-10 pages of PDF
    - Identify page ranges for: Abstract, Introduction, Methods, Results, Discussion, References
    - Output JSON mapping of sections to pages
 
 2. **Create skeleton summary file**
-   - Read `templates/summary-skeleton.md`
-   - Read `templates/skeleton-config.md` for article-type-specific placeholders
+   - Read `{baseDir}/templates/summary-skeleton.md`
+   - Read `{baseDir}/templates/skeleton-config.md` for article-type-specific placeholders
    - Fill in metadata: TITLE, TIMESTAMP, FILENAME, PAGE_COUNT, ARTICLE_TYPE
    - Apply article-type-specific customizations
    - Write skeleton to `{original_filename}_summary.md`
@@ -204,11 +216,12 @@ Process the paper section-by-section using specialized subagents:
 
 For each subagent:
 1. Extract relevant PDF pages based on section mapping
-2. Read the subagent prompt from `prompts/subagents/` or `subagents/`
-3. Invoke Task tool with the subagent
-4. Subagent reads PDF pages + current summary file
-5. Subagent writes output to summary file, updating section markers from PENDING → COMPLETE
-6. Verify section was written before proceeding to next agent
+2. Read the subagent from `{baseDir}/subagents/` (contains both config and prompt)
+3. Substitute placeholders (see `{baseDir}/references/placeholder-guide.md`)
+4. Invoke Task tool with the subagent
+5. Subagent reads PDF pages + current summary file
+6. Subagent writes output to summary file, updating section markers from PENDING → COMPLETE
+7. Verify section was written before proceeding to next agent
 
 ### Section Markers
 
@@ -290,7 +303,7 @@ Ask: "Which visual output format(s) would you like?"
 
 ### 1. Interactive HTML Report
 
-Read: `prompts/html-report.md`
+Read: `{baseDir}/prompts/html-report.md`
 
 **Source**: The markdown summary file generated in Phase 1
 
@@ -304,7 +317,7 @@ Single-file HTML document with:
 
 ### 2. PDF Summary (via YAML)
 
-Read: `prompts/yaml-for-pdf.md`
+Read: `{baseDir}/prompts/yaml-for-pdf.md`
 
 **Source**: The markdown summary file generated in Phase 1
 
@@ -312,11 +325,13 @@ Two-step workflow:
 1. Generate YAML summary with figure references (extracted from markdown summary)
 2. User runs Python script to generate PDF with automatic figure extraction
 
-Script location: `scripts/generate_summary_pdf.py`
+Script location: `{baseDir}/scripts/generate_summary_pdf.py`
 
 ### 3. SVG Infographic
 
-Read: `prompts/svg-infographic.md`
+Read: `{baseDir}/prompts/svg-infographic.md`
+
+See also: `{baseDir}/references/svg-component-library.md` for available components
 
 **Source**: The markdown summary file generated in Phase 1
 
@@ -426,104 +441,26 @@ Each summarizer prompt is optimized for its article type:
 
 ## Troubleshooting & Error Recovery
 
-### Common Issues
+For detailed troubleshooting, see: `{baseDir}/references/troubleshooting.md`
 
-| Issue | Cause | Solution |
-|-------|-------|----------|
-| Summary incomplete | Subagent failed mid-process | Retry the skill; check for PENDING markers in summary file |
-| Context exceeded | Paper too long for chunked mode | Reduce page ranges; contact support for very long papers |
-| Section detection failed | Non-standard paper format | Uses page-ratio fallback automatically |
-| Missing statistics | Data in figures, not text | Check figure captions; may require manual extraction |
-| Wrong article type | Misclassified paper | Re-run with correct article type selection |
+### Quick Reference
 
-### Processing Mode Issues
+| Issue | Quick Fix |
+|-------|-----------|
+| Summary incomplete | Check for PENDING markers; retry skill |
+| Context exceeded | Use chunked mode; reduce page ranges |
+| PDF generation fails | Run `pip install weasyprint pyyaml` |
+| Wrong article type | Re-run with correct selection |
 
-**Chunked mode not triggering for long papers:**
-- Verify PDF is readable (not image-only scan)
-- Check page count detection worked correctly
-- Force chunked mode by confirming paper >12 pages
-
-**Standard mode producing truncated output:**
-- Paper may be near the 12-page threshold
-- Dense text/tables increase token count
-- Consider requesting chunked mode explicitly
-
-### Subagent Pipeline Recovery
-
-**If a subagent fails:**
-
-1. Check the summary file for `<!-- SECTION: xxx PENDING -->` markers
-2. Identify which section(s) failed
-3. Claude will automatically:
-   - Retry the failed agent once
-   - Fall back to Standard Mode if retry fails
-   - Report which sections couldn't be completed
-
-**Partial completion recovery:**
+### Recovery Commands
 
 ```
-# To resume from partial completion:
-User: Continue summarizing this paper - some sections are still PENDING
+# Resume incomplete chunked summary:
+User: Continue summarizing - some sections are still PENDING
 
-Claude: [Reads existing summary file]
-        Found 3 sections marked PENDING. Resuming from critique agent...
-```
-
-### Subagent Error Handling
-
-| Scenario | Recovery |
-|----------|----------|
-| Subagent fails to write section | Retry once, then fall back to Standard Mode |
-| Section detection fails | Use page-ratio fallback estimates |
-| Context exceeded in subagent | Reduce page range, retry |
-
-### PDF Reading Issues
-
-| Symptom | Likely Cause | Fix |
-|---------|--------------|-----|
-| Empty content extracted | Image-only PDF (scanned) | Use OCR tool first, then provide text |
-| Garbled text | PDF encoding issues | Re-export from source or use different PDF |
-| Missing sections | Multi-column layout confusion | Provide page hints for key sections |
-| Figures not described | Text extraction excludes images | Refer to figure captions in PDF |
-
-### Visual Output Issues
-
-**HTML report not styling correctly:**
-- Check browser console for errors
-- Verify brand colors applied from Oligon brand (see `oligon-brand` skill)
-- Single-file HTML should work offline
-
-**PDF generation fails:**
-- Ensure weasyprint is installed: `pip install weasyprint`
-- Check YAML syntax in intermediate file
-- Run: `python scripts/generate_summary_pdf.py input.yaml`
-
-**SVG infographic rendering issues:**
-- Verify viewBox dimensions match content
-- Check for unsupported CSS properties
-- Test in multiple browsers
-
-### When to Fall Back to Standard Mode
-
-Standard mode (full-document) may work better when:
-- Paper is well-structured with clear sections
-- Paper is 10-15 pages (borderline length)
-- You need faster processing (single pass)
-- Chunked mode repeatedly fails
-
-```
+# Force standard mode:
 User: Use standard mode for this paper instead
-
-Claude: Switching to Standard Mode (full-document analysis)...
 ```
-
-### Getting Help
-
-If issues persist:
-1. Check that all required files exist (see Supporting Files section)
-2. Verify the PDF is not corrupted
-3. Try with a different paper to isolate the issue
-4. Report issues at https://github.com/anthropics/claude-code/issues
 
 </error_handling>
 
@@ -533,37 +470,18 @@ If issues persist:
 
 ## Common Pitfalls
 
-### 1. Skipping Article Type Selection
-**Problem:** Using general summarizer for specialized content (compbio, cellmolbio).
-**Solution:** Always ask user to confirm article type before processing.
+For detailed anti-patterns with examples, see: `{baseDir}/references/common-pitfalls.md`
 
-### 2. Ignoring Page Count Threshold
-**Problem:** Using Standard Mode for papers >12 pages, causing context exhaustion.
-**Solution:** Let the skill auto-detect; trust the 12-page threshold.
+### Quick Reference
 
-### 3. Summarizing Away Statistics
-**Problem:** Replacing "p = 0.003" with "statistically significant."
-**Solution:** Preserve ALL numerical data exactly as reported.
-
-### 4. Missing Figure References
-**Problem:** Summary mentions findings without linking to source figures.
-**Solution:** Include figure_ref for every finding with supporting data.
-
-### 5. Incomplete Chunked Processing
-**Problem:** Stopping when one subagent fails.
-**Solution:** Use recovery workflow; check for PENDING markers and resume.
-
-### 6. Paraphrasing Technical Terminology
-**Problem:** Replacing "CRISPR-Cas9 knockout" with "gene editing technique."
-**Solution:** Use exact technical terminology from the paper.
-
-### 7. Omitting Negative Results
-**Problem:** Only highlighting positive findings.
-**Solution:** Include all results, especially null/negative findings with statistical context.
-
-### 8. Ignoring Author Hedging
-**Problem:** Converting "may suggest" to "demonstrates."
-**Solution:** Preserve conditional language exactly as authors stated.
+| Pitfall | Prevention |
+|---------|------------|
+| Skipping article type selection | Always ask user to confirm type |
+| Ignoring page threshold | Trust 12-page automatic detection |
+| Summarizing away statistics | Preserve ALL numerical data exactly |
+| Missing figure references | Link every finding to source figure |
+| Paraphrasing terminology | Use exact technical terms from paper |
+| Omitting negative results | Include all results with statistical context |
 
 </anti_patterns>
 
@@ -637,50 +555,52 @@ If issues persist:
 
 ## Supporting Files
 
-### Article Type Summarizers (Standard Mode - Phase 1)
-- `prompts/general_researcher_summarizer.md` - General primary research papers
-- `prompts/review_article_summarizer.md` - Review articles and meta-analyses
-- `prompts/compbio_bioinformatic_summarizer.md` - Computational biology and bioinformatics
-- `prompts/cellmolbio_summarizer.md` - Cell and molecular biology papers
+All paths use `{baseDir}` which resolves to this skill's installation directory.
 
-### Chunked Mode Infrastructure
-- `templates/summary-skeleton.md` - Base skeleton template with section markers
-- `templates/skeleton-config.md` - Article-type-specific placeholder values
-- `prompts/subagents/_shared/section-detection.md` - PDF section boundary detection
+### Reference Documentation
+- `{baseDir}/references/subagent_architecture.md` - Chunked pipeline architecture deep-dive
+- `{baseDir}/references/troubleshooting.md` - Error recovery and common issues
+- `{baseDir}/references/common-pitfalls.md` - Anti-patterns with detailed examples
+- `{baseDir}/references/placeholder-guide.md` - Template variable substitution guide
+- `{baseDir}/references/statistics-formatting.md` - Standardized statistics formatting
+- `{baseDir}/references/brand-quick-reference.md` - Quick color codes for visual outputs
+- `{baseDir}/references/svg-component-library.md` - SVG components for infographics
 
-### Chunked Mode Subagent Prompts (Phase 2 onwards)
-Shared prompts (all article types):
-- `prompts/subagents/_shared/overview.md` - Executive summary, background, hypothesis
-- `prompts/subagents/_shared/critique.md` - Critical analysis, limitations
-- `prompts/subagents/_shared/synthesis.md` - Final synthesis (reads summary file only)
+### Article Type Summarizers (Standard Mode)
+- `{baseDir}/prompts/general_researcher_summarizer.md` - General primary research papers
+- `{baseDir}/prompts/review_article_summarizer.md` - Review articles and meta-analyses
+- `{baseDir}/prompts/compbio_bioinformatic_summarizer.md` - Computational biology
+- `{baseDir}/prompts/cellmolbio_summarizer.md` - Cell and molecular biology papers
 
-Article-type-specific prompts in:
-- `prompts/subagents/general/` - General research variants
-- `prompts/subagents/review/` - Review article variants
-- `prompts/subagents/cellmolbio/` - Cell & molecular biology variants
-- `prompts/subagents/compbio/` - Computational biology variants
+### Chunked Mode Templates
+- `{baseDir}/templates/summary-skeleton.md` - Base skeleton with section markers
+- `{baseDir}/templates/skeleton-config.md` - Article-type placeholder values
 
-### Subagent Configuration Files
-- `subagents/overview-agent.md` - Shared overview agent config
-- `subagents/critique-agent.md` - Shared critique agent config
-- `subagents/synthesis-agent.md` - Shared synthesis agent config
-- `subagents/{type}/*.md` - Article-type-specific agent configs
+### Subagent Configurations (Chunked Mode)
+Shared agents (all article types):
+- `{baseDir}/subagents/overview-agent.md` - Executive summary, background, hypothesis
+- `{baseDir}/subagents/critique-agent.md` - Critical analysis, limitations
+- `{baseDir}/subagents/synthesis-agent.md` - Final synthesis (summary file only)
 
-### Visual Output Prompts (Phase 2)
-- `prompts/html-report.md` - Interactive HTML prompt
-- `prompts/yaml-for-pdf.md` - YAML generation for PDF
-- `prompts/svg-infographic.md` - Infographic prompt with component library
+Article-type-specific agents:
+- `{baseDir}/subagents/general/` - methods-agent, results-agent, context-agent
+- `{baseDir}/subagents/review/` - evidence-agent, landscape-agent, references-agent
+- `{baseDir}/subagents/cellmolbio/` - models-agent, mechanisms-agent, translational-agent
+- `{baseDir}/subagents/compbio/` - data-agent, methods-agent, validation-agent
+
+### Visual Output Prompts
+- `{baseDir}/prompts/html-report.md` - Interactive HTML generation
+- `{baseDir}/prompts/yaml-for-pdf.md` - YAML for PDF pipeline
+- `{baseDir}/prompts/svg-infographic.md` - Infographic with component library
 
 ### Brand Guidelines
-- See `skills/oligon-brand/` - Complete Oligon brand palette and usage rules
+- `skills/oligon-brand/SKILL.md` - Complete Oligon brand specification
 
 ### Scripts
-- `scripts/generate_summary_pdf.py` - PDF generator script (requires weasyprint)
+- `{baseDir}/scripts/generate_summary_pdf.py` - PDF generator (requires weasyprint)
 
 ### Examples
-- `examples/example_summary.yaml` - Example YAML output for PDF generation
-- `examples/example_chunked_summary.md` - Complete markdown summary from chunked mode
-- `examples/example_workflow_general.md` - Step-by-step general research workflow
-- `examples/example_workflow_review.md` - Step-by-step review article workflow
+- `{baseDir}/examples/example_summary.yaml` - YAML output for PDF generation
+- `{baseDir}/examples/example_workflow_general.md` - General research workflow
 
 </references>
